@@ -1,0 +1,32 @@
+package com.appacitive.khelkund.infra;
+
+/**
+ * Created by sathley on 3/24/2015.
+ */
+public class Urls {
+
+    private static String baseUrl = "http://www.khelkund.com/test/Service/";
+
+    public static class PlayerUrls
+    {
+        public static String getAllPlayersUrl() {
+            return baseUrl + "PlayerService.svc/Players";
+        }
+    }
+
+    public static class TeamUrls
+    {
+        public static String getMyTeamUrl(String userId)
+        {
+            return baseUrl + "UserTeamService.svc/UserTeam/" + userId;
+        }
+    }
+
+    public static class UserUrls
+    {
+        public static String getLoginUrl()
+        {
+            return baseUrl + "Loginservice.svc/login";
+        }
+    }
+}

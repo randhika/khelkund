@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="primary" type="color">#3F51B5</item>
+    <item name="primary_dark" type="color">#303F9F</item>
+    <item name="accent" type="color">#E91E63</item>
+
+    <color name="CSK">#FFEB3B</color>
+    <color name="DD">#673AB7</color>
+    <color name="SH">#FF5722</color>
+    <color name="KIXP">#F44336</color>
+    <color name="KKR">#9C27B0</color>
+    <color name="MI">#2196F3</color>
+    <color name="RR">#3F51B5</color>
+    <color name="RCB">#E91E63</color>
+</resources>
