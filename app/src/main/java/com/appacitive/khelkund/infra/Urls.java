@@ -20,6 +20,11 @@ public class Urls {
         {
             return baseUrl + "UserTeamService.svc/UserTeam/" + userId;
         }
+
+        public static String saveTeamUrl()
+        {
+            return baseUrl + "UserTeamService.svc/SaveTeam";
+        }
     }
 
     public static class UserUrls

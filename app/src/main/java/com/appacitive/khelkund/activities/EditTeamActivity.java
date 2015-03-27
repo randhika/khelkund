@@ -119,22 +119,12 @@ public class EditTeamActivity extends ActionBarActivity {
         mWicketKeepersAdapter = new PlayerCardAdapter(urls);
         mWicketKeeperRecyclerView.setAdapter(mWicketKeepersAdapter);
 
-        mChangeFormation.setOnClickListener(formationChangeClickListener());
-        mAutoSelect.setOnClickListener(autoSelectClickListener());
+//        mChangeFormation.setOnClickListener(formationChangeClickListener());
+//        mAutoSelect.setOnClickListener(autoSelectClickListener());
 
     }
 
-    private View.OnClickListener formationChangeClickListener() {
-        return view -> {
 
-        };
-    }
-
-    private View.OnClickListener autoSelectClickListener() {
-        return view -> {
-
-        };
-    }
 
     private void updateStats()
     {

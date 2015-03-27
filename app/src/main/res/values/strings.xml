@@ -34,4 +34,5 @@
 
     <string name="title_section1">Section 1</string>
     <string name="title_activity_edit_team">Modify Your Team</string>
+    <string name="title_activity_create_team">Create your team</string>
 </resources>

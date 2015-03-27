@@ -61,7 +61,7 @@ public class SplashScreenActivity extends ActionBarActivity {
                 }
             }
         };
-        new Handler().postDelayed(endSplash, 5000L);
+        new Handler().postDelayed(endSplash, 1000L);
 
 
     }
@@ -71,7 +71,7 @@ public class SplashScreenActivity extends ActionBarActivity {
         http.get(Urls.TeamUrls.getMyTeamUrl(userId), new HashMap<String, String>(), new APCallback() {
             @Override
             public void success(JSONObject result) {
-                if (result.optString("Error") == null)
+                if (result.optJSONObject("Error") == null)
                     return;
                 if(result.optJSONArray("Players") == null)
                     //  You are new here
@@ -94,7 +94,7 @@ public class SplashScreenActivity extends ActionBarActivity {
         http.get(Urls.PlayerUrls.getAllPlayersUrl(), new HashMap<String, String>(), new APCallback() {
             @Override
             public void success(JSONObject result) {
-                if (result.optString("Error") == null)
+                if (result.optJSONObject("Error") == null)
                     return;
                 JSONArray playersJsonArray = result.optJSONArray("Players");
                 List<Player> players = new ArrayList<Player>();

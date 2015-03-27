@@ -60,6 +60,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.ViewTeamActivity" />
         </activity>
+        <activity
+            android:name=".activities.CreateTeamActivity"
+            android:label="@string/title_activity_create_team"
+            android:parentActivityName=".activities.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
