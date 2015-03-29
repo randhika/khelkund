@@ -1,5 +1,7 @@
 package com.appacitive.khelkund.model;
 
+import android.text.TextUtils;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -9,19 +11,20 @@ import java.util.List;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
 /**
  * Created by sathley on 3/24/2015.
  */
+
+@RealmClass
 public class Team extends RealmObject {
 
-    public Team()
-    {
+    public Team() {
     }
 
-    public Team(JSONObject json)
-    {
-        if(json == null)
+    public Team(JSONObject json) {
+        if (json == null)
             return;
 
         this.Balance = json.optInt("Balance");
@@ -30,23 +33,23 @@ public class Team extends RealmObject {
         this.Id = json.optString("Id");
         this.ImageName = json.optString("ImageName");
         this.Name = json.optString("Name");
-        this.PreviousMatch = json.optString("PreviousMatch");
+        this.PreviousMatch = json.optString("PrevMatch");
         this.Rank = json.optInt("Rank");
         this.TotalPoints = json.optInt("TotalPoints");
         this.TransfersRemaining = json.optInt("TransfersRemaining");
+
         JSONArray playersArray = json.optJSONArray("Players");
         this.Players = new RealmList<Player>();
-        for(int i = 0; i < playersArray.length(); i++)
-        {
-            this.Players.add(new Player(playersArray.optJSONObject(i)));
+        if (playersArray != null) {
+            for (int i = 0; i < playersArray.length(); i++) {
+                this.Players.add(new Player(playersArray.optJSONObject(i)));
+            }
         }
         JSONObject historyObject = json.optJSONObject("TeamHistory");
         this.TeamHistory = new RealmList<History>();
-        if(historyObject != null)
-        {
+        if (historyObject != null) {
             JSONArray pointsArray = historyObject.optJSONArray("Points");
-            for (int i = 0; i < pointsArray.length(); i++)
-            {
+            for (int i = 0; i < pointsArray.length(); i++) {
                 this.TeamHistory.add(new History(pointsArray.optJSONObject(i).optString("Opposition"), pointsArray.optJSONObject(i).optInt("Points")));
             }
         }
@@ -68,13 +71,11 @@ public class Team extends RealmObject {
     private int TransfersRemaining;
     private RealmList<History> TeamHistory;
 
-    public RealmList<Player> getPlayers()
-    {
+    public RealmList<Player> getPlayers() {
         return Players;
     }
 
-    public RealmList<History> getTeamHistory()
-    {
+    public RealmList<History> getTeamHistory() {
         return TeamHistory;
     }
 

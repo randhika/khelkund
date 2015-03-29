@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/card_view"
+    android:id="@+id/card_view_filled"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_centerInParent="true"
-    card_view:cardBackgroundColor="@color/CSK"
+
     android:layout_margin="4dp"
-    android:elevation="5dp"
-    android:background="@color/DD">
+    android:elevation="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"

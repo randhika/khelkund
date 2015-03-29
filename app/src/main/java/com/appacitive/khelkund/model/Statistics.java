@@ -3,10 +3,13 @@ package com.appacitive.khelkund.model;
 import org.json.JSONObject;
 
 import io.realm.RealmObject;
+import io.realm.annotations.RealmClass;
 
 /**
  * Created by sathley on 3/24/2015.
  */
+
+@RealmClass
 public class Statistics extends RealmObject {
 
     public Statistics()

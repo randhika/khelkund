@@ -27,12 +27,18 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="title_activity_register">Register</string>
+    
+    <string name="facebook_app_id">407923276028749</string>
+    <string name="TWITTER_KEY">N1J0SKJLkMAoQe2kERO9LaX6j</string>
+    <string name="TWITTER_SECRET">ehmqbKoGROgCV2Ynk8jL9TsC7laL5xPvjMWXti9xZBSdO7zgqP</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_view_team">My Team</string>
 
     <string name="title_section1">Section 1</string>
     <string name="title_activity_edit_team">Modify Your Team</string>
     <string name="title_activity_create_team">Create your team</string>
+    <string name="title_activity_player_details">Player Details</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

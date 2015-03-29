@@ -20,9 +20,9 @@ import java.util.Map;
  */
 public class Http {
 
-    public Http(Context cxt) {
+    public Http() {
         if (requestQueue == null)
-            requestQueue = Volley.newRequestQueue(cxt.getApplicationContext());
+            requestQueue = Volley.newRequestQueue(KhelkundApplication.getAppContext());
     }
 
     private static RequestQueue requestQueue = null;

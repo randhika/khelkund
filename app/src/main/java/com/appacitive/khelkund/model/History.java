@@ -1,10 +1,13 @@
 package com.appacitive.khelkund.model;
 
 import io.realm.RealmObject;
+import io.realm.annotations.RealmClass;
 
 /**
  * Created by sathley on 3/24/2015.
  */
+
+@RealmClass
 public class History extends RealmObject {
 
     public History()

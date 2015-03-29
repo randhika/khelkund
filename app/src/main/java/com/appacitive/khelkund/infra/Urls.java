@@ -12,6 +12,10 @@ public class Urls {
         public static String getAllPlayersUrl() {
             return baseUrl + "PlayerService.svc/Players";
         }
+
+        public static String getPlayerDetailsUrl(String playerId) {
+            return baseUrl + "PlayerService.svc/PlayerDetails/" + playerId + "/allrounder";
+        }
     }
 
     public static class TeamUrls

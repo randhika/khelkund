@@ -9,6 +9,9 @@ import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -18,6 +21,8 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +33,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +71,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ConnectionManager.checkNetworkConnectivity(this);
+
         ButterKnife.inject(this);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -152,13 +160,12 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             } catch (JSONException e) {
                 throw new RuntimeException(e.getMessage());
             }
-            Http http = new Http(KhelkundApplication.getAppContext());
+            Http http = new Http();
             http.post(Urls.UserUrls.getLoginUrl(), new HashMap<String, String>(), jsonObject, new APCallback() {
                 @Override
                 public void success(JSONObject result) {
-
-                    if(result.optJSONObject("Error") != null)
-                    {
+                    showProgress(false);
+                    if (result.optJSONObject("Error") != null) {
                         mPasswordView.setError(getString(R.string.error_incorrect_password));
                         mPasswordView.requestFocus();
                         return;
@@ -183,13 +190,13 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
     }
 
     private void fetchMyTeam(final String userId) {
-        Http http = new Http(KhelkundApplication.getAppContext());
+        Http http = new Http();
         http.get(Urls.TeamUrls.getMyTeamUrl(userId), new HashMap<String, String>(), new APCallback() {
             @Override
             public void success(JSONObject result) {
                 if (result.optString("Error") == null)
                     return;
-                if(result.optJSONArray("Players") == null)
+                if (result.optJSONArray("Players") == null)
                     //  You are new here
                     return;
                 Team myTeam = new Team(result);

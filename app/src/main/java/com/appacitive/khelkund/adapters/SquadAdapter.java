@@ -27,9 +27,7 @@ public class SquadAdapter extends RecyclerView.Adapter<SquadAdapter.SquadViewHol
     }
     @Override
     public SquadViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.
-                from(parent.getContext()).
-                inflate(R.layout.item_squad, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_squad, parent, false);
         return new SquadViewHolder(itemView);
     }
 

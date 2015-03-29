@@ -32,7 +32,11 @@ public class VerticallyWrappedGridLayoutManager extends GridLayoutManager {
         final int heightSize = View.MeasureSpec.getSize(heightSpec);
         int width = 0;
         int height = 0;
-        for (int i = 0; i < ((getItemCount() / getSpanCount()) + 1); i++) {
+        double itemCount = getItemCount();
+        double spanCount = getSpanCount();
+
+        int rowsRequired = (int) Math.ceil(itemCount / spanCount);
+        for (int i = 0; i < rowsRequired; i++) {
             measureScrapChild(recycler, i,
                     View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
                     View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),

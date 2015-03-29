@@ -71,13 +71,13 @@ public class StorageManager {
 
     public List<Player> GetAllRounders(Team team, String userId)
     {
-        RealmQuery<Player> query = team.getPlayers().where().equalTo("PlayingPosition", "All Rounder");
+        RealmQuery<Player> query = team.getPlayers().where().equalTo("PlayingPosition", "AllRounder");
         return query.findAll();
     }
 
     public List<Player> GetWicketKeeper(Team team, String userId)
     {
-        RealmQuery<Player> query = team.getPlayers().where().equalTo("PlayingPosition", "Wicket Keeper");
+        RealmQuery<Player> query = team.getPlayers().where().equalTo("PlayingPosition", "WicketKeeper");
         return query.findAll();
     }
 

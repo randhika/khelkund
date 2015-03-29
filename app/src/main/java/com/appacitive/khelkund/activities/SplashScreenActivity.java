@@ -67,7 +67,7 @@ public class SplashScreenActivity extends ActionBarActivity {
     }
 
     private void fetchMyTeam(final String userId) {
-        Http http = new Http(context.getApplicationContext());
+        Http http = new Http();
         http.get(Urls.TeamUrls.getMyTeamUrl(userId), new HashMap<String, String>(), new APCallback() {
             @Override
             public void success(JSONObject result) {
@@ -90,11 +90,11 @@ public class SplashScreenActivity extends ActionBarActivity {
     }
 
     private void fetchAllPlayers() {
-        Http http = new Http(context.getApplicationContext());
+        Http http = new Http();
         http.get(Urls.PlayerUrls.getAllPlayersUrl(), new HashMap<String, String>(), new APCallback() {
             @Override
             public void success(JSONObject result) {
-                if (result.optJSONObject("Error") == null)
+                if (result.optJSONObject("Error") != null)
                     return;
                 JSONArray playersJsonArray = result.optJSONArray("Players");
                 List<Player> players = new ArrayList<Player>();

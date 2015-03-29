@@ -33,18 +33,6 @@ public class HomeFragment extends Fragment {
     private Team mTeam;
 
 
-//    @InjectView(R.id.tv_fantasy_teamname)
-//    public TextView mFantasyName;
-//
-//    @InjectView(R.id.tv_fantasy_nextmatch)
-//    public TextView mFantasyLastMathPlayed;
-//
-//    @InjectView(R.id.tv_fantasy_points)
-//    public TextView mFantasyLastMatchScore;
-//
-//    @InjectView(R.id.layout_fantasyleague)
-//    public LinearLayout mFantasyLeague;
-
     @InjectView(R.id.card_view_fantasy)
     public CardView mFantasy;
 
@@ -83,7 +71,6 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 mTeam = manager.GetTeam(mUser.getId());
 
-                mTeam = null;
                 if(mTeam != null)
                 {
                     Intent viewTeamIntent = new Intent(getActivity(), ViewTeamActivity.class);

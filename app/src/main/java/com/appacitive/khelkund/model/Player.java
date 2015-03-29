@@ -7,10 +7,13 @@ import java.util.List;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
 /**
  * Created by sathley on 3/24/2015.
  */
+
+@RealmClass
 public class Player extends RealmObject {
 
     public Player() {
@@ -21,30 +24,37 @@ public class Player extends RealmObject {
         if (json == null)
             return;
         this.DisplayName = json.optString("DisplayName");
+        this.FirstName = json.optString("FirstName");
+        this.LastName = json.optString("LastName");
+        this.Type = json.optString("Type");
         this.Id = json.optString("Id");
-        this.ImageUrl = json.optString("TImageUrl");
+        this.ImageUrl = json.optString("ImageUrl");
         this.ShortTeamName = json.optString("ShortTeamName");
         this.Price = json.optInt("Price");
         this.Popularity = json.optInt("Popularity");
         this.Points = json.optInt("Points");
-        this.PlayingPosition = json.optString("PlayingPosition");
         this.NextOpponent = json.optString("NextOpponent");
+        JSONObject statisticsJson = json.optJSONObject("Statistics");
+        if(statisticsJson != null)
+        {
+            this.Statistics = new Statistics(statisticsJson);
+        }
         JSONArray history = json.optJSONArray("PointsHistory");
         if (history != null) {
             if (history.isNull(0) == false) {
-                this.PointsHistory1 = (int) history.opt(0);
+                this.PointsHistory1 = (int) history.optInt(0);
             }
             if (history.isNull(1) == false) {
-                this.PointsHistory2 = (int) history.opt(1);
+                this.PointsHistory2 = (int) history.optInt(1);
             }
             if (history.isNull(2) == false) {
-                this.PointsHistory3 = (int) history.opt(2);
+                this.PointsHistory3 = (int) history.optInt(2);
             }
             if (history.isNull(3) == false) {
-                this.PointsHistory4 = (int) history.opt(3);
+                this.PointsHistory4 = (int) history.optInt(3);
             }
             if (history.isNull(4) == false) {
-                this.PointsHistory5 = (int) history.opt(4);
+                this.PointsHistory5 = (int) history.optInt(4);
             }
         }
     }
@@ -52,11 +62,13 @@ public class Player extends RealmObject {
     @PrimaryKey
     private String Id;
     private String DisplayName;
+    private String FirstName;
+    private String LastName;
+    private String Type;
     private String ImageUrl;
     private int Price;
     private int Popularity;
     private int Points;
-    private String PlayingPosition;
     private String NextOpponent;
     private String ShortTeamName;
     private int PointsHistory1;
@@ -113,14 +125,14 @@ public class Player extends RealmObject {
     public void setPoints(int points) {
         Points = points;
     }
-
-    public String getPlayingPosition() {
-        return PlayingPosition;
-    }
-
-    public void setPlayingPosition(String playingPosition) {
-        PlayingPosition = playingPosition;
-    }
+//
+//    public String getPlayingPosition() {
+//        return PlayingPosition;
+//    }
+//
+//    public void setPlayingPosition(String playingPosition) {
+//        PlayingPosition = playingPosition;
+//    }
 
     public String getNextOpponent() {
         return NextOpponent;
@@ -184,5 +196,29 @@ public class Player extends RealmObject {
 
     public void setStatistics(com.appacitive.khelkund.model.Statistics statistics) {
         Statistics = statistics;
+    }
+
+    public String getFirstName() {
+        return FirstName;
+    }
+
+    public void setFirstName(String firstName) {
+        FirstName = firstName;
+    }
+
+    public String getLastName() {
+        return LastName;
+    }
+
+    public void setLastName(String lastName) {
+        LastName = lastName;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
     }
 }

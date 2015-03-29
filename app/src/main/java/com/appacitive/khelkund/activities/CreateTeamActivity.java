@@ -85,11 +85,16 @@ public class CreateTeamActivity extends ActionBarActivity {
 
         mLogoRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override public void onItemClick(View view, int position) {
+
+                // 1. Remove selection from previously selected item
                 TeamLogoAdapter.TeamLogoViewHolder holder =  (TeamLogoAdapter.TeamLogoViewHolder)mLogoRecyclerView.findViewHolderForAdapterPosition(CreateTeamActivity.selectedId);
                 holder.logo.setBackgroundColor(Color.WHITE);
 
+                // 2. Add selection to newly selected item
                 CardView cardView = (CardView) view.findViewById(R.id.card_view_pick_team_logo);
                 cardView.setBackgroundColor(getResources().getColor(R.color.accent));
+
+                // 3. Update selected position in static variable
                 CreateTeamActivity.selectedId = position;
             }
         }));
@@ -113,11 +118,11 @@ public class CreateTeamActivity extends ActionBarActivity {
 
     private void createTeam() {
 
-        Http http = new Http(getApplicationContext());
+        Http http = new Http();
         final JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("UserId", mUserId);
-            jsonObject.put("ImageUrl", mLogos.get(selectedId));
+            jsonObject.put("ImageName", mLogos.get(selectedId));
         } catch (JSONException e) {
             e.printStackTrace();
         }

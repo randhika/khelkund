@@ -1,65 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:paddingEnd="10dp"
     android:paddingStart="10dp">
 
-        <ImageView
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iv_player_squad_photo"
+        android:src="@drawable/broncos"
+        android:minWidth="56dp"
+        android:minHeight="56dp"
+        android:maxWidth="56dp"
+        android:maxHeight="56dp"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="center_vertical">
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/iv_player_squad_photo"
-            android:src="@drawable/broncos"
-            android:minWidth="56dp"
-            android:minHeight="56dp"
-            android:maxWidth="56dp"
-            android:maxHeight="56dp"
-            android:scaleType="fitXY" />
+            android:text="Jaques Kallis"
+            android:id="@+id/tv_squad_name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/abc_primary_text_material_light" />
 
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
-            android:orientation="vertical"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Jaques Kallis"
-                android:id="@+id/tv_squad_name"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/abc_primary_text_material_light" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chennai Super Kings"
-                android:id="@+id/tv_squad_team" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|right">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="+12.12"
-                android:id="@+id/tv_squad_points"
-                android:textColor="@color/primary_dark" />
-        </LinearLayout>
-
+            android:text="Chennai Super Kings"
+            android:id="@+id/tv_squad_team" />
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|right">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="+12.12"
+            android:id="@+id/tv_squad_points"
+            android:textColor="@color/primary_dark" />
+    </LinearLayout>
+
+</LinearLayout>
 
