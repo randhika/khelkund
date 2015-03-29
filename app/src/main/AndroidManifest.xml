@@ -9,9 +9,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.NETWORK" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <!-- <uses-permission android:name="android.permission.NETWORK" /> -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:name=".infra.KhelkundApplication"
@@ -21,7 +21,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activities.SplashScreenActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -73,23 +74,38 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="2890d3d7e7948bff7abc0d2c5733a5ecabc8195e" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
         <activity
             android:name=".activities.PlayerDetailsActivity"
-            android:theme="@style/NoActionBar"
             android:label="@string/title_activity_player_details"
+            android:parentActivityName=".activities.EditTeamActivity"
+            android:theme="@style/NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.appacitive.khelkund.activities.EditTeamActivity" />
+        </activity>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <service
+            android:name=".infra.runnables.FetchAllPlayersIntentService"
+            android:exported="false" >
+        </service>
+
+        <activity
+            android:name=".activities.PlayerPoolActivity"
+            android:label="@string/title_activity_player_pool"
             android:parentActivityName=".activities.EditTeamActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.EditTeamActivity" />
         </activity>
-
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
     </application>
 
 </manifest>

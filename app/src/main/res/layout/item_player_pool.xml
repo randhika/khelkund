@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_item_pool"
+        android:layout_width="match_parent"
+        android:layout_height="88dp">
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:id="@+id/iv_pool_photo"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/demo"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:maxWidth="56dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Player Name"
+            android:id="@+id/tv_pool_player_name"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="72dp"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/primary_material_dark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Team"
+            android:id="@+id/tv_pool_team"
+            android:layout_below="@+id/tv_pool_player_name"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="72dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Points  "
+            android:id="@+id/tv_label_pool_points"
+            android:layout_below="@+id/tv_pool_team"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="72dp"
+            android:layout_marginTop="4dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="0.0"
+            android:id="@+id/tv_pool_points"
+            android:layout_alignTop="@+id/tv_label_pool_points"
+            android:layout_toRightOf="@+id/tv_label_pool_points"
+            android:layout_toEndOf="@+id/tv_label_pool_points"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Popularity  "
+            android:id="@+id/tv_label_pool_popularity"
+            android:layout_alignTop="@+id/tv_pool_points"
+            android:layout_toRightOf="@+id/tv_pool_points"
+            android:layout_toEndOf="@+id/tv_pool_points"
+            android:layout_marginLeft="24dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="0.0"
+            android:id="@+id/tv_pool_popularity"
+            android:layout_alignTop="@+id/tv_label_pool_popularity"
+            android:layout_toRightOf="@+id/tv_label_pool_popularity"
+            android:layout_toEndOf="@+id/tv_label_pool_popularity"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="$ 0.0"
+            android:id="@+id/tv_pool_price"
+            android:layout_alignBottom="@+id/tv_pool_team"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/primary_dark" />
+
+    </RelativeLayout>
+</RelativeLayout>

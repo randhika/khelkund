@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
@@ -16,6 +17,7 @@ import com.digits.sdk.android.DigitsSession;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.twitter.sdk.android.core.Callback;
@@ -43,8 +45,10 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        FacebookSdk.sdkInitialize(KhelkundApplication.getAppContext());
         callbackManager = CallbackManager.Factory.create();
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+
         facebookLoginButton = (LoginButton) view.findViewById(R.id.facebook_login_button);
         facebookLoginButton.setFragment(this);
         facebookLoginButton.registerCallback(callbackManager, facebookSessionCallback);

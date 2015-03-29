@@ -21,6 +21,8 @@ import io.realm.annotations.RealmClass;
 public class Team extends RealmObject {
 
     public Team() {
+        this.Players = new RealmList<Player>();
+        this.TeamHistory = new RealmList<History>();
     }
 
     public Team(JSONObject json) {

@@ -12,6 +12,7 @@ import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PlayerType;
+import com.appacitive.khelkund.model.TeamHelper;
 import com.appacitive.khelkund.model.events.EmptyPlayerCardClickedEvent;
 import com.appacitive.khelkund.model.events.FilledPlayerCardClickedEvent;
 import com.appacitive.khelkund.model.viewholders.EmptyCardViewHolder;
@@ -75,7 +76,7 @@ public class PlayerCardAdapter extends RecyclerView.Adapter<PlayerCardViewHolder
         final PlayerType playerType = this.mPlayerType;
         switch (viewType) {
             case 0: {
-                CardView cardView = ((EmptyCardViewHolder)holder).cvEmptyCard;
+                CardView cardView = ((EmptyCardViewHolder) holder).cvEmptyCard;
                 ImageView ivPlayerType = (ImageView) cardView.findViewById(R.id.iv_player_type);
                 Picasso
                         .with(KhelkundApplication.getAppContext())
@@ -96,12 +97,14 @@ public class PlayerCardAdapter extends RecyclerView.Adapter<PlayerCardViewHolder
 
             case 1: {
                 final Player player = mPlayers.get(position);
-                CardView cardView = ((FilledCardViewHolder)holder).cvFilledCard;
+                CardView cardView = ((FilledCardViewHolder) holder).cvFilledCard;
+                cardView.setBackgroundColor(TeamHelper.getTeamColor(player.getShortTeamName()));
                 ImageView ivPlayerPhoto = (ImageView) cardView.findViewById(R.id.iv_player_photo);
                 Picasso
                         .with(KhelkundApplication.getAppContext())
-                .load(player.getImageUrl())
-                .into(ivPlayerPhoto);
+                        .load(player.getImageUrl())
+                        .placeholder(R.drawable.demo)
+                        .into(ivPlayerPhoto);
                 cardView.setOnClickListener(null);
                 cardView.setOnClickListener(new View.OnClickListener() {
                     @Override

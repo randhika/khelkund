@@ -1,7 +1,11 @@
 package com.appacitive.khelkund.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,9 +18,16 @@ import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.Player;
+import com.appacitive.khelkund.model.TeamHelper;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 
 import butterknife.ButterKnife;
@@ -40,7 +51,6 @@ public class PlayerDetailsActivity extends ActionBarActivity {
         Intent intent = getIntent();
         playerId = intent.getStringExtra("player_id");
         fetchAndDisplayPlayerDetails();
-
     }
 
     private void fetchAndDisplayPlayerDetails()
@@ -63,16 +73,33 @@ public class PlayerDetailsActivity extends ActionBarActivity {
 
     }
 
+    private Target target = new Target() {
+        @Override
+        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            getSupportActionBar().setLogo(new BitmapDrawable(bitmap));
+        }
+
+        @Override
+        public void onBitmapFailed(Drawable errorDrawable) {
+
+        }
+
+        @Override
+        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+        }
+    };
+
     private void DisplayPlayerDetails()
     {
         getSupportActionBar().setTitle(String.format("%s %s", mPlayer.getFirstName(), mPlayer.getLastName()));
         getSupportActionBar().setElevation(5);
-        getSupportActionBar().setSubtitle("Subtitle");
+        getSupportActionBar().setSubtitle(mPlayer.getShortTeamName());
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.demo);
-
-        mToolbar.setBackgroundColor(getResources().getColor(R.color.DD));
-        mToolbar.setCollapsible(true);
+//        getSupportActionBar().setLogo(drawableFromUrl(mPlayer.getImageUrl()));
+        Picasso.with(this).load(mPlayer.getImageUrl()).into(target);
+        mToolbar.setBackgroundColor(getResources().getColor(TeamHelper.getTeamColor(mPlayer.getShortTeamName())));
+        mToolbar.setCollapsible(false);
         mToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +109,27 @@ public class PlayerDetailsActivity extends ActionBarActivity {
         });
 
 
+    }
+
+    public static Drawable drawableFromUrl(String url) {
+        Bitmap x;
+        InputStream input = null;
+        HttpURLConnection connection = null;
+        try {
+            connection = (HttpURLConnection) new URL(url).openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            connection.connect();
+
+        input = connection.getInputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        x = BitmapFactory.decodeStream(input);
+        return new BitmapDrawable(x);
     }
 
 

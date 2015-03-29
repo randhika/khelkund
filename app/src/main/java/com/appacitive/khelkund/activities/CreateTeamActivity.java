@@ -29,6 +29,7 @@ import com.appacitive.khelkund.infra.RecyclerItemClickListener;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
+import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.Team;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
@@ -42,6 +43,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import io.realm.RealmList;
 
 public class CreateTeamActivity extends ActionBarActivity {
 
@@ -109,40 +111,29 @@ public class CreateTeamActivity extends ActionBarActivity {
                                     .text("You did not provide a name for your team"), CreateTeamActivity.this);
                     return;
                 }
-                createTeam();
-                return;
+                createTeam(mTeamName.getText().toString(), mLogos.get(selectedId));
             }
         });
 
     }
 
-    private void createTeam() {
+    private void createTeam(String teamName, String logoId) {
+        Team team = new Team();
+        team.setUserId(mUserId);
+        team.setFormation("C_4_3_3_1");
+        team.setPlayers(new RealmList<Player>());
+        team.setImageName(logoId);
+        team.setName(teamName);
+        team.setTotalPoints(0);
 
-        Http http = new Http();
-        final JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("UserId", mUserId);
-            jsonObject.put("ImageName", mLogos.get(selectedId));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        http.post(Urls.TeamUrls.saveTeamUrl(), new HashMap<String, String>(), jsonObject, new APCallback() {
-            @Override
-            public void failure(Exception e) {
+        team.setTransfersRemaining(18);
+        team.setBalance(10000000);
 
-            }
-
-            @Override
-            public void success(JSONObject result) {
-
-                if(jsonObject.optJSONObject("Error") == null)
-                    return;
-                StorageManager storageManager = new StorageManager();
-                storageManager.Save(new Team(jsonObject));
-                Intent editTeamIntent = new Intent(CreateTeamActivity.this, EditTeamActivity.class);
-                startActivity(editTeamIntent);
-            }
-        });
+        StorageManager storageManager = new StorageManager();
+        storageManager.Save(team);
+        Intent editTeamIntent = new Intent(CreateTeamActivity.this, EditTeamActivity.class);
+        startActivity(editTeamIntent);
+        finish();
     }
 
 

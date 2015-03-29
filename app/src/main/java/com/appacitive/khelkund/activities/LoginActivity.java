@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.fragments.LoginFragment;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
@@ -63,6 +64,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private int mLoginFragmentId;
 
     @InjectView(R.id.tv_register)
     TextView mRegister;
@@ -72,8 +74,14 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ConnectionManager.checkNetworkConnectivity(this);
-
         ButterKnife.inject(this);
+        if (savedInstanceState == null) {
+            LoginFragment loginFragment = new LoginFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, loginFragment).commit();
+            mLoginFragmentId = loginFragment.getId();
+        }
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -106,6 +114,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             public void onClick(View view) {
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
+                finish();
             }
         });
     }
@@ -207,6 +216,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
                 showProgress(false);
                 Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(homeIntent);
+                finish();
             }
 
             @Override
@@ -316,7 +326,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         super.onActivityResult(requestCode, resultCode, data);
 
         Fragment fragment = getSupportFragmentManager()
-                .findFragmentById(R.id.fragment);
+                .findFragmentById(mLoginFragmentId);
         if (fragment != null) {
             fragment.onActivityResult(requestCode, resultCode, data);
         }

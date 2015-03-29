@@ -81,21 +81,8 @@ public class HomeFragment extends Fragment {
                     Intent createTeamIntent = new Intent(getActivity(), CreateTeamActivity.class);
                     startActivity(createTeamIntent);
                 }
-            }
+           }
         });
-
-
-//        mFantasyName.setText(mTeam.getName());
-//        mFantasyLastMathPlayed.setText(mTeam.getPreviousMatch());
-//        mFantasyLastMatchScore.setText(String.valueOf(mTeam.getTeamHistory().last().getPoints()));
-//
-//        mFantasyLeague.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Intent viewTeamIntent = new Intent(getActivity(), ViewTeamActivity.class);
-//                startActivity(viewTeamIntent);
-//            }
-//        });
         return rootView;
     }
 

@@ -7,23 +7,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.appacitive.khelkund.activities.LoginActivity">
 
-    <fragment
-        android:name="com.appacitive.khelkund.fragments.LoginFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_login"
+    <!--<fragment-->
+        <!--android:name="com.appacitive.khelkund.fragments.LoginFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--tools:layout="@layout/fragment_login"-->
 
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:id="@+id/fragment">-->
+
+    <!--</fragment>-->
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_container"
         android:layout_alignParentTop="true"
-        android:id="@+id/fragment">
-
-    </fragment>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"
         android:id="@+id/divider"
-        android:layout_below="@+id/fragment"
+        android:layout_below="@+id/fragment_container"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:paddingTop="8dp"
@@ -42,6 +48,7 @@
     <ScrollView android:id="@+id/login_form" android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/divider"
+
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
 
@@ -71,14 +78,32 @@
                 android:textColor="@color/background_floating_material_light"
                 android:elevation="5dp" />
 
+
+
         </LinearLayout>
+
+
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/divider2"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_below="@+id/login_form"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical|center_horizontal"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
     <TextView
         android:layout_width="wrap_content"
@@ -86,17 +111,18 @@
         android:text="Don&apos;t have an account? "
         android:id="@+id/tv_label_register"
 
-        android:layout_alignParentBottom="false"
+        android:gravity="center_vertical|center_horizontal"
          />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SIGN UP"
+            android:gravity="center_vertical|center_horizontal"
             android:id="@+id/tv_register"
             android:layout_alignParentBottom="false"
             android:layout_toRightOf="@+id/tv_label_register"
-            android:layout_toEndOf="@+id/tv_label_register"
+
             android:textColor="@color/accent" />
 
     </RelativeLayout>

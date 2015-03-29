@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.fragments.LoginFragment;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
 
@@ -27,19 +28,28 @@ public class RegisterActivity extends ActionBarActivity {
     @InjectView(R.id.et_register_password)
     public EditText mPassword;
 
+    private int mLoginFragmentId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.inject(this);
         ConnectionManager.checkNetworkConnectivity(this);
+        if (savedInstanceState == null) {
+            LoginFragment loginFragment = new LoginFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, loginFragment).commit();
+            mLoginFragmentId = loginFragment.getId();
+        }
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Fragment fragment = getSupportFragmentManager()
-                .findFragmentById(R.id.fragment);
+                .findFragmentById(mLoginFragmentId);
         if (fragment != null) {
             fragment.onActivityResult(requestCode, resultCode, data);
         }
@@ -50,6 +60,7 @@ public class RegisterActivity extends ActionBarActivity {
     {
         Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(loginIntent);
+        finish();
     }
 
     private boolean isEmailValid(String email) {

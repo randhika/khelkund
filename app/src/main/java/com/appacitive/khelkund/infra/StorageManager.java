@@ -9,6 +9,7 @@ import com.appacitive.khelkund.model.User;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
@@ -57,27 +58,11 @@ public class StorageManager {
         return query.findFirst();
     }
 
-    public List<Player> GetBatsmen(Team team, String userId)
+    public RealmResults<Player> GetAllPlayers(String type)
     {
-        RealmQuery<Player> query = team.getPlayers().where().equalTo("PlayingPosition", "Batsman");
-        return query.findAll();
-    }
-
-    public List<Player> GetBowlers(Team team, String userId)
-    {
-        RealmQuery<Player> query = team.getPlayers().where().equalTo("PlayingPosition", "Bowler");
-        return query.findAll();
-    }
-
-    public List<Player> GetAllRounders(Team team, String userId)
-    {
-        RealmQuery<Player> query = team.getPlayers().where().equalTo("PlayingPosition", "AllRounder");
-        return query.findAll();
-    }
-
-    public List<Player> GetWicketKeeper(Team team, String userId)
-    {
-        RealmQuery<Player> query = team.getPlayers().where().equalTo("PlayingPosition", "WicketKeeper");
+        Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
+        RealmQuery<Player> query = realm.where(Player.class);
+        query.equalTo("Type", type);
         return query.findAll();
     }
 
@@ -86,6 +71,28 @@ public class StorageManager {
         Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
         RealmQuery<User> query = realm.where(User.class);
         query.equalTo("Id", userId);
+        return query.findFirst();
+    }
+
+    public RealmResults<Player> GetTopPerformingPlayersByType(String type) {
+        Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
+        RealmQuery<Player> query = realm.where(Player.class);
+        query.equalTo("Type", type);
+        return query.findAllSorted("Points", false);
+    }
+
+    public RealmResults<Player> GetBargainPlayersByType(String type) {
+        Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
+        RealmQuery<Player> query = realm.where(Player.class);
+        query.equalTo("Type", type);
+        query.lessThan("Price", 10000000 / 11);
+        return query.findAllSorted("Points", false);
+    }
+
+    public Player GetPlayer(String playerId) {
+        Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
+        RealmQuery<Player> query = realm.where(Player.class);
+        query.equalTo("Id", playerId);
         return query.findFirst();
     }
 }

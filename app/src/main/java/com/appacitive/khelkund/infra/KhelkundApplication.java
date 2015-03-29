@@ -23,7 +23,7 @@ public class KhelkundApplication extends Application {
 
     public void onCreate(){
         super.onCreate();
-        FacebookSdk.sdkInitialize(getApplicationContext());
+
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Crashlytics(), new Twitter(authConfig));
         Fabric.with(this, new TwitterCore(authConfig), new Digits());

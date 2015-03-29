@@ -5,7 +5,7 @@ package com.appacitive.khelkund.infra;
  */
 public class Urls {
 
-    private static String baseUrl = "http://www.khelkund.com/test/Service/";
+    private static String baseUrl = "http://www.khelkund.com/ipl/Service/";
 
     public static class PlayerUrls
     {
