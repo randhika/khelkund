@@ -28,13 +28,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:paddingTop="8dp"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:id="@+id/et_register_name"
         android:layout_below="@+id/divider"
@@ -43,8 +44,8 @@
         android:layout_alignRight="@+id/divider"
         android:layout_alignEnd="@+id/divider"
         android:hint="Name"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -58,8 +59,8 @@
         android:layout_alignRight="@+id/et_register_name"
         android:layout_alignEnd="@+id/et_register_name"
         android:hint="Email address"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -73,8 +74,8 @@
         android:layout_alignRight="@+id/et_register_email"
         android:layout_alignEnd="@+id/et_register_email"
         android:hint="Password"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -84,14 +85,14 @@
         android:layout_below="@+id/et_register_password"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/et_register_password"
-        android:layout_alignEnd="@+id/et_register_password"
+
         android:background="@color/accent"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:textColor="@color/abc_primary_text_material_dark" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/abc_primary_text_material_dark"
+        android:elevation="5dp" />
 
     <View
         android:layout_width="match_parent"
@@ -102,13 +103,15 @@
         android:paddingBottom="8dp"
         android:layout_below="@+id/btn_register"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:id="@+id/rl_login"
         android:layout_below="@+id/divider2">
 
         <RelativeLayout
@@ -117,23 +120,24 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:gravity="fill">
+            android:gravity="center_vertical|center_horizontal"
+
+            >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Already a member? "
+                android:gravity="center_vertical|center_horizontal"
                 android:id="@+id/textView12"
                  />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="SIGN UP"
+                android:text="LOG IN"
                 android:id="@+id/textView13"
-
+                android:gravity="center_vertical|center_horizontal"
                 android:layout_toRightOf="@+id/textView12"
                 android:textColor="@color/primary" />
         </RelativeLayout>

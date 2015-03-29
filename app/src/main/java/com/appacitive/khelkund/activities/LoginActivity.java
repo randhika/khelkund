@@ -19,6 +19,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -308,6 +309,17 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Fragment fragment = getSupportFragmentManager()
+                .findFragmentById(R.id.fragment);
+        if (fragment != null) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
 

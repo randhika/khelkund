@@ -49,7 +49,7 @@ public class LoginFragment extends Fragment {
         facebookLoginButton.setFragment(this);
         facebookLoginButton.registerCallback(callbackManager, facebookSessionCallback);
 
-        digitsLoginButton = (DigitsAuthButton) view.findViewById(R.id.auth_button);
+        digitsLoginButton = (DigitsAuthButton) view.findViewById(R.id.digits_login_button);
         digitsLoginButton.setAuthTheme(android.R.style.Theme_Material_Light_DarkActionBar);
         digitsLoginButton.setCallback(digitsSessionCallback);
 

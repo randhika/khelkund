@@ -1,36 +1,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.appacitive.khelkund.fragments.LoginFragment">
-
-    <com.twitter.sdk.android.core.identity.TwitterLoginButton
-        android:id="@+id/twitter_login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/auth_button"
-        android:layout_alignStart="@+id/auth_button"
-        android:layout_alignRight="@+id/auth_button"
-        android:layout_alignEnd="@+id/auth_button" />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/facebook_login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/twitter_login_button"
-        android:layout_alignLeft="@+id/twitter_login_button"
-        android:layout_alignStart="@+id/twitter_login_button"
-        android:layout_alignRight="@+id/twitter_login_button"
-        android:layout_alignEnd="@+id/twitter_login_button" />
+    android:layout_height="wrap_content"
+    tools:context="com.appacitive.khelkund.fragments.LoginFragment"
+    android:gravity="center_vertical|center_horizontal">
 
     <com.digits.sdk.android.DigitsAuthButton
-        android:id="@+id/auth_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_above="@+id/twitter_login_button"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="36dp"
+        android:text="New Button"
+        android:id="@+id/digits_login_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="4dp" />
 
+    <com.facebook.login.widget.LoginButton
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:id="@+id/facebook_login_button"
+        android:layout_below="@+id/digits_login_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/digits_login_button"
+        android:layout_alignEnd="@+id/digits_login_button"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
+
+    <com.twitter.sdk.android.core.identity.TwitterLoginButton
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:id="@+id/twitter_login_button"
+        android:layout_below="@+id/facebook_login_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/facebook_login_button"
+        android:layout_alignEnd="@+id/facebook_login_button"
+        android:layout_marginBottom="4dp" />
 </RelativeLayout>
