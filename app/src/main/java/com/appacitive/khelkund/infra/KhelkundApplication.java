@@ -2,6 +2,8 @@ package com.appacitive.khelkund.infra;
 
 import android.app.Application;
 import android.content.Context;
+
+import com.appacitive.khelkund.R;
 import com.crashlytics.android.Crashlytics;
 import com.digits.sdk.android.Digits;
 import com.facebook.FacebookSdk;
@@ -24,9 +26,11 @@ public class KhelkundApplication extends Application {
     public void onCreate(){
         super.onCreate();
 
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(getResources().getString(R.string.TWITTER_KEY), getResources().getString(R.string.TWITTER_SECRET));
+//        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Crashlytics(), new Twitter(authConfig));
         Fabric.with(this, new TwitterCore(authConfig), new Digits());
+        Fabric.with(this, new Twitter(authConfig));
         KhelkundApplication.context = getApplicationContext();
     }
 

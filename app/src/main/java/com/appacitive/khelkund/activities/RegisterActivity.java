@@ -9,8 +9,18 @@ import android.widget.EditText;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.fragments.LoginFragment;
+import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
+import com.appacitive.khelkund.infra.SharedPreferencesManager;
+import com.appacitive.khelkund.infra.StorageManager;
+import com.appacitive.khelkund.infra.Urls;
+import com.appacitive.khelkund.model.User;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -103,8 +113,37 @@ public class RegisterActivity extends ActionBarActivity {
             return;
         }
 
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Email", mEmail.getText().toString());
+            jsonObject.put("Password", mPassword.getText().toString());
+            jsonObject.put("Firstname", mName.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         Http http = new Http();
+        http.post(Urls.UserUrls.getSignupUrl(), new HashMap<String, String>(), jsonObject, new APCallback() {
+            @Override
+            public void success(JSONObject result) {
+                if(result.optJSONObject("Error") != null)
+                {
+                    return;
+                }
+                User user = new User(result);
+                SharedPreferencesManager.WriteUserId(user.getId());
+                StorageManager manager = new StorageManager();
+                manager.Save(user);
 
+                Intent homeIntent = new Intent(RegisterActivity.this, HomeActivity.class);
+                startActivity(homeIntent);
+                finish();
+            }
+
+            @Override
+            public void failure(Exception e) {
+                super.failure(e);
+            }
+        });
 
     }
 

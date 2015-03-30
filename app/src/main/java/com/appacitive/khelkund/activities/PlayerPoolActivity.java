@@ -2,6 +2,7 @@ package com.appacitive.khelkund.activities;
 
 import java.util.Locale;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -35,12 +36,8 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_pool);
-        BusProvider.getInstance().register(this);
         final ActionBar actionBar = getSupportActionBar();
-        String playerType = getIntent().getStringExtra("type");
-        mPlayerType = PlayerType.valueOf(playerType.toUpperCase());
-        actionBar.setTitle("Choose " + playerType);
-
+        setupActionBarTitle();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -63,6 +60,14 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
         }
     }
 
+    private void setupActionBarTitle()
+    {
+        final ActionBar actionBar = getSupportActionBar();
+        String playerType = getIntent().getStringExtra("type");
+        mPlayerType = PlayerType.valueOf(playerType.toUpperCase());
+        actionBar.setTitle("Choose " + playerType);
+    }
+
     @Override
     public void onBackPressed()
     {
@@ -70,6 +75,17 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
         finish();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
+    }
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
@@ -121,7 +137,12 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
         Intent intent = new Intent();
         intent.putExtra("player_id", event.PlayerId);
         intent.putExtra("Type", mPlayerType.toString());
+        if (getParent() == null) {
+            setResult(Activity.RESULT_OK, intent);
+        } else {
+            getParent().setResult(Activity.RESULT_OK, intent);
+        }
         setResult(RESULT_OK, intent);
-        PlayerPoolActivity.this.finish();
+        finish();
     }
 }

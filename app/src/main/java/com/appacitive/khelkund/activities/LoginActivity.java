@@ -47,8 +47,10 @@ import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
+import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
+import com.appacitive.khelkund.infra.runnables.FetchMyPLayersIntentService;
 import com.appacitive.khelkund.model.Team;
 import com.appacitive.khelkund.model.User;
 
@@ -185,7 +187,12 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
                     User user = new User(result.optJSONObject("User"));
                     StorageManager manager = new StorageManager();
                     manager.Save(user);
-                    fetchMyTeam(user.getId());
+
+                    Intent mServiceIntent = new Intent(LoginActivity.this, FetchMyPLayersIntentService.class);
+                    startService(mServiceIntent);
+                    Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(homeIntent);
+                    finish();
 
                 }
 
@@ -197,33 +204,6 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
                 }
             });
         }
-    }
-
-    private void fetchMyTeam(final String userId) {
-        Http http = new Http();
-        http.get(Urls.TeamUrls.getMyTeamUrl(userId), new HashMap<String, String>(), new APCallback() {
-            @Override
-            public void success(JSONObject result) {
-                if (result.optString("Error") == null)
-                    return;
-                if (result.optJSONArray("Players") == null)
-                    //  You are new here
-                    return;
-                Team myTeam = new Team(result);
-                myTeam.setUserId(userId);
-                StorageManager storageManager = new StorageManager();
-                storageManager.Save(myTeam);
-                showProgress(false);
-                Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivity(homeIntent);
-                finish();
-            }
-
-            @Override
-            public void failure(Exception e) {
-
-            }
-        });
     }
 
     private boolean isEmailValid(String email) {

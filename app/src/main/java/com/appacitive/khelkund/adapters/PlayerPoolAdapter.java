@@ -17,7 +17,6 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import io.realm.RealmList;
 import io.realm.RealmResults;
 
 /**
@@ -38,8 +37,8 @@ public class PlayerPoolAdapter extends RecyclerView.Adapter<PlayerPoolAdapter.Po
     }
 
     @Override
-    public void onBindViewHolder(PoolViewHolder holder, final int position) {
-        Player player = mPlayers.get(position);
+    public void onBindViewHolder(final PoolViewHolder holder, final int position) {
+        final Player player = mPlayers.get(position);
         holder.name.setText(player.getDisplayName());
         holder.points.setText(String.valueOf(player.getPoints()));
         holder.team.setText(player.getShortTeamName());
@@ -48,6 +47,7 @@ public class PlayerPoolAdapter extends RecyclerView.Adapter<PlayerPoolAdapter.Po
         Picasso.with(KhelkundApplication.getAppContext()).load(player.getImageUrl()).into(holder.logo);
 
         holder.relativeLayout.setOnClickListener(null);
+        holder.relativeLayout.setClickable(false);
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,17 +65,17 @@ public class PlayerPoolAdapter extends RecyclerView.Adapter<PlayerPoolAdapter.Po
 
     public static class PoolViewHolder extends RecyclerView.ViewHolder
     {
-        @InjectView(R.id.tv_pool_player_name)
+        @InjectView(R.id.tv_squad_name)
         public TextView name;
-        @InjectView(R.id.tv_pool_team)
+        @InjectView(R.id.tv_squad_team)
         public TextView team;
-        @InjectView(R.id.iv_pool_photo)
+        @InjectView(R.id.iv_player_squad_photo)
         public ImageView logo;
         @InjectView(R.id.tv_pool_points)
         public TextView points;
         @InjectView(R.id.tv_pool_popularity)
         public TextView popularity;
-        @InjectView(R.id.tv_pool_price)
+        @InjectView(R.id.tv_squad_points)
         public TextView price;
         @InjectView(R.id.rl_item_pool)
         public RelativeLayout relativeLayout;

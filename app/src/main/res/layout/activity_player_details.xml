@@ -1,10 +1,205 @@
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:id="@+id/player_toolbar"
-    android:layout_height="200dp"
-    >
+    android:layout_height="match_parent"
+    android:clickable="false">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:id="@+id/player_toolbar"
+        android:layout_height="180dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="85dp"
+                android:id="@+id/iv_details_photo"
+                android:layout_height="match_parent"
+                android:layout_marginTop="56dp"
+                android:layout_toLeftOf="@+id/relativeLayout"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="48dp"
+                android:id="@+id/relativeLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="NA"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_details_1"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="16sp"
+                    android:textIsSelectable="true"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MATCHES"
+                    android:id="@+id/tv_label_details_1"
+                    android:layout_below="@+id/tv_details_1"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NA"
+                    android:id="@+id/tv_details_2"
+                    android:layout_below="@+id/tv_label_details_1"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RUNS"
+                    android:id="@+id/tv_label_details_2"
+                    android:layout_below="@+id/tv_details_2"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NA"
+                    android:id="@+id/tv_details_3"
+                    android:layout_below="@+id/tv_label_details_2"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WICKETS"
+                    android:id="@+id/tv_label_details_3"
+                    android:layout_below="@+id/tv_details_3"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white" />
 
 
-</android.support.v7.widget.Toolbar>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Player Name"
+                android:id="@+id/tv_details_player_name"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/iv_details_photo"
+                android:layout_alignStart="@+id/iv_details_photo"
+                android:layout_marginLeft="36dp" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Price"
+        android:id="@+id/textView14"
+        android:layout_below="@+id/player_toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="72dp"
+        android:textColor="@color/secondary_text_default_material_light"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="$ 0"
+        android:id="@+id/tv_details_price"
+        android:layout_below="@+id/textView14"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="72dp"
+        android:textColor="@color/primary_dark" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/divider"
 
 
+        android:layout_below="@+id/tv_details_price"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="MAKE CAPTAIN"
+        android:id="@+id/btn_make_captain"
+        android:layout_below="@+id/divider"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="72dp"
+        android:background="@android:color/transparent"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:padding="8dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="REMOVE"
+        android:id="@+id/btn_details_remove"
+        android:layout_alignBottom="@+id/btn_make_captain"
+        android:layout_toRightOf="@+id/btn_make_captain"
+        android:layout_toEndOf="@+id/btn_make_captain"
+        android:layout_marginLeft="12dp"
+        android:background="@color/accent"
+        android:textColor="@android:color/white"
+        android:padding="8dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/divider2"
+
+
+        android:layout_below="@+id/btn_make_captain"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/divider2"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:minHeight="250dp" />
+
+
+</RelativeLayout>

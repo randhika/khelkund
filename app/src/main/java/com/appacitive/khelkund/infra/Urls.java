@@ -37,5 +37,20 @@ public class Urls {
         {
             return baseUrl + "Loginservice.svc/login";
         }
+
+        public static String getFacebookLoginUrl()
+        {
+            return baseUrl + "Loginservice.svc/registerfacebook";
+        }
+
+        public static String getTwitterLoginUrl()
+        {
+            return baseUrl + "Loginservice.svc/registertwitter";
+        }
+
+        public static String getSignupUrl()
+        {
+            return baseUrl + "Loginservice.svc/signup";
+        }
     }
 }

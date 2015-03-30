@@ -4,6 +4,7 @@ package com.appacitive.khelkund.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -57,6 +58,7 @@ public class TeamSquadFragment extends Fragment {
         String userId = SharedPreferencesManager.ReadUserId();
         StorageManager storageManager = new StorageManager();
         mTeam = storageManager.GetTeam(userId);
+        ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(mTeam.getName());
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);

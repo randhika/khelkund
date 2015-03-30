@@ -83,6 +83,7 @@ public class PlayerCardAdapter extends RecyclerView.Adapter<PlayerCardViewHolder
                         .load(mPlayerTypeDrawableId)
                         .into(ivPlayerType);
                 cardView.setOnClickListener(null);
+                cardView.setClickable(false);
                 cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -98,7 +99,7 @@ public class PlayerCardAdapter extends RecyclerView.Adapter<PlayerCardViewHolder
             case 1: {
                 final Player player = mPlayers.get(position);
                 CardView cardView = ((FilledCardViewHolder) holder).cvFilledCard;
-                cardView.setBackgroundColor(TeamHelper.getTeamColor(player.getShortTeamName()));
+                cardView.setBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(player.getShortTeamName())));
                 ImageView ivPlayerPhoto = (ImageView) cardView.findViewById(R.id.iv_player_photo);
                 Picasso
                         .with(KhelkundApplication.getAppContext())
@@ -106,6 +107,7 @@ public class PlayerCardAdapter extends RecyclerView.Adapter<PlayerCardViewHolder
                         .placeholder(R.drawable.demo)
                         .into(ivPlayerPhoto);
                 cardView.setOnClickListener(null);
+                cardView.setClickable(false);
                 cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

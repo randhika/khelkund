@@ -3,6 +3,7 @@ package com.appacitive.khelkund.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,7 @@ public class TeamOverviewFragment extends Fragment {
         String userId = SharedPreferencesManager.ReadUserId();
         StorageManager storageManager = new StorageManager();
         mTeam = storageManager.GetTeam(userId);
-
+        ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(mTeam.getName());
         mTotalPoints.setText(String.valueOf(mTeam.getTotalPoints()));
         if(mTeam.getTeamHistory().size() != 0)
         {

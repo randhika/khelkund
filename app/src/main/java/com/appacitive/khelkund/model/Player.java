@@ -71,11 +71,11 @@ public class Player extends RealmObject {
     private int Points;
     private String NextOpponent;
     private String ShortTeamName;
-    private int PointsHistory1;
-    private int PointsHistory2;
-    private int PointsHistory3;
-    private int PointsHistory4;
-    private int PointsHistory5;
+    private int PointsHistory1 = 0;
+    private int PointsHistory2 = 0;
+    private int PointsHistory3 = 0;
+    private int PointsHistory4 = 0;
+    private int PointsHistory5 = 0;
     private Statistics Statistics;
 
     public String getDisplayName() {

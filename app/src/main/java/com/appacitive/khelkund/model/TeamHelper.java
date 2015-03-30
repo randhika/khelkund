@@ -90,7 +90,7 @@ public class TeamHelper {
             List<String> playerIds = new ArrayList<String>();
             for (Player p : team.getPlayers())
                 playerIds.add(p.getId());
-            object.put("Players", playerIds);
+            object.put("PlayerIds", playerIds);
 
         } catch (JSONException e) {
             e.printStackTrace();
