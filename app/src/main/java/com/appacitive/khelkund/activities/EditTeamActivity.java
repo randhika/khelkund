@@ -1,5 +1,7 @@
 package com.appacitive.khelkund.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -30,12 +32,17 @@ import com.appacitive.khelkund.model.User;
 import com.appacitive.khelkund.model.events.EmptyPlayerCardClickedEvent;
 import com.appacitive.khelkund.model.events.FilledPlayerCardClickedEvent;
 import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.SnackbarManager;
+import com.nispok.snackbar.enums.SnackbarType;
 import com.squareup.otto.Subscribe;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import butterknife.ButterKnife;
@@ -201,12 +208,98 @@ public class EditTeamActivity extends ActionBarActivity {
         return mWicketKeepersAdapter;
     }
 
+    private int userSelected = 0;
+
+    final Map<String, String> formations = new LinkedHashMap<String, String>(){{
+        put("C_6_4_0_1", "6 BTSM, 4 BWLR, 0 AR, 1 WK");
+        put("C_5_3_2_1", "5 BTSM, 3 BWLR, 2 AR, 1 WK");
+        put("C_4_3_3_1", "4 BTSM, 3 BWLR, 3 AR, 1 WK");
+        put("C_4_4_2_1", "4 BTSM, 4 BWLR, 2 AR, 1 WK");
+        put("C_5_4_1_1", "5 BTSM, 4 BWLR, 1 AR, 1 WK");
+    }};
+
+    String[] formationsStrings = new String[]{
+            "6 BTSM, 4 BWLR, 0 AR, 1 WK",
+            "5 BTSM, 3 BWLR, 2 AR, 1 WK",
+            "4 BTSM, 3 BWLR, 3 AR, 1 WK",
+            "4 BTSM, 4 BWLR, 2 AR, 1 WK",
+            "5 BTSM, 4 BWLR, 1 AR, 1 WK"
+
+    };
+
     private View.OnClickListener formationChangeClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
+            List<String> indexes = new ArrayList<String>(formations.keySet());
+            final int selectionId = indexes.indexOf(mTeamMutated.getFormation());
+            userSelected = selectionId;
+            AlertDialog.Builder builder = new AlertDialog.Builder(EditTeamActivity.this);
+            builder.setTitle("CHANGE TEAM FORMATION")
+                    .setSingleChoiceItems(formationsStrings, selectionId, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            userSelected = i;
+                        }
+                    })
+                    .setPositiveButton("DONE", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            tryChangeFormation(getFormation(new ArrayList<String>(formations.keySet()).get(userSelected)));
+                        }
+                    })
+                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    }).create().show();
+
         }
     };
+
+    private Formation getFormation(String formation) {
+        String[] parts = formation.split("_");
+        return new Formation(Integer.valueOf(parts[1]), Integer.valueOf(parts[2]), Integer.valueOf(parts[3]), Integer.valueOf(parts[4]));
+    }
+
+    private String toFormationString(Formation formation)
+    {
+        return "C_" + String.valueOf(formation.BatsmenCount) + "_" + String.valueOf(formation.BowlersCount) + "_" + String.valueOf(formation.AllRoundersCount) + "_" + String.valueOf(formation.WicketKeepersCount);
+    }
+
+    private void tryChangeFormation(Formation formation)
+    {
+        if(formation.BatsmenCount < TeamHelper.getBatsmen(mTeamMutated).size())
+        {
+            showMessage(String.format("You need to remove %s batsmen to change formation", String.valueOf(TeamHelper.getBatsmen(mTeamMutated).size() - formation.BatsmenCount)));
+            return;
+        }
+
+        if(formation.BowlersCount < TeamHelper.getBowlers(mTeamMutated).size())
+        {
+            showMessage(String.format("You need to remove %s bowlers to change formation", String.valueOf(TeamHelper.getBowlers(mTeamMutated).size() - formation.BowlersCount)));
+            return;
+        }
+
+        if(formation.AllRoundersCount < TeamHelper.getAllRounders(mTeamMutated).size())
+        {
+            showMessage(String.format("You need to remove %s all rounders to change formation", String.valueOf(TeamHelper.getAllRounders(mTeamMutated).size() - formation.AllRoundersCount)));
+            return;
+        }
+
+        if(formation.WicketKeepersCount < TeamHelper.getWicketKeepers(mTeamMutated).size())
+        {
+            showMessage(String.format("You need to remove %s wicket keepers to change formation", String.valueOf(TeamHelper.getWicketKeepers(mTeamMutated).size() - formation.WicketKeepersCount)));
+            return;
+        }
+
+        // if all validations pass, change the formation
+        mTeamMutated.setFormation(toFormationString(formation));
+        showMessage(String.format("Formation changed to %s", new ArrayList<String>(formations.values()).get(userSelected)));
+        updateStats(mTeamMutated);
+        resetAdapters(mTeamMutated);
+    }
 
     private View.OnClickListener autoSelectClickListener = new View.OnClickListener() {
         @Override
@@ -389,7 +482,7 @@ public class EditTeamActivity extends ActionBarActivity {
                 {
                     if(mTeamMutated.getPlayers().get(i).getId().equals(removeId)) {
                         mTeamMutated.getPlayers().remove(i);
-                        if(mTeamMutated.getCaptainId().equals(removeId))
+                        if(mTeamMutated.getCaptainId() != null && mTeamMutated.getCaptainId().equals(removeId))
                             mTeamMutated.setCaptainId(null);
                         resetAdapters(mTeamMutated);
                     }
@@ -500,8 +593,12 @@ public class EditTeamActivity extends ActionBarActivity {
 
     private void showMessage(String message)
     {
-        Snackbar.with(getApplicationContext()) // context
-                .text(message) // text to display
-                .show(this);
+        SnackbarManager.show(
+                Snackbar.with(getApplicationContext()) // context
+                        .type(SnackbarType.MULTI_LINE)
+                         // Set is as a multi-line snackbar
+                        .text(message) // text to be displayed
+                        .duration(Snackbar.SnackbarDuration.LENGTH_LONG) // make it shorter
+                , this);
     }
 }
