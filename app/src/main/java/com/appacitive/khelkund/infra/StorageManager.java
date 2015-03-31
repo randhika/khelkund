@@ -2,6 +2,7 @@ package com.appacitive.khelkund.infra;
 
 import android.app.Application;
 
+import com.appacitive.khelkund.model.Match;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.Team;
 import com.appacitive.khelkund.model.User;
@@ -18,7 +19,7 @@ import io.realm.RealmResults;
  */
 public class StorageManager {
 
-    public void Save(Player player)
+    public void SaveTeam(Player player)
     {
         Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
         realm.beginTransaction();
@@ -26,7 +27,7 @@ public class StorageManager {
         realm.commitTransaction();
     }
 
-    public void Save(User user)
+    public void SaveUser(User user)
     {
         Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
         realm.beginTransaction();
@@ -34,7 +35,7 @@ public class StorageManager {
         realm.commitTransaction();
     }
 
-    public void Save(List<Player> players)
+    public void SavePlayers(List<Player> players)
     {
         Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
         realm.beginTransaction();
@@ -42,7 +43,7 @@ public class StorageManager {
         realm.commitTransaction();
     }
 
-    public void Save(Team team)
+    public void SaveTeam(Team team)
     {
         Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
         realm.beginTransaction();
@@ -94,5 +95,26 @@ public class StorageManager {
         RealmQuery<Player> query = realm.where(Player.class);
         query.equalTo("Id", playerId);
         return query.findFirst();
+    }
+
+    public void deleteUser(String userId) {
+        Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
+        realm.beginTransaction();
+        realm.allObjects(User.class).clear();
+        realm.allObjects(Team.class).clear();
+        realm.commitTransaction();
+    }
+
+    public void SaveMatches(List<Match> matchList) {
+        Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(matchList);
+        realm.commitTransaction();
+    }
+
+    public List<Match> GetAllMatches() {
+        Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
+        RealmQuery<Match> query = realm.where(Match.class);
+        return query.findAll();
     }
 }

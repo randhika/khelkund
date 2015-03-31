@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.appacitive.khelkund.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -69,12 +70,69 @@ public class TeamHelper {
         newTeam.setBalance(team.getBalance());
         newTeam.setId(team.getId());
         newTeam.setImageName(team.getImageName());
-        newTeam.setPlayers(team.getPlayers());
         newTeam.setPreviousMatch(team.getPreviousMatch());
         newTeam.setRank(team.getRank());
         newTeam.setUserId(team.getUserId());
-
+        if (team.getPlayers() != null)
+            for (Player p : team.getPlayers())
+                newTeam.getPlayers().add(clone(p));
+        if(team.getTeamHistory() != null)
+            for (History h : team.getTeamHistory())
+                newTeam.getTeamHistory().add(clone(h));
         return newTeam;
+    }
+
+    public static History clone(History history)
+    {
+        History h = new History();
+        if(history == null)
+            return h;
+        h.setOpposition(history.getOpposition());
+        h.setPoints(history.getPoints());
+        return h;
+    }
+
+    public static Player clone(Player player) {
+        Player p = new Player();
+        if (player == null)
+            return p;
+        p.setPointsHistory1(player.getPointsHistory1());
+        p.setPointsHistory2(player.getPointsHistory2());
+        p.setPointsHistory3(player.getPointsHistory3());
+        p.setPointsHistory4(player.getPointsHistory4());
+        p.setPointsHistory5(player.getPointsHistory5());
+        p.setPoints(player.getPoints());
+        p.setDisplayName(player.getDisplayName());
+        p.setFirstName(player.getFirstName());
+        p.setId(player.getId());
+        p.setImageUrl(player.getImageUrl());
+        p.setLastName(player.getLastName());
+        p.setNextOpponent(player.getNextOpponent());
+        p.setPopularity(player.getPopularity());
+        p.setPrice(player.getPrice());
+        p.setShortTeamName(player.getShortTeamName());
+        p.setType(player.getType());
+        p.setStatistics(clone(player.getStatistics()));
+        return p;
+    }
+
+    public static Statistics clone(Statistics statistics) {
+        Statistics s = new Statistics();
+        if (statistics == null)
+            return s;
+        s.setEconomy(statistics.getEconomy());
+        s.setStrikeRate(statistics.getStrikeRate());
+        s.setFifties(statistics.getFifties());
+        s.setFiveWickets(statistics.getFiveWickets());
+        s.setHundreds(statistics.getHundreds());
+        s.setMatchesPlayed(statistics.getMatchesPlayed());
+        s.setRunsScored(statistics.getRunsScored());
+
+
+        s.setThreeWickets(statistics.getThreeWickets());
+        s.setWickets(statistics.getWickets());
+
+        return s;
     }
 
     public static JSONObject getJson(Team team) {
@@ -90,7 +148,8 @@ public class TeamHelper {
             List<String> playerIds = new ArrayList<String>();
             for (Player p : team.getPlayers())
                 playerIds.add(p.getId());
-            object.put("PlayerIds", playerIds);
+            JSONArray playersArray = new JSONArray(playerIds);
+            object.put("PlayerIds", playersArray);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -98,23 +157,22 @@ public class TeamHelper {
         return object;
     }
 
-    public static int getTeamColor(String shortTeamName)
-    {
-        if(shortTeamName.equals("DD"))
+    public static int getTeamColor(String shortTeamName) {
+        if (shortTeamName.equals("DD"))
             return R.color.DD;
-        if(shortTeamName.equals("SRH"))
+        if (shortTeamName.equals("SRH"))
             return R.color.SRH;
-        if(shortTeamName.equals("CSK"))
+        if (shortTeamName.equals("CSK"))
             return R.color.CSK;
-        if(shortTeamName.equals("RCB"))
+        if (shortTeamName.equals("RCB"))
             return R.color.RCB;
-        if(shortTeamName.equals("MI"))
+        if (shortTeamName.equals("MI"))
             return R.color.MI;
-        if(shortTeamName.equals("KXIP"))
+        if (shortTeamName.equals("KXIP"))
             return R.color.KXIP;
-        if(shortTeamName.equals("KKR"))
+        if (shortTeamName.equals("KKR"))
             return R.color.KKR;
-        if(shortTeamName.equals("RR"))
+        if (shortTeamName.equals("RR"))
             return R.color.RR;
 
         return R.color.DD;

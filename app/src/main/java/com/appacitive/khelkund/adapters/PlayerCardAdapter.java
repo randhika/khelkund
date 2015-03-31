@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.BusProvider;
@@ -30,12 +31,15 @@ public class PlayerCardAdapter extends RecyclerView.Adapter<PlayerCardViewHolder
     private List<Player> mPlayers;
     private int mPlayerTypeDrawableId;
     final private PlayerType mPlayerType;
+    final private String mCaptainId;
 
-    public PlayerCardAdapter(List<Player> players, int count, int playerTypeDrawableId, PlayerType playerType) {
+
+    public PlayerCardAdapter(List<Player> players, int count, int playerTypeDrawableId, PlayerType playerType, String captainId) {
         this.mCount = count;
         this.mPlayers = players;
         this.mPlayerTypeDrawableId = playerTypeDrawableId;
         this.mPlayerType = playerType;
+        this.mCaptainId = captainId;
     }
 
     public void setmCount(int mCount) {
@@ -83,7 +87,6 @@ public class PlayerCardAdapter extends RecyclerView.Adapter<PlayerCardViewHolder
                         .load(mPlayerTypeDrawableId)
                         .into(ivPlayerType);
                 cardView.setOnClickListener(null);
-                cardView.setClickable(false);
                 cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -99,6 +102,15 @@ public class PlayerCardAdapter extends RecyclerView.Adapter<PlayerCardViewHolder
             case 1: {
                 final Player player = mPlayers.get(position);
                 CardView cardView = ((FilledCardViewHolder) holder).cvFilledCard;
+                TextView name = (TextView) cardView.findViewById(R.id.tv_card_name);
+                name.setText(player.getFirstName().charAt(0) + " " + player.getLastName());
+                ImageView star = (ImageView) cardView.findViewById(R.id.card_star);
+                if(mCaptainId != null)
+                {
+                    if(mCaptainId.equals(player.getId()))
+                        star.setVisibility(View.VISIBLE);
+                    else star.setVisibility(View.INVISIBLE);
+                }
                 cardView.setBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(player.getShortTeamName())));
                 ImageView ivPlayerPhoto = (ImageView) cardView.findViewById(R.id.iv_player_photo);
                 Picasso
@@ -107,7 +119,6 @@ public class PlayerCardAdapter extends RecyclerView.Adapter<PlayerCardViewHolder
                         .placeholder(R.drawable.demo)
                         .into(ivPlayerPhoto);
                 cardView.setOnClickListener(null);
-                cardView.setClickable(false);
                 cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

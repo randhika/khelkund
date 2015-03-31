@@ -81,8 +81,8 @@
         <activity
             android:name=".activities.PlayerDetailsActivity"
             android:label="@string/title_activity_player_details"
-            android:theme="@style/NoActionBar"
-            android:parentActivityName=".activities.EditTeamActivity" >
+            android:parentActivityName=".activities.EditTeamActivity"
+            android:theme="@style/NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.EditTeamActivity" />
@@ -109,6 +109,20 @@
 
         <service
             android:name=".infra.runnables.FetchMyPLayersIntentService"
+            android:exported="false" >
+        </service>
+
+        <activity
+            android:name=".activities.Pick5HomeActivity"
+            android:label="@string/title_activity_pick5_home"
+            android:parentActivityName=".activities.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+        </activity>
+
+        <service
+            android:name=".infra.runnables.FetchAllPick5MatchesIntentService"
             android:exported="false" >
         </service>
     </application>

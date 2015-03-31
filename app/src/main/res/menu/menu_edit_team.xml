@@ -8,4 +8,8 @@
         android:title="SAVE TEAM"
         app:showAsAction="always"/>
 
+    <item android:id="@+id/action_reset"
+        android:title="RESET"
+        app:showAsAction="ifRoom"/>
+
 </menu>

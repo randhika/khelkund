@@ -1,6 +1,66 @@
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:choiceMode="singleChoice"
-    android:divider="@android:color/transparent" android:dividerHeight="0dp"
-    android:background="#cccc"
-    tools:context="com.appacitive.khelkund.fragments.NavigationDrawerFragment" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:choiceMode="singleChoice"
+    android:background="@color/cardview_light_background"
+    tools:context="com.appacitive.khelkund.fragments.NavigationDrawerFragment" >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Leaderboard"
+        android:id="@+id/tv_nav_leaderboard"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="72dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="36dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="How to play"
+        android:id="@+id/tv_nav_howtoplay"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/tv_nav_leaderboard"
+        android:layout_alignLeft="@+id/tv_nav_leaderboard"
+        android:layout_alignStart="@+id/tv_nav_leaderboard" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Logout"
+        android:id="@+id/tv_nav_logout"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/tv_nav_howtoplay"
+        android:layout_alignLeft="@+id/tv_nav_leaderboard"
+        android:layout_alignStart="@+id/tv_nav_leaderboard" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Terms &amp; Policies"
+        android:id="@+id/tv_nav_terms"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/tv_nav_logout"
+        android:layout_alignLeft="@+id/tv_nav_logout"
+        android:layout_alignStart="@+id/tv_nav_logout" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="About Us"
+        android:id="@+id/tv_nav_aboutus"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/tv_nav_terms"
+        android:layout_alignLeft="@+id/tv_nav_terms"
+        android:layout_alignStart="@+id/tv_nav_terms" />
+</RelativeLayout>

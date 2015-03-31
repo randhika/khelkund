@@ -18,6 +18,14 @@ public class Urls {
         }
     }
 
+    public static class Pick5Urls
+    {
+        public static String getAllMatchesUrl()
+        {
+            return baseUrl + "PickThemFiveService.svc/GetMatches";
+        }
+    }
+
     public static class TeamUrls
     {
         public static String getMyTeamUrl(String userId)

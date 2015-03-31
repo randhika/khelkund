@@ -27,7 +27,7 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="48dp"
+                android:layout_marginRight="36dp"
                 android:id="@+id/relativeLayout">
 
                 <TextView
@@ -109,7 +109,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignLeft="@+id/iv_details_photo"
                 android:layout_alignStart="@+id/iv_details_photo"
-                android:layout_marginLeft="36dp" />
+                android:layout_marginLeft="18dp"
+                android:layout_alignRight="@+id/iv_details_photo"
+                android:layout_alignEnd="@+id/iv_details_photo" />
 
         </RelativeLayout>
 
@@ -196,10 +198,22 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
         android:layout_width="wrap_content"
-        android:layout_below="@+id/divider2"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"
-        android:minHeight="250dp" />
+        android:minHeight="250dp"
+        android:layout_alignTop="@+id/textView15" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Previous Performance"
+        android:id="@+id/textView15"
+        android:layout_below="@+id/divider2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="72dp"
+        android:textColor="@color/secondary_text_default_material_light" />
 
 
 </RelativeLayout>

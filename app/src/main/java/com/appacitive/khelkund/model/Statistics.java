@@ -32,15 +32,15 @@ public class Statistics extends RealmObject {
         this.Wickets = json.optInt("Wickets");
     }
 
-    private double Economy;
-    private int Fifties;
-    private int Hundreds;
-    private int FiveWickets;
-    private int ThreeWickets;
-    private int Wickets;
-    private int MatchesPlayed;
-    private int RunsScored;
-    private double StrikeRate;
+    private double Economy =0.0;
+    private int Fifties=0;
+    private int Hundreds=0;
+    private int FiveWickets=0;
+    private int ThreeWickets=0;
+    private int Wickets=0;
+    private int MatchesPlayed=0;
+    private int RunsScored=0;
+    private double StrikeRate=0.0;
 
     public double getStrikeRate() {
         return StrikeRate;

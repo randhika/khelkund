@@ -1,10 +1,11 @@
 package com.appacitive.khelkund.activities;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -19,10 +20,10 @@ import com.appacitive.khelkund.adapters.PlayerCardAdapter;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.Http;
-import com.appacitive.khelkund.infra.Urls;
-import com.appacitive.khelkund.infra.VerticallyWrappedGridLayoutManager;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
+import com.appacitive.khelkund.infra.Urls;
+import com.appacitive.khelkund.infra.VerticallyWrappedGridLayoutManager;
 import com.appacitive.khelkund.model.Formation;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PlayerType;
@@ -55,6 +56,8 @@ public class EditTeamActivity extends ActionBarActivity {
     private Team mTeamOriginal;
     private Team mTeamMutated;
     private StorageManager mStorageManager;
+
+    private ProgressDialog mProgressDialog;
 
     private static int VIEW_PLAYER_DETAILS_REQUEST = 111;
     private static int CHOOSE_PLAYER_REQUEST = 222;
@@ -114,8 +117,7 @@ public class EditTeamActivity extends ActionBarActivity {
     public RecyclerView.Adapter mWicketKeepersAdapter;
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
         ButterKnife.reset(this);
     }
@@ -131,9 +133,7 @@ public class EditTeamActivity extends ActionBarActivity {
 
         mTeamOriginal = mStorageManager.GetTeam(userId);
         mTeamMutated = TeamHelper.clone(mTeamOriginal);
-
-        mTeamMutated.setTransfersRemaining(50);
-//        mTeamMutated.getPlayers().remove(0);
+        getSupportActionBar().setTitle(mTeamOriginal.getName());
         Formation formation = TeamHelper.getFormation(mTeamMutated);
 
         updateStats(mTeamMutated);
@@ -141,25 +141,25 @@ public class EditTeamActivity extends ActionBarActivity {
         mBatsmanRecyclerView.setHasFixedSize(false);
         mBatsmenLayoutManager = new VerticallyWrappedGridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
         mBatsmanRecyclerView.setLayoutManager(mBatsmenLayoutManager);
-        mBatsmenAdapter = new PlayerCardAdapter(TeamHelper.getBatsmen(mTeamMutated), formation.BatsmenCount, R.drawable.batsman, PlayerType.BATSMAN);
+        mBatsmenAdapter = new PlayerCardAdapter(TeamHelper.getBatsmen(mTeamMutated), formation.BatsmenCount, R.drawable.batsman, PlayerType.BATSMAN, mTeamMutated.getCaptainId());
         mBatsmanRecyclerView.setAdapter(mBatsmenAdapter);
 
         mBowlerRecyclerView.setHasFixedSize(false);
         mBowlersLayoutManager = new VerticallyWrappedGridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
         mBowlerRecyclerView.setLayoutManager(mBowlersLayoutManager);
-        mBowlersAdapter = new PlayerCardAdapter(TeamHelper.getBowlers(mTeamMutated), formation.BowlersCount, R.drawable.bowler, PlayerType.BOWLER);
+        mBowlersAdapter = new PlayerCardAdapter(TeamHelper.getBowlers(mTeamMutated), formation.BowlersCount, R.drawable.bowler, PlayerType.BOWLER, mTeamMutated.getCaptainId());
         mBowlerRecyclerView.setAdapter(mBowlersAdapter);
 
         mAllRounderRecyclerView.setHasFixedSize(false);
         mAllRoundersLayoutManager = new VerticallyWrappedGridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
         mAllRounderRecyclerView.setLayoutManager(mAllRoundersLayoutManager);
-        mAllRoundersAdapter = new PlayerCardAdapter(TeamHelper.getAllRounders(mTeamMutated), formation.AllRoundersCount, R.drawable.allrounder, PlayerType.ALLROUNDER);
+        mAllRoundersAdapter = new PlayerCardAdapter(TeamHelper.getAllRounders(mTeamMutated), formation.AllRoundersCount, R.drawable.allrounder, PlayerType.ALLROUNDER, mTeamMutated.getCaptainId());
         mAllRounderRecyclerView.setAdapter(mAllRoundersAdapter);
 
         mWicketKeeperRecyclerView.setHasFixedSize(false);
         mWicketKeepersLayoutManager = new VerticallyWrappedGridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
         mWicketKeeperRecyclerView.setLayoutManager(mWicketKeepersLayoutManager);
-        mWicketKeepersAdapter = new PlayerCardAdapter(TeamHelper.getWicketKeepers(mTeamMutated), formation.WicketKeepersCount, R.drawable.wicketkeeper, PlayerType.WICKETKEEPER);
+        mWicketKeepersAdapter = new PlayerCardAdapter(TeamHelper.getWicketKeepers(mTeamMutated), formation.WicketKeepersCount, R.drawable.wicketkeeper, PlayerType.WICKETKEEPER, mTeamMutated.getCaptainId());
         mWicketKeeperRecyclerView.setAdapter(mWicketKeepersAdapter);
 
         mChangeFormation.setOnClickListener(formationChangeClickListener);
@@ -176,41 +176,44 @@ public class EditTeamActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_save)
-        {
+        if (item.getItemId() == R.id.action_save) {
             saveTeam(mTeamMutated);
+            return true;
+        }
+        if (item.getItemId() == R.id.action_reset) {
+            mTeamMutated = TeamHelper.clone(mTeamOriginal);
+            updateStats(mTeamMutated);
+            resetAdapters(mTeamMutated);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void resetAdapters(Team team)
-    {
+    private void resetAdapters(Team team) {
         Formation formation = TeamHelper.getFormation(team);
-        mBatsmenAdapter = new PlayerCardAdapter(TeamHelper.getBatsmen(team), formation.BatsmenCount, R.drawable.batsman, PlayerType.BATSMAN);
+        mBatsmenAdapter = new PlayerCardAdapter(TeamHelper.getBatsmen(team), formation.BatsmenCount, R.drawable.batsman, PlayerType.BATSMAN, team.getCaptainId());
         mBatsmanRecyclerView.setAdapter(mBatsmenAdapter);
-        mBowlersAdapter = new PlayerCardAdapter(TeamHelper.getBowlers(team), formation.BowlersCount, R.drawable.bowler, PlayerType.BOWLER);
+        mBowlersAdapter = new PlayerCardAdapter(TeamHelper.getBowlers(team), formation.BowlersCount, R.drawable.bowler, PlayerType.BOWLER, team.getCaptainId());
         mBowlerRecyclerView.setAdapter(mBowlersAdapter);
-        mAllRoundersAdapter = new PlayerCardAdapter(TeamHelper.getAllRounders(team), formation.AllRoundersCount, R.drawable.allrounder, PlayerType.ALLROUNDER);
+        mAllRoundersAdapter = new PlayerCardAdapter(TeamHelper.getAllRounders(team), formation.AllRoundersCount, R.drawable.allrounder, PlayerType.ALLROUNDER, team.getCaptainId());
         mAllRounderRecyclerView.setAdapter(mAllRoundersAdapter);
-        mWicketKeepersAdapter = new PlayerCardAdapter(TeamHelper.getWicketKeepers(team), formation.WicketKeepersCount, R.drawable.wicketkeeper, PlayerType.WICKETKEEPER);
+        mWicketKeepersAdapter = new PlayerCardAdapter(TeamHelper.getWicketKeepers(team), formation.WicketKeepersCount, R.drawable.wicketkeeper, PlayerType.WICKETKEEPER, team.getCaptainId());
         mWicketKeeperRecyclerView.setAdapter(mWicketKeepersAdapter);
     }
 
-    private RecyclerView.Adapter getAdapterByType(PlayerType type)
-    {
-        if(type == PlayerType.BATSMAN)
+    private RecyclerView.Adapter getAdapterByType(PlayerType type) {
+        if (type == PlayerType.BATSMAN)
             return mBatsmenAdapter;
         if (type == PlayerType.ALLROUNDER)
             return mAllRoundersAdapter;
-        if(type == PlayerType.BOWLER)
+        if (type == PlayerType.BOWLER)
             return mBowlersAdapter;
         return mWicketKeepersAdapter;
     }
 
     private int userSelected = 0;
 
-    final Map<String, String> formations = new LinkedHashMap<String, String>(){{
+    final Map<String, String> formations = new LinkedHashMap<String, String>() {{
         put("C_6_4_0_1", "6 BTSM, 4 BWLR, 0 AR, 1 WK");
         put("C_5_3_2_1", "5 BTSM, 3 BWLR, 2 AR, 1 WK");
         put("C_4_3_3_1", "4 BTSM, 3 BWLR, 3 AR, 1 WK");
@@ -263,33 +266,27 @@ public class EditTeamActivity extends ActionBarActivity {
         return new Formation(Integer.valueOf(parts[1]), Integer.valueOf(parts[2]), Integer.valueOf(parts[3]), Integer.valueOf(parts[4]));
     }
 
-    private String toFormationString(Formation formation)
-    {
+    private String toFormationString(Formation formation) {
         return "C_" + String.valueOf(formation.BatsmenCount) + "_" + String.valueOf(formation.BowlersCount) + "_" + String.valueOf(formation.AllRoundersCount) + "_" + String.valueOf(formation.WicketKeepersCount);
     }
 
-    private void tryChangeFormation(Formation formation)
-    {
-        if(formation.BatsmenCount < TeamHelper.getBatsmen(mTeamMutated).size())
-        {
+    private void tryChangeFormation(Formation formation) {
+        if (formation.BatsmenCount < TeamHelper.getBatsmen(mTeamMutated).size()) {
             showMessage(String.format("You need to remove %s batsmen to change formation", String.valueOf(TeamHelper.getBatsmen(mTeamMutated).size() - formation.BatsmenCount)));
             return;
         }
 
-        if(formation.BowlersCount < TeamHelper.getBowlers(mTeamMutated).size())
-        {
+        if (formation.BowlersCount < TeamHelper.getBowlers(mTeamMutated).size()) {
             showMessage(String.format("You need to remove %s bowlers to change formation", String.valueOf(TeamHelper.getBowlers(mTeamMutated).size() - formation.BowlersCount)));
             return;
         }
 
-        if(formation.AllRoundersCount < TeamHelper.getAllRounders(mTeamMutated).size())
-        {
+        if (formation.AllRoundersCount < TeamHelper.getAllRounders(mTeamMutated).size()) {
             showMessage(String.format("You need to remove %s all rounders to change formation", String.valueOf(TeamHelper.getAllRounders(mTeamMutated).size() - formation.AllRoundersCount)));
             return;
         }
 
-        if(formation.WicketKeepersCount < TeamHelper.getWicketKeepers(mTeamMutated).size())
-        {
+        if (formation.WicketKeepersCount < TeamHelper.getWicketKeepers(mTeamMutated).size()) {
             showMessage(String.format("You need to remove %s wicket keepers to change formation", String.valueOf(TeamHelper.getWicketKeepers(mTeamMutated).size() - formation.WicketKeepersCount)));
             return;
         }
@@ -314,20 +311,16 @@ public class EditTeamActivity extends ActionBarActivity {
             // Fetch batsmen
             List<Player> batsmen = mStorageManager.GetBargainPlayersByType("Batsman");
             int i = 0;
-            while (i < formation.BatsmenCount)
-            {
+            while (i < formation.BatsmenCount) {
                 Player randomPlayer = batsmen.get(random.nextInt(batsmen.size()));
                 boolean isPlayerTaken = false;
-                for(Player p : mTeamMutated.getPlayers())
-                {
-                    if(p.getId().equals(randomPlayer.getId()))
-                    {
+                for (Player p : mTeamMutated.getPlayers()) {
+                    if (p.getId().equals(randomPlayer.getId())) {
                         isPlayerTaken = true;
                         break;
                     }
                 }
-                if(isPlayerTaken == false)
-                {
+                if (isPlayerTaken == false) {
                     mTeamMutated.getPlayers().add(randomPlayer);
                     mTeamMutated.setBalance(mTeamMutated.getBalance() - randomPlayer.getPrice());
                     i++;
@@ -338,20 +331,16 @@ public class EditTeamActivity extends ActionBarActivity {
             // Fetch wicketkeepers
             List<Player> wicketKeepers = mStorageManager.GetBargainPlayersByType("WicketKeeper");
             i = 0;
-            while (i < formation.WicketKeepersCount)
-            {
+            while (i < formation.WicketKeepersCount) {
                 Player randomPlayer = wicketKeepers.get(random.nextInt(wicketKeepers.size()));
                 boolean isPlayerTaken = false;
-                for(Player p : mTeamMutated.getPlayers())
-                {
-                    if(p.getId().equals(randomPlayer.getId()))
-                    {
+                for (Player p : mTeamMutated.getPlayers()) {
+                    if (p.getId().equals(randomPlayer.getId())) {
                         isPlayerTaken = true;
                         break;
                     }
                 }
-                if(isPlayerTaken == false)
-                {
+                if (isPlayerTaken == false) {
                     mTeamMutated.getPlayers().add(randomPlayer);
                     mTeamMutated.setBalance(mTeamMutated.getBalance() - randomPlayer.getPrice());
                     i++;
@@ -361,20 +350,16 @@ public class EditTeamActivity extends ActionBarActivity {
             // Fetch bowlers
             List<Player> bowlers = mStorageManager.GetBargainPlayersByType("Bowler");
             i = 0;
-            while (i < formation.BowlersCount)
-            {
+            while (i < formation.BowlersCount) {
                 Player randomPlayer = bowlers.get(random.nextInt(bowlers.size()));
                 boolean isPlayerTaken = false;
-                for(Player p : mTeamMutated.getPlayers())
-                {
-                    if(p.getId().equals(randomPlayer.getId()))
-                    {
+                for (Player p : mTeamMutated.getPlayers()) {
+                    if (p.getId().equals(randomPlayer.getId())) {
                         isPlayerTaken = true;
                         break;
                     }
                 }
-                if(isPlayerTaken == false)
-                {
+                if (isPlayerTaken == false) {
                     mTeamMutated.getPlayers().add(randomPlayer);
                     mTeamMutated.setBalance(mTeamMutated.getBalance() - randomPlayer.getPrice());
                     i++;
@@ -384,20 +369,16 @@ public class EditTeamActivity extends ActionBarActivity {
             // Fetch all rounders
             List<Player> allRounders = mStorageManager.GetBargainPlayersByType("AllRounder");
             i = 0;
-            while (i < formation.AllRoundersCount)
-            {
+            while (i < formation.AllRoundersCount) {
                 Player randomPlayer = allRounders.get(random.nextInt(allRounders.size()));
                 boolean isPlayerTaken = false;
-                for(Player p : mTeamMutated.getPlayers())
-                {
-                    if(p.getId().equals(randomPlayer.getId()))
-                    {
+                for (Player p : mTeamMutated.getPlayers()) {
+                    if (p.getId().equals(randomPlayer.getId())) {
                         isPlayerTaken = true;
                         break;
                     }
                 }
-                if(isPlayerTaken == false)
-                {
+                if (isPlayerTaken == false) {
                     mTeamMutated.getPlayers().add(randomPlayer);
                     mTeamMutated.setBalance(mTeamMutated.getBalance() - randomPlayer.getPrice());
                     i++;
@@ -406,17 +387,11 @@ public class EditTeamActivity extends ActionBarActivity {
 
             updateStats(mTeamMutated);
             resetAdapters(mTeamMutated);
-            showMessage("Auto Selected team for you");
-
+            showMessage("Auto selected team for you");
         }
-
-
     };
 
-
-
-    private void updateStats(Team team)
-    {
+    private void updateStats(Team team) {
         mBalance.setText(String.valueOf(team.getBalance()));
         mTransfers.setText(String.valueOf(team.getTransfersRemaining()) + " Transfers");
         mPoints.setText(String.valueOf(team.getTotalPoints()) + " Pt");
@@ -429,11 +404,10 @@ public class EditTeamActivity extends ActionBarActivity {
     }
 
     @Subscribe
-    public void onFilledCardClick(FilledPlayerCardClickedEvent event)
-    {
+    public void onFilledCardClick(FilledPlayerCardClickedEvent event) {
         Intent viewPlayerDetailsIntent = new Intent(EditTeamActivity.this, PlayerDetailsActivity.class);
         viewPlayerDetailsIntent.putExtra("player_id", event.playerId);
-        if(mTeamMutated.getCaptainId() != null && mTeamMutated.getCaptainId().equals(event.playerId))
+        if (mTeamMutated.getCaptainId() != null && mTeamMutated.getCaptainId().equals(event.playerId))
             viewPlayerDetailsIntent.putExtra("is_captain", true);
         else
             viewPlayerDetailsIntent.putExtra("is_captain", false);
@@ -441,8 +415,7 @@ public class EditTeamActivity extends ActionBarActivity {
     }
 
     @Subscribe
-    public void onEmptyCardClick(EmptyPlayerCardClickedEvent event)
-    {
+    public void onEmptyCardClick(EmptyPlayerCardClickedEvent event) {
         Intent choosePlayerIntent = new Intent(EditTeamActivity.this, PlayerPoolActivity.class);
         choosePlayerIntent.putExtra("type", event.playerType.toString());
         startActivityForResult(choosePlayerIntent, CHOOSE_PLAYER_REQUEST);
@@ -461,82 +434,64 @@ public class EditTeamActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed
-        if(resultCode != RESULT_OK)
+        if (resultCode != RESULT_OK)
             return;
-        if(requestCode == VIEW_PLAYER_DETAILS_REQUEST)
-        {
+        if (requestCode == VIEW_PLAYER_DETAILS_REQUEST) {
             String captainId = data.getStringExtra("captain_id");
-            if(captainId != null) {
+            if (captainId != null) {
                 mTeamMutated.setCaptainId(captainId);
                 updateStats(mTeamMutated);
+                resetAdapters(mTeamMutated);
             }
 
             String removeId = data.getStringExtra("remove_id");
-            if(removeId != null)
-            {
-                for(int i = 0; i < mTeamMutated.getPlayers().size(); i++)
-                {
-                    if(mTeamMutated.getPlayers().get(i).getId().equals(removeId)) {
+            if (removeId != null) {
+                for (int i = 0; i < mTeamMutated.getPlayers().size(); i++) {
+                    if (mTeamMutated.getPlayers().get(i).getId().equals(removeId)) {
+                        int price = mTeamMutated.getPlayers().get(i).getPrice();
                         mTeamMutated.getPlayers().remove(i);
-                        if(mTeamMutated.getCaptainId() != null && mTeamMutated.getCaptainId().equals(removeId))
+                        mTeamMutated.setBalance(mTeamMutated.getBalance() + price);
+                        if (mTeamMutated.getCaptainId() != null && mTeamMutated.getCaptainId().equals(removeId))
                             mTeamMutated.setCaptainId(null);
+                        updateStats(mTeamMutated);
                         resetAdapters(mTeamMutated);
                     }
                 }
             }
         }
-        if(requestCode == CHOOSE_PLAYER_REQUEST)
-        {
+        if (requestCode == CHOOSE_PLAYER_REQUEST) {
             String playerId = data.getStringExtra("player_id");
             tryAddPlayer(playerId);
         }
     }
 
-    private void tryAddPlayer(String playerId)
-    {
+    private void tryAddPlayer(String playerId) {
         StorageManager storageManager = new StorageManager();
         Player player = storageManager.GetPlayer(playerId);
 
         // check if user has sufficient balance
-        if(mTeamMutated.getBalance() - player.getPrice() < 0)
-        {
+        if (mTeamMutated.getBalance() - player.getPrice() < 0) {
             showMessage("You have insufficient funds to buy this player");
             return;
         }
-        // check if user has sufficient transfers remaining
-        boolean isOriginalPlayer = false;
-        for(Player originalPlayer : mTeamOriginal.getPlayers())
-        {
-            if(playerId.equals(originalPlayer.getId()))
-                isOriginalPlayer = true;
-        }
-        if(isOriginalPlayer == false && mTeamMutated.getTransfersRemaining() < 1)
-        {
-            showMessage("Sorry! You have run out of transfers");
-            return;
-        }
+
         // check player already exists in your team
-        for(Player p : mTeamMutated.getPlayers())
-        {
-            if(playerId.equals(p.getId()))
-            {
+        for (Player p : mTeamMutated.getPlayers()) {
+            if (playerId.equals(p.getId())) {
                 showMessage("You already own this player");
                 return;
             }
         }
         // check if user hits maximum number of players from same team count
         int sameTeamCount = 0;
-        for (Player p : mTeamMutated.getPlayers())
-        {
-            if(p.getShortTeamName().equals(player.getShortTeamName()))
+        for (Player p : mTeamMutated.getPlayers()) {
+            if (p.getShortTeamName().equals(player.getShortTeamName()))
                 sameTeamCount++;
         }
-        if(sameTeamCount >=6)
-        {
+        if (sameTeamCount >= 6) {
             showMessage("You cannot pick more than 6 players from the same team");
             return;
         }
@@ -545,58 +500,79 @@ public class EditTeamActivity extends ActionBarActivity {
         mTeamMutated.getPlayers().add(player);
         int oldBalance = mTeamMutated.getBalance();
         mTeamMutated.setBalance(oldBalance - player.getPrice());
-        int oldTransfersRemaining = mTeamMutated.getTransfersRemaining();
-        mTeamMutated.setTransfersRemaining(oldTransfersRemaining - 1);
         resetAdapters(mTeamMutated);
         updateStats(mTeamMutated);
     }
 
-    private void saveTeam(final Team team)
-    {
+    private void saveTeam(final Team team) {
 
         // make sure there are 11 players
-        if(mTeamMutated.getPlayers().size() != 11)
-        {
+        if (mTeamMutated.getPlayers().size() != 11) {
             showMessage("Your team is missing players. Pick all 11 players to continue");
             return;
         }
 
         // check captain exists
-        if(mTeamMutated.getCaptainId() == null || TextUtils.isEmpty(mTeamMutated.getCaptainId()))
-        {
+        if (mTeamMutated.getCaptainId() == null || TextUtils.isEmpty(mTeamMutated.getCaptainId())) {
             showMessage("Select a captain for your team");
             return;
         }
+
+        // calculate transfers
+        List<String> originalPlayerIds = new ArrayList<String>();
+        List<String> mutatedPlayerIds = new ArrayList<String>();
+        for(Player p: mTeamOriginal.getPlayers())
+        {
+            originalPlayerIds.add(p.getId());
+        }
+
+        for(Player p: mTeamMutated.getPlayers())
+        {
+            mutatedPlayerIds.add(p.getId());
+        }
+
+        originalPlayerIds.retainAll(mutatedPlayerIds);
+        int transfersMade = 11 - originalPlayerIds.size();
+        if(transfersMade > mTeamOriginal.getTransfersRemaining())
+        {
+            showMessage("You don't have sufficient transfers remaining to make these trades");
+            return;
+        }
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Saving your team");
+        mProgressDialog.show();
         Http http = new Http();
         JSONObject jsonObject = TeamHelper.getJson(team);
         http.post(Urls.TeamUrls.saveTeamUrl(), new HashMap<String, String>(), jsonObject, new APCallback() {
             @Override
             public void success(JSONObject result) {
-                if(result.optJSONObject("Error") != null)
-                {
+                mProgressDialog.dismiss();
+                if (result.optJSONObject("Error") != null) {
                     showMessage(result.optJSONObject("Error").optString("ErrorMessage"));
                     return;
                 }
-                showMessage("Team created successfully");
+                showMessage("Team saved successfully!");
                 StorageManager manager = new StorageManager();
                 Team savedTeam = new Team(result);
                 savedTeam.setUserId(team.getUserId());
-                manager.Save(savedTeam);
+                manager.SaveTeam(savedTeam);
+                mTeamOriginal = savedTeam;
+                mTeamMutated = TeamHelper.clone(mTeamOriginal);
             }
 
             @Override
             public void failure(Exception e) {
-                showMessage("Something wrong happened");
+                mProgressDialog.dismiss();
+                showMessage("Something went wrong");
             }
         });
     }
 
-    private void showMessage(String message)
-    {
+    private void showMessage(String message) {
         SnackbarManager.show(
                 Snackbar.with(getApplicationContext()) // context
                         .type(SnackbarType.MULTI_LINE)
-                         // Set is as a multi-line snackbar
+                                // Set is as a multi-line snackbar
                         .text(message) // text to be displayed
                         .duration(Snackbar.SnackbarDuration.LENGTH_LONG) // make it shorter
                 , this);

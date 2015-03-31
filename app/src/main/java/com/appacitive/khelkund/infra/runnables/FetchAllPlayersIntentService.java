@@ -37,7 +37,7 @@ public class FetchAllPlayersIntentService extends IntentService {
                     players.add(new Player(playersJsonArray.optJSONObject(i)));
                 }
                 StorageManager storageManager = new StorageManager();
-                storageManager.Save(players);
+                storageManager.SavePlayers(players);
             }
 
             @Override

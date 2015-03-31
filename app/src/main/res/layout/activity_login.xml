@@ -41,15 +41,6 @@
         android:layout_marginBottom="16dp" />
 
     <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentLeft="false" />
 
     <ScrollView
         android:id="@+id/login_form"
@@ -121,6 +112,15 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp" />
+
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/divider2"
+        android:layout_centerHorizontal="true" />
 
     <RelativeLayout
         android:layout_width="wrap_content"

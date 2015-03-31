@@ -32,4 +32,11 @@ public class SharedPreferencesManager {
         SharedPreferences sharedPreferences = KhelkundApplication.getAppContext().getSharedPreferences("khelkund", Context.MODE_PRIVATE);
         return sharedPreferences.getString(key, null);
     }
+
+    public static void RemoveUserId() {
+        SharedPreferences sharedPreferences = KhelkundApplication.getAppContext().getSharedPreferences("khelkund", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("user_id");
+        editor.commit();
+    }
 }

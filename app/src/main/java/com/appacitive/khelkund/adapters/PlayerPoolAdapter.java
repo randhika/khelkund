@@ -44,7 +44,7 @@ public class PlayerPoolAdapter extends RecyclerView.Adapter<PlayerPoolAdapter.Po
         holder.team.setText(player.getShortTeamName());
         holder.price.setText("$ " + String.valueOf(player.getPrice()));
         holder.popularity.setText(String.valueOf(player.getPopularity() + " %"));
-        Picasso.with(KhelkundApplication.getAppContext()).load(player.getImageUrl()).into(holder.logo);
+        Picasso.with(KhelkundApplication.getAppContext()).load(player.getImageUrl()).placeholder(R.drawable.demo).into(holder.logo);
 
         holder.relativeLayout.setOnClickListener(null);
         holder.relativeLayout.setClickable(false);

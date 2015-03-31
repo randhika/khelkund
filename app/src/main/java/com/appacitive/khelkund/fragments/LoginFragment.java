@@ -1,6 +1,7 @@
 package com.appacitive.khelkund.fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,21 +18,19 @@ import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
-import com.appacitive.khelkund.infra.runnables.FetchAllPlayersIntentService;
-import com.appacitive.khelkund.infra.runnables.FetchMyPLayersIntentService;
 import com.appacitive.khelkund.model.User;
 import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.Digits;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.nispok.snackbar.Snackbar;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -55,6 +54,8 @@ public class LoginFragment extends Fragment {
     CallbackManager callbackManager;
     TwitterLoginButton twitterLoginButton;
 
+    ProgressDialog progressDialog;
+
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -67,6 +68,11 @@ public class LoginFragment extends Fragment {
         FacebookSdk.sdkInitialize(KhelkundApplication.getAppContext());
         callbackManager = CallbackManager.Factory.create();
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+
+        //  Logout
+        AccessToken.setCurrentAccessToken(null);
+        Twitter.logOut();
+        Digits.getSessionManager().clearActiveSession();
 
         facebookLoginButton = (LoginButton) view.findViewById(R.id.facebook_login_button);
         facebookLoginButton.setFragment(this);
@@ -82,10 +88,47 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
+
+    private void fireLoginCall(String url, JSONObject payload)
+    {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("LOGGING IN");
+        progressDialog.show();
+        Http http = new Http();
+        http.post(url, new HashMap<String, String>(), payload, new APCallback() {
+            @Override
+            public void success(JSONObject result) {
+                progressDialog.dismiss();
+                if(result.optJSONObject("Error") != null)
+                {
+                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), getActivity());
+                    return;
+                }
+
+                User user = new User(result.optJSONObject("User"));
+                SharedPreferencesManager.WriteUserId(user.getId());
+                StorageManager storageManager = new StorageManager();
+                storageManager.SaveUser(user);
+
+                Intent homeIntent = new Intent(getActivity(), HomeActivity.class);
+                startActivity(homeIntent);
+                getActivity().finish();
+            }
+
+            @Override
+            public void failure(Exception e) {
+                progressDialog.dismiss();
+                SnackBarManager.showError("Something went wrong", getActivity());
+            }
+        });
+
+    }
+
     private Callback<TwitterSession> twitterSessionCallback = new Callback<TwitterSession>() {
         @Override
         public void success(Result<TwitterSession> result) {
             TwitterSession session = Twitter.getSessionManager().getActiveSession();
+
             TwitterAuthToken authToken = session.getAuthToken();
             String token = authToken.token;
             String secret = authToken.secret;
@@ -94,89 +137,46 @@ public class LoginFragment extends Fragment {
             try {
                 request.put("AccessToken", token);
                 request.put("AccessSecret", secret);
-                request.put("ConsumerKey", "N1J0SKJLkMAoQe2kERO9LaX6j");
-                request.put("ConsumerSecret", "ehmqbKoGROgCV2Ynk8jL9TsC7laL5xPvjMWXti9xZBSdO7zgqP");
+                request.put("ConsumerKey", "IjYVjFetPBvINUGr5JxxbP99V");
+                request.put("ConsumerSecret", "gnTvCVeDBp0GSPRYDtCDiAWeGoC1HEAMs6AOBZxeOcC5bURWpS");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            Http http = new Http();
-            http.post(Urls.UserUrls.getTwitterLoginUrl(), new HashMap<String, String>(), request, new APCallback() {
-                @Override
-                public void success(JSONObject result) {
-                    if(result.optJSONObject("Error") != null)
-                    {
-                        SnackBarManager.showMessage(result.optJSONObject("Error").optString("ErrorMessage"), getActivity());
-                        return;
-                    }
-
-                    User user = new User(result);
-                    SharedPreferencesManager.WriteUserId(user.getId());
-                    StorageManager storageManager = new StorageManager();
-                    storageManager.Save(user);
-
-                    Intent mServiceIntent = new Intent(getActivity(), FetchMyPLayersIntentService.class);
-                    getActivity().startService(mServiceIntent);
-                    Intent homeIntent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(homeIntent);
-                    getActivity().finish();
-                }
-
-                @Override
-                public void failure(Exception e) {
-                    SnackBarManager.showMessage("Something went wrong", getActivity());
-                }
-            });
+            fireLoginCall(Urls.UserUrls.getTwitterLoginUrl(), request);
 
         }
 
         @Override
         public void failure(TwitterException e) {
-            SnackBarManager.showMessage("Something went wrong", getActivity());
+            SnackBarManager.showError("Something went wrong", getActivity());
         }
     };
 
     private AuthCallback digitsSessionCallback = new AuthCallback() {
         @Override
         public void success(DigitsSession digitsSession, String s) {
-            final JSONObject request = new JSONObject();
+            String tokens = digitsSession.getAuthToken().toString();
 
+            final JSONObject request = new JSONObject();
+            String[] parts = tokens.split(",");
+            String token = parts[0].substring(6);
+            String secret = parts[1].substring(7);
             try {
-                request.put("AccessToken", digitsSession.getAuthToken());
+                request.put("AccessToken", token);
+                request.put("AccessSecret", secret);
+                request.put("ConsumerKey", "IjYVjFetPBvINUGr5JxxbP99V");
+                request.put("ConsumerSecret", "gnTvCVeDBp0GSPRYDtCDiAWeGoC1HEAMs6AOBZxeOcC5bURWpS");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            Http http = new Http();
-            http.post(Urls.UserUrls.getTwitterLoginUrl(), new HashMap<String, String>(), request, new APCallback() {
-                @Override
-                public void success(JSONObject result) {
-                    if (result.optJSONObject("Error") != null) {
-                        SnackBarManager.showMessage(result.optJSONObject("Error").optString("ErrorMessage"), getActivity());
-                        return;
-                    }
-                    User user = new User(result);
-                    SharedPreferencesManager.WriteUserId(user.getId());
-                    StorageManager storageManager = new StorageManager();
-                    storageManager.Save(user);
-
-                    Intent mServiceIntent = new Intent(getActivity(), FetchMyPLayersIntentService.class);
-                    getActivity().startService(mServiceIntent);
-                    Intent homeIntent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(homeIntent);
-                    getActivity().finish();
-                }
-
-                @Override
-                public void failure(Exception e) {
-                    SnackBarManager.showMessage("Something went wrong", getActivity());
-                }
-            });
+            fireLoginCall(Urls.UserUrls.getTwitterLoginUrl(), request);
         }
 
         @Override
         public void failure(DigitsException e) {
-            SnackBarManager.showMessage("Something went wrong", getActivity());
+            SnackBarManager.showError("Something went wrong", getActivity());
         }
     };
 
@@ -191,32 +191,7 @@ public class LoginFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            Http http = new Http();
-            http.post(Urls.UserUrls.getFacebookLoginUrl(), new HashMap<String, String>(), request, new APCallback() {
-                @Override
-                public void success(JSONObject result) {
-                    if(result.optJSONObject("Error") != null)
-                    {
-                        SnackBarManager.showMessage(result.optJSONObject("Error").optString("ErrorMessage"), getActivity());
-                        return;
-                    }
-                    User user = new User(result);
-                    SharedPreferencesManager.WriteUserId(user.getId());
-                    StorageManager storageManager = new StorageManager();
-                    storageManager.Save(user);
-
-                    Intent mServiceIntent = new Intent(getActivity(), FetchMyPLayersIntentService.class);
-                    getActivity().startService(mServiceIntent);
-                    Intent homeIntent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(homeIntent);
-                    getActivity().finish();
-                }
-
-                @Override
-                public void failure(Exception e) {
-                    SnackBarManager.showMessage("Something went wrong", getActivity());
-                }
-            });
+            fireLoginCall(Urls.UserUrls.getFacebookLoginUrl(), request);
         }
 
         @Override
@@ -226,7 +201,7 @@ public class LoginFragment extends Fragment {
 
         @Override
         public void onError(FacebookException e) {
-            SnackBarManager.showMessage("Something went wrong", getActivity());
+            SnackBarManager.showError("Something went wrong", getActivity());
         }
     };
 

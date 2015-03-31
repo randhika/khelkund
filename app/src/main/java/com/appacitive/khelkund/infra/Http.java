@@ -26,6 +26,8 @@ public class Http {
             requestQueue = Volley.newRequestQueue(KhelkundApplication.getAppContext());
     }
 
+
+
     private static RequestQueue requestQueue = null;
 
     private static RequestQueue getRequestQueue() {

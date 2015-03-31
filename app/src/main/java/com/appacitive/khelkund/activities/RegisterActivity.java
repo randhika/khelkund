@@ -1,5 +1,6 @@
 package com.appacitive.khelkund.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,9 +14,11 @@ import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
+import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.User;
+import com.crashlytics.android.Crashlytics;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,31 +41,14 @@ public class RegisterActivity extends ActionBarActivity {
     @InjectView(R.id.et_register_password)
     public EditText mPassword;
 
-    private int mLoginFragmentId;
 
+    public ProgressDialog mProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.inject(this);
         ConnectionManager.checkNetworkConnectivity(this);
-        if (savedInstanceState == null) {
-            LoginFragment loginFragment = new LoginFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, loginFragment).commit();
-            mLoginFragmentId = loginFragment.getId();
-        }
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Fragment fragment = getSupportFragmentManager()
-                .findFragmentById(mLoginFragmentId);
-        if (fragment != null) {
-            fragment.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     @OnClick(R.id.rl_login)
@@ -112,12 +98,14 @@ public class RegisterActivity extends ActionBarActivity {
             mPassword.requestFocus();
             return;
         }
-
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Registering new user");
+        mProgressDialog.show();
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("Email", mEmail.getText().toString());
             jsonObject.put("Password", mPassword.getText().toString());
-            jsonObject.put("Firstname", mName.getText().toString());
+            jsonObject.put("FirstName", mName.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -125,14 +113,16 @@ public class RegisterActivity extends ActionBarActivity {
         http.post(Urls.UserUrls.getSignupUrl(), new HashMap<String, String>(), jsonObject, new APCallback() {
             @Override
             public void success(JSONObject result) {
+                mProgressDialog.dismiss();
                 if(result.optJSONObject("Error") != null)
                 {
+                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), RegisterActivity.this);
                     return;
                 }
                 User user = new User(result);
                 SharedPreferencesManager.WriteUserId(user.getId());
                 StorageManager manager = new StorageManager();
-                manager.Save(user);
+                manager.SaveUser(user);
 
                 Intent homeIntent = new Intent(RegisterActivity.this, HomeActivity.class);
                 startActivity(homeIntent);
@@ -141,7 +131,8 @@ public class RegisterActivity extends ActionBarActivity {
 
             @Override
             public void failure(Exception e) {
-                super.failure(e);
+                mProgressDialog.dismiss();
+                SnackBarManager.showError("Something went wrong", RegisterActivity.this);
             }
         });
 

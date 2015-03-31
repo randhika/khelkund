@@ -31,10 +31,14 @@ public class HomeActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
+    @Override
+    public void onBackPressed() {
+        finish();
+        System.exit(0);
+    }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         if(position == 0)
             fragmentManager.beginTransaction()

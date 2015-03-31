@@ -1,44 +1,29 @@
 package com.appacitive.khelkund.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.adapters.SquadAdapter;
 import com.appacitive.khelkund.adapters.TeamLogoAdapter;
-import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
-import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.RecyclerItemClickListener;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
-import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.Team;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -130,7 +115,7 @@ public class CreateTeamActivity extends ActionBarActivity {
         team.setBalance(10000000);
 
         StorageManager storageManager = new StorageManager();
-        storageManager.Save(team);
+        storageManager.SaveTeam(team);
         Intent editTeamIntent = new Intent(CreateTeamActivity.this, EditTeamActivity.class);
         startActivity(editTeamIntent);
         finish();
