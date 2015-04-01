@@ -28,7 +28,8 @@ public class ConnectionManager {
             SnackbarManager.show(
                     Snackbar.with(context) // context
                             .type(SnackbarType.MULTI_LINE)
-                            .textColor(Color.RED)
+                            .color(Color.parseColor("#F44336"))
+                            .textColor(Color.WHITE)
                             .text("No internet connectivity")
                             .duration(Snackbar.SnackbarDuration.LENGTH_LONG)
                     , context);

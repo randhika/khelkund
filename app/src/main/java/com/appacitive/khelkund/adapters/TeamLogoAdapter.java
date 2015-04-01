@@ -2,6 +2,7 @@ package com.appacitive.khelkund.adapters;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,22 +11,35 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
+import com.appacitive.khelkund.model.events.LogoSelectedEvent;
+import com.appacitive.khelkund.model.viewholders.TeamLogoViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by sathley on 3/27/2015.
  */
-public class TeamLogoAdapter extends RecyclerView.Adapter<TeamLogoAdapter.TeamLogoViewHolder> {
+public class TeamLogoAdapter extends RecyclerView.Adapter<TeamLogoViewHolder> {
 
     private List<String> mTeamLogos = new ArrayList<String>();
+    private int mSelectedPosition;
 
-    public TeamLogoAdapter(List<String> logos)
+    public void setmSelectedPosition(int position)
+    {
+        this.mSelectedPosition = position;
+    }
+
+    public TeamLogoAdapter(List<String> logos, int selectedPosition)
     {
         this.mTeamLogos = logos;
+        this.mSelectedPosition = selectedPosition;
     }
 
     @Override
@@ -37,9 +51,16 @@ public class TeamLogoAdapter extends RecyclerView.Adapter<TeamLogoAdapter.TeamLo
     }
 
     @Override
-    public void onBindViewHolder(TeamLogoViewHolder holder, int position) {
+    public void onBindViewHolder(TeamLogoViewHolder holder, final int position) {
         int bitmapId  = KhelkundApplication.getAppContext().getResources().getIdentifier(mTeamLogos.get(position), "drawable", KhelkundApplication.getAppContext().getPackageName());
-        Picasso.with(KhelkundApplication.getAppContext()).load(bitmapId).into((ImageView)holder.logo.findViewById(R.id.iv_pick_team_logo));
+        Picasso.with(KhelkundApplication.getAppContext()).load(bitmapId).into((ImageView) holder.logo.findViewById(R.id.iv_pick_team_logo));
+        if(position == mSelectedPosition)
+        {
+            holder.logo.setBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(R.color.accent));
+        }
+        else {
+            holder.logo.setBackgroundColor(Color.WHITE);
+        }
     }
 
     @Override
@@ -47,12 +68,5 @@ public class TeamLogoAdapter extends RecyclerView.Adapter<TeamLogoAdapter.TeamLo
         return mTeamLogos.size();
     }
 
-    public static class TeamLogoViewHolder extends RecyclerView.ViewHolder
-    {
-        public CardView logo;
-        public TeamLogoViewHolder(View itemView) {
-            super(itemView);
-            logo = (CardView) itemView.findViewById(R.id.card_view_pick_team_logo);
-        }
-    }
+
 }

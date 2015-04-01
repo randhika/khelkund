@@ -15,8 +15,9 @@ import android.widget.TextView;
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.CreateTeamActivity;
 import com.appacitive.khelkund.activities.HomeActivity;
-import com.appacitive.khelkund.activities.pick5.Pick5HomeActivity;
+import com.appacitive.khelkund.activities.LoginActivity;
 import com.appacitive.khelkund.activities.ViewTeamActivity;
+import com.appacitive.khelkund.activities.pick5.Pick5HomeActivity;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
@@ -24,8 +25,8 @@ import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
+import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.Team;
-import com.appacitive.khelkund.model.User;
 
 import org.json.JSONObject;
 
@@ -33,12 +34,17 @@ import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class HomeFragment extends Fragment {
 
-    private User mUser;
+    private KhelkundUser mUser;
+
+    private boolean isInitializing = false;
 
     private Team mTeam;
+
+    private String userId;
 
     @InjectView(R.id.tv_rank)
     public TextView mRank;
@@ -56,6 +62,7 @@ public class HomeFragment extends Fragment {
     public CardView mPick5;
 
     private ProgressDialog mProgressDialog;
+    private StorageManager manager;
 
     public static HomeFragment newInstance(int sectionNumber) {
         HomeFragment fragment = new HomeFragment();
@@ -83,8 +90,16 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.inject(this, rootView);
         ConnectionManager.checkNetworkConnectivity(getActivity());
-        String userId = SharedPreferencesManager.ReadUserId();
-        final StorageManager manager = new StorageManager();
+        manager = new StorageManager();
+        userId = SharedPreferencesManager.ReadUserId();
+
+        if (userId == null)
+        {
+            Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(loginIntent);
+            getActivity().finish();
+        }
+
         mUser = manager.GetUser(userId);
 
         String name = mUser.getFirstName();
@@ -92,32 +107,63 @@ public class HomeFragment extends Fragment {
             name += " " + mUser.getLastName();
         mName.setText(name);
 
-        fetchTeam(userId);
-        if(mTeam == null)
-        {
-            mTeam = manager.GetTeam(userId);
-        }
-        mFantasy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mTeam != null && mTeam.getId() != null && TextUtils.isEmpty(mTeam.getId()) == false) {
-                    Intent viewTeamIntent = new Intent(getActivity(), ViewTeamActivity.class);
-                    startActivity(viewTeamIntent);
-                } else {
-                    Intent createTeamIntent = new Intent(getActivity(), CreateTeamActivity.class);
-                    startActivity(createTeamIntent);
-                }
-            }
-        });
-
-        mPick5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Pick5HomeActivity.class);
-                startActivity(intent);
-            }
-        });
         return rootView;
+    }
+
+    private void fetchAndDisplayUserDetails() {
+        userId = SharedPreferencesManager.ReadUserId();
+        manager = new StorageManager();
+        mTeam = manager.GetTeam(userId);
+        if (mTeam == null) {
+            fetchTeam(userId);
+        } else {
+            mRank.setText(String.valueOf(mTeam.getRank()));
+            mPoints.setText(String.valueOf(mTeam.getTotalPoints()));
+            if (mTeam.getId() == null) {
+                SnackBarManager.showError("Your team has unsaved changes.", getActivity());
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mTeam == null && isInitializing == false) {
+            isInitializing = true;
+            fetchAndDisplayUserDetails();
+            isInitializing = false;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @OnClick(R.id.card_view_fantasy)
+    public void onFantasyClick() {
+        if (isTeamCreatedOnServer() == true) {
+            Intent viewTeamIntent = new Intent(getActivity(), ViewTeamActivity.class);
+            startActivity(viewTeamIntent);
+        } else {
+            Intent createTeamIntent = new Intent(getActivity(), CreateTeamActivity.class);
+            startActivity(createTeamIntent);
+        }
+    }
+
+    private boolean isTeamCreatedOnServer() {
+        if (mTeam != null && mTeam.getId() != null && TextUtils.isEmpty(mTeam.getId()) == false)
+            return true;
+        else {
+            return false;
+        }
+    }
+
+    @OnClick(R.id.card_view_pick5)
+    public void onPick5Click() {
+        Intent intent = new Intent(getActivity(), Pick5HomeActivity.class);
+        startActivity(intent);
     }
 
     private void fetchTeam(final String userId) {
@@ -133,14 +179,14 @@ public class HomeFragment extends Fragment {
                     SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), getActivity());
                     return;
                 }
-                if (result.optString("Id") != null) {
+                if (result.optString("Id") != "null") {
 
                     mTeam = new Team(result);
-                    mRank.setText(String.valueOf(mTeam.getRank()));
-                    mPoints.setText(String.valueOf(mTeam.getTotalPoints()));
+
                     mTeam.setUserId(userId);
                     StorageManager storageManager = new StorageManager();
                     storageManager.SaveTeam(mTeam);
+
                 }
             }
 

@@ -59,7 +59,7 @@ public class HomeActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         context = getApplicationContext();
-
+        String name =  context.getPackageName();
         if (checkPlayServices()) {
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
@@ -69,11 +69,20 @@ public class HomeActivity extends ActionBarActivity
             }
         }
     }
-
     @Override
     public void onBackPressed() {
         finish();
         System.exit(0);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     @Override

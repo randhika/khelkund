@@ -39,7 +39,7 @@ import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.infra.services.FetchMyPLayersIntentService;
-import com.appacitive.khelkund.model.User;
+import com.appacitive.khelkund.model.KhelkundUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -167,7 +167,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
                     }
 
                     SharedPreferencesManager.WriteUserId(result.optJSONObject("User").optString("UserId"));
-                    User user = new User(result.optJSONObject("User"));
+                    KhelkundUser user = new KhelkundUser(result.optJSONObject("User"));
                     StorageManager manager = new StorageManager();
                     manager.SaveUser(user);
 
@@ -194,7 +194,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+        return password.length() >= 4;
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)

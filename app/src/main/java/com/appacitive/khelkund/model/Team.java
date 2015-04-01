@@ -60,7 +60,7 @@ public class Team extends RealmObject {
     @PrimaryKey
     private String UserId;
 
-    private int Balance;
+    private int Balance=0;
     private String CaptainId;
     private String Formation;
     private String Id;

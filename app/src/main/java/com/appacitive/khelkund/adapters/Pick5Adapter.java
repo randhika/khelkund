@@ -52,7 +52,7 @@ public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHol
         holder.venue.setText(match.getVenue());
         Picasso.with(KhelkundApplication.getAppContext()).load(getTeamLogo(match.getAwayTeamShortName())).into(holder.awayLogo);
         Picasso.with(KhelkundApplication.getAppContext()).load(getTeamLogo(match.getHomeTeamShortName())).into(holder.homeLogo);
-
+        holder.card.setBackgroundResource(R.drawable.background);
         holder.card.setOnClickListener(null);
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override

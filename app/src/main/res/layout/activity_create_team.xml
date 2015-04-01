@@ -20,11 +20,12 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_pick_team_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView16"
         android:layout_above="@+id/btn_create_team"
-        android:layout_marginBottom="24dp"
-        android:layout_below="@+id/textView16" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp" />
 
     <Button
         android:layout_width="wrap_content"

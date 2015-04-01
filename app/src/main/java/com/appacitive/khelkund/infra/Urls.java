@@ -66,7 +66,15 @@ public class Urls {
 
         public static String getSignupUrl()
         {
-            return baseUrl + "Loginservice.svc/signup";
+            return baseUrl + "Loginservice.svc/register";
+        }
+    }
+
+    public static class LeaderboardUrls {
+
+        public static String getLeaderboardUrl()
+        {
+            return baseUrl + "privateleagueservice.svc/leaderboard";
         }
     }
 }

@@ -25,15 +25,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.activities.LeaderboardActivity;
 import com.appacitive.khelkund.activities.LoginActivity;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.digits.sdk.android.Digits;
 import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 import com.twitter.sdk.android.Twitter;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class NavigationDrawerFragment extends Fragment {
 
@@ -58,85 +61,98 @@ public class NavigationDrawerFragment extends Fragment {
     @InjectView(R.id.tv_nav_logout)
     public TextView mLogout;
 
+    @InjectView(R.id.tv_nav_leaderboard)
+    public TextView mLeaderboard;
+
+    @InjectView(R.id.tv_nav_terms)
+    public TextView mTerms;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Read in the flag indicating whether or not the user has demonstrated awareness of the
-        // drawer. See PREF_USER_LEARNED_DRAWER for details.
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
+        mUserLearnedDrawer = true;
+//        mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
         if (savedInstanceState != null) {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
         }
 
-        // Select either the default item (0) or the last selected item.
         selectItem(mCurrentSelectedPosition);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // Indicate that this fragment would like to influence the set of actions in the action bar.
         setHasOptionsMenu(true);
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         ButterKnife.inject(this, view);
-        mLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //  Logout
-
-                AccessToken.setCurrentAccessToken(null);
-                Twitter.logOut();
-                Digits.getSessionManager().clearActiveSession();
-                String userId = SharedPreferencesManager.ReadUserId();
-                if(userId == null)
-                    return;
-                StorageManager manager = new StorageManager();
-                manager.deleteUser(userId);
-                SharedPreferencesManager.RemoveUserId();
-                Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(loginIntent);
-                getActivity().finish();
-            }
-        });
         return view;
+    }
+
+    @OnClick(R.id.tv_nav_leaderboard)
+    public void onLeaderBoardClick()
+    {
+        Intent intent = new Intent(getActivity(), LeaderboardActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.tv_nav_howtoplay)
+    public void onHowToPlayClick()
+    {
+
+    }
+
+    @OnClick(R.id.tv_nav_terms)
+    public void onTermsClick()
+    {
+
+    }
+
+    @OnClick(R.id.tv_nav_aboutus)
+    public void onAboutUsClick()
+    {
+
+    }
+
+    @OnClick(R.id.tv_nav_logout)
+    public void onLogoutClick()
+    {
+        LoginManager.getInstance().logOut();
+        Twitter.logOut();
+        Digits.getSessionManager().clearActiveSession();
+        String userId = SharedPreferencesManager.ReadUserId();
+        if (userId == null)
+            return;
+        StorageManager manager = new StorageManager();
+        manager.deleteUser(userId);
+        SharedPreferencesManager.RemoveUserId();
+        Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(loginIntent);
+        getActivity().finish();
     }
 
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
     }
 
-    /**
-     * Users of this fragment must call this method to set up the navigation drawer interactions.
-     *
-     * @param fragmentId   The android:id of this fragment in its activity's layout.
-     * @param drawerLayout The DrawerLayout containing this fragment's UI.
-     */
     public void setUp(int fragmentId, DrawerLayout drawerLayout) {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
 
-        // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the navigation drawer and the action bar app icon.
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */

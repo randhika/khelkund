@@ -16,3 +16,7 @@
 #   public *;
 #}
 -include ../proguard-com.twitter.sdk.android.twitter.txt
+-keepnames public class * extends io.realm.RealmObject
+-keep class io.realm.** { *; }
+-dontwarn javax.**
+-dontwarn io.realm.**

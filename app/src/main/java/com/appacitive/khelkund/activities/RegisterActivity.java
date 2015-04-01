@@ -1,15 +1,16 @@
 package com.appacitive.khelkund.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.fragments.LoginFragment;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
@@ -17,8 +18,7 @@ import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
-import com.appacitive.khelkund.model.User;
-import com.crashlytics.android.Crashlytics;
+import com.appacitive.khelkund.model.KhelkundUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +40,9 @@ public class RegisterActivity extends ActionBarActivity {
 
     @InjectView(R.id.et_register_password)
     public EditText mPassword;
+
+    @InjectView(R.id.btn_register)
+    public Button mRegister;
 
 
     public ProgressDialog mProgressDialog;
@@ -64,18 +67,21 @@ public class RegisterActivity extends ActionBarActivity {
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+        return password.length() >= 4;
     }
 
     @OnClick(R.id.btn_register)
     public void onRegister()
     {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
         mName.setError(null);
         mEmail.setError(null);
         mPassword.setError(null);
         String name = mName.getText().toString();
         String email = mEmail.getText().toString();
-        String password = mEmail.getText().toString();
+        String password = mPassword.getText().toString();
 
 
         if(TextUtils.isEmpty(name))
@@ -114,12 +120,13 @@ public class RegisterActivity extends ActionBarActivity {
             @Override
             public void success(JSONObject result) {
                 mProgressDialog.dismiss();
-                if(result.optJSONObject("Error") != null)
+                if(result.optJSONObject("User") == null)
                 {
-                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), RegisterActivity.this);
+//                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), RegisterActivity.this);
+                    SnackBarManager.showError("Something went wrong", RegisterActivity.this);
                     return;
                 }
-                User user = new User(result);
+                KhelkundUser user = new KhelkundUser(result.optJSONObject("User"));
                 SharedPreferencesManager.WriteUserId(user.getId());
                 StorageManager manager = new StorageManager();
                 manager.SaveUser(user);

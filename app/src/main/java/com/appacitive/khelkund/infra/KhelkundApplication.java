@@ -25,13 +25,14 @@ public class KhelkundApplication extends Application {
 
     public void onCreate(){
         super.onCreate();
-
+        KhelkundApplication.context = getApplicationContext();
 //        TwitterAuthConfig authConfig = new TwitterAuthConfig(getResources().getString(R.string.TWITTER_KEY), getResources().getString(R.string.TWITTER_SECRET));
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Crashlytics(), new Twitter(authConfig));
         Fabric.with(this, new TwitterCore(authConfig), new Digits());
         Fabric.with(this, new Twitter(authConfig));
-        KhelkundApplication.context = getApplicationContext();
+
+        FacebookSdk.sdkInitialize(context);
 
     }
 

@@ -13,22 +13,20 @@ import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.HomeActivity;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.Http;
-import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
-import com.appacitive.khelkund.model.User;
+import com.appacitive.khelkund.model.KhelkundUser;
 import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.Digits;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.twitter.sdk.android.Twitter;
@@ -65,12 +63,12 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        FacebookSdk.sdkInitialize(KhelkundApplication.getAppContext());
+
         callbackManager = CallbackManager.Factory.create();
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         //  Logout
-        AccessToken.setCurrentAccessToken(null);
+        LoginManager.getInstance().logOut();
         Twitter.logOut();
         Digits.getSessionManager().clearActiveSession();
 
@@ -105,7 +103,7 @@ public class LoginFragment extends Fragment {
                     return;
                 }
 
-                User user = new User(result.optJSONObject("User"));
+                KhelkundUser user = new KhelkundUser(result.optJSONObject("User"));
                 SharedPreferencesManager.WriteUserId(user.getId());
                 StorageManager storageManager = new StorageManager();
                 storageManager.SaveUser(user);

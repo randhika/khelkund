@@ -63,4 +63,58 @@
         android:layout_below="@+id/tv_nav_terms"
         android:layout_alignLeft="@+id/tv_nav_terms"
         android:layout_alignStart="@+id/tv_nav_terms" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView14"
+        android:layout_alignTop="@+id/tv_nav_leaderboard"
+        android:nestedScrollingEnabled="true"
+        android:src="@drawable/ic_assessment_grey600_36dp"
+        android:layout_alignBottom="@+id/tv_nav_leaderboard"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView15"
+        android:src="@drawable/ic_favorite_grey600_36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@+id/imageView17"
+        android:layout_alignBottom="@+id/tv_nav_aboutus" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView16"
+        android:src="@drawable/ic_help_grey600_36dp"
+        android:layout_above="@+id/tv_nav_logout"
+        android:layout_alignLeft="@+id/imageView14"
+        android:layout_alignStart="@+id/imageView14"
+        android:layout_alignTop="@+id/tv_nav_howtoplay" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView17"
+        android:layout_below="@+id/tv_nav_logout"
+        android:layout_alignLeft="@+id/imageView15"
+        android:layout_alignStart="@+id/imageView15"
+        android:src="@drawable/ic_work_grey600_36dp"
+        android:layout_above="@+id/tv_nav_aboutus" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView18"
+        android:layout_below="@+id/imageView16"
+        android:layout_alignRight="@+id/imageView16"
+        android:layout_alignEnd="@+id/imageView16"
+        android:src="@drawable/ic_settings_grey600_36dp"
+        android:layout_above="@+id/imageView17" />
+
 </RelativeLayout>

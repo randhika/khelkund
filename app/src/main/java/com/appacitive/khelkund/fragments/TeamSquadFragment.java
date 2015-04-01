@@ -18,7 +18,7 @@ import com.appacitive.khelkund.infra.DividerItemDecoration;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.model.Team;
-import com.appacitive.khelkund.model.User;
+import com.appacitive.khelkund.model.KhelkundUser;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import butterknife.ButterKnife;
@@ -38,7 +38,7 @@ public class TeamSquadFragment extends Fragment {
     public FloatingActionButton mFab;
 
 
-    private User mUser;
+    private KhelkundUser mUser;
     private Team mTeam;
 
     public TeamSquadFragment() {

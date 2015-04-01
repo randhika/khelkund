@@ -1,16 +1,13 @@
 package com.appacitive.khelkund.infra;
 
-import android.app.Application;
-
+import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.Match;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.Team;
-import com.appacitive.khelkund.model.User;
 
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
@@ -27,7 +24,7 @@ public class StorageManager {
         realm.commitTransaction();
     }
 
-    public void SaveUser(User user)
+    public void SaveUser(KhelkundUser user)
     {
         Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
         realm.beginTransaction();
@@ -67,10 +64,10 @@ public class StorageManager {
         return query.findAll();
     }
 
-    public User GetUser(String userId)
+    public KhelkundUser GetUser(String userId)
     {
         Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
-        RealmQuery<User> query = realm.where(User.class);
+        RealmQuery<KhelkundUser> query = realm.where(KhelkundUser.class);
         query.equalTo("Id", userId);
         return query.findFirst();
     }
@@ -100,7 +97,7 @@ public class StorageManager {
     public void deleteUser(String userId) {
         Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
         realm.beginTransaction();
-        realm.allObjects(User.class).clear();
+        realm.allObjects(KhelkundUser.class).clear();
         realm.allObjects(Team.class).clear();
         realm.commitTransaction();
     }

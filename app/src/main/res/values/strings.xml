@@ -44,4 +44,5 @@
     <string name="title_activity_player_pool">Select Player</string>
     <string name="title_activity_pick5_home">Pick\'em 5</string>
     <string name="title_activity_pick5_match">Pick\'em 5</string>
+    <string name="title_activity_leaderboard">Leaderboard</string>
 </resources>

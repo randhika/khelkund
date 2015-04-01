@@ -18,7 +18,7 @@ public class SnackBarManager {
                 Snackbar.with(activity) // context
                         .type(SnackbarType.MULTI_LINE)
                         .textColor(Color.WHITE)
-                        .color(Color.RED)
+                        .color(Color.parseColor("#F44336"))
                         .text(message)
                         .duration(Snackbar.SnackbarDuration.LENGTH_LONG)
                 , activity);
@@ -30,7 +30,7 @@ public class SnackBarManager {
         SnackbarManager.show(
                 Snackbar.with(activity) // context
                         .type(SnackbarType.MULTI_LINE)
-                        .textColor(Color.GREEN)
+                        .textColor(Color.parseColor("#4CAF50"))
                         .text(message)
                         .duration(Snackbar.SnackbarDuration.LENGTH_LONG)
                 , activity);

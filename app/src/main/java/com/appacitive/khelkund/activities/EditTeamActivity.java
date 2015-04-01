@@ -30,7 +30,7 @@ import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PlayerType;
 import com.appacitive.khelkund.model.Team;
 import com.appacitive.khelkund.model.TeamHelper;
-import com.appacitive.khelkund.model.User;
+import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.events.EmptyPlayerCardClickedEvent;
 import com.appacitive.khelkund.model.events.FilledPlayerCardClickedEvent;
 import com.nispok.snackbar.Snackbar;
@@ -53,7 +53,7 @@ import io.realm.RealmList;
 
 public class EditTeamActivity extends ActionBarActivity {
 
-    private User mUser;
+    private KhelkundUser mUser;
     private Team mTeamOriginal;
     private Team mTeamMutated;
     private StorageManager mStorageManager;
@@ -185,6 +185,7 @@ public class EditTeamActivity extends ActionBarActivity {
             mTeamMutated = TeamHelper.clone(mTeamOriginal);
             updateStats(mTeamMutated);
             resetAdapters(mTeamMutated);
+            showSuccess("Your changes have been reset");
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -573,7 +574,7 @@ public class EditTeamActivity extends ActionBarActivity {
         SnackbarManager.show(
                 Snackbar.with(getApplicationContext()) // context
                         .type(SnackbarType.MULTI_LINE)
-                                .color(Color.RED)
+                                .color(Color.parseColor("#F44336"))
                                         .textColor(Color.WHITE)
                         .text(message) // text to be displayed
                         .duration(Snackbar.SnackbarDuration.LENGTH_LONG) // make it shorter
@@ -584,7 +585,7 @@ public class EditTeamActivity extends ActionBarActivity {
         SnackbarManager.show(
                 Snackbar.with(getApplicationContext()) // context
                         .type(SnackbarType.MULTI_LINE)
-                        .color(Color.GREEN)
+                        .color(Color.parseColor("#4CAF50"))
                         .textColor(Color.WHITE)
                         .text(message) // text to be displayed
                         .duration(Snackbar.SnackbarDuration.LENGTH_LONG) // make it shorter

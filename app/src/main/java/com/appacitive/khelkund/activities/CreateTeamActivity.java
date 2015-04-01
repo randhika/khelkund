@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -14,14 +13,19 @@ import android.widget.EditText;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.adapters.TeamLogoAdapter;
+import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.ConnectionManager;
-import com.appacitive.khelkund.infra.RecyclerItemClickListener;
+import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.Team;
+import com.appacitive.khelkund.model.KhelkundUser;
+import com.appacitive.khelkund.model.events.LogoSelectedEvent;
+import com.appacitive.khelkund.model.viewholders.TeamLogoViewHolder;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +38,26 @@ public class CreateTeamActivity extends ActionBarActivity {
 
     private static List<String> mLogos = new ArrayList<String>()
     {{
-            add("ic_logo_1");
-            add("ic_logo_2");
-            add("ic_logo_3");
-            add("ic_logo_4");
-            add("ic_logo_5");
+            add("l1");
+            add("l2");
+            add("l3");
+            add("l4");
+            add("l5");
+            add("l6");
+            add("l7");
+            add("l8");
+            add("l9");
+            add("l10");
+            add("l11");
+            add("l12");
+            add("l13");
+            add("l14");
+            add("l15");
+            add("l16");
+            add("l17");
         }};
 
-    private static int selectedId = 0;
+    private int selectedPosition = 0;
 
     @InjectView(R.id.rv_pick_team_logo)
     public RecyclerView mLogoRecyclerView;
@@ -53,6 +69,7 @@ public class CreateTeamActivity extends ActionBarActivity {
     public Button mCreateTeam;
 
     private String mUserId;
+    private KhelkundUser mUser;
     public RecyclerView.Adapter mAdapter;
     public RecyclerView.LayoutManager mLayoutManager;
 
@@ -61,30 +78,20 @@ public class CreateTeamActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_team);
         ButterKnife.inject(this);
+
         ConnectionManager.checkNetworkConnectivity(this);
         mUserId = SharedPreferencesManager.ReadUserId();
-
+        StorageManager manager = new StorageManager();
+        mUser = manager.GetUser(mUserId);
+        if(mUser.getFirstName() != null && mUser.getFirstName() != "null")
+        {
+            mTeamName.setHint(String.format("Your team name eg %sIX", mUser.getFirstName()));
+        }
         mLogoRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(this, 3);
         mLogoRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new TeamLogoAdapter(mLogos);
+        mAdapter = new TeamLogoAdapter(mLogos, this.selectedPosition);
         mLogoRecyclerView.setAdapter(mAdapter);
-
-        mLogoRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override public void onItemClick(View view, int position) {
-
-                // 1. Remove selection from previously selected item
-                TeamLogoAdapter.TeamLogoViewHolder holder =  (TeamLogoAdapter.TeamLogoViewHolder)mLogoRecyclerView.findViewHolderForAdapterPosition(CreateTeamActivity.selectedId);
-                holder.logo.setBackgroundColor(Color.WHITE);
-
-                // 2. Add selection to newly selected item
-                CardView cardView = (CardView) view.findViewById(R.id.card_view_pick_team_logo);
-                cardView.setBackgroundColor(getResources().getColor(R.color.accent));
-
-                // 3. Update selected position in static variable
-                CreateTeamActivity.selectedId = position;
-            }
-        }));
 
         mCreateTeam.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,10 +103,26 @@ public class CreateTeamActivity extends ActionBarActivity {
                                     .text("You did not provide a name for your team"), CreateTeamActivity.this);
                     return;
                 }
-                createTeam(mTeamName.getText().toString(), mLogos.get(selectedId));
+                createTeam(mTeamName.getText().toString(), mLogos.get(selectedPosition));
             }
         });
 
+    }
+
+    @Subscribe
+    public void onLogoSelected(LogoSelectedEvent event)
+    {
+        TeamLogoViewHolder holder = (TeamLogoViewHolder) mLogoRecyclerView.findViewHolderForAdapterPosition(this.selectedPosition);
+        if(holder != null)
+            holder.logo.setBackgroundColor(Color.WHITE);
+
+        this.selectedPosition = event.Position;
+
+        holder = (TeamLogoViewHolder) mLogoRecyclerView.findViewHolderForAdapterPosition(this.selectedPosition);
+        if(holder != null)
+            holder.logo.setBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(R.color.accent));
+
+        ((TeamLogoAdapter) mAdapter).setmSelectedPosition(this.selectedPosition);
     }
 
     private void createTeam(String teamName, String logoId) {
@@ -121,5 +144,15 @@ public class CreateTeamActivity extends ActionBarActivity {
         finish();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
+    }
 }

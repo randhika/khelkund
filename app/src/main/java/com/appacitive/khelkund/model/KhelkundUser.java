@@ -14,13 +14,13 @@ import io.realm.annotations.RealmClass;
  */
 
 @RealmClass
-public class User extends RealmObject {
+public class KhelkundUser extends RealmObject {
 
-    public User()
+    public KhelkundUser()
     {
     }
 
-    public User(JSONObject json)
+    public KhelkundUser(JSONObject json)
     {
         if(json == null)
             return;
@@ -71,15 +71,15 @@ public class User extends RealmObject {
 //        parcel.writeString(LastName);
 //    }
 //    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-//        public User createFromParcel(Parcel in) {
-//            return new User(in);
+//        public KhelkundUser createFromParcel(Parcel in) {
+//            return new KhelkundUser(in);
 //        }
-//        public User[] newArray(int size) {
-//            return new User[size];
+//        public KhelkundUser[] newArray(int size) {
+//            return new KhelkundUser[size];
 //        }
 //    };
 //
-//    private User(Parcel in)
+//    private KhelkundUser(Parcel in)
 //    {
 //        Id = in.readString();
 //        FirstName = in.readString();
