@@ -39,6 +39,14 @@ public class Urls {
         }
     }
 
+    public static class AppacitiveUrls
+    {
+        public static String getRegisterDeviceUrl()
+        {
+            return "https://apis.appacitive.com/v1.0/connection/user_device";
+        }
+    }
+
     public static class UserUrls
     {
         public static String getLoginUrl()

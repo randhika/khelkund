@@ -38,7 +38,7 @@ import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
-import com.appacitive.khelkund.infra.runnables.FetchMyPLayersIntentService;
+import com.appacitive.khelkund.infra.services.FetchMyPLayersIntentService;
 import com.appacitive.khelkund.model.User;
 
 import org.json.JSONException;

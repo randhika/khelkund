@@ -1,5 +1,6 @@
 package com.appacitive.khelkund.adapters;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.model.Match;
 import com.appacitive.khelkund.model.Player;
+import com.appacitive.khelkund.model.events.EmptyPlayerCardClickedEvent;
+import com.appacitive.khelkund.model.events.MatchSelectedEvent;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -40,14 +44,25 @@ public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHol
 
     @Override
     public void onBindViewHolder(Pick5ViewHolder holder, int position) {
-        Match match = mMatches.get(position);
+        final Match match = mMatches.get(position);
         holder.awayName.setText(match.getAwayTeamName());
         holder.homeName.setText(match.getHomeTeamName());
         DateFormat df = new SimpleDateFormat("dd, MMMM yyyy");
         holder.date.setText(df.format(match.getStartDate()));
-
+        holder.venue.setText(match.getVenue());
         Picasso.with(KhelkundApplication.getAppContext()).load(getTeamLogo(match.getAwayTeamShortName())).into(holder.awayLogo);
         Picasso.with(KhelkundApplication.getAppContext()).load(getTeamLogo(match.getHomeTeamShortName())).into(holder.homeLogo);
+
+        holder.card.setOnClickListener(null);
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MatchSelectedEvent event = new MatchSelectedEvent();
+                event.MatchId = match.getId();
+                BusProvider.getInstance().post(event);
+            }
+        });
+
     }
 
     private int getTeamLogo(String teamName)
@@ -89,6 +104,10 @@ public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHol
         public ImageView homeLogo;
         @InjectView(R.id.tv_pick5_date)
         public TextView date;
+        @InjectView(R.id.tv_pick5_venue)
+        public TextView venue;
+        @InjectView(R.id.card_view_pick5)
+        public CardView card;
 
         public Pick5ViewHolder(View itemView) {
             super(itemView);

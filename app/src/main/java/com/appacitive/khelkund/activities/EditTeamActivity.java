@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -272,28 +273,28 @@ public class EditTeamActivity extends ActionBarActivity {
 
     private void tryChangeFormation(Formation formation) {
         if (formation.BatsmenCount < TeamHelper.getBatsmen(mTeamMutated).size()) {
-            showMessage(String.format("You need to remove %s batsmen to change formation", String.valueOf(TeamHelper.getBatsmen(mTeamMutated).size() - formation.BatsmenCount)));
+            showError(String.format("You need to remove %s batsmen to change formation", String.valueOf(TeamHelper.getBatsmen(mTeamMutated).size() - formation.BatsmenCount)));
             return;
         }
 
         if (formation.BowlersCount < TeamHelper.getBowlers(mTeamMutated).size()) {
-            showMessage(String.format("You need to remove %s bowlers to change formation", String.valueOf(TeamHelper.getBowlers(mTeamMutated).size() - formation.BowlersCount)));
+            showError(String.format("You need to remove %s bowlers to change formation", String.valueOf(TeamHelper.getBowlers(mTeamMutated).size() - formation.BowlersCount)));
             return;
         }
 
         if (formation.AllRoundersCount < TeamHelper.getAllRounders(mTeamMutated).size()) {
-            showMessage(String.format("You need to remove %s all rounders to change formation", String.valueOf(TeamHelper.getAllRounders(mTeamMutated).size() - formation.AllRoundersCount)));
+            showError(String.format("You need to remove %s all rounders to change formation", String.valueOf(TeamHelper.getAllRounders(mTeamMutated).size() - formation.AllRoundersCount)));
             return;
         }
 
         if (formation.WicketKeepersCount < TeamHelper.getWicketKeepers(mTeamMutated).size()) {
-            showMessage(String.format("You need to remove %s wicket keepers to change formation", String.valueOf(TeamHelper.getWicketKeepers(mTeamMutated).size() - formation.WicketKeepersCount)));
+            showError(String.format("You need to remove %s wicket keepers to change formation", String.valueOf(TeamHelper.getWicketKeepers(mTeamMutated).size() - formation.WicketKeepersCount)));
             return;
         }
 
         // if all validations pass, change the formation
         mTeamMutated.setFormation(toFormationString(formation));
-        showMessage(String.format("Formation changed to %s", new ArrayList<String>(formations.values()).get(userSelected)));
+        showSuccess(String.format("Formation changed to %s", new ArrayList<String>(formations.values()).get(userSelected)));
         updateStats(mTeamMutated);
         resetAdapters(mTeamMutated);
     }
@@ -387,7 +388,7 @@ public class EditTeamActivity extends ActionBarActivity {
 
             updateStats(mTeamMutated);
             resetAdapters(mTeamMutated);
-            showMessage("Auto selected team for you");
+            showSuccess("Auto selected team for you");
         }
     };
 
@@ -474,14 +475,14 @@ public class EditTeamActivity extends ActionBarActivity {
 
         // check if user has sufficient balance
         if (mTeamMutated.getBalance() - player.getPrice() < 0) {
-            showMessage("You have insufficient funds to buy this player");
+            showError("You have insufficient funds to buy this player");
             return;
         }
 
         // check player already exists in your team
         for (Player p : mTeamMutated.getPlayers()) {
             if (playerId.equals(p.getId())) {
-                showMessage("You already own this player");
+                showError("You already own this player");
                 return;
             }
         }
@@ -492,7 +493,7 @@ public class EditTeamActivity extends ActionBarActivity {
                 sameTeamCount++;
         }
         if (sameTeamCount >= 6) {
-            showMessage("You cannot pick more than 6 players from the same team");
+            showError("You cannot pick more than 6 players from the same team");
             return;
         }
 
@@ -508,13 +509,13 @@ public class EditTeamActivity extends ActionBarActivity {
 
         // make sure there are 11 players
         if (mTeamMutated.getPlayers().size() != 11) {
-            showMessage("Your team is missing players. Pick all 11 players to continue");
+            showError("Your team is missing players. Pick all 11 players to continue");
             return;
         }
 
         // check captain exists
         if (mTeamMutated.getCaptainId() == null || TextUtils.isEmpty(mTeamMutated.getCaptainId())) {
-            showMessage("Select a captain for your team");
+            showError("Select a captain for your team");
             return;
         }
 
@@ -535,7 +536,7 @@ public class EditTeamActivity extends ActionBarActivity {
         int transfersMade = 11 - originalPlayerIds.size();
         if(transfersMade > mTeamOriginal.getTransfersRemaining())
         {
-            showMessage("You don't have sufficient transfers remaining to make these trades");
+            showError("You don't have sufficient transfers remaining to make these trades");
             return;
         }
         mProgressDialog = new ProgressDialog(this);
@@ -548,10 +549,10 @@ public class EditTeamActivity extends ActionBarActivity {
             public void success(JSONObject result) {
                 mProgressDialog.dismiss();
                 if (result.optJSONObject("Error") != null) {
-                    showMessage(result.optJSONObject("Error").optString("ErrorMessage"));
+                    showError(result.optJSONObject("Error").optString("ErrorMessage"));
                     return;
                 }
-                showMessage("Team saved successfully!");
+                showSuccess("Team saved successfully!");
                 StorageManager manager = new StorageManager();
                 Team savedTeam = new Team(result);
                 savedTeam.setUserId(team.getUserId());
@@ -563,18 +564,32 @@ public class EditTeamActivity extends ActionBarActivity {
             @Override
             public void failure(Exception e) {
                 mProgressDialog.dismiss();
-                showMessage("Something went wrong");
+                showError("Something went wrong");
             }
         });
     }
 
-    private void showMessage(String message) {
+    private void showError(String message) {
         SnackbarManager.show(
                 Snackbar.with(getApplicationContext()) // context
                         .type(SnackbarType.MULTI_LINE)
-                                // Set is as a multi-line snackbar
+                                .color(Color.RED)
+                                        .textColor(Color.WHITE)
                         .text(message) // text to be displayed
                         .duration(Snackbar.SnackbarDuration.LENGTH_LONG) // make it shorter
                 , this);
     }
+
+    private void showSuccess(String message) {
+        SnackbarManager.show(
+                Snackbar.with(getApplicationContext()) // context
+                        .type(SnackbarType.MULTI_LINE)
+                        .color(Color.GREEN)
+                        .textColor(Color.WHITE)
+                        .text(message) // text to be displayed
+                        .duration(Snackbar.SnackbarDuration.LENGTH_LONG) // make it shorter
+                , this);
+    }
+
+
 }

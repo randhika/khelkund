@@ -60,28 +60,43 @@
             android:layout_marginRight="30dp" />
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="KXIP"
+            android:text="HOME"
             android:id="@+id/tv_pick5_home_team_name"
             android:textColor="@color/abc_primary_text_material_dark"
-            android:gravity="center_horizontal"
             android:textSize="12sp"
-            android:layout_above="@+id/tv_pick5_away_team_name"
+
+            android:layout_alignBottom="@+id/iv_pick5_home_logo"
             android:layout_alignLeft="@+id/iv_pick5_home_logo"
-            android:layout_alignStart="@+id/iv_pick5_home_logo" />
+            android:layout_alignStart="@+id/iv_pick5_home_logo"
+            android:layout_alignRight="@+id/iv_pick5_home_logo"
+            android:layout_alignEnd="@+id/iv_pick5_home_logo"
+            android:gravity="center_horizontal" />
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="KKR"
+            android:text="AWAY"
             android:id="@+id/tv_pick5_away_team_name"
             android:textColor="@color/abc_primary_text_material_dark"
             android:gravity="center_horizontal"
             android:textSize="12sp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignBottom="@+id/iv_pick5_away_logo"
+            android:layout_alignRight="@+id/iv_pick5_away_logo"
+            android:layout_alignEnd="@+id/iv_pick5_away_logo"
+            android:layout_toEndOf="@+id/tv_pick5_date"
+            android:layout_alignLeft="@+id/iv_pick5_away_logo"
+            android:layout_alignStart="@+id/iv_pick5_away_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Venue"
+            android:id="@+id/tv_pick5_venue"
+            android:layout_below="@+id/tv_pick5_date"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/abc_primary_text_material_dark" />
 
     </RelativeLayout>
 

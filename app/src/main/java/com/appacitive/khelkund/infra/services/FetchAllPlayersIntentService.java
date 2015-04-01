@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.infra.runnables;
+package com.appacitive.khelkund.infra.services;
 
 import android.app.IntentService;
 import android.content.Intent;

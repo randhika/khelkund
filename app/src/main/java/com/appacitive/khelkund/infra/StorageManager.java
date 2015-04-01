@@ -117,4 +117,11 @@ public class StorageManager {
         RealmQuery<Match> query = realm.where(Match.class);
         return query.findAll();
     }
+
+    public Match GetMatch(String matchId) {
+        Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
+        RealmQuery<Match> query = realm.where(Match.class);
+        query.equalTo("Id", matchId);
+        return query.findFirst();
+    }
 }

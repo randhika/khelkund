@@ -30,6 +30,7 @@ public class Match extends RealmObject {
         this.HomeTeamShortName = jsonObject.optString("HomeTeamShortName");
         this.Id = jsonObject.optString("Id");
         this.MatchStatus = jsonObject.optInt("MatchStatus");
+        this.Venue = jsonObject.optString("Venue");
         DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'");
         try {
             this.StartDate = df1.parse(jsonObject.optString("StartDate"));
@@ -47,6 +48,7 @@ public class Match extends RealmObject {
     private String HomeTeamShortName;
     private Date StartDate;
     private int MatchStatus;
+    private String Venue;
 
     public String getAwayTeamName() {
         return AwayTeamName;
@@ -102,5 +104,13 @@ public class Match extends RealmObject {
 
     public void setId(String id) {
         Id = id;
+    }
+
+    public String getVenue() {
+        return Venue;
+    }
+
+    public void setVenue(String venue) {
+        Venue = venue;
     }
 }

@@ -10,13 +10,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.CreateTeamActivity;
 import com.appacitive.khelkund.activities.HomeActivity;
-import com.appacitive.khelkund.activities.Pick5HomeActivity;
+import com.appacitive.khelkund.activities.pick5.Pick5HomeActivity;
 import com.appacitive.khelkund.activities.ViewTeamActivity;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
@@ -104,7 +103,6 @@ public class HomeFragment extends Fragment {
                 if (mTeam != null && mTeam.getId() != null && TextUtils.isEmpty(mTeam.getId()) == false) {
                     Intent viewTeamIntent = new Intent(getActivity(), ViewTeamActivity.class);
                     startActivity(viewTeamIntent);
-                    getActivity().finish();
                 } else {
                     Intent createTeamIntent = new Intent(getActivity(), CreateTeamActivity.class);
                     startActivity(createTeamIntent);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.appacitive.khelkund" >
+    package="com.appacitive.khelkund">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -9,20 +9,28 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- <uses-permission android:name="android.permission.NETWORK" /> -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+    <permission
+        android:name="com.example.gcm.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
 
     <application
         android:name=".infra.KhelkundApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activities.SplashScreenActivity"
             android:label="@string/app_name"
-            android:theme="@style/NoActionBar" >
+            android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,17 +39,15 @@
         </activity>
         <activity
             android:name=".activities.HomeActivity"
-            android:label="@string/title_activity_home" >
-        </activity>
+            android:label="@string/title_activity_home"></activity>
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="stateVisible|adjustPan" >
-        </activity>
+            android:windowSoftInputMode="stateVisible|adjustPan"></activity>
         <activity
             android:name=".activities.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:parentActivityName=".activities.LoginActivity" >
+            android:parentActivityName=".activities.LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.LoginActivity" />
@@ -49,7 +55,7 @@
         <activity
             android:name=".activities.ViewTeamActivity"
             android:label="@string/title_activity_view_team"
-            android:parentActivityName=".activities.HomeActivity" >
+            android:parentActivityName=".activities.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.HomeActivity" />
@@ -57,7 +63,7 @@
         <activity
             android:name=".activities.EditTeamActivity"
             android:label="@string/title_activity_edit_team"
-            android:parentActivityName=".activities.ViewTeamActivity" >
+            android:parentActivityName=".activities.ViewTeamActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.ViewTeamActivity" />
@@ -65,7 +71,7 @@
         <activity
             android:name=".activities.CreateTeamActivity"
             android:label="@string/title_activity_create_team"
-            android:parentActivityName=".activities.HomeActivity" >
+            android:parentActivityName=".activities.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.HomeActivity" />
@@ -82,7 +88,7 @@
             android:name=".activities.PlayerDetailsActivity"
             android:label="@string/title_activity_player_details"
             android:parentActivityName=".activities.EditTeamActivity"
-            android:theme="@style/NoActionBar" >
+            android:theme="@style/NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.EditTeamActivity" />
@@ -94,37 +100,54 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <service
-            android:name=".infra.runnables.FetchAllPlayersIntentService"
-            android:exported="false" >
-        </service>
+            android:name=".infra.services.FetchAllPlayersIntentService"
+            android:exported="false"></service>
 
         <activity
             android:name=".activities.PlayerPoolActivity"
             android:label="@string/title_activity_player_pool"
-            android:parentActivityName=".activities.EditTeamActivity" >
+            android:parentActivityName=".activities.EditTeamActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.EditTeamActivity" />
         </activity>
 
         <service
-            android:name=".infra.runnables.FetchMyPLayersIntentService"
-            android:exported="false" >
-        </service>
+            android:name=".infra.services.FetchMyPLayersIntentService"
+            android:exported="false"></service>
 
         <activity
-            android:name=".activities.Pick5HomeActivity"
+            android:name=".activities.pick5.Pick5HomeActivity"
             android:label="@string/title_activity_pick5_home"
-            android:parentActivityName=".activities.HomeActivity" >
+            android:parentActivityName=".activities.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.HomeActivity" />
         </activity>
 
         <service
-            android:name=".infra.runnables.FetchAllPick5MatchesIntentService"
-            android:exported="false" >
-        </service>
+            android:name=".infra.services.FetchAllPick5MatchesIntentService"
+            android:exported="false"></service>
+
+        <activity
+            android:name=".activities.pick5.Pick5MatchActivity"
+            android:label="@string/title_activity_pick5_match"
+            android:theme="@style/NoActionBar">
+            android:parentActivityName=".activities.pick5.Pick5HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.appacitive.khelkund.activities.pick5.Pick5HomeActivity" />
+        </activity>
+
+        <receiver
+            android:name=".infra.services.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.appacitive.khelkund" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".infra.services.GcmIntentService" />
     </application>
 
 </manifest>

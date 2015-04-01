@@ -40,6 +40,12 @@ public class ViewTeamActivity extends ActionBarActivity implements ActionBar.Tab
     ViewPager mViewPager;
 
     @Override
+    public void onBackPressed()
+    {
+        this.finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_team);
