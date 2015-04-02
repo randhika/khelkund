@@ -1,5 +1,6 @@
 package com.appacitive.khelkund.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,6 +13,7 @@ import com.appacitive.khelkund.adapters.SquadAdapter;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
+import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.LeaderboardScore;
@@ -30,11 +32,12 @@ public class LeaderboardActivity extends ActionBarActivity {
 
     private Context mContext;
     private List<LeaderboardScore> mScores;
+    private ProgressDialog mProgressDialog;
 
-//    @InjectView(R.id.rv_leaderboard)
     public RecyclerView mRecyclerView;
     public RecyclerView.Adapter mAdapter;
     public RecyclerView.LayoutManager mLayoutManager;
+    String mUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +45,21 @@ public class LeaderboardActivity extends ActionBarActivity {
         setContentView(R.layout.activity_leaderboard);
         ConnectionManager.checkNetworkConnectivity(this);
 
-//        ButterKnife.inject(this);
         mContext = this;
         mScores = new ArrayList<LeaderboardScore>();
         FetchLeaderBoard();
     }
 
     private void FetchLeaderBoard() {
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Fetching Leaderboard");
+        mProgressDialog.show();
         Http http = new Http();
-        http.get(Urls.LeaderboardUrls.getLeaderboardUrl(), new HashMap<String, String>(), new APCallback() {
+        mUserId = SharedPreferencesManager.ReadUserId();
+        http.get(Urls.LeaderboardUrls.getLeaderboardUrl(mUserId), new HashMap<String, String>(), new APCallback() {
             @Override
             public void success(JSONObject result) {
+                mProgressDialog.dismiss();
                 if (result.optJSONObject("Error") != null) {
                     SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), LeaderboardActivity.this);
                     return;
@@ -63,7 +70,6 @@ public class LeaderboardActivity extends ActionBarActivity {
                     for (int i = 0; i < scores.length(); i++) {
                         LeaderboardScore s = new LeaderboardScore(scores.optJSONObject(i));
                         LeaderboardActivity.this.mScores.add(s);
-
                     }
                     PopulateView();
                 }
@@ -71,6 +77,7 @@ public class LeaderboardActivity extends ActionBarActivity {
 
             @Override
             public void failure(Exception e) {
+                mProgressDialog.dismiss();
                 SnackBarManager.showError("Unable to fetch leaderboard at the moment", LeaderboardActivity.this);
             }
         });
@@ -82,7 +89,7 @@ public class LeaderboardActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(LeaderboardActivity.this);
         ((LinearLayoutManager)mLayoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new LeaderboardAdapter(mScores);
+        mAdapter = new LeaderboardAdapter(mScores, mUserId);
         mRecyclerView.setAdapter(mAdapter);
     }
 

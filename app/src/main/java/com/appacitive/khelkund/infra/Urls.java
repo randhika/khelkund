@@ -72,9 +72,9 @@ public class Urls {
 
     public static class LeaderboardUrls {
 
-        public static String getLeaderboardUrl()
+        public static String getLeaderboardUrl(String userId)
         {
-            return baseUrl + "privateleagueservice.svc/leaderboard";
+            return baseUrl + "privateleagueservice.svc/leaderboard/" + userId;
         }
     }
 }

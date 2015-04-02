@@ -42,7 +42,7 @@ public class SplashScreenActivity extends ActionBarActivity {
 
 
         Message msg = new Message();
-        splashHandler.sendMessageDelayed(msg, 1000);
+        splashHandler.sendMessageDelayed(msg, 3000);
     }
 
     private void startBackgroundIntentServices() {

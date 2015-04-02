@@ -18,7 +18,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Total Points"
             android:id="@+id/textView"
-            android:layout_marginLeft="72dp"
+            android:layout_marginLeft="145dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -33,13 +33,13 @@
             android:textColor="@color/primary_dark"
             android:textStyle="bold"
 
-            android:layout_marginLeft="72dp"
+            android:layout_marginLeft="145dp"
             android:layout_below="@+id/textView" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="72dp"
+            android:layout_marginLeft="145dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Previous Match Points"
             android:id="@+id/textView2"
@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="72dp"
+            android:layout_marginLeft="145dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="0"
             android:id="@+id/tv_overview_previouspoints"
@@ -93,6 +93,17 @@
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
             android:minHeight="250dp" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/iv_overview_emblem"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/l14"
+            android:layout_alignBottom="@+id/tv_overview_previouspoints"
+            android:layout_marginLeft="16dp" />
     </RelativeLayout>
 
 </ScrollView>

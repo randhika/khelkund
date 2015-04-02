@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
@@ -21,6 +22,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,9 @@ public class TeamOverviewFragment extends Fragment {
 
     @InjectView(R.id.tv_overview_previouspoints)
     public TextView mPreviousMatchPoints;
+
+    @InjectView(R.id.iv_overview_emblem)
+    public ImageView mEmblem;
 
     private Team mTeam;
 
@@ -64,8 +69,8 @@ public class TeamOverviewFragment extends Fragment {
         mTeam = storageManager.GetTeam(userId);
         ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(mTeam.getName());
         int bitmapId  = KhelkundApplication.getAppContext().getResources().getIdentifier(mTeam.getImageName(), "drawable", KhelkundApplication.getAppContext().getPackageName());
-        ((ActionBarActivity)getActivity()).getSupportActionBar().setLogo(bitmapId);
-        ((ActionBarActivity)getActivity()).getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        if(bitmapId > 0)
+            Picasso.with(getActivity()).load(bitmapId).into(mEmblem);
         mTotalPoints.setText(String.valueOf(mTeam.getTotalPoints()));
         if(mTeam.getTeamHistory().size() != 0)
         {

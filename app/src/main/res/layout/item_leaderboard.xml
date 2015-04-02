@@ -7,43 +7,42 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rl_item_leaderboard"
         android:layout_width="match_parent"
-        android:layout_height="72dp">
+        android:layout_height="88dp">
 
         <ImageView
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:id="@+id/iv_leaderboard_photo"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:src="@drawable/demo"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:maxWidth="56dp" />
+            android:src="@drawable/l3"
+            android:layout_marginLeft="12dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Player Name"
+            android:text="Team Name"
             android:id="@+id/tv_leaderboard_teamname"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="72dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:textColor="@color/primary_material_dark" />
+            android:layout_marginLeft="95dp"
+            android:layout_marginTop="12dp"
+            android:textSize="18dp"
+            android:textColor="@color/primary_material_dark"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Team"
+            android:text="Player name"
             android:id="@+id/tv_leaderboard_username"
+            android:textSize="16dp"
             android:layout_below="@+id/tv_leaderboard_teamname"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="72dp"
-            android:textSize="14sp" />
+            android:layout_alignLeft="@+id/tv_leaderboard_teamname"
+            android:layout_alignStart="@+id/tv_leaderboard_teamname" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,10 +53,44 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="16dp"
             android:textColor="@color/primary"
-            android:textSize="36sp"
+            android:textSize="32sp"
             android:layout_alignParentTop="true"
             android:layout_alignBottom="@+id/iv_leaderboard_photo"
             android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rank "
+            android:id="@+id/textView13"
+            android:layout_below="@+id/tv_leaderboard_username"
+            android:layout_alignLeft="@+id/tv_leaderboard_username"
+            android:layout_alignStart="@+id/tv_leaderboard_username"
+            android:layout_marginTop="4dp"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123"
+            android:id="@+id/tv_leaderboard_rank"
+            android:layout_alignBottom="@+id/textView13"
+            android:layout_toRightOf="@+id/textView13"
+            android:layout_toEndOf="@+id/textView13"
+            android:textColor="@android:color/holo_green_dark"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:id="@+id/iv_leaderboard_me"
+            android:layout_toRightOf="@+id/tv_leaderboard_teamname"
+            android:layout_toEndOf="@+id/tv_leaderboard_teamname"
+            android:src="@drawable/ic_keyboard_alt_grey600_18dp"
+            android:layout_alignBottom="@+id/tv_leaderboard_teamname"
+            android:layout_alignTop="@+id/tv_leaderboard_teamname"
+            android:layout_marginLeft="8dp" />
 
     </RelativeLayout>
 </RelativeLayout>

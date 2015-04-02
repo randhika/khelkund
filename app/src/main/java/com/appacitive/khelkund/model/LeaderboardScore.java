@@ -8,16 +8,21 @@ import org.json.JSONObject;
 public class LeaderboardScore {
     private int Points;
     private int Rank;
+    private String UserId;
     private String UserName;
     private String TeamName;
+    private String UserTeamImage;
 
     public LeaderboardScore(JSONObject json) {
         if (json == null)
             return;
+
         this.Points = json.optInt("Points");
         this.Rank = json.optInt("Rank");
+        this.UserId = json.optString("UserId");
         this.UserName = json.optString("UserName");
         this.TeamName = json.optString("UserTeamName");
+        this.UserTeamImage = json.optString("UserTeamImage");
     }
 
     public int getPoints() {
@@ -50,5 +55,21 @@ public class LeaderboardScore {
 
     public void setTeamName(String userTeamName) {
         TeamName = userTeamName;
+    }
+
+    public String getUserTeamImage() {
+        return UserTeamImage;
+    }
+
+    public void setUserTeamImage(String userTeamImage) {
+        UserTeamImage = userTeamImage;
+    }
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
     }
 }

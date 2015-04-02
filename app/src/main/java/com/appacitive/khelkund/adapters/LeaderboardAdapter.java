@@ -24,10 +24,12 @@ import butterknife.InjectView;
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.ViewHolder> {
 
     private List<LeaderboardScore> mScores;
+    private String mUserId;
 
-    public LeaderboardAdapter(List<LeaderboardScore> scores)
+    public LeaderboardAdapter(List<LeaderboardScore> scores, String userId)
     {
         this.mScores = scores;
+        this.mUserId = userId;
     }
 
     @Override
@@ -39,11 +41,18 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         LeaderboardScore score = mScores.get(position);
-
         holder.points.setText(String.valueOf(score.getPoints()));
         holder.teamName.setText(String.valueOf(score.getTeamName()));
         holder.userName.setText(String.valueOf(score.getUserName()));
-        Picasso.with(KhelkundApplication.getAppContext()).load(R.drawable.l10).into(holder.logo);
+        holder.rank.setText(String.valueOf(score.getRank()));
+
+        if(score.getUserId().equals(mUserId))
+            holder.me.setVisibility(View.VISIBLE);
+        else holder.me.setVisibility(View.INVISIBLE);
+
+        int bitmapId = KhelkundApplication.getAppContext().getResources().getIdentifier(score.getUserTeamImage(), "drawable", KhelkundApplication.getAppContext().getPackageName());
+        if(bitmapId > 0)
+            Picasso.with(KhelkundApplication.getAppContext()).load(bitmapId).into(holder.logo);
     }
 
     @Override
@@ -64,6 +73,12 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
         @InjectView(R.id.tv_leaderboard_points)
         public TextView points;
+
+        @InjectView(R.id.tv_leaderboard_rank)
+        public TextView rank;
+
+        @InjectView(R.id.iv_leaderboard_me)
+        public ImageView me;
 
         public ViewHolder(View v) {
             super(v);
