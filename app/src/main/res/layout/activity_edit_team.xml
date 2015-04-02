@@ -26,7 +26,8 @@
         android:layout_below="@+id/tv_formation"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="@color/accent" />
+        android:textColor="@color/accent"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,7 +46,8 @@
         android:layout_alignTop="@+id/textView4"
         android:layout_toRightOf="@+id/textView4"
         android:layout_toEndOf="@+id/textView4"
-        android:textColor="@color/accent" />
+        android:textColor="@color/accent"
+        android:textStyle="bold" />
 
     <View
         android:layout_width="fill_parent"

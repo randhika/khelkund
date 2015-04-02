@@ -54,7 +54,7 @@ public class RegisterActivity extends ActionBarActivity {
         ConnectionManager.checkNetworkConnectivity(this);
     }
 
-    @OnClick(R.id.rl_login)
+    @OnClick(R.id.tv_login)
     public void onLoginCLick()
     {
         Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -122,8 +122,8 @@ public class RegisterActivity extends ActionBarActivity {
                 mProgressDialog.dismiss();
                 if(result.optJSONObject("User") == null)
                 {
-//                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), RegisterActivity.this);
-                    SnackBarManager.showError("Something went wrong", RegisterActivity.this);
+                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), RegisterActivity.this);
+//                    SnackBarManager.showError("Something went wrong", RegisterActivity.this);
                     return;
                 }
                 KhelkundUser user = new KhelkundUser(result.optJSONObject("User"));

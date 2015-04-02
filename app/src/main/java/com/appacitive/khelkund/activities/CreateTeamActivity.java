@@ -134,7 +134,7 @@ public class CreateTeamActivity extends ActionBarActivity {
         team.setName(teamName);
         team.setTotalPoints(0);
 
-        team.setTransfersRemaining(18);
+        team.setTransfersRemaining(80);
         team.setBalance(10000000);
 
         StorageManager storageManager = new StorageManager();

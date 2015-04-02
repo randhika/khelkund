@@ -111,7 +111,8 @@
                 android:layout_alignStart="@+id/iv_details_photo"
                 android:layout_marginLeft="18dp"
                 android:layout_alignRight="@+id/iv_details_photo"
-                android:layout_alignEnd="@+id/iv_details_photo" />
+                android:layout_alignEnd="@+id/iv_details_photo"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -167,7 +168,11 @@
         android:background="@android:color/transparent"
         android:focusableInTouchMode="false"
         android:clickable="false"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:textStyle="bold"
+        android:translationZ="5dp"
+        android:elevation="5dp"
+        android:elegantTextHeight="false" />
 
     <Button
         android:layout_width="wrap_content"
@@ -180,7 +185,10 @@
         android:layout_marginLeft="12dp"
         android:background="@color/accent"
         android:textColor="@android:color/white"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:textStyle="bold"
+        android:translationZ="5dp"
+        android:elevation="5dp" />
 
     <View
         android:layout_width="match_parent"

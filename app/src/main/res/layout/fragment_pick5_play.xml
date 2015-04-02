@@ -1,8 +1,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.appacitive.khelkund.fragments.Pick5PlayFragment">
 
+    <com.pkmmte.view.CircularImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/demo1"
+        android:background="#ffd3d3d3"
+        app:border="true"
+        app:border_color="#EEEEEE"
+        app:border_width="2dp"
+        app:shadow="true"
+        android:id="@+id/view5" />
 
+
+    <com.appacitive.khelkund.infra.RoundImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/demo1"
+        android:layout_below="@+id/view5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

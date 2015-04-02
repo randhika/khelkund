@@ -89,6 +89,7 @@
         <activity
             android:name=".activities.PlayerDetailsActivity"
             android:label="@string/title_activity_player_details"
+
             android:parentActivityName=".activities.EditTeamActivity"
             android:theme="@style/NoActionBar" >
             <meta-data

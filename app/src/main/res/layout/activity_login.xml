@@ -89,10 +89,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="LOG IN"
-
                 android:background="@color/accent"
                 android:elevation="5dp"
-                android:textColor="@color/abc_primary_text_material_dark" />
+                android:textColor="@color/abc_primary_text_material_dark"
+                android:layout_gravity="right"
+                android:textStyle="bold"
+                android:translationZ="5dp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/activity_horizontal_margin" />
 
 
         </LinearLayout>
@@ -107,11 +113,10 @@
         android:id="@+id/divider2"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:layout_below="@+id/login_form"
+        android:layout_above="@+id/relativeLayout3"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="36dp" />
 
     <ProgressBar
         android:id="@+id/login_progress"
@@ -128,7 +133,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/relativeLayout3">
 
         <TextView
             android:layout_width="wrap_content"
@@ -136,7 +142,8 @@
             android:text="Don&apos;t have an account? "
             android:id="@+id/tv_label_register"
 
-            android:gravity="center_vertical|center_horizontal" />
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginBottom="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -147,7 +154,8 @@
             android:layout_alignParentBottom="false"
             android:layout_toRightOf="@+id/tv_label_register"
 
-            android:textColor="@color/accent" />
+            android:textColor="@color/accent"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

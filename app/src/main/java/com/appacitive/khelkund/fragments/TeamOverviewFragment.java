@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.model.History;
@@ -62,6 +63,9 @@ public class TeamOverviewFragment extends Fragment {
         StorageManager storageManager = new StorageManager();
         mTeam = storageManager.GetTeam(userId);
         ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(mTeam.getName());
+        int bitmapId  = KhelkundApplication.getAppContext().getResources().getIdentifier(mTeam.getImageName(), "drawable", KhelkundApplication.getAppContext().getPackageName());
+        ((ActionBarActivity)getActivity()).getSupportActionBar().setLogo(bitmapId);
+        ((ActionBarActivity)getActivity()).getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         mTotalPoints.setText(String.valueOf(mTeam.getTotalPoints()));
         if(mTeam.getTeamHistory().size() != 0)
         {
