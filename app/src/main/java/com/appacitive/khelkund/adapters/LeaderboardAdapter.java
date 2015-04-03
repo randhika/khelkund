@@ -1,10 +1,13 @@
 package com.appacitive.khelkund.adapters;
 
+import android.graphics.Color;
+import android.provider.CalendarContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
@@ -47,8 +50,9 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         holder.rank.setText(String.valueOf(score.getRank()));
 
         if(score.getUserId().equals(mUserId))
-            holder.me.setVisibility(View.VISIBLE);
-        else holder.me.setVisibility(View.INVISIBLE);
+            holder.mLayout.setBackgroundColor(Color.CYAN);
+        else
+            holder.mLayout.setBackgroundColor(Color.WHITE);
 
         int bitmapId = KhelkundApplication.getAppContext().getResources().getIdentifier(score.getUserTeamImage(), "drawable", KhelkundApplication.getAppContext().getPackageName());
         if(bitmapId > 0)
@@ -77,8 +81,8 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         @InjectView(R.id.tv_leaderboard_rank)
         public TextView rank;
 
-        @InjectView(R.id.iv_leaderboard_me)
-        public ImageView me;
+        @InjectView(R.id.rl_item_leaderboard)
+        public RelativeLayout mLayout;
 
         public ViewHolder(View v) {
             super(v);

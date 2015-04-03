@@ -8,9 +8,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.activities.EmailLoginActivity;
 import com.appacitive.khelkund.activities.HomeActivity;
+import com.appacitive.khelkund.activities.LoginActivity;
+import com.appacitive.khelkund.activities.RegisterActivity;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
@@ -29,6 +33,7 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -42,6 +47,10 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -53,6 +62,9 @@ public class LoginFragment extends Fragment {
     TwitterLoginButton twitterLoginButton;
 
     ProgressDialog progressDialog;
+
+    @InjectView(R.id.btn_signup_email)
+    public Button mEmailSignup;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -66,29 +78,38 @@ public class LoginFragment extends Fragment {
 
         callbackManager = CallbackManager.Factory.create();
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
+        ButterKnife.inject(this, view);
         //  Logout
         LoginManager.getInstance().logOut();
         Twitter.logOut();
         Digits.getSessionManager().clearActiveSession();
 
         facebookLoginButton = (LoginButton) view.findViewById(R.id.facebook_login_button);
+//        facebookLoginButton.setBackgroundResource(R.drawable.facebooklogin);
+//        facebookLoginButton.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         facebookLoginButton.setFragment(this);
         facebookLoginButton.registerCallback(callbackManager, facebookSessionCallback);
 
         digitsLoginButton = (DigitsAuthButton) view.findViewById(R.id.digits_login_button);
-        digitsLoginButton.setAuthTheme(android.R.style.Theme_Material_Light_DarkActionBar);
+//        digitsLoginButton.setBackgroundResource(R.drawable.phonelogin);
+//        digitsLoginButton.setText("");
+//        digitsLoginButton.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        digitsLoginButton.setAuthTheme(android.R.style.ThemeOverlay_Material_Dark_ActionBar);
         digitsLoginButton.setCallback(digitsSessionCallback);
 
         twitterLoginButton = (TwitterLoginButton) view.findViewById(R.id.twitter_login_button);
+//        twitterLoginButton.setBackgroundResource(R.drawable.twitterlogin);
+//        twitterLoginButton.setText("");
+//        twitterLoginButton.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
         twitterLoginButton.setCallback(twitterSessionCallback);
+
+
 
         return view;
     }
 
 
-    private void fireLoginCall(String url, JSONObject payload)
-    {
+    private void fireLoginCall(String url, JSONObject payload) {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("LOGGING IN");
         progressDialog.show();
@@ -97,8 +118,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void success(JSONObject result) {
                 progressDialog.dismiss();
-                if(result.optJSONObject("Error") != null)
-                {
+                if (result.optJSONObject("Error") != null) {
                     SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), getActivity());
                     return;
                 }
@@ -202,6 +222,20 @@ public class LoginFragment extends Fragment {
             SnackBarManager.showError("Something went wrong", getActivity());
         }
     };
+
+    @OnClick(R.id.btn_signup_email)
+    public void onEmailSignupClick() {
+        Intent intent = new Intent(getActivity(), RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.tv_login_email)
+    public void onEmailLoginClick()
+    {
+        Intent intent = new Intent(getActivity(), EmailLoginActivity.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

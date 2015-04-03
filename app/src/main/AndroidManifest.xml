@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.appacitive.khelkund"
     android:versionCode="1"
-    android:versionName="1.0">
+    android:versionName="1.0" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -40,19 +40,29 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activities.LoginActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_login"
+            android:theme="@style/NoActionBar" >
+        </activity>
+        <activity
             android:name=".activities.HomeActivity"
             android:label="@string/title_activity_home" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.EmailLoginActivity"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="stateVisible|adjustPan" />
+            android:parentActivityName=".activities.LoginActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.LoginActivity" />
+        </activity>
         <activity
             android:name=".activities.RegisterActivity"
             android:label="@string/title_activity_register"
             android:parentActivityName=".activities.LoginActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.LoginActivity" />
+                android:value=".activities.LoginActivity" />
         </activity>
         <activity
             android:name=".activities.ViewTeamActivity"
@@ -89,7 +99,6 @@
         <activity
             android:name=".activities.PlayerDetailsActivity"
             android:label="@string/title_activity_player_details"
-
             android:parentActivityName=".activities.EditTeamActivity"
             android:theme="@style/NoActionBar" >
             <meta-data
@@ -135,19 +144,21 @@
         <activity
             android:name=".activities.pick5.Pick5MatchActivity"
             android:label="@string/title_activity_pick5_match"
-            android:theme="@style/NoActionBar"
-            android:parentActivityName=".activities.pick5.Pick5HomeActivity" >
+            android:parentActivityName=".activities.pick5.Pick5HomeActivity"
+            android:theme="@style/NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.pick5.Pick5HomeActivity" />
         </activity>
 
-        <receiver android:exported="true"
+        <receiver
             android:name=".infra.services.GcmBroadcastReceiver"
+            android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
                 <category android:name="com.appacitive.khelkund" />
             </intent-filter>
         </receiver>
@@ -157,6 +168,46 @@
         <activity
             android:name=".activities.LeaderboardActivity"
             android:label="@string/title_activity_leaderboard"
+            android:parentActivityName=".activities.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activities.FeedbackActivity"
+            android:label="@string/title_activity_feedback"
+            android:parentActivityName=".activities.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activities.HowToPlayActivity"
+            android:label="@string/title_activity_how_to_play"
+            android:parentActivityName=".activities.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activities.LicencesActivity"
+            android:label="@string/title_activity_licences"
+            android:parentActivityName=".activities.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AboutUsActivity"
+            android:label="@string/title_activity_about_us"
+            android:parentActivityName=".activities.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activities.ScheduleActivity"
+            android:label="@string/title_activity_schedule"
             android:parentActivityName=".activities.HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

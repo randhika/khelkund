@@ -57,9 +57,8 @@ public class RegisterActivity extends ActionBarActivity {
     @OnClick(R.id.tv_login)
     public void onLoginCLick()
     {
-        Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+        Intent loginIntent = new Intent(RegisterActivity.this, EmailLoginActivity.class);
         startActivity(loginIntent);
-        finish();
     }
 
     private boolean isEmailValid(String email) {
@@ -133,7 +132,6 @@ public class RegisterActivity extends ActionBarActivity {
 
                 Intent homeIntent = new Intent(RegisterActivity.this, HomeActivity.class);
                 startActivity(homeIntent);
-                finish();
             }
 
             @Override

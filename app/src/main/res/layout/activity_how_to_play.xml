@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.appacitive.khelkund.activities.HowToPlayActivity">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+
+
+    </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Khelkund!   Your favorite website that gives you, your uninterrupted dose of Fantasy Cricket!   Register yourself with us and get cracking with your very own Fantasy Cricket Game, where   strategy is the essence of the game.  Here are a few helpful tips, to get you started with your match!  Registration  To begin playing in Khelkund’s Fantasy Cricket League, a user must first register   with Khelkund.com.  Create Your Team  To create a team, you must have an account on this website. You can create an   account by either signing up or login using your Facebook credentials.  Once you log in you can begin by selecting players for creating your team from   the players available. You can create a team for any match that you wish to play.   Team Combination guidelines  The team comprises of 11 players with one Captain. The selection of players in   your team must adhere to one of following team combinations:-  • 6 Batsmen, 0 All Rounder, 1 Wicket Keeper, 4 Bowlers.  • 5 Batsmen, 1 All Rounder, 1 Wicket Keeper, 4 Bowlers.  • 5 Batsmen, 2 All Rounder, 1 Wicket Keeper, 3 Bowlers.  • 4 Batsmen, 2 All Rounder, 1 Wicket Keeper, 4 Bowlers.  • 4 Batsmen, 3 All Rounder, 1 Wicket Keeper, 3 Bowlers.  Your team must be created using a limited budget of 1Cr. only. The total cost of   all the players in a user’s team cannot exceed this limit.  The team you create can at most have 7 players only from a specific team   available team during the match.  Team Changes and Transfers:  You can make changes in your team by removing and adding another player from   the player pool.   You can make unlimited changes in your team before the start of any match. Any   team changes, once the match has started will not be considered.  While making changes, a team should adhere to the given formations and the   allocated budget.  Participating in a challenge  At Khelkund, we have challenges for every match where you can compete with your   friends and other user/s, once they have created their team/s for a specific match.  Currently, we have three types of challenge categories- o Double Trouble: Two users participate in this challenge category and   compete with the each other win.  o Triple Run: Three users participate in this challenge category and   compete with the other two opponents to win.  o Power Paanch: Five users participate in this challenge category and   compete against all the four opponents to win.  Once you have created your team for a match, you can participate in any   number of challenges as you like. Please note, that only one team per user will   be allowed across all these challenges.  Each type of challenge has two variations:  o Paid variation: In this model, users put money to win hard cash.  o Free variation: In this model, users can play without putting money and   brush up their skills.  Add/Redeem Cash  Khelkund provides each user with their individual Khelkund wallets. This wallet is   visible on the top of the Khelkund screen, once you log in.  For participating in paid challenges, you can use the money in this wallet to   join the challenge. If you do not have any money in the wallet, you can add   money using the payment gateway (Insert link) and then participate in the paid   challenges.  Redeem Cash: You can redeem the cash that you have in your Khelkund wallet   at any point. For this purpose, you are required to provide your bank account   information along with the IFSC code of the branch.  Unused Cash: If you add cash to your Khelkund wallet and do not participate in   any of the challenges and want to withdraw this money, you will be charged 3%   as processing fee.  Scoring points  All the players of your team accumulate points based on their batting, bowling and   fielding performance in a match. The points system based as per their performance   is as follows:   1. For every run scored, the player gets 1 point.  2. For every wicket taken the player gets 20 points.  3. For every catch taken or direct hit, the player gets 10 points.  4. For a run out with a combination of two players, both get 5 points each.  Bonus Points  1. For every 50 runs scored, the player gets 30 points.  2. For every 100 runs scored, the player gets 100 points.  3. For a three wicket haul, the player gets 25 points.  4. For a four wicket haul, the player gets 35 points.  5. For a five wicket haul, the player gets 50 points."
+        android:id="@+id/textView21"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

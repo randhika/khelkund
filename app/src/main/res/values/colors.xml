@@ -12,4 +12,6 @@
     <color name="MI">#2196F3</color>
     <color name="RR">#3F51B5</color>
     <color name="RCB">#E91E63</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

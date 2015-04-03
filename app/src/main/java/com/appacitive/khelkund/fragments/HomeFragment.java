@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.CreateTeamActivity;
 import com.appacitive.khelkund.activities.HomeActivity;
-import com.appacitive.khelkund.activities.LoginActivity;
+import com.appacitive.khelkund.activities.EmailLoginActivity;
 import com.appacitive.khelkund.activities.ViewTeamActivity;
 import com.appacitive.khelkund.activities.pick5.Pick5HomeActivity;
 import com.appacitive.khelkund.infra.APCallback;
@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment {
 
         if (userId == null)
         {
-            Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+            Intent loginIntent = new Intent(getActivity(), EmailLoginActivity.class);
             startActivity(loginIntent);
             getActivity().finish();
         }

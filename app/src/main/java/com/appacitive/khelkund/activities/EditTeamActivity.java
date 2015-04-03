@@ -560,6 +560,8 @@ public class EditTeamActivity extends ActionBarActivity {
                 manager.SaveTeam(savedTeam);
                 mTeamOriginal = savedTeam;
                 mTeamMutated = TeamHelper.clone(mTeamOriginal);
+                resetAdapters(mTeamMutated);
+                updateStats(mTeamMutated);
             }
 
             @Override

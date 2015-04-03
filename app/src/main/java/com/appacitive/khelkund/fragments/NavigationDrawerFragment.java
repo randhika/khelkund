@@ -18,19 +18,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.activities.AboutUsActivity;
+import com.appacitive.khelkund.activities.FeedbackActivity;
+import com.appacitive.khelkund.activities.HowToPlayActivity;
 import com.appacitive.khelkund.activities.LeaderboardActivity;
+import com.appacitive.khelkund.activities.EmailLoginActivity;
+import com.appacitive.khelkund.activities.LicencesActivity;
 import com.appacitive.khelkund.activities.LoginActivity;
+import com.appacitive.khelkund.activities.ScheduleActivity;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.digits.sdk.android.Digits;
-import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.twitter.sdk.android.Twitter;
 
@@ -107,6 +108,13 @@ public class NavigationDrawerFragment extends Fragment {
     @OnClick(R.id.tv_nav_howtoplay)
     public void onHowToPlayClick()
     {
+        Intent intent = new Intent(getActivity(), HowToPlayActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.tv_nav_scoring_chart)
+    public void onScoringChartClick()
+    {
 
     }
 
@@ -119,7 +127,29 @@ public class NavigationDrawerFragment extends Fragment {
     @OnClick(R.id.tv_nav_aboutus)
     public void onAboutUsClick()
     {
+        Intent intent = new Intent(getActivity(), AboutUsActivity.class);
+        startActivity(intent);
+    }
 
+    @OnClick(R.id.tv_nav_licenses)
+    public void onLicensesClick()
+    {
+        Intent intent = new Intent(getActivity(), LicencesActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.tv_nav_schedule)
+    public void onScheduleClick()
+    {
+        Intent intent = new Intent(getActivity(), ScheduleActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.tv_nav_feedback)
+    public void onFeedbackClick()
+    {
+        Intent feedBackIntent = new Intent(getActivity(), FeedbackActivity.class);
+        startActivity(feedBackIntent);
     }
 
     @OnClick(R.id.tv_nav_logout)
