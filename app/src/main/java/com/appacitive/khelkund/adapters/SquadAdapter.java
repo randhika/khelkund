@@ -12,7 +12,8 @@ import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.model.Player;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.realm.RealmList;
 
@@ -25,6 +26,17 @@ public class SquadAdapter extends RecyclerView.Adapter<SquadAdapter.SquadViewHol
     {
         this.mPlayers = players;
     }
+
+    private static final Map<String, String> mTeamNameMappings = new HashMap<String, String>(){{
+        put("KXIP", "King's Eleven Punjab");
+        put("MI", "Mumbai Indians");
+        put("SRH", "Sunrisers Hyderabad");
+        put("DD", "Delhi Daredevils");
+        put("RCB", "Royal Challenger's Bangalore");
+        put("RR", "Rajasthan Royals");
+        put("CSK", "Chennai Super Kings");
+        put("KKR", "Kolkata Knight Riders");
+    }};
     @Override
     public SquadViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_squad, parent, false);
@@ -36,7 +48,7 @@ public class SquadAdapter extends RecyclerView.Adapter<SquadAdapter.SquadViewHol
         Player player = mPlayers.get(position);
         holder.name.setText(player.getDisplayName());
         holder.points.setText(String.valueOf(player.getPoints()));
-        holder.match.setText(player.getNextOpponent());
+        holder.team.setText(mTeamNameMappings.get(player.getShortTeamName()));
         Picasso.with(KhelkundApplication.getAppContext()).load(player.getImageUrl()).into(holder.logo);
     }
 
@@ -48,7 +60,7 @@ public class SquadAdapter extends RecyclerView.Adapter<SquadAdapter.SquadViewHol
     public static class SquadViewHolder extends RecyclerView.ViewHolder
     {
         protected TextView name;
-        protected TextView match;
+        protected TextView team;
         protected ImageView logo;
         protected TextView points;
 
@@ -56,7 +68,7 @@ public class SquadAdapter extends RecyclerView.Adapter<SquadAdapter.SquadViewHol
             super(itemView);
             logo = (ImageView) itemView.findViewById(R.id.iv_player_squad_photo);
             name = (TextView) itemView.findViewById(R.id.tv_squad_name);
-            match = (TextView) itemView.findViewById(R.id.tv_squad_team);
+            team = (TextView) itemView.findViewById(R.id.tv_squad_team);
             points = (TextView) itemView.findViewById(R.id.tv_squad_points);
         }
     }

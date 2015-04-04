@@ -7,7 +7,7 @@
 
     <com.digits.sdk.android.DigitsAuthButton
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_height="42dp"
         android:scaleType="centerInside"
         android:id="@+id/digits_login_button"
         android:layout_alignParentTop="true"
@@ -16,25 +16,37 @@
         android:layout_marginTop="4dp"
         android:layout_marginLeft="48dp"
         android:layout_marginRight="48dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:includeFontPadding="false"
         android:layout_marginBottom="4dp" />
 
     <com.facebook.login.widget.LoginButton
         xmlns:fb="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
         android:scaleType="centerInside"
         android:id="@+id/facebook_login_button"
         android:layout_below="@+id/digits_login_button"
-        android:layout_alignRight="@+id/digits_login_button"
-        android:layout_alignEnd="@+id/digits_login_button"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:layout_alignLeft="@+id/digits_login_button"
-        android:layout_alignStart="@+id/digits_login_button" />
+        android:layout_alignStart="@+id/digits_login_button"
+        android:textSize="18sp"
+        android:layout_marginLeft="48dp"
+        android:layout_alignRight="@+id/digits_login_button"
+        android:layout_alignEnd="@+id/digits_login_button"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:includeFontPadding="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <com.twitter.sdk.android.core.identity.TwitterLoginButton
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_height="42dp"
         android:scaleType="centerInside"
         android:id="@+id/twitter_login_button"
         android:layout_below="@+id/facebook_login_button"
@@ -43,20 +55,34 @@
         android:layout_marginBottom="4dp"
         android:layout_alignLeft="@+id/facebook_login_button"
         android:layout_alignStart="@+id/facebook_login_button"
-        android:layout_marginTop="4dp" />
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:includeFontPadding="false"
+        android:textSize="18sp" />
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:text="Sing Up with Email"
+        android:layout_height="42dp"
+        android:scaleType="centerInside"
+        android:text="Sign up with email"
         android:id="@+id/btn_signup_email"
         android:layout_below="@+id/twitter_login_button"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:layout_alignLeft="@+id/twitter_login_button"
         android:layout_alignStart="@+id/twitter_login_button"
         android:layout_alignRight="@+id/twitter_login_button"
         android:layout_alignEnd="@+id/twitter_login_button"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp" />
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:includeFontPadding="false"
+        android:textAllCaps="false"
+        android:visibility="visible"
+        android:layout_centerInParent="true" />
 
     <TextView
         android:layout_width="wrap_content"

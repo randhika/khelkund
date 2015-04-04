@@ -1,6 +1,7 @@
 package com.appacitive.khelkund.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -28,7 +29,10 @@ import com.appacitive.khelkund.activities.LeaderboardActivity;
 import com.appacitive.khelkund.activities.EmailLoginActivity;
 import com.appacitive.khelkund.activities.LicencesActivity;
 import com.appacitive.khelkund.activities.LoginActivity;
+import com.appacitive.khelkund.activities.PrizesActivity;
 import com.appacitive.khelkund.activities.ScheduleActivity;
+import com.appacitive.khelkund.activities.ScoringChartActivity;
+import com.appacitive.khelkund.activities.TermsAndPolicyActivity;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.digits.sdk.android.Digits;
@@ -105,6 +109,13 @@ public class NavigationDrawerFragment extends Fragment {
         startActivity(intent);
     }
 
+    @OnClick(R.id.tv_nav_prizes)
+    public void onPrizesCLick()
+    {
+        Intent intent = new Intent(getActivity(), PrizesActivity.class);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.tv_nav_howtoplay)
     public void onHowToPlayClick()
     {
@@ -115,13 +126,16 @@ public class NavigationDrawerFragment extends Fragment {
     @OnClick(R.id.tv_nav_scoring_chart)
     public void onScoringChartClick()
     {
-
+        Intent intent = new Intent(getActivity(), ScoringChartActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.tv_nav_terms)
     public void onTermsClick()
     {
-
+        Uri uri = Uri.parse("http://www.khelkund.com/ipl/terms.aspx");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 
     @OnClick(R.id.tv_nav_aboutus)
@@ -186,7 +200,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */
-                R.drawable.ic_drawer,             /* nav drawer image to replace 'Up' caret */
+                R.drawable.ic_drawer1,             /* nav drawer image to replace 'Up' caret */
                 R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
         ) {

@@ -33,7 +33,6 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -85,26 +84,25 @@ public class LoginFragment extends Fragment {
         Digits.getSessionManager().clearActiveSession();
 
         facebookLoginButton = (LoginButton) view.findViewById(R.id.facebook_login_button);
-//        facebookLoginButton.setBackgroundResource(R.drawable.facebooklogin);
-//        facebookLoginButton.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        facebookLoginButton.setBackgroundResource(R.drawable.f_bg);
+        facebookLoginButton.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         facebookLoginButton.setFragment(this);
         facebookLoginButton.registerCallback(callbackManager, facebookSessionCallback);
 
         digitsLoginButton = (DigitsAuthButton) view.findViewById(R.id.digits_login_button);
-//        digitsLoginButton.setBackgroundResource(R.drawable.phonelogin);
-//        digitsLoginButton.setText("");
-//        digitsLoginButton.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        digitsLoginButton.setBackgroundResource(R.drawable.white_bg);
+        digitsLoginButton.setText("Use my phone number");
+        digitsLoginButton.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         digitsLoginButton.setAuthTheme(android.R.style.ThemeOverlay_Material_Dark_ActionBar);
         digitsLoginButton.setCallback(digitsSessionCallback);
+        digitsLoginButton.setVisibility(View.INVISIBLE);
 
         twitterLoginButton = (TwitterLoginButton) view.findViewById(R.id.twitter_login_button);
-//        twitterLoginButton.setBackgroundResource(R.drawable.twitterlogin);
-//        twitterLoginButton.setText("");
-//        twitterLoginButton.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+        twitterLoginButton.setBackgroundResource(R.drawable.t_bg);
+        twitterLoginButton.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
         twitterLoginButton.setCallback(twitterSessionCallback);
 
-
-
+        mEmailSignup.setBackgroundResource(R.drawable.white_bg);
         return view;
     }
 

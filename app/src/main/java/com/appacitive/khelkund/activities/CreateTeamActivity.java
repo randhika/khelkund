@@ -85,7 +85,7 @@ public class CreateTeamActivity extends ActionBarActivity {
         mUser = manager.GetUser(mUserId);
         if(mUser.getFirstName() != null && mUser.getFirstName() != "null")
         {
-            mTeamName.setHint(String.format("Your team name eg %sIX", mUser.getFirstName()));
+            mTeamName.setHint(String.format("Your team name eg %s XI", mUser.getFirstName()));
         }
         mLogoRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(this, 3);

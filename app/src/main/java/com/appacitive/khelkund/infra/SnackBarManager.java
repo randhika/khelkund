@@ -12,6 +12,19 @@ import com.nispok.snackbar.enums.SnackbarType;
  */
 public class SnackBarManager {
 
+    public static void showMessage(String message, Activity activity)
+    {
+        SnackbarManager.show(
+                Snackbar.with(activity) // context
+                        .type(SnackbarType.MULTI_LINE)
+                        .textColor(Color.WHITE)
+                        .color(Color.DKGRAY)
+                        .text(message)
+                        .duration(Snackbar.SnackbarDuration.LENGTH_LONG)
+                , activity);
+
+    }
+
     public static void showError(String message, Activity activity)
     {
         SnackbarManager.show(

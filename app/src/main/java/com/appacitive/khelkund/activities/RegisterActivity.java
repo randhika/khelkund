@@ -59,6 +59,7 @@ public class RegisterActivity extends ActionBarActivity {
     {
         Intent loginIntent = new Intent(RegisterActivity.this, EmailLoginActivity.class);
         startActivity(loginIntent);
+        finish();
     }
 
     private boolean isEmailValid(String email) {

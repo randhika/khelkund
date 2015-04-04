@@ -12,9 +12,6 @@ import com.appacitive.khelkund.R;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Pick5PlayFragment extends Fragment {
 
 

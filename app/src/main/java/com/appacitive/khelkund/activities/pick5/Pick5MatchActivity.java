@@ -1,12 +1,10 @@
 package com.appacitive.khelkund.activities.pick5;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.fragments.LoginFragment;
+import com.appacitive.khelkund.fragments.Pick5FinishedFragment;
 import com.appacitive.khelkund.fragments.Pick5PlayFragment;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.model.Match;
@@ -26,11 +24,17 @@ public class Pick5MatchActivity extends ActionBarActivity {
         String matchId = getIntent().getStringExtra("match_id");
         storageManager = new StorageManager();
         mMatch = storageManager.GetMatch(matchId);
-        if (savedInstanceState == null) {
-            Pick5PlayFragment loginFragment = new Pick5PlayFragment();
+        if (mMatch.getMatchStatus() == 0) {
+            Pick5PlayFragment playPick6Fragment = new Pick5PlayFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, loginFragment).commit();
+                    .replace(R.id.fragment_container, playPick6Fragment).commit();
 
+        }
+        if(mMatch.getMatchStatus() == 1)
+        {
+            Pick5FinishedFragment emptyPick5Fragment = new Pick5FinishedFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, emptyPick5Fragment).commit();
         }
 
 

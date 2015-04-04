@@ -125,7 +125,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="18dp"
-        android:layout_marginBottom="18dp" />
+        android:layout_marginBottom="18dp"
+        android:textSize="18sp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -140,7 +141,7 @@
             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/card_view_fantasy"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="72dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_below="@+id/tv_scoreboard_label"
                 android:layout_alignParentRight="true"
@@ -152,8 +153,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
+                    android:layout_height="match_parent"
+                    >
 
 
                     <TextView
@@ -162,13 +163,12 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Fantasy League"
                         android:id="@+id/textView9"
-                        android:layout_alignParentTop="false"
-                        android:layout_toRightOf="@+id/imageView6"
-                        android:layout_toEndOf="@+id/imageView6"
-                        android:layout_centerVertical="true"
-                        android:paddingLeft="24dp"
                         android:textColor="@color/primary_dark"
-                        android:textStyle="bold" />
+                        android:textSize="26sp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="92dp" />
 
                     <ImageView
                         android:layout_width="36dp"
@@ -178,7 +178,7 @@
                         android:layout_alignParentLeft="false"
                         android:layout_alignParentStart="true"
                         android:src="@drawable/fantacy"
-                        android:layout_marginLeft="16dp"
+                        android:layout_marginLeft="32dp"
                         android:layout_gravity="center_vertical"
                         android:layout_alignParentBottom="false"
                         android:layout_alignParentRight="false"
@@ -191,19 +191,17 @@
             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/card_view_pick5"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="72dp"
                 android:layout_below="@+id/card_view_fantasy"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:elevation="5dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
+                    android:layout_height="match_parent">
 
 
                     <TextView
@@ -212,49 +210,44 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Pick'em 5"
                         android:id="@+id/textView10"
-                        android:layout_alignParentTop="false"
-                        android:layout_toRightOf="@+id/imageView7"
-                        android:layout_toEndOf="@+id/imageView7"
-                        android:layout_centerVertical="true"
-                        android:paddingLeft="24dp"
                         android:textColor="@color/primary_dark"
-                        android:textStyle="bold" />
+                        android:textSize="26sp"
+                        android:textIsSelectable="false"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="92dp" />
 
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:id="@+id/imageView7"
-                        android:layout_alignParentTop="false"
-                        android:layout_alignParentLeft="false"
-                        android:layout_alignParentStart="false"
                         android:src="@drawable/pickme5"
-                        android:layout_marginLeft="16dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_alignParentBottom="false"
-                        android:layout_alignParentRight="false"
                         android:layout_alignWithParentIfMissing="false"
-                        android:layout_centerVertical="true" />
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="32dp" />
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
+
+
             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/card_view_privateleague"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_below="@+id/card_view_pick5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:elevation="5dp"
+                android:layout_height="72dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
+                    android:layout_height="match_parent"
+                    >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -262,28 +255,25 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Private League"
                         android:id="@+id/textView11"
-                        android:layout_alignParentTop="false"
-                        android:layout_toRightOf="@+id/imageView8"
-                        android:layout_toEndOf="@+id/imageView8"
-                        android:layout_centerVertical="true"
-                        android:paddingLeft="24dp"
                         android:textColor="@color/primary_dark"
-                        android:textStyle="bold" />
+                        android:textSize="26sp"
+                        android:textIsSelectable="false"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="92dp" />
+
+
 
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:id="@+id/imageView8"
-                        android:layout_alignParentTop="false"
-                        android:layout_alignParentLeft="false"
-                        android:layout_alignParentStart="false"
                         android:src="@drawable/private_league"
-                        android:layout_marginLeft="16dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_alignParentBottom="false"
-                        android:layout_alignParentRight="false"
                         android:layout_alignWithParentIfMissing="false"
-                        android:layout_centerVertical="true" />
+                        android:layout_alignBottom="@+id/textView11"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="32dp" />
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>

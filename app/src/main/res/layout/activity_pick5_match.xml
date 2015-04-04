@@ -24,8 +24,8 @@
                 android:layout_marginTop="12dp">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:id="@+id/imageView10"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
@@ -59,8 +59,8 @@
                 android:layout_marginTop="12dp">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:id="@+id/imageView11"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"

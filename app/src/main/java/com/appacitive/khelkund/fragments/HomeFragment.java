@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.CreateTeamActivity;
@@ -107,6 +108,12 @@ public class HomeFragment extends Fragment {
             name += " " + mUser.getLastName();
         mName.setText(name);
 
+        if (HomeFragment.this.mTeam == null) {
+            fetchAndDisplayUserDetails();
+        }
+
+        mFantasy.setOnClickListener(onFantasyClick);
+
         return rootView;
     }
 
@@ -129,10 +136,8 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        if (mTeam == null && isInitializing == false) {
-            isInitializing = true;
-            fetchAndDisplayUserDetails();
-            isInitializing = false;
+        if (mTeam == null) {
+            mTeam = new StorageManager().GetTeam(SharedPreferencesManager.ReadUserId());
         }
     }
 
@@ -141,16 +146,18 @@ public class HomeFragment extends Fragment {
         super.onPause();
     }
 
-    @OnClick(R.id.card_view_fantasy)
-    public void onFantasyClick() {
-        if (isTeamCreatedOnServer() == true) {
-            Intent viewTeamIntent = new Intent(getActivity(), ViewTeamActivity.class);
-            startActivity(viewTeamIntent);
-        } else {
-            Intent createTeamIntent = new Intent(getActivity(), CreateTeamActivity.class);
-            startActivity(createTeamIntent);
+    View.OnClickListener onFantasyClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (isTeamCreatedOnServer() == true) {
+                Intent viewTeamIntent = new Intent(getActivity(), ViewTeamActivity.class);
+                startActivity(viewTeamIntent);
+            } else {
+                Intent createTeamIntent = new Intent(getActivity(), CreateTeamActivity.class);
+                startActivity(createTeamIntent);
+            }
         }
-    }
+    };
 
     private boolean isTeamCreatedOnServer() {
         if (mTeam != null && mTeam.getId() != null && TextUtils.isEmpty(mTeam.getId()) == false)
@@ -160,10 +167,17 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    @OnClick(R.id.card_view_privateleague)
+    public void onPrivateLeagueClick()
+    {
+        Toast.makeText(getActivity(),"This game is currently unavailable. Check back soon.", Toast.LENGTH_SHORT).show();
+    }
+
     @OnClick(R.id.card_view_pick5)
     public void onPick5Click() {
         Intent intent = new Intent(getActivity(), Pick5HomeActivity.class);
         startActivity(intent);
+//        Toast.makeText(getActivity(),"This game is currently unavailable. Check back soon.", Toast.LENGTH_SHORT).show();
     }
 
     private void fetchTeam(final String userId) {
@@ -176,17 +190,15 @@ public class HomeFragment extends Fragment {
             public void success(JSONObject result) {
                 mProgressDialog.dismiss();
                 if (result.optJSONObject("Error") != null) {
-                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), getActivity());
+//                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), getActivity());
                     return;
                 }
-                if (result.optString("Id") != "null") {
+                if (result.optString("Id") != null) {
 
                     mTeam = new Team(result);
-
                     mTeam.setUserId(userId);
                     StorageManager storageManager = new StorageManager();
                     storageManager.SaveTeam(mTeam);
-
                 }
             }
 

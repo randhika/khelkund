@@ -215,6 +215,8 @@ public class PlayerDetailsActivity extends ActionBarActivity {
     {
         List<String> statistics = new ArrayList<String>();
         Statistics playerStats = mPlayerFromServer.getStatistics();
+        if(playerStats == null)
+            return;
         statistics.add("Matches");
         statistics.add(String.valueOf(playerStats.getMatchesPlayed()));
 

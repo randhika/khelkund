@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
+import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.events.PlayerChosenEvent;
 import com.squareup.picasso.Picasso;
@@ -43,7 +44,12 @@ public class PlayerPoolAdapter extends RecyclerView.Adapter<PlayerPoolAdapter.Po
         holder.points.setText(String.valueOf(player.getPoints()));
         holder.team.setText(player.getShortTeamName());
         holder.price.setText("$ " + String.valueOf(player.getPrice()));
-        holder.popularity.setText(String.valueOf(player.getPopularity() + " %"));
+        int totalTeams = SharedPreferencesManager.ReadTotalTeamsCount();
+        if(totalTeams != 0)
+        {
+            holder.popularity.setText(String.valueOf((player.getPopularity() * 100)/totalTeams) + " %");
+        }
+
         Picasso.with(KhelkundApplication.getAppContext()).load(player.getImageUrl()).placeholder(R.drawable.demo).into(holder.logo);
 
         holder.relativeLayout.setOnClickListener(null);

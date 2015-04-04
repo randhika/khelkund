@@ -46,7 +46,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Khelkund and the Khelkund logos are trademarks of Khelkund Inc. All rights reserved."
+        android:text="Khelkund and the Khelkund logos are trademarks of OwlHack LLP. All rights reserved."
         android:id="@+id/textView24"
         android:layout_below="@+id/textView22"
         android:layout_alignLeft="@+id/textView22"
@@ -66,4 +66,13 @@
         android:layout_alignStart="@+id/textView24"
         android:layout_marginTop="16dp"
         android:textColor="@color/primary" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textView29"
+        android:layout_below="@+id/textView25"
+        android:layout_alignLeft="@+id/textView25"
+        android:layout_alignStart="@+id/textView25" />
 </RelativeLayout>

@@ -177,7 +177,7 @@ public class HomeActivity extends ActionBarActivity
 
     private void sendRegistrationIdToBackend() {
         Http http = new Http();
-        http.put(Urls.AppacitiveUrls.getRegisterDeviceUrl(), getHeaders(), getJsonRequestObject().toString(), new APCallback() {
+        http.put(Urls.AppacitiveUrls.getRegisterDeviceUrl(), Urls.AppacitiveUrls.getHeaders(), getJsonRequestObject().toString(), new APCallback() {
             @Override
             public void success(JSONObject result) {
                 if (result.optJSONObject("connection") == null) {
@@ -192,13 +192,7 @@ public class HomeActivity extends ActionBarActivity
         });
     }
 
-    private HashMap<String, String> getHeaders()
-    {
-        return new HashMap<String, String>(){{
-            put("Appacitive-Environment", "sandbox");
-            put("Appacitive-Apikey", "+HfTOp2nF8TnkyZVBblkTBLm6Cz6zIfKYdXBhV6Aag4=");
-        }};
-    }
+
 
     private JSONObject getJsonRequestObject()
     {

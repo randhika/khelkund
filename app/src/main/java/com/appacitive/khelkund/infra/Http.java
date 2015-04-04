@@ -35,11 +35,15 @@ public class Http {
 
     public void get(String url, final Map<String, String> headers, final APCallback callback) {
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(String response) {
                 if (callback != null)
-                    callback.success((response));
+                    try {
+                        callback.success(new JSONObject(processResponse(response)));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -94,7 +98,7 @@ public class Http {
         getRequestQueue().add(request);
     }
 
-    private static String processResponse(String response) {
+    private String processResponse(String response) {
         return response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1);
     }
 

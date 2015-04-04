@@ -111,7 +111,7 @@ public class PlayerCardAdapter extends RecyclerView.Adapter<PlayerCardViewHolder
                         star.setVisibility(View.VISIBLE);
                     else star.setVisibility(View.INVISIBLE);
                 }
-                cardView.setBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(player.getShortTeamName())));
+                cardView.setCardBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(player.getShortTeamName())));
                 ImageView ivPlayerPhoto = (ImageView) cardView.findViewById(R.id.iv_player_photo);
                 Picasso
                         .with(KhelkundApplication.getAppContext())

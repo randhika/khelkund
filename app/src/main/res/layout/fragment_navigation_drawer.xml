@@ -4,222 +4,254 @@
     android:layout_height="match_parent"
     android:choiceMode="singleChoice"
     android:background="@color/cardview_light_background"
-    tools:context="com.appacitive.khelkund.fragments.NavigationDrawerFragment" >
+    tools:context="com.appacitive.khelkund.fragments.NavigationDrawerFragment">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Leaderboard"
-        android:id="@+id/tv_nav_leaderboard"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="72dp"
-        android:gravity="center_vertical"
-        android:layout_marginTop="36dp"
-        android:textColor="@color/primary_dark_material_dark" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Leaderboard"
+                android:id="@+id/tv_nav_leaderboard"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="72dp"
+                android:gravity="center_vertical"
+                android:layout_marginTop="36dp"
+                android:textColor="@color/primary_dark_material_dark" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Schedule"
-        android:id="@+id/tv_nav_schedule"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/tv_nav_leaderboard"
-        android:layout_alignLeft="@+id/tv_nav_leaderboard"
-        android:layout_alignStart="@+id/tv_nav_leaderboard"
-        android:textColor="@color/primary_dark_material_dark" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Schedule"
+                android:id="@+id/tv_nav_schedule"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/tv_nav_leaderboard"
+                android:layout_alignLeft="@+id/tv_nav_leaderboard"
+                android:layout_alignStart="@+id/tv_nav_leaderboard"
+                android:textColor="@color/primary_dark_material_dark" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="How to play"
-        android:id="@+id/tv_nav_howtoplay"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/tv_nav_schedule"
-        android:layout_alignLeft="@+id/tv_nav_schedule"
-        android:layout_alignStart="@+id/tv_nav_schedule"
-        android:textColor="@color/primary_dark_material_dark" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="How to play"
+                android:id="@+id/tv_nav_howtoplay"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/tv_nav_schedule"
+                android:layout_alignLeft="@+id/tv_nav_schedule"
+                android:layout_alignStart="@+id/tv_nav_schedule"
+                android:textColor="@color/primary_dark_material_dark" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Scoring Chart"
-        android:id="@+id/tv_nav_scoring_chart"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/tv_nav_howtoplay"
-        android:layout_alignLeft="@+id/tv_nav_leaderboard"
-        android:layout_alignStart="@+id/tv_nav_leaderboard"
-        android:textColor="@color/primary_dark_material_dark" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Scoring Chart"
+                android:id="@+id/tv_nav_scoring_chart"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/tv_nav_howtoplay"
+                android:layout_alignLeft="@+id/tv_nav_leaderboard"
+                android:layout_alignStart="@+id/tv_nav_leaderboard"
+                android:textColor="@color/primary_dark_material_dark" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Logout"
-        android:id="@+id/tv_nav_logout"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/tv_nav_scoring_chart"
-        android:layout_alignLeft="@+id/tv_nav_leaderboard"
-        android:layout_alignStart="@+id/tv_nav_leaderboard"
-        android:textColor="@color/primary_dark_material_dark" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Logout"
+                android:id="@+id/tv_nav_logout"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/tv_nav_scoring_chart"
+                android:layout_alignLeft="@+id/tv_nav_leaderboard"
+                android:layout_alignStart="@+id/tv_nav_leaderboard"
+                android:textColor="@color/primary_dark_material_dark" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Terms &amp; Policies"
-        android:id="@+id/tv_nav_terms"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/tv_nav_logout"
-        android:layout_alignLeft="@+id/tv_nav_logout"
-        android:layout_alignStart="@+id/tv_nav_logout"
-        android:textColor="@color/primary_dark_material_dark" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Prizes"
+                android:id="@+id/tv_nav_prizes"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/tv_nav_logout"
+                android:layout_alignLeft="@+id/tv_nav_logout"
+                android:layout_alignStart="@+id/tv_nav_logout"
+                android:textColor="@color/primary_dark_material_dark" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Licenses"
-        android:id="@+id/tv_nav_licenses"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/tv_nav_terms"
-        android:layout_alignRight="@+id/tv_nav_schedule"
-        android:layout_alignEnd="@+id/tv_nav_schedule"
-        android:textColor="@color/primary_dark_material_dark" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Terms &amp; Policies"
+                android:id="@+id/tv_nav_terms"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/tv_nav_prizes"
+                android:layout_alignLeft="@+id/tv_nav_prizes"
+                android:layout_alignStart="@+id/tv_nav_prizes"
+                android:textColor="@color/primary_dark_material_dark" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="About Us"
-        android:id="@+id/tv_nav_aboutus"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/tv_nav_licenses"
-        android:layout_alignLeft="@+id/tv_nav_licenses"
-        android:layout_alignStart="@+id/tv_nav_licenses"
-        android:textColor="@color/primary_dark_material_dark" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Licenses"
+                android:id="@+id/tv_nav_licenses"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/tv_nav_terms"
+                android:layout_alignRight="@+id/tv_nav_schedule"
+                android:layout_alignEnd="@+id/tv_nav_schedule"
+                android:textColor="@color/primary_dark_material_dark" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iv_nav_leaderbord"
-        android:layout_alignTop="@+id/tv_nav_leaderboard"
-        android:nestedScrollingEnabled="true"
-        android:src="@drawable/ic_assessment_grey600_36dp"
-        android:layout_alignBottom="@+id/tv_nav_leaderboard"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="About Us"
+                android:id="@+id/tv_nav_aboutus"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/tv_nav_licenses"
+                android:layout_alignLeft="@+id/tv_nav_licenses"
+                android:layout_alignStart="@+id/tv_nav_licenses"
+                android:textColor="@color/primary_dark_material_dark" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iv_nav_schedule"
-        android:layout_alignTop="@+id/tv_nav_schedule"
-        android:nestedScrollingEnabled="true"
-        android:src="@drawable/ic_event_grey600_24dp"
-        android:layout_alignBottom="@+id/tv_nav_schedule"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="16dp"
-        android:layout_alignRight="@+id/iv_nav_leaderbord"
-        android:layout_alignEnd="@+id/iv_nav_leaderbord" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_nav_leaderbord"
+                android:layout_alignTop="@+id/tv_nav_leaderboard"
+                android:nestedScrollingEnabled="true"
+                android:src="@drawable/ic_assessment_grey600_36dp"
+                android:layout_alignBottom="@+id/tv_nav_leaderboard"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="16dp" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iv_nav_aboutus"
-        android:src="@drawable/ic_favorite_grey600_36dp"
-        android:layout_alignBottom="@+id/tv_nav_aboutus"
-        android:layout_alignLeft="@+id/iv_nav_terms"
-        android:layout_alignStart="@+id/iv_nav_terms"
-        android:layout_alignTop="@+id/tv_nav_aboutus" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_nav_schedule"
+                android:layout_alignTop="@+id/tv_nav_schedule"
+                android:nestedScrollingEnabled="true"
+                android:src="@drawable/ic_event_grey600_24dp"
+                android:layout_alignBottom="@+id/tv_nav_schedule"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="16dp"
+                android:layout_alignRight="@+id/iv_nav_leaderbord"
+                android:layout_alignEnd="@+id/iv_nav_leaderbord" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iv_nav_howtoplay"
-        android:src="@drawable/ic_help_grey600_36dp"
-        android:layout_alignLeft="@+id/iv_nav_leaderbord"
-        android:layout_alignStart="@+id/iv_nav_leaderbord"
-        android:layout_alignTop="@+id/tv_nav_howtoplay"
-        android:layout_above="@+id/tv_nav_scoring_chart" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_nav_aboutus"
+                android:src="@drawable/ic_favorite_grey600_36dp"
+                android:layout_alignBottom="@+id/tv_nav_aboutus"
+                android:layout_alignLeft="@+id/iv_nav_terms"
+                android:layout_alignStart="@+id/iv_nav_terms"
+                android:layout_alignTop="@+id/tv_nav_aboutus" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iv_nav_terms"
-        android:src="@drawable/ic_work_grey600_36dp"
-        android:layout_alignLeft="@+id/iv_nav_logout"
-        android:layout_alignStart="@+id/iv_nav_logout"
-        android:layout_alignTop="@+id/tv_nav_terms"
-        android:layout_above="@+id/iv_nav_licenses" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_nav_howtoplay"
+                android:src="@drawable/ic_help_grey600_36dp"
+                android:layout_alignLeft="@+id/iv_nav_leaderbord"
+                android:layout_alignStart="@+id/iv_nav_leaderbord"
+                android:layout_alignTop="@+id/tv_nav_howtoplay"
+                android:layout_above="@+id/tv_nav_scoring_chart" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_nav_terms"
+                android:src="@drawable/ic_work_grey600_36dp"
+                android:layout_alignLeft="@+id/iv_nav_logout"
+                android:layout_alignStart="@+id/iv_nav_logout"
+                android:layout_alignTop="@+id/tv_nav_terms"
+                android:layout_above="@+id/iv_nav_licenses" />
 
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_nav_logout"
+                android:layout_alignRight="@+id/iv_nav_howtoplay"
+                android:layout_alignEnd="@+id/iv_nav_howtoplay"
+                android:src="@drawable/ic_settings_grey600_36dp"
+                android:layout_alignTop="@+id/tv_nav_logout"
+                android:layout_alignBottom="@+id/tv_nav_logout" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iv_nav_logout"
-        android:layout_alignRight="@+id/iv_nav_howtoplay"
-        android:layout_alignEnd="@+id/iv_nav_howtoplay"
-        android:src="@drawable/ic_settings_grey600_36dp"
-        android:layout_alignTop="@+id/tv_nav_logout"
-        android:layout_alignBottom="@+id/tv_nav_logout" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Feedback"
+                android:id="@+id/tv_nav_feedback"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/tv_nav_aboutus"
+                android:layout_alignLeft="@+id/tv_nav_aboutus"
+                android:layout_alignStart="@+id/tv_nav_aboutus"
+                android:textColor="@color/primary_dark_material_dark" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Feedback"
-        android:id="@+id/tv_nav_feedback"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/tv_nav_aboutus"
-        android:layout_alignLeft="@+id/tv_nav_aboutus"
-        android:layout_alignStart="@+id/tv_nav_aboutus"
-        android:textColor="@color/primary_dark_material_dark" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_nav_feedback"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_textsms_grey600_36dp"
+                android:layout_alignBottom="@+id/tv_nav_feedback"
+                android:layout_marginLeft="16dp"
+                android:layout_alignRight="@+id/iv_nav_aboutus"
+                android:layout_alignEnd="@+id/iv_nav_aboutus"
+                android:layout_alignTop="@+id/tv_nav_feedback" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iv_nav_feedback"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:src="@drawable/ic_textsms_grey600_36dp"
-        android:layout_alignBottom="@+id/tv_nav_feedback"
-        android:layout_marginLeft="16dp"
-        android:layout_alignRight="@+id/iv_nav_aboutus"
-        android:layout_alignEnd="@+id/iv_nav_aboutus"
-        android:layout_alignTop="@+id/tv_nav_feedback" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_nav_licenses"
+                android:layout_above="@+id/tv_nav_aboutus"
+                android:layout_alignLeft="@+id/iv_nav_aboutus"
+                android:layout_alignStart="@+id/iv_nav_aboutus"
+                android:src="@drawable/ic_assignment_grey600_36dp"
+                android:layout_alignRight="@+id/iv_nav_aboutus"
+                android:layout_alignEnd="@+id/iv_nav_aboutus"
+                android:layout_below="@+id/tv_nav_terms" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iv_nav_licenses"
-        android:layout_above="@+id/tv_nav_aboutus"
-        android:layout_alignLeft="@+id/iv_nav_aboutus"
-        android:layout_alignStart="@+id/iv_nav_aboutus"
-        android:src="@drawable/ic_assignment_grey600_36dp"
-        android:layout_alignRight="@+id/iv_nav_aboutus"
-        android:layout_alignEnd="@+id/iv_nav_aboutus"
-        android:layout_below="@+id/tv_nav_terms" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_nav_scoring"
+                android:src="@drawable/ic_flag_grey600_36dp"
+                android:layout_below="@+id/tv_nav_howtoplay"
+                android:layout_alignLeft="@+id/iv_nav_howtoplay"
+                android:layout_alignStart="@+id/iv_nav_howtoplay"
+                android:layout_alignRight="@+id/iv_nav_howtoplay"
+                android:layout_alignEnd="@+id/iv_nav_howtoplay"
+                android:layout_above="@+id/iv_nav_logout" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iv_nav_scoring"
-        android:src="@drawable/ic_flag_grey600_36dp"
-        android:layout_below="@+id/tv_nav_howtoplay"
-        android:layout_alignLeft="@+id/iv_nav_howtoplay"
-        android:layout_alignStart="@+id/iv_nav_howtoplay"
-        android:layout_alignRight="@+id/iv_nav_howtoplay"
-        android:layout_alignEnd="@+id/iv_nav_howtoplay"
-        android:layout_above="@+id/iv_nav_logout" />
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_nav_prizes"
+                android:src="@drawable/ic_redeem_grey600_24dp"
+                android:layout_alignRight="@+id/iv_nav_terms"
+                android:layout_alignEnd="@+id/iv_nav_terms"
+                android:layout_alignLeft="@+id/iv_nav_terms"
+                android:layout_alignStart="@+id/iv_nav_terms"
+                android:layout_below="@+id/iv_nav_logout"
+                android:layout_above="@+id/iv_nav_terms" />
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

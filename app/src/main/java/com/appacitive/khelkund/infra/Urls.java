@@ -1,5 +1,7 @@
 package com.appacitive.khelkund.infra;
 
+import java.util.HashMap;
+
 /**
  * Created by sathley on 3/24/2015.
  */
@@ -33,6 +35,11 @@ public class Urls {
             return baseUrl + "UserTeamService.svc/UserTeam/" + userId;
         }
 
+        public static String getAllTeamsCountUrl()
+        {
+            return baseUrl + "UserTeamService.svc/Count";
+        }
+
         public static String saveTeamUrl()
         {
             return baseUrl + "UserTeamService.svc/SaveTeam";
@@ -44,6 +51,19 @@ public class Urls {
         public static String getRegisterDeviceUrl()
         {
             return "https://apis.appacitive.com/v1.0/connection/user_device";
+        }
+
+        public static String getAllPlayersUrl()
+        {
+            return "https://apis.appacitive.com/v1.0/connection/series_player/series/87810459553628582/find?returnedge=false?pnum=1&psize=300";
+        }
+
+        public static HashMap<String, String> getHeaders()
+        {
+            return new HashMap<String, String>(){{
+                put("Appacitive-Environment", "sandbox");
+                put("Appacitive-Apikey", "+HfTOp2nF8TnkyZVBblkTBLm6Cz6zIfKYdXBhV6Aag4=");
+            }};
         }
     }
 

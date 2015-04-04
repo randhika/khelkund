@@ -312,6 +312,11 @@ public class EditTeamActivity extends ActionBarActivity {
             Formation formation = TeamHelper.getFormation(mTeamMutated);
             // Fetch batsmen
             List<Player> batsmen = mStorageManager.GetBargainPlayersByType("Batsman");
+            if(batsmen.size() == 0)
+            {
+                showError("Check your internet connectivity and try again");
+                return;
+            }
             int i = 0;
             while (i < formation.BatsmenCount) {
                 Player randomPlayer = batsmen.get(random.nextInt(batsmen.size()));

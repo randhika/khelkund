@@ -97,6 +97,7 @@ public class EmailLoginActivity extends ActionBarActivity implements LoaderCallb
             public void onClick(View view) {
                 Intent registerIntent = new Intent(EmailLoginActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
+                finish();
             }
         });
     }

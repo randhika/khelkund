@@ -52,4 +52,7 @@
     <string name="title_activity_licences">Licences</string>
     <string name="title_activity_about_us">About Us</string>
     <string name="title_activity_schedule">IPL T20 Schedule</string>
+    <string name="title_activity_scoring_chart">Scoring Chart</string>
+    <string name="title_activity_terms_and_policy">TermsAndPolicyActivity</string>
+    <string name="title_activity_prizes">Prizes</string>
 </resources>

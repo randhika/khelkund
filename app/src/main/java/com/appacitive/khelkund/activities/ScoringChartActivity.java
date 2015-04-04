@@ -9,25 +9,26 @@ import android.webkit.WebView;
 
 import com.appacitive.khelkund.R;
 
-import java.io.File;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class HowToPlayActivity extends ActionBarActivity {
+public class ScoringChartActivity extends ActionBarActivity {
 
-    @InjectView(R.id.web_howtoplay)
+    @InjectView(R.id.web_scoring_chart)
     public WebView mWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_how_to_play);
+        setContentView(R.layout.activity_scoring_chart);
+
         ButterKnife.inject(this);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setClickable(true);
-        String path = "file:///android_asset/how_to_play.html";
+        String path = "file:///android_asset/scoring_chart.html";
         mWebView.loadUrl(path);
         mWebView.setBackgroundColor(Color.TRANSPARENT);
     }
+
+
 }
