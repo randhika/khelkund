@@ -1,14 +1,20 @@
 package com.appacitive.khelkund.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.activities.PlayerPoolActivity;
 import com.appacitive.khelkund.adapters.PlayerPoolAdapter;
 import com.appacitive.khelkund.adapters.SquadAdapter;
 import com.appacitive.khelkund.infra.StorageManager;
@@ -67,10 +73,67 @@ public class PlayerPoolFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.menu_action_filter:
+                showFilterDialog();
+                return true;
+            default:
+                break;
+        }
+        return false;
+    }
+
+
+
+    List<Integer> selectedItemsIndexes;
+    private void showFilterDialog() {
+        selectedItemsIndexes = new ArrayList<Integer>();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        boolean[] isSelectedArray = {false, false, false, false, false, false, false, false};
+        builder.setTitle("Choose teams");
+        List<String> teams = ((PlayerPoolActivity) getActivity()).allTeams;
+        String[] teamsToShow = teams.toArray(new String[teams.size()]);
+        builder.setMultiChoiceItems(teamsToShow, isSelectedArray, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
+                if (isChecked)
+                    selectedItemsIndexes.add(which);
+                else if (selectedItemsIndexes.contains(which))
+                    selectedItemsIndexes.remove(Integer.valueOf(which));
+            }
+        });
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.setPositiveButton("FILTER", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                List<String> selectedTeams = new ArrayList<String>();
+                for (int index = 0; index < selectedItemsIndexes.size(); index++) {
+                    selectedTeams.add(((PlayerPoolActivity)getActivity()).allTeams.get(selectedItemsIndexes.get(index)));
+                }
+                ((PlayerPoolActivity) getActivity()).chosenTeams = selectedTeams;
+            }
+        });
+        builder.show();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_player_pool, container, false);
         ButterKnife.inject(this, rootView);
+        setHasOptionsMenu(true);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);

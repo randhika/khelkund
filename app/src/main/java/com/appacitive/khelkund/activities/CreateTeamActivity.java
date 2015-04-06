@@ -114,13 +114,13 @@ public class CreateTeamActivity extends ActionBarActivity {
     {
         TeamLogoViewHolder holder = (TeamLogoViewHolder) mLogoRecyclerView.findViewHolderForAdapterPosition(this.selectedPosition);
         if(holder != null)
-            holder.logo.setBackgroundColor(Color.WHITE);
+            holder.logo.setCardBackgroundColor(Color.WHITE);
 
         this.selectedPosition = event.Position;
 
         holder = (TeamLogoViewHolder) mLogoRecyclerView.findViewHolderForAdapterPosition(this.selectedPosition);
         if(holder != null)
-            holder.logo.setBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(R.color.accent));
+            holder.logo.setCardBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(R.color.accent));
 
         ((TeamLogoAdapter) mAdapter).setmSelectedPosition(this.selectedPosition);
     }

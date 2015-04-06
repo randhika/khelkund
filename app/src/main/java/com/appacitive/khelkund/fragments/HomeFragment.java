@@ -28,6 +28,9 @@ import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.Team;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import org.json.JSONObject;
 
@@ -135,7 +138,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+//        showTutorialOverlay();
         if (mTeam == null) {
             mTeam = new StorageManager().GetTeam(SharedPreferencesManager.ReadUserId());
         }
@@ -175,9 +178,9 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.card_view_pick5)
     public void onPick5Click() {
-        Intent intent = new Intent(getActivity(), Pick5HomeActivity.class);
-        startActivity(intent);
-//        Toast.makeText(getActivity(),"This game is currently unavailable. Check back soon.", Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(getActivity(), Pick5HomeActivity.class);
+//        startActivity(intent);
+        Toast.makeText(getActivity(),"This game is currently unavailable. Check back soon.", Toast.LENGTH_SHORT).show();
     }
 
     private void fetchTeam(final String userId) {
@@ -190,7 +193,7 @@ public class HomeFragment extends Fragment {
             public void success(JSONObject result) {
                 mProgressDialog.dismiss();
                 if (result.optJSONObject("Error") != null) {
-//                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), getActivity());
+
                     return;
                 }
                 if (result.optString("Id") != null) {
@@ -209,6 +212,17 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+//    private void showTutorialOverlay() {
+//        new ShowcaseView.Builder(getActivity())
+//                .setTarget(new ViewTarget(mFantasy))
+//                .setContentTitle("Welcome to Khelkund")
+//                .setContentText("Start by creating a fantasy team")
+//
+//                .singleShot(11)
+//                .hideOnTouchOutside()
+//                .build().show();
+//    }
 
     @Override
     public void onAttach(Activity activity) {

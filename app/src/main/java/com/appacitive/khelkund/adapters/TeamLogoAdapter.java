@@ -56,10 +56,10 @@ public class TeamLogoAdapter extends RecyclerView.Adapter<TeamLogoViewHolder> {
         Picasso.with(KhelkundApplication.getAppContext()).load(bitmapId).into((ImageView) holder.logo.findViewById(R.id.iv_pick_team_logo));
         if(position == mSelectedPosition)
         {
-            holder.logo.setBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(R.color.accent));
+            holder.logo.setCardBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(R.color.accent));
         }
         else {
-            holder.logo.setBackgroundColor(Color.WHITE);
+            holder.logo.setCardBackgroundColor(Color.WHITE);
         }
     }
 

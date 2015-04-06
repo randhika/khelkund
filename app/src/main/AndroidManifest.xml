@@ -14,8 +14,8 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <!--<uses-permission android:name="android.permission.RECEIVE_SMS" />-->
 
     <permission
         android:name="com.appacitive.khelkund.gcm.permission.C2D_MESSAGE"
@@ -82,10 +82,10 @@
             android:name=".activities.EditTeamActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_edit_team"
-            android:parentActivityName=".activities.ViewTeamActivity" >
+            android:parentActivityName=".activities.HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.ViewTeamActivity" />
+                android:value="com.appacitive.khelkund.activities.HomeActivity" />
         </activity>
         <activity
             android:name=".activities.CreateTeamActivity"

@@ -7,7 +7,6 @@
     android:layout_gravity="center"
     android:layout_width="105dp"
     android:layout_height="105dp"
-    card_view:cardCornerRadius="4dp"
     android:layout_margin="4dp">
 
     <ImageView

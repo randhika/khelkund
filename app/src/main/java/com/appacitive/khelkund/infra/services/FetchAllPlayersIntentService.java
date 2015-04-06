@@ -56,7 +56,7 @@ public class FetchAllPlayersIntentService extends IntentService {
                     JSONObject popularityCount = playerObject.optJSONObject("$popularity_count");
                     if(popularityCount != null)
                     {
-                        player.setPopularity(Integer.valueOf(popularityCount.optString("all")));
+                        player.setPopularity((int)Double.parseDouble(popularityCount.optString("all")));
                     }
                     players.add(player);
                 }

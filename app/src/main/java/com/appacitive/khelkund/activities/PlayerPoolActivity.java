@@ -1,5 +1,7 @@
 package com.appacitive.khelkund.activities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -13,6 +15,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,6 +25,7 @@ import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.fragments.PlayerPoolFragment;
 import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.model.PlayerType;
+import com.appacitive.khelkund.model.TeamHelper;
 import com.appacitive.khelkund.model.events.FilledPlayerCardClickedEvent;
 import com.appacitive.khelkund.model.events.PlayerChosenEvent;
 import com.squareup.otto.Subscribe;
@@ -31,6 +37,12 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
     ViewPager mViewPager;
 
     private PlayerType mPlayerType;
+
+    public List<String> allTeams = new ArrayList<String>(){{
+        add("KXIP");add("RR");add("DD");add("CSK");add("RCB");add("SRH");add("KKR");add("MI");
+    }};
+
+    public List<String> chosenTeams = new ArrayList<String>(allTeams);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +70,18 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_player_pool, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return false;
     }
 
     private void setupActionBarTitle()

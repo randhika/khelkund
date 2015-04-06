@@ -17,9 +17,11 @@ import com.appacitive.khelkund.adapters.SquadAdapter;
 import com.appacitive.khelkund.infra.DividerItemDecoration;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
-import com.appacitive.khelkund.model.Team;
 import com.appacitive.khelkund.model.KhelkundUser;
+import com.appacitive.khelkund.model.Team;
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -58,7 +60,7 @@ public class TeamSquadFragment extends Fragment {
         String userId = SharedPreferencesManager.ReadUserId();
         StorageManager storageManager = new StorageManager();
         mTeam = storageManager.GetTeam(userId);
-        ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(mTeam.getName());
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(mTeam.getName());
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -73,9 +75,25 @@ public class TeamSquadFragment extends Fragment {
                 startActivity(editTeamIntent);
             }
         });
-
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            new ShowcaseView.Builder(getActivity())
+                    .setTarget(new ViewTarget(mFab))
+                    .setContentTitle("Click here to edit your team")
+                    .hideOnTouchOutside()
+                    .singleShot(456)
+                    .build().hideButton();
+        } else {
+        }
+    }
 }

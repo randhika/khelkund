@@ -5,10 +5,10 @@
     android:id="@+id/card_view_filled"
     android:layout_width="match_parent"
     android:layout_height="105dp"
-    android:background="@color/cardview_light_background"
     app:cardBackgroundColor="@color/cardview_light_background"
+    app:cardCornerRadius="2dp"
     android:layout_margin="4dp"
-    android:elevation="5dp">
+    android:elevation="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +20,8 @@
             android:id="@+id/iv_player_photo"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/broncos" />
+            android:src="@drawable/demo"
+            android:layout_below="@+id/card_star" />
 
         <ImageView
             android:layout_width="18dp"
@@ -48,7 +49,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:singleLine="false"
+            android:singleLine="true"
             android:textSize="12sp"
             android:textColor="@color/abc_primary_text_material_dark" />
 

@@ -8,12 +8,14 @@
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
     android:layout_height="200dp"
-    android:layout_gravity="center"
-    android:background="@drawable/background">
+    app:cardCornerRadius="4dp"
+    android:layout_gravity="center">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/rl_pick5_match"
+        android:background="@android:color/holo_blue_light">
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,26 +40,26 @@
             android:textColor="@color/abc_primary_text_material_dark" />
 
         <ImageView
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="100dp"
             android:id="@+id/iv_pick5_home_logo"
             android:src="@drawable/kxip"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="30dp" />
+            android:layout_marginTop="48dp"
+            android:layout_marginLeft="36dp" />
 
         <ImageView
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="100dp"
             android:id="@+id/iv_pick5_away_logo"
             android:src="@drawable/kkr"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="30dp"
-            android:layout_marginRight="30dp" />
+            android:layout_marginTop="48dp"
+            android:layout_marginRight="36dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,12 +69,13 @@
             android:textColor="@color/abc_primary_text_material_dark"
             android:textSize="12sp"
 
-            android:layout_alignBottom="@+id/iv_pick5_home_logo"
-            android:layout_alignLeft="@+id/iv_pick5_home_logo"
-            android:layout_alignStart="@+id/iv_pick5_home_logo"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/iv_pick5_home_logo"
             android:layout_alignRight="@+id/iv_pick5_home_logo"
             android:layout_alignEnd="@+id/iv_pick5_home_logo"
-            android:gravity="center_horizontal" />
+            android:layout_alignLeft="@+id/iv_pick5_home_logo"
+            android:layout_alignStart="@+id/iv_pick5_home_logo"
+            android:layout_alignParentBottom="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,12 +85,12 @@
             android:textColor="@color/abc_primary_text_material_dark"
             android:gravity="center_horizontal"
             android:textSize="12sp"
-            android:layout_alignBottom="@+id/iv_pick5_away_logo"
+            android:layout_below="@+id/iv_pick5_away_logo"
+            android:layout_alignLeft="@+id/iv_pick5_away_logo"
+            android:layout_alignStart="@+id/iv_pick5_away_logo"
             android:layout_alignRight="@+id/iv_pick5_away_logo"
             android:layout_alignEnd="@+id/iv_pick5_away_logo"
-            android:layout_toEndOf="@+id/tv_pick5_date"
-            android:layout_alignLeft="@+id/iv_pick5_away_logo"
-            android:layout_alignStart="@+id/iv_pick5_away_logo" />
+            android:layout_alignParentBottom="true" />
 
         <TextView
             android:layout_width="wrap_content"

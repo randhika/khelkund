@@ -2,6 +2,7 @@ package com.appacitive.khelkund.fragments;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -16,6 +17,9 @@ import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.model.History;
 import com.appacitive.khelkund.model.Team;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -103,8 +107,28 @@ public class TeamOverviewFragment extends Fragment {
         dataSet.setLineWidth(3);
         LineData lineData = new LineData(oppositions, new ArrayList<LineDataSet>(){{add(dataSet);}});
         mChart.setData(lineData);
-
+        showOverlayTutorial();
         return rootView;
+    }
+
+    private void showOverlayTutorial() {
+
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                new ShowcaseView.Builder(getActivity())
+                        .setTarget(ViewTarget.NONE)
+                        .setContentText("Swipe left to view your squad")
+                        .setContentTitle("Your team details appear here")
+                        .hideOnTouchOutside()
+                        .singleShot(123)
+                        .build().hideButton();
+            }
+        };
+        new Handler().postDelayed(runnable, 1500);
+
+
     }
 
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
@@ -52,7 +53,10 @@ public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHol
         holder.venue.setText(match.getVenue());
         Picasso.with(KhelkundApplication.getAppContext()).load(getTeamLogo(match.getAwayTeamShortName())).into(holder.awayLogo);
         Picasso.with(KhelkundApplication.getAppContext()).load(getTeamLogo(match.getHomeTeamShortName())).into(holder.homeLogo);
-        holder.card.setBackgroundResource(R.drawable.background);
+        holder.relativeLayout.setBackgroundResource(R.drawable.background);
+        holder.card.setCardElevation(8);
+        holder.card.setPreventCornerOverlap(true);
+
         holder.card.setOnClickListener(null);
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +112,8 @@ public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHol
         public TextView venue;
         @InjectView(R.id.card_view_pick5)
         public CardView card;
+        @InjectView(R.id.rl_pick5_match)
+        public RelativeLayout relativeLayout;
 
         public Pick5ViewHolder(View itemView) {
             super(itemView);

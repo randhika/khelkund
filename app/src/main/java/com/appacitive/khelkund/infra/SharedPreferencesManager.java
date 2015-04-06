@@ -19,6 +19,17 @@ public class SharedPreferencesManager {
         return ReadKeyValueAsInteger("total_teams_count");
     }
 
+    public static boolean getFantasyTutorial()
+    {
+        SharedPreferences sharedPreferences = KhelkundApplication.getAppContext().getSharedPreferences("khelkund", Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("fantasy_tutorial_status", false);
+    }
+
+    public static void setFantasyTutorialDone()
+    {
+        WriteKeyValue("fantasy_tutorial_status", true);
+    }
+
 
     public static void  WriteTotalTeamsCount(int count)
     {
@@ -35,6 +46,14 @@ public class SharedPreferencesManager {
         SharedPreferences sharedPreferences = KhelkundApplication.getAppContext().getSharedPreferences("khelkund", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
+        editor.commit();
+    }
+
+    public static void WriteKeyValue(String key, boolean value)
+    {
+        SharedPreferences sharedPreferences = KhelkundApplication.getAppContext().getSharedPreferences("khelkund", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, value);
         editor.commit();
     }
 

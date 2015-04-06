@@ -33,6 +33,9 @@ import com.appacitive.khelkund.model.TeamHelper;
 import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.events.EmptyPlayerCardClickedEvent;
 import com.appacitive.khelkund.model.events.FilledPlayerCardClickedEvent;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.enums.SnackbarType;
@@ -443,6 +446,8 @@ public class EditTeamActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        
+//        showSaveTeamTutorialOverlay();
         // check if the request code is same as what is passed
         if (resultCode != RESULT_OK)
             return;
@@ -473,6 +478,16 @@ public class EditTeamActivity extends ActionBarActivity {
             String playerId = data.getStringExtra("player_id");
             tryAddPlayer(playerId);
         }
+    }
+
+    private void showSaveTeamTutorialOverlay() {
+        new ShowcaseView.Builder(this)
+                .setTarget(new ActionItemTarget(EditTeamActivity.this, R.id.action_save))
+                .setContentTitle("Don't forget to save your team.")
+//                .setContentText("This is highlighting the Home button")
+//                .singleShot(789)
+                .hideOnTouchOutside()
+                .build().show();
     }
 
     private void tryAddPlayer(String playerId) {
