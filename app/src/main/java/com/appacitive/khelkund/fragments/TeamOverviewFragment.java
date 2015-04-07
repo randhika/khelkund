@@ -122,11 +122,11 @@ public class TeamOverviewFragment extends Fragment {
                         .setContentText("Swipe left to view your squad")
                         .setContentTitle("Your team details appear here")
                         .hideOnTouchOutside()
-                        .singleShot(123)
+                        .singleShot(11)
                         .build().hideButton();
             }
         };
-        new Handler().postDelayed(runnable, 1500);
+        new Handler().postDelayed(runnable, 500);
 
 
     }

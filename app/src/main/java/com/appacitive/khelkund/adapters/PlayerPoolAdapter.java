@@ -16,6 +16,9 @@ import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.events.PlayerChosenEvent;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import io.realm.RealmResults;
@@ -31,6 +34,17 @@ public class PlayerPoolAdapter extends RecyclerView.Adapter<PlayerPoolAdapter.Po
         this.mPlayers = players;
     }
 
+    private static final Map<String, String> mTeamNameMappings = new HashMap<String, String>(){{
+        put("KXIP", "King's Eleven Punjab");
+        put("MI", "Mumbai Indians");
+        put("SRH", "Sunrisers Hyderabad");
+        put("DD", "Delhi Daredevils");
+        put("RCB", "Royal Challenger's Bangalore");
+        put("RR", "Rajasthan Royals");
+        put("CSK", "Chennai Super Kings");
+        put("KKR", "Kolkata Knight Riders");
+    }};
+
     @Override
     public PoolViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_player_pool, parent, false);
@@ -40,9 +54,9 @@ public class PlayerPoolAdapter extends RecyclerView.Adapter<PlayerPoolAdapter.Po
     @Override
     public void onBindViewHolder(final PoolViewHolder holder, final int position) {
         final Player player = mPlayers.get(position);
-        holder.name.setText(player.getDisplayName());
+        holder.name.setText(player.getFirstName() + " " + player.getLastName());
         holder.points.setText(String.valueOf(player.getPoints()));
-        holder.team.setText(player.getShortTeamName());
+        holder.team.setText(mTeamNameMappings.get(player.getShortTeamName()));
         holder.price.setText("$ " + String.valueOf(player.getPrice()));
         int totalTeams = SharedPreferencesManager.ReadTotalTeamsCount();
         if(totalTeams != 0)

@@ -123,15 +123,14 @@ public class RegisterActivity extends ActionBarActivity {
                 if(result.optJSONObject("User") == null)
                 {
                     SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), RegisterActivity.this);
-//                    SnackBarManager.showError("Something went wrong", RegisterActivity.this);
                     return;
                 }
-                KhelkundUser user = new KhelkundUser(result.optJSONObject("User"));
-                SharedPreferencesManager.WriteUserId(user.getId());
-                StorageManager manager = new StorageManager();
-                manager.SaveUser(user);
-
-                Intent homeIntent = new Intent(RegisterActivity.this, HomeActivity.class);
+//                KhelkundUser user = new KhelkundUser(result.optJSONObject("User"));
+//                SharedPreferencesManager.WriteUserId(user.getId());
+//                StorageManager manager = new StorageManager();
+//                manager.SaveUser(user);
+                SnackBarManager.showSuccess("An email verification link has been sent to " + mEmail.getText().toString() + ". Don't forget to check your spam folder.", RegisterActivity.this);
+                Intent homeIntent = new Intent(RegisterActivity.this, EmailLoginActivity.class);
                 startActivity(homeIntent);
             }
 

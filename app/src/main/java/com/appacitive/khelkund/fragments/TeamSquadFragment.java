@@ -1,14 +1,26 @@
 package com.appacitive.khelkund.fragments;
 
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 
 import com.appacitive.khelkund.R;
@@ -23,12 +35,11 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
+import java.io.OutputStream;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TeamSquadFragment extends Fragment {
 
     @InjectView(R.id.rv_squad)
@@ -75,7 +86,64 @@ public class TeamSquadFragment extends Fragment {
                 startActivity(editTeamIntent);
             }
         });
+        setHasOptionsMenu(true);
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_view_team, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_share:
+                shareTeam(mRecyclerView);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void shareTeam(View view) {
+        Bitmap bitmap = getScreenBitmap();
+
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/jpeg");
+
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, mTeam.getName());
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        Uri uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                values);
+
+        OutputStream outstream;
+        try {
+            outstream = getActivity().getContentResolver().openOutputStream(uri);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
+            outstream.close();
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+
+        share.putExtra(Intent.EXTRA_STREAM, uri);
+        startActivity(Intent.createChooser(share, "Share team using"));
+    }
+
+    private Bitmap getScreenBitmap() {
+        View v = getActivity().findViewById(R.id.squad_parent);
+        v.setDrawingCacheEnabled(true);
+        v.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+        v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
+
+        v.buildDrawingCache(true);
+        Bitmap b = Bitmap.createBitmap(v.getDrawingCache());
+        v.setDrawingCacheEnabled(false); // clear drawing cache
+        return b;
     }
 
     @Override
@@ -84,16 +152,21 @@ public class TeamSquadFragment extends Fragment {
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
+    public void setUserVisibleHint(final boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            new ShowcaseView.Builder(getActivity())
-                    .setTarget(new ViewTarget(mFab))
-                    .setContentTitle("Click here to edit your team")
-                    .hideOnTouchOutside()
-                    .singleShot(456)
-                    .build().hideButton();
-        } else {
-        }
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (isVisibleToUser && mFab != null) {
+                    new ShowcaseView.Builder(getActivity())
+                            .setTarget(new ViewTarget(mFab))
+                            .setContentTitle("Click here to edit your team")
+                            .hideOnTouchOutside()
+                            .singleShot(22)
+                            .build().hideButton();
+                }
+            }
+        };
+        new Handler().postDelayed(runnable, 500);
     }
 }

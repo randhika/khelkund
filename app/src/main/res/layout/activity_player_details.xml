@@ -165,14 +165,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="72dp"
-        android:background="@android:color/transparent"
+        android:background="@android:color/white"
         android:focusableInTouchMode="false"
         android:clickable="false"
         android:padding="8dp"
         android:textStyle="bold"
-        android:translationZ="5dp"
         android:elevation="5dp"
-        android:elegantTextHeight="false" />
+        android:elegantTextHeight="false"
+        android:enabled="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -187,7 +187,6 @@
         android:textColor="@android:color/white"
         android:padding="8dp"
         android:textStyle="bold"
-        android:translationZ="5dp"
         android:elevation="5dp" />
 
     <View

@@ -3,6 +3,8 @@ package com.appacitive.khelkund.infra;
 import android.app.Application;
 import android.content.Context;
 
+import com.appacitive.android.AppacitiveContext;
+import com.appacitive.core.model.Environment;
 import com.appacitive.khelkund.R;
 import com.crashlytics.android.Crashlytics;
 import com.digits.sdk.android.Digits;
@@ -31,7 +33,7 @@ public class KhelkundApplication extends Application {
         Fabric.with(this, new Crashlytics(), new Twitter(authConfig));
         Fabric.with(this, new TwitterCore(authConfig), new Digits());
         Fabric.with(this, new Twitter(authConfig));
-
+        AppacitiveContext.initialize("+HfTOp2nF8TnkyZVBblkTBLm6Cz6zIfKYdXBhV6Aag4=", Environment.live, getAppContext());
         FacebookSdk.sdkInitialize(context);
 
     }

@@ -100,7 +100,7 @@ public class CreateTeamActivity extends ActionBarActivity {
                 {
                     SnackbarManager.show(
                             Snackbar.with(getApplicationContext())
-                                    .text("You did not provide a name for your team"), CreateTeamActivity.this);
+                                    .text("Please provide a name for your team"), CreateTeamActivity.this);
                     return;
                 }
                 createTeam(mTeamName.getText().toString(), mLogos.get(selectedPosition));

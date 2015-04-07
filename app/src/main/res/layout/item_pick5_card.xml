@@ -44,22 +44,22 @@
             android:layout_height="100dp"
             android:id="@+id/iv_pick5_home_logo"
             android:src="@drawable/kxip"
-            android:layout_alignParentTop="true"
+            android:layout_marginLeft="35dp"
+            android:layout_below="@+id/tv_pick5_venue"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="48dp"
-            android:layout_marginLeft="36dp" />
+            android:layout_marginStart="35dp" />
 
         <ImageView
             android:layout_width="80dp"
             android:layout_height="100dp"
             android:id="@+id/iv_pick5_away_logo"
             android:src="@drawable/kkr"
-            android:layout_alignParentTop="true"
+            android:layout_marginRight="35dp"
+            android:layout_below="@+id/tv_pick5_venue"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="48dp"
-            android:layout_marginRight="36dp" />
+            android:layout_marginEnd="35dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,8 +98,12 @@
             android:text="Venue"
             android:id="@+id/tv_pick5_venue"
             android:layout_below="@+id/tv_pick5_date"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/abc_primary_text_material_dark" />
+            android:textColor="@color/abc_primary_text_material_dark"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal" />
 
     </RelativeLayout>
 

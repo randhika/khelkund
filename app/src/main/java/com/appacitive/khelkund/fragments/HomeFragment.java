@@ -138,7 +138,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        showTutorialOverlay();
         if (mTeam == null) {
             mTeam = new StorageManager().GetTeam(SharedPreferencesManager.ReadUserId());
         }
@@ -178,9 +177,9 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.card_view_pick5)
     public void onPick5Click() {
-//        Intent intent = new Intent(getActivity(), Pick5HomeActivity.class);
-//        startActivity(intent);
-        Toast.makeText(getActivity(),"This game is currently unavailable. Check back soon.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), Pick5HomeActivity.class);
+        startActivity(intent);
+//        Toast.makeText(getActivity(),"This game is currently unavailable. Check back soon.", Toast.LENGTH_SHORT).show();
     }
 
     private void fetchTeam(final String userId) {
@@ -212,17 +211,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
-//    private void showTutorialOverlay() {
-//        new ShowcaseView.Builder(getActivity())
-//                .setTarget(new ViewTarget(mFantasy))
-//                .setContentTitle("Welcome to Khelkund")
-//                .setContentText("Start by creating a fantasy team")
-//
-//                .singleShot(11)
-//                .hideOnTouchOutside()
-//                .build().show();
-//    }
 
     @Override
     public void onAttach(Activity activity) {

@@ -103,7 +103,7 @@ public class PlayerCardAdapter extends RecyclerView.Adapter<PlayerCardViewHolder
                 final Player player = mPlayers.get(position);
                 CardView cardView = ((FilledCardViewHolder) holder).cvFilledCard;
                 TextView name = (TextView) cardView.findViewById(R.id.tv_card_name);
-                name.setText(player.getFirstName().charAt(0) + " " + player.getLastName());
+                name.setText(player.getDisplayName());
                 ImageView star = (ImageView) cardView.findViewById(R.id.card_star);
                 if(mCaptainId != null)
                 {

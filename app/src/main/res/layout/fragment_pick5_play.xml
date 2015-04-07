@@ -5,24 +5,25 @@
     android:layout_height="match_parent"
     tools:context="com.appacitive.khelkund.fragments.Pick5PlayFragment">
 
-    <com.pkmmte.view.CircularImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/demo1"
-        android:background="#ffd3d3d3"
-        app:border="true"
-        app:border_color="#EEEEEE"
-        app:border_width="2dp"
-        app:shadow="true"
-        android:id="@+id/view5" />
-
 
     <com.appacitive.khelkund.infra.RoundImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/demo1"
-        android:layout_below="@+id/view5"
+        android:src="@drawable/demo2"
+        android:id="@+id/try1"
+
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <com.pkmmte.view.CircularImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/demo2"
+        android:id="@+id/try2"
+        android:layout_below="@+id/try1"
+        app:border="true"
+        app:border_color="#FFEE0D0D"
+        app:border_width="4dp"
+        app:shadow="true" />
 
 </RelativeLayout>

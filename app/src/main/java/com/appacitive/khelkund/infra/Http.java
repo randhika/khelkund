@@ -70,7 +70,7 @@ public class Http {
 
     public void delete(String url, final Map<String, String> headers, final APCallback callback) {
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url, new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if (callback != null)

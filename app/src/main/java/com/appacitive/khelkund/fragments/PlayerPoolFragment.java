@@ -77,18 +77,18 @@ public class PlayerPoolFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.menu_action_filter:
-                showFilterDialog();
-                return true;
-            default:
-                break;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//
+//            case R.id.menu_action_filter:
+//                showFilterDialog();
+//                return true;
+//            default:
+//                break;
+//        }
+//        return false;
+//    }
 
 
 

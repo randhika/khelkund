@@ -11,6 +11,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 
+import com.appacitive.core.AppacitiveConnection;
+import com.appacitive.core.AppacitiveDevice;
+import com.appacitive.core.model.Callback;
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.fragments.HomeFragment;
 import com.appacitive.khelkund.fragments.NavigationDrawerFragment;
@@ -24,6 +27,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import org.codechimp.apprater.AppRater;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -59,7 +63,7 @@ public class HomeActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         context = getApplicationContext();
-        String name =  context.getPackageName();
+
         if (checkPlayServices()) {
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
@@ -176,50 +180,24 @@ public class HomeActivity extends ActionBarActivity
     }
 
     private void sendRegistrationIdToBackend() {
-        Http http = new Http();
-        http.put(Urls.AppacitiveUrls.getRegisterDeviceUrl(), Urls.AppacitiveUrls.getHeaders(), getJsonRequestObject().toString(), new APCallback() {
-            @Override
-            public void success(JSONObject result) {
-                if (result.optJSONObject("connection") == null) {
-                    SnackBarManager.showError("Device could not be registered for push notifications", HomeActivity.this);
-                }
-            }
+        AppacitiveDevice device = new AppacitiveDevice();
+        device.setDeviceToken(regid);
+        device.setDeviceType("android");
 
-            @Override
-            public void failure(Exception e) {
-                SnackBarManager.showError("Device could not be registered for push notifications", HomeActivity.this);
-            }
-        });
-    }
+        new AppacitiveConnection("user_device").fromExistingUser("user", Long.valueOf(SharedPreferencesManager.ReadUserId()))
+            .toNewDevice("device", device)
+                .createInBackground(new Callback<AppacitiveConnection>() {
+                    @Override
+                    public void success(AppacitiveConnection result) {
 
+                    }
 
+                    @Override
+                    public void failure(AppacitiveConnection result, Exception e) {
+                        SnackBarManager.showError("Device could not be registered for push notifications", HomeActivity.this);
+                    }
+                });
 
-    private JSONObject getJsonRequestObject()
-    {
-        JSONObject request = new JSONObject();
-        try {
-
-            JSONObject endpointA = new JSONObject();
-            JSONObject endpointB = new JSONObject();
-            JSONObject device = new JSONObject();
-
-            device.put("devicetype", "android");
-            device.put("devicetoken", regid);
-
-            endpointA.put("label", "user");
-            endpointA.put("objectid", SharedPreferencesManager.ReadUserId());
-
-            endpointB.put("label", "device");
-            endpointB.put("object", device);
-
-            request.put("__endpointa", endpointA);
-            request.put("__endpointb", endpointB);
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return request;
     }
 
     private void storeRegistrationId(Context context, String regId) {

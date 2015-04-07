@@ -2,11 +2,14 @@
 
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view_empty"
     android:layout_width="match_parent"
     android:layout_height="105dp"
     android:layout_centerInParent="true"
     android:layout_margin="4dp"
+    android:elevation="0dp"
+    app:cardCornerRadius="0dp"
     >
 
     <RelativeLayout

@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Schedule"
+                android:text="IPL T20 Schedule"
                 android:id="@+id/tv_nav_schedule"
                 android:gravity="center_vertical"
                 android:layout_below="@+id/tv_nav_leaderboard"
@@ -108,10 +108,10 @@
                 android:text="Licenses"
                 android:id="@+id/tv_nav_licenses"
                 android:gravity="center_vertical"
+                android:textColor="@color/primary_dark_material_dark"
                 android:layout_below="@+id/tv_nav_terms"
-                android:layout_alignRight="@+id/tv_nav_schedule"
-                android:layout_alignEnd="@+id/tv_nav_schedule"
-                android:textColor="@color/primary_dark_material_dark" />
+                android:layout_alignLeft="@+id/tv_nav_terms"
+                android:layout_alignStart="@+id/tv_nav_terms" />
 
             <TextView
                 android:layout_width="wrap_content"

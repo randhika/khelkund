@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.fragments.TeamOverviewFragment;
 import com.appacitive.khelkund.fragments.TeamSquadFragment;
+import com.appacitive.khelkund.model.TeamHelper;
 
 public class ViewTeamActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -83,6 +85,17 @@ public class ViewTeamActivity extends ActionBarActivity implements ActionBar.Tab
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

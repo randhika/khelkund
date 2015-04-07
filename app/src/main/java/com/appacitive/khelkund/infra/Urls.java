@@ -26,6 +26,11 @@ public class Urls {
         {
             return baseUrl + "PickThemFiveService.svc/GetMatches";
         }
+
+        public static String getMatchesDetailsUrl(String userId, String matchId)
+        {
+            return baseUrl + String.format("PickThemFiveService.svc/GetPickThemTeam/%s/%s", matchId, userId);
+        }
     }
 
     public static class TeamUrls
@@ -55,13 +60,13 @@ public class Urls {
 
         public static String getAllPlayersUrl()
         {
-            return "https://apis.appacitive.com/v1.0/connection/series_player/series/87810459553628582/find?returnedge=false?pnum=1&psize=300";
+            return "https://apis.appacitive.com/v1.0/connection/series_player/series/88663391933170156/find?returnedge=false?pnum=1&psize=300";
         }
 
         public static HashMap<String, String> getHeaders()
         {
             return new HashMap<String, String>(){{
-                put("Appacitive-Environment", "sandbox");
+                put("Appacitive-Environment", "live");
                 put("Appacitive-Apikey", "+HfTOp2nF8TnkyZVBblkTBLm6Cz6zIfKYdXBhV6Aag4=");
             }};
         }

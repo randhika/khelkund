@@ -41,6 +41,7 @@ import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.enums.SnackbarType;
 import com.squareup.otto.Subscribe;
 
+import org.codechimp.apprater.AppRater;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -308,7 +309,7 @@ public class EditTeamActivity extends ActionBarActivity {
         public void onClick(View view) {
             //  reset fields
             mTeamMutated.setCaptainId(null);
-            mTeamMutated.setBalance(10000000);
+            mTeamMutated.setBalance(mTeamOriginal.getBalance());
             mTeamMutated.setPlayers(new RealmList<Player>());
 
             Random random = new Random();
@@ -582,6 +583,8 @@ public class EditTeamActivity extends ActionBarActivity {
                 mTeamMutated = TeamHelper.clone(mTeamOriginal);
                 resetAdapters(mTeamMutated);
                 updateStats(mTeamMutated);
+                AppRater.setLightTheme();
+                AppRater.app_launched(EditTeamActivity.this, 2, 2, 2, 2);
             }
 
             @Override
