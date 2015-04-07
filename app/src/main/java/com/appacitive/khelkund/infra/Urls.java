@@ -60,7 +60,7 @@ public class Urls {
 
         public static String getAllPlayersUrl()
         {
-            return "https://apis.appacitive.com/v1.0/connection/series_player/series/88663391933170156/find?returnedge=false?pnum=1&psize=300";
+            return "https://apis.appacitive.com/v1.0/connection/series_player/series/88663391933170156/find?returnedge=false?pnum=1&psize=300&orderBy=price&isAsc=false";
         }
 
         public static HashMap<String, String> getHeaders()

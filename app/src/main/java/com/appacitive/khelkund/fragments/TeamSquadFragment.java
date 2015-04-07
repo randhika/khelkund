@@ -86,64 +86,7 @@ public class TeamSquadFragment extends Fragment {
                 startActivity(editTeamIntent);
             }
         });
-        setHasOptionsMenu(true);
         return rootView;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_view_team, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.action_share:
-                shareTeam(mRecyclerView);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void shareTeam(View view) {
-        Bitmap bitmap = getScreenBitmap();
-
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("image/jpeg");
-
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE, mTeam.getName());
-        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-        Uri uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                values);
-
-        OutputStream outstream;
-        try {
-            outstream = getActivity().getContentResolver().openOutputStream(uri);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
-            outstream.close();
-        } catch (Exception e) {
-            System.err.println(e.toString());
-        }
-
-        share.putExtra(Intent.EXTRA_STREAM, uri);
-        startActivity(Intent.createChooser(share, "Share team using"));
-    }
-
-    private Bitmap getScreenBitmap() {
-        View v = getActivity().findViewById(R.id.squad_parent);
-        v.setDrawingCacheEnabled(true);
-        v.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-        v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
-
-        v.buildDrawingCache(true);
-        Bitmap b = Bitmap.createBitmap(v.getDrawingCache());
-        v.setDrawingCacheEnabled(false); // clear drawing cache
-        return b;
     }
 
     @Override

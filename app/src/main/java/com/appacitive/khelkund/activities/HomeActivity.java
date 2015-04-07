@@ -197,7 +197,6 @@ public class HomeActivity extends ActionBarActivity
                         SnackBarManager.showError("Device could not be registered for push notifications", HomeActivity.this);
                     }
                 });
-
     }
 
     private void storeRegistrationId(Context context, String regId) {

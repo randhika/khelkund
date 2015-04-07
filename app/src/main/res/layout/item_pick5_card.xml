@@ -41,7 +41,7 @@
 
         <ImageView
             android:layout_width="80dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:id="@+id/iv_pick5_home_logo"
             android:src="@drawable/kxip"
             android:layout_marginLeft="35dp"
@@ -52,7 +52,7 @@
 
         <ImageView
             android:layout_width="80dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:id="@+id/iv_pick5_away_logo"
             android:src="@drawable/kkr"
             android:layout_marginRight="35dp"

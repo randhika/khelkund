@@ -175,12 +175,14 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:scrollbars="vertical"
+        android:id="@+id/edit_team_parent_scroll"
         android:layout_below="@+id/view2"
         >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/edit_team_scroll_child"
             android:layout_below="@+id/view2">
 
             <TextView

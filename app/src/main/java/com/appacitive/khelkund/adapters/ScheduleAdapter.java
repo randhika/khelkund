@@ -75,7 +75,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         if(teamName.equals("RCB"))
             return R.drawable.rcb;
 
-        return R.drawable.broncos;
+        return R.drawable.rcb;
     }
 
     @Override

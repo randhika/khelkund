@@ -88,7 +88,7 @@ public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHol
         if(teamName.equals("RCB"))
             return R.drawable.rcb;
 
-        return R.drawable.broncos;
+        return R.drawable.rcb;
     }
 
     @Override

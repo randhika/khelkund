@@ -177,9 +177,9 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.card_view_pick5)
     public void onPick5Click() {
-        Intent intent = new Intent(getActivity(), Pick5HomeActivity.class);
-        startActivity(intent);
-//        Toast.makeText(getActivity(),"This game is currently unavailable. Check back soon.", Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(getActivity(), Pick5HomeActivity.class);
+//        startActivity(intent);
+        Toast.makeText(getActivity(),"This game is currently unavailable. Check back soon.", Toast.LENGTH_SHORT).show();
     }
 
     private void fetchTeam(final String userId) {

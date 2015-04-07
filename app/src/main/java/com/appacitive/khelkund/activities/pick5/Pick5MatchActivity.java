@@ -38,12 +38,13 @@ public class Pick5MatchActivity extends ActionBarActivity {
         String matchId = getIntent().getStringExtra("match_id");
         String userId = SharedPreferencesManager.ReadUserId();
 
-            Pick5PlayFragment playPick6Fragment = Pick5PlayFragment.newInstance(mDetails);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, playPick6Fragment).commit();
-
-
 //        fetchMatchDetails(userId, matchId);
+
+        Pick5PlayFragment playPick5Fragment = Pick5PlayFragment.newInstance(mDetails);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, playPick5Fragment).commit();
+
+
 
         //  if match is over and user did not play
 //        if(mDetails.getMatchDetails().getMatchStatus() == 2 && mDetails.getPlayers().size() == 0)

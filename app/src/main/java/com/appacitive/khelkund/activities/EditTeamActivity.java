@@ -2,18 +2,25 @@ package com.appacitive.khelkund.activities;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
@@ -44,6 +51,7 @@ import com.squareup.otto.Subscribe;
 import org.codechimp.apprater.AppRater;
 import org.json.JSONObject;
 
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -192,7 +200,47 @@ public class EditTeamActivity extends ActionBarActivity {
             showSuccess("Your changes have been reset");
             return true;
         }
+        if(item.getItemId() == R.id.action_share)
+        {
+            shareTeam();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void shareTeam() {
+        Bitmap bitmap = getScreenBitmap();
+
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/jpeg");
+
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, mTeamOriginal.getName());
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                values);
+
+        OutputStream outstream;
+        try {
+            outstream = getContentResolver().openOutputStream(uri);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
+            outstream.close();
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+
+        share.putExtra(Intent.EXTRA_STREAM, uri);
+        startActivity(Intent.createChooser(share, "Share team using"));
+    }
+
+    private Bitmap getScreenBitmap() {
+
+        ScrollView iv = (ScrollView) findViewById(R.id.edit_team_parent_scroll);
+        Bitmap bitmap = Bitmap.createBitmap(iv.getChildAt(0).getWidth(), iv.getChildAt(0).getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bitmap);
+        c.drawColor(Color.WHITE);
+        iv.getChildAt(0).draw(c);
+        return (bitmap);
     }
 
     private void resetAdapters(Team team) {
@@ -309,7 +357,8 @@ public class EditTeamActivity extends ActionBarActivity {
         public void onClick(View view) {
             //  reset fields
             mTeamMutated.setCaptainId(null);
-            mTeamMutated.setBalance(mTeamOriginal.getBalance());
+//            mTeamMutated.setBalance(mTeamOriginal.getBalance());
+            mTeamMutated.setBalance(10000000);
             mTeamMutated.setPlayers(new RealmList<Player>());
 
             Random random = new Random();

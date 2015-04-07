@@ -46,7 +46,7 @@ public class SquadAdapter extends RecyclerView.Adapter<SquadAdapter.SquadViewHol
     @Override
     public void onBindViewHolder(SquadViewHolder holder, int position) {
         Player player = mPlayers.get(position);
-        holder.name.setText(player.getDisplayName());
+        holder.name.setText(player.getFirstName() + " " + player.getLastName());
         holder.points.setText(String.valueOf(player.getPoints()));
         holder.team.setText(mTeamNameMappings.get(player.getShortTeamName()));
         Picasso.with(KhelkundApplication.getAppContext()).load(player.getImageUrl()).into(holder.logo);

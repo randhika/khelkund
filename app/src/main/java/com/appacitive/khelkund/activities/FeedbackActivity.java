@@ -72,5 +72,28 @@ public class FeedbackActivity extends ActionBarActivity {
         });
     }
 
+//    @OnClick(R.id.btn_feedback)
+//    public void onSubmit()
+//    {
+//        String userId = SharedPreferencesManager.ReadUserId();
+//        String to1 = "khelkund@gmail.com";
+////        String to2= "sathley@appacitive.com";
+//        String message = mFeedbackForm.getText().toString();
+//        if(TextUtils.isEmpty(message))
+//            return;
+//        String subject = "Khelkund Feedback : User " + userId;
+//
+//        Intent mEmail = new Intent(Intent.ACTION_SEND);
+//        mEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{ to1});
+//        mEmail.putExtra(Intent.EXTRA_SUBJECT, subject);
+//        mEmail.putExtra(Intent.EXTRA_TEXT, message);
+//
+//        // prompts to choose email client
+//        mEmail.setType("message/rfc822");
+//
+//        startActivity(Intent.createChooser(mEmail, "Send email via"));
+//        finish();
+//    }
+
 
 }

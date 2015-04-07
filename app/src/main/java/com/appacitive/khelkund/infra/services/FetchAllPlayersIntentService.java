@@ -11,11 +11,9 @@ import com.appacitive.core.query.AppacitiveQuery;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
-import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.Player;
-import com.crashlytics.android.Crashlytics;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -52,8 +50,11 @@ public class FetchAllPlayersIntentService extends IntentService {
 
         //  Fetch all players from server
         AppacitiveQuery query = new AppacitiveQuery();
+        query.orderBy = "price";
+        query.isAscending = false;
         query.pageSize = 300;
         query.pageNumber = 1;
+
         AppacitiveObject.getConnectedObjectsInBackground("series_player", "series", 88663391933170156l, query, null, new Callback<ConnectedObjectsResponse>() {
             @Override
             public void success(ConnectedObjectsResponse result) {
@@ -70,6 +71,7 @@ public class FetchAllPlayersIntentService extends IntentService {
                     player.setImageUrl(apPlayer.getPropertyAsString("image_url"));
                     player.setDisplayName(apPlayer.getPropertyAsString("displayname"));
                     player.setId(String.valueOf(apPlayer.getId()));
+
                     Map<String, String> popularityAggregate = apPlayer.getAggregate("popularity_count");
                     if (popularityAggregate != null && popularityAggregate.keySet().contains("all"))
                         player.setPopularity((int) Double.parseDouble(popularityAggregate.get("all")));

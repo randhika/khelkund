@@ -7,7 +7,7 @@
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:id="@+id/pick5_toolbar"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         android:background="@color/primary_dark">
 
         <RelativeLayout
@@ -93,8 +93,8 @@
                 android:layout_marginBottom="24dp" />
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:id="@+id/imageView12"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
@@ -103,8 +103,8 @@
                 android:layout_marginLeft="24dp" />
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:id="@+id/imageView13"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"

@@ -73,9 +73,12 @@ public class GcmIntentService extends IntentService {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(bundle.getString("alert")))
                         .setSmallIcon(R.drawable.launcher)
                         .setContentTitle(bundle.getString("title"))
-                        .setContentText(bundle.getString("alert"));
+//                        .setContentText(bundle.getString("alert"))
+                ;
 
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());

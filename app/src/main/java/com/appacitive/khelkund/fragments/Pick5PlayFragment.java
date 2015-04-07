@@ -32,7 +32,9 @@ public class Pick5PlayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_pick5_play, container, false);
+        View view = inflater.inflate(R.layout.fragment_pick5_play, container, false);
+        
+        return view;
     }
 
 

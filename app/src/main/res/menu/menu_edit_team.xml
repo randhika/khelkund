@@ -12,4 +12,9 @@
         android:title="RESET"
         app:showAsAction="ifRoom"/>
 
+    <item android:id="@+id/action_share"
+        android:title="SHARE"
+        android:icon="@drawable/abc_ic_menu_share_mtrl_alpha"
+        app:showAsAction="ifRoom" />
+
 </menu>
