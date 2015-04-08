@@ -22,17 +22,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.activities.AboutUsActivity;
-import com.appacitive.khelkund.activities.FeedbackActivity;
-import com.appacitive.khelkund.activities.HowToPlayActivity;
-import com.appacitive.khelkund.activities.LeaderboardActivity;
-import com.appacitive.khelkund.activities.EmailLoginActivity;
-import com.appacitive.khelkund.activities.LicencesActivity;
+import com.appacitive.khelkund.navigationdrawer.FeedbackActivity;
+import com.appacitive.khelkund.navigationdrawer.HowToPlayActivity;
+import com.appacitive.khelkund.navigationdrawer.LeaderboardActivity;
+import com.appacitive.khelkund.navigationdrawer.LicencesActivity;
 import com.appacitive.khelkund.activities.LoginActivity;
-import com.appacitive.khelkund.activities.PrizesActivity;
-import com.appacitive.khelkund.activities.ScheduleActivity;
-import com.appacitive.khelkund.activities.ScoringChartActivity;
-import com.appacitive.khelkund.activities.TermsAndPolicyActivity;
+import com.appacitive.khelkund.navigationdrawer.PrizesActivity;
+import com.appacitive.khelkund.navigationdrawer.ScheduleActivity;
+import com.appacitive.khelkund.navigationdrawer.ScoringChartActivity;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.digits.sdk.android.Digits;
@@ -134,13 +131,6 @@ public class NavigationDrawerFragment extends Fragment {
     {
         Uri uri = Uri.parse("http://www.khelkund.com/ipl/terms.aspx");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.tv_nav_aboutus)
-    public void onAboutUsClick()
-    {
-        Intent intent = new Intent(getActivity(), AboutUsActivity.class);
         startActivity(intent);
     }
 

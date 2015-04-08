@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.adapters.Pick5Adapter;
+import com.appacitive.khelkund.adapters.ScheduleAdapter;
 import com.appacitive.khelkund.adapters.SquadAdapter;
 import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.StorageManager;
@@ -19,10 +20,12 @@ import com.appacitive.khelkund.model.Match;
 import com.appacitive.khelkund.model.events.MatchSelectedEvent;
 import com.squareup.otto.Subscribe;
 
+import java.util.Date;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import jp.wasabeef.recyclerview.animators.adapters.SlideInLeftAnimationAdapter;
 
 public class Pick5HomeActivity extends ActionBarActivity {
 
@@ -44,8 +47,20 @@ public class Pick5HomeActivity extends ActionBarActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new Pick5Adapter(mMatches);
+
+        Pick5Adapter scheduleAdapter = new Pick5Adapter(mMatches);
+        mAdapter = new SlideInLeftAnimationAdapter(scheduleAdapter);
         mRecyclerView.setAdapter(mAdapter);
+        int position = 0;
+
+        for(int i = 1 ; i < mMatches.size(); i++)
+        {
+            if(mMatches.get(i).getStartDate().after(new Date()) && mMatches.get(i-1).getStartDate().before(new Date()))
+                position = i;
+
+
+        }
+        mRecyclerView.smoothScrollToPosition(position);
     }
 
     @Override

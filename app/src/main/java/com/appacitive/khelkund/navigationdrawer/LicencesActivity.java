@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.activities;
+package com.appacitive.khelkund.navigationdrawer;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;

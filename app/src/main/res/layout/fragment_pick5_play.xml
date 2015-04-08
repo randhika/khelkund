@@ -13,6 +13,37 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <com.makeramen.roundedimageview.RoundedImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/imageView1"
+                android:src="@drawable/bowler"
+                app:riv_corner_radius="30dip"
+                android:scaleType="centerInside"
+                app:riv_border_width="2dip"
+                app:riv_border_color="#333333"
+                app:riv_mutate_background="true"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:riv_oval="true"
+                android:background="#ffd3d3d3" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/imageView2"
+                android:src="@drawable/demo2"
+                app:riv_corner_radius="30dip"
+                android:scaleType="center"
+                app:riv_border_width="2dip"
+                app:riv_border_color="#333333"
+                app:riv_mutate_background="true"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:riv_oval="true"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/imageView1"
+                android:layout_toEndOf="@+id/imageView1"
+                android:background="@color/KXIP" />
+
             <!--<de.hdodenhof.circleimageview.CircleImageView-->
                 <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
                 <!--android:layout_width="60dp"-->
@@ -143,4 +174,5 @@
 
         </RelativeLayout>
     </ScrollView>
+
 </RelativeLayout>

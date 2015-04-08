@@ -175,7 +175,7 @@
         <service android:name=".infra.services.GcmIntentService" />
 
         <activity
-            android:name=".activities.LeaderboardActivity"
+            android:name=".navigationdrawer.LeaderboardActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_leaderboard"
             android:parentActivityName=".activities.HomeActivity">
@@ -184,7 +184,7 @@
                 android:value="com.appacitive.khelkund.activities.HomeActivity" />
         </activity>
         <activity
-            android:name=".activities.FeedbackActivity"
+            android:name=".navigationdrawer.FeedbackActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_feedback"
             android:parentActivityName=".activities.HomeActivity">
@@ -193,7 +193,7 @@
                 android:value="com.appacitive.khelkund.activities.HomeActivity" />
         </activity>
         <activity
-            android:name=".activities.HowToPlayActivity"
+            android:name=".navigationdrawer.HowToPlayActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_how_to_play"
             android:parentActivityName=".activities.HomeActivity">
@@ -202,7 +202,7 @@
                 android:value="com.appacitive.khelkund.activities.HomeActivity" />
         </activity>
         <activity
-            android:name=".activities.LicencesActivity"
+            android:name=".navigationdrawer.LicencesActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_licences"
             android:parentActivityName=".activities.HomeActivity">
@@ -210,17 +210,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.HomeActivity" />
         </activity>
+
         <activity
-            android:name=".activities.AboutUsActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_about_us"
-            android:parentActivityName=".activities.HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
-        </activity>
-        <activity
-            android:name=".activities.ScheduleActivity"
+            android:name=".navigationdrawer.ScheduleActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_schedule"
             android:parentActivityName=".activities.HomeActivity">
@@ -229,7 +221,7 @@
                 android:value="com.appacitive.khelkund.activities.HomeActivity" />
         </activity>
         <activity
-            android:name=".activities.ScoringChartActivity"
+            android:name=".navigationdrawer.ScoringChartActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_scoring_chart"
             android:parentActivityName=".activities.HomeActivity">
@@ -238,11 +230,11 @@
                 android:value="com.appacitive.khelkund.activities.HomeActivity" />
         </activity>
         <activity
-            android:name=".activities.TermsAndPolicyActivity"
+            android:name=".navigationdrawer.TermsAndPolicyActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_terms_and_policy"></activity>
         <activity
-            android:name=".activities.PrizesActivity"
+            android:name=".navigationdrawer.PrizesActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_prizes"
             android:parentActivityName=".activities.HomeActivity">

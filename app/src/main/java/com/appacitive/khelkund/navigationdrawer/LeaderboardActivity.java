@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.activities;
+package com.appacitive.khelkund.navigationdrawer;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.adapters.LeaderboardAdapter;
-import com.appacitive.khelkund.adapters.SquadAdapter;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
@@ -24,9 +23,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class LeaderboardActivity extends ActionBarActivity {
 

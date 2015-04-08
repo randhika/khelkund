@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -38,14 +41,21 @@ import com.appacitive.khelkund.model.PlayerType;
 import com.appacitive.khelkund.model.Team;
 import com.appacitive.khelkund.model.TeamHelper;
 import com.appacitive.khelkund.model.KhelkundUser;
+import com.appacitive.khelkund.model.events.AlreadyOwnedPlayerClickedEvent;
+import com.appacitive.khelkund.model.events.CardErrorEvent;
 import com.appacitive.khelkund.model.events.EmptyPlayerCardClickedEvent;
 import com.appacitive.khelkund.model.events.FilledPlayerCardClickedEvent;
+import com.appacitive.khelkund.model.events.NewPlayerAddedEvent;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.enums.SnackbarType;
+import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
 import org.codechimp.apprater.AppRater;
@@ -62,6 +72,8 @@ import java.util.Random;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import io.realm.RealmList;
+import jp.wasabeef.recyclerview.animators.LandingAnimator;
+import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
 
 public class EditTeamActivity extends ActionBarActivity {
 
@@ -118,16 +130,16 @@ public class EditTeamActivity extends ActionBarActivity {
     public RecyclerView mWicketKeeperRecyclerView;
 
     public RecyclerView.LayoutManager mBatsmenLayoutManager = null;
-    public RecyclerView.Adapter mBatsmenAdapter;
+    public PlayerCardAdapter mBatsmenAdapter;
 
     public RecyclerView.LayoutManager mBowlersLayoutManager = null;
-    public RecyclerView.Adapter mBowlersAdapter;
+    public PlayerCardAdapter mBowlersAdapter;
 
     public RecyclerView.LayoutManager mAllRoundersLayoutManager = null;
-    public RecyclerView.Adapter mAllRoundersAdapter;
+    public PlayerCardAdapter mAllRoundersAdapter;
 
     public RecyclerView.LayoutManager mWicketKeepersLayoutManager = null;
-    public RecyclerView.Adapter mWicketKeepersAdapter;
+    public PlayerCardAdapter mWicketKeepersAdapter;
 
     @Override
     protected void onDestroy() {
@@ -157,6 +169,7 @@ public class EditTeamActivity extends ActionBarActivity {
         mBatsmenAdapter = new PlayerCardAdapter(TeamHelper.getBatsmen(mTeamMutated), formation.BatsmenCount, R.drawable.batsman, PlayerType.BATSMAN, mTeamMutated.getCaptainId());
         mBatsmanRecyclerView.setAdapter(mBatsmenAdapter);
 
+
         mBowlerRecyclerView.setHasFixedSize(false);
         mBowlersLayoutManager = new VerticallyWrappedGridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
         mBowlerRecyclerView.setLayoutManager(mBowlersLayoutManager);
@@ -177,7 +190,6 @@ public class EditTeamActivity extends ActionBarActivity {
 
         mChangeFormation.setOnClickListener(formationChangeClickListener);
         mAutoSelect.setOnClickListener(autoSelectClickListener);
-
     }
 
     @Override
@@ -196,7 +208,7 @@ public class EditTeamActivity extends ActionBarActivity {
         if (item.getItemId() == R.id.action_reset) {
             mTeamMutated = TeamHelper.clone(mTeamOriginal);
             updateStats(mTeamMutated);
-            resetAdapters(mTeamMutated);
+            resetAdapters(mTeamMutated, false);
             showSuccess("Your changes have been reset");
             return true;
         }
@@ -243,19 +255,39 @@ public class EditTeamActivity extends ActionBarActivity {
         return (bitmap);
     }
 
-    private void resetAdapters(Team team) {
+    private void resetAdapters(Team team, boolean animate) {
         Formation formation = TeamHelper.getFormation(team);
-        mBatsmenAdapter = new PlayerCardAdapter(TeamHelper.getBatsmen(team), formation.BatsmenCount, R.drawable.batsman, PlayerType.BATSMAN, team.getCaptainId());
-        mBatsmanRecyclerView.setAdapter(mBatsmenAdapter);
-        mBowlersAdapter = new PlayerCardAdapter(TeamHelper.getBowlers(team), formation.BowlersCount, R.drawable.bowler, PlayerType.BOWLER, team.getCaptainId());
-        mBowlerRecyclerView.setAdapter(mBowlersAdapter);
-        mAllRoundersAdapter = new PlayerCardAdapter(TeamHelper.getAllRounders(team), formation.AllRoundersCount, R.drawable.allrounder, PlayerType.ALLROUNDER, team.getCaptainId());
-        mAllRounderRecyclerView.setAdapter(mAllRoundersAdapter);
-        mWicketKeepersAdapter = new PlayerCardAdapter(TeamHelper.getWicketKeepers(team), formation.WicketKeepersCount, R.drawable.wicketkeeper, PlayerType.WICKETKEEPER, team.getCaptainId());
-        mWicketKeeperRecyclerView.setAdapter(mWicketKeepersAdapter);
+
+        mBatsmenAdapter.resetDetails(TeamHelper.getBatsmen(team), formation.BatsmenCount, R.drawable.batsman, PlayerType.BATSMAN, team.getCaptainId());
+        mBatsmenAdapter.notifyDataSetChanged();
+
+        mBowlersAdapter.resetDetails(TeamHelper.getBowlers(team), formation.BowlersCount, R.drawable.bowler, PlayerType.BOWLER, team.getCaptainId());
+        mBowlersAdapter.notifyDataSetChanged();
+
+        mAllRoundersAdapter.resetDetails(TeamHelper.getAllRounders(team), formation.AllRoundersCount, R.drawable.allrounder, PlayerType.ALLROUNDER, team.getCaptainId());
+        mAllRoundersAdapter.notifyDataSetChanged();
+
+        mWicketKeepersAdapter.resetDetails(TeamHelper.getWicketKeepers(team), formation.WicketKeepersCount, R.drawable.wicketkeeper, PlayerType.WICKETKEEPER, team.getCaptainId());
+        mWicketKeepersAdapter.notifyDataSetChanged();
+
+//        mBatsmenAdapter = new PlayerCardAdapter(TeamHelper.getBatsmen(team), formation.BatsmenCount, R.drawable.batsman, PlayerType.BATSMAN, team.getCaptainId());
+//        mBatsmanRecyclerView.setAdapter(mBatsmenAdapter);
+//        mBowlersAdapter = new PlayerCardAdapter(TeamHelper.getBowlers(team), formation.BowlersCount, R.drawable.bowler, PlayerType.BOWLER, team.getCaptainId());
+//        mBowlerRecyclerView.setAdapter(mBowlersAdapter);
+//        mAllRoundersAdapter = new PlayerCardAdapter(TeamHelper.getAllRounders(team), formation.AllRoundersCount, R.drawable.allrounder, PlayerType.ALLROUNDER, team.getCaptainId());
+//        mAllRounderRecyclerView.setAdapter(mAllRoundersAdapter);
+//        mWicketKeepersAdapter = new PlayerCardAdapter(TeamHelper.getWicketKeepers(team), formation.WicketKeepersCount, R.drawable.wicketkeeper, PlayerType.WICKETKEEPER, team.getCaptainId());
+//        mWicketKeeperRecyclerView.setAdapter(mWicketKeepersAdapter);
+//        if(animate)
+//        {
+//            mBatsmanRecyclerView.setItemAnimator(new LandingAnimator());
+//            mBowlerRecyclerView.setItemAnimator(new LandingAnimator());
+//            mAllRounderRecyclerView.setItemAnimator(new LandingAnimator());
+//            mWicketKeeperRecyclerView.setItemAnimator(new LandingAnimator());
+//        }
     }
 
-    private RecyclerView.Adapter getAdapterByType(PlayerType type) {
+    private PlayerCardAdapter getAdapterByType(PlayerType type) {
         if (type == PlayerType.BATSMAN)
             return mBatsmenAdapter;
         if (type == PlayerType.ALLROUNDER)
@@ -349,7 +381,7 @@ public class EditTeamActivity extends ActionBarActivity {
         mTeamMutated.setFormation(toFormationString(formation));
         showSuccess(String.format("Formation changed to %s", new ArrayList<String>(formations.values()).get(userSelected)));
         updateStats(mTeamMutated);
-        resetAdapters(mTeamMutated);
+        resetAdapters(mTeamMutated, false);
     }
 
     private View.OnClickListener autoSelectClickListener = new View.OnClickListener() {
@@ -446,14 +478,29 @@ public class EditTeamActivity extends ActionBarActivity {
             }
 
             updateStats(mTeamMutated);
-            resetAdapters(mTeamMutated);
+            resetAdapters(mTeamMutated, false);
             showSuccess("Auto selected team for you");
         }
     };
 
     private void updateStats(Team team) {
-        mBalance.setText(String.valueOf(team.getBalance()));
-        mTransfers.setText(String.valueOf(team.getTransfersRemaining()) + " Transfers");
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.abc_slide_in_top);
+        animation.setStartOffset(500);
+        if(mBalance.getText().toString().equals(String.valueOf(team.getBalance())) == false)
+        {
+            mBalance.setText(String.valueOf(team.getBalance()));
+            mBalance.startAnimation(animation);
+
+        }
+        if(mTransfers.getText().toString().equals(String.valueOf(team.getTransfersRemaining() + " Transfers")) == false)
+        {
+            mTransfers.setText(String.valueOf(team.getTransfersRemaining() + " Transfers"));
+            mTransfers.startAnimation(animation);
+
+        }
+
+
+//        mTransfers.setText(String.valueOf(team.getTransfersRemaining()) + " Transfers");
         mPoints.setText(String.valueOf(team.getTotalPoints()) + " Pt");
         Formation formation = TeamHelper.getFormation(mTeamMutated);
         mFormation.setText(String.format("Your team formation is set to %s BTSM, %s BWLR, %s AR and %s WK.", formation.BatsmenCount, formation.BowlersCount, formation.AllRoundersCount, formation.WicketKeepersCount));
@@ -497,16 +544,25 @@ public class EditTeamActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         
-//        showSaveTeamTutorialOverlay();
+        showSaveTeamTutorialOverlay();
         // check if the request code is same as what is passed
         if (resultCode != RESULT_OK)
             return;
         if (requestCode == VIEW_PLAYER_DETAILS_REQUEST) {
-            String captainId = data.getStringExtra("captain_id");
+
+            final String captainId = data.getStringExtra("captain_id");
             if (captainId != null) {
                 mTeamMutated.setCaptainId(captainId);
                 updateStats(mTeamMutated);
-                resetAdapters(mTeamMutated);
+                resetAdapters(mTeamMutated, false);
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        BusProvider.getInstance().post(new AlreadyOwnedPlayerClickedEvent(captainId));
+                    }
+                };
+                new Handler().postDelayed(runnable, 300);
+
             }
 
             String removeId = data.getStringExtra("remove_id");
@@ -519,7 +575,7 @@ public class EditTeamActivity extends ActionBarActivity {
                         if (mTeamMutated.getCaptainId() != null && mTeamMutated.getCaptainId().equals(removeId))
                             mTeamMutated.setCaptainId(null);
                         updateStats(mTeamMutated);
-                        resetAdapters(mTeamMutated);
+                        resetAdapters(mTeamMutated, false);
                     }
                 }
             }
@@ -532,31 +588,35 @@ public class EditTeamActivity extends ActionBarActivity {
 
     private void showSaveTeamTutorialOverlay() {
         new ShowcaseView.Builder(this)
-                .setTarget(new ActionItemTarget(EditTeamActivity.this, R.id.action_save))
-                .setContentTitle("Don't forget to save your team.")
-//                .setContentText("This is highlighting the Home button")
-//                .singleShot(789)
+                .setTarget(new ViewTarget(findViewById(R.id.action_save)))
+                .setContentTitle("Don't forget to SAVE your team once you have decided your players")
                 .hideOnTouchOutside()
-                .build().show();
+                .singleShot(33)
+                .build().hideButton();
     }
 
-    private void tryAddPlayer(String playerId) {
+    private void tryAddPlayer(final String playerId) {
         StorageManager storageManager = new StorageManager();
         Player player = storageManager.GetPlayer(playerId);
 
-        // check if user has sufficient balance
-        if (mTeamMutated.getBalance() - player.getPrice() < 0) {
-            showError("You have insufficient funds to buy this player");
-            return;
-        }
+
 
         // check player already exists in your team
         for (Player p : mTeamMutated.getPlayers()) {
             if (playerId.equals(p.getId())) {
                 showError("You already own this player");
+                BusProvider.getInstance().post(new AlreadyOwnedPlayerClickedEvent(playerId));
                 return;
             }
         }
+
+        // check if user has sufficient balance
+        if (mTeamMutated.getBalance() - player.getPrice() < 0) {
+            showError("You have insufficient funds to buy this player");
+            YoYo.with(Techniques.Wobble).duration(700).playOn(mBalance);
+            return;
+        }
+
         // check if user hits maximum number of players from same team count
         int sameTeamCount = 0;
         for (Player p : mTeamMutated.getPlayers()) {
@@ -572,7 +632,15 @@ public class EditTeamActivity extends ActionBarActivity {
         mTeamMutated.getPlayers().add(player);
         int oldBalance = mTeamMutated.getBalance();
         mTeamMutated.setBalance(oldBalance - player.getPrice());
-        resetAdapters(mTeamMutated);
+        resetAdapters(mTeamMutated, false);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                BusProvider.getInstance().post(new NewPlayerAddedEvent(playerId));
+            }
+        };
+        new Handler().postDelayed(runnable, 200);
+
         updateStats(mTeamMutated);
     }
 
@@ -581,12 +649,14 @@ public class EditTeamActivity extends ActionBarActivity {
         // make sure there are 11 players
         if (mTeamMutated.getPlayers().size() != 11) {
             showError("Your team is missing players. Pick all 11 players to continue");
+            BusProvider.getInstance().post(new CardErrorEvent());
             return;
         }
 
         // check captain exists
         if (mTeamMutated.getCaptainId() == null || TextUtils.isEmpty(mTeamMutated.getCaptainId())) {
             showError("Select a captain for your team");
+            BusProvider.getInstance().post(new CardErrorEvent());
             return;
         }
 
@@ -608,6 +678,7 @@ public class EditTeamActivity extends ActionBarActivity {
         if(transfersMade > mTeamOriginal.getTransfersRemaining())
         {
             showError("You don't have sufficient transfers remaining to make these trades");
+            YoYo.with(Techniques.Wobble).duration(700).playOn(mTransfers);
             return;
         }
         mProgressDialog = new ProgressDialog(this);
@@ -621,6 +692,7 @@ public class EditTeamActivity extends ActionBarActivity {
                 mProgressDialog.dismiss();
                 if (result.optJSONObject("Error") != null) {
                     showError(result.optJSONObject("Error").optString("ErrorMessage"));
+                    BusProvider.getInstance().post(new CardErrorEvent());
                     return;
                 }
                 showSuccess("Team saved successfully!");
@@ -630,7 +702,7 @@ public class EditTeamActivity extends ActionBarActivity {
                 manager.SaveTeam(savedTeam);
                 mTeamOriginal = savedTeam;
                 mTeamMutated = TeamHelper.clone(mTeamOriginal);
-                resetAdapters(mTeamMutated);
+                resetAdapters(mTeamMutated, false);
                 updateStats(mTeamMutated);
                 AppRater.setLightTheme();
                 AppRater.app_launched(EditTeamActivity.this, 2, 2, 2, 2);
@@ -639,12 +711,14 @@ public class EditTeamActivity extends ActionBarActivity {
             @Override
             public void failure(Exception e) {
                 mProgressDialog.dismiss();
+                BusProvider.getInstance().post(new CardErrorEvent());
                 showError("Something went wrong");
             }
         });
     }
 
     private void showError(String message) {
+
         SnackbarManager.show(
                 Snackbar.with(getApplicationContext()) // context
                         .type(SnackbarType.MULTI_LINE)
@@ -665,6 +739,8 @@ public class EditTeamActivity extends ActionBarActivity {
                         .duration(Snackbar.SnackbarDuration.LENGTH_LONG) // make it shorter
                 , this);
     }
+
+
 
 
 }

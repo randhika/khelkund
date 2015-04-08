@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.activities;
+package com.appacitive.khelkund.navigationdrawer;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;

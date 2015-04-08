@@ -113,18 +113,6 @@
                 android:layout_alignLeft="@+id/tv_nav_terms"
                 android:layout_alignStart="@+id/tv_nav_terms" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="About Us"
-                android:id="@+id/tv_nav_aboutus"
-                android:gravity="center_vertical"
-                android:layout_below="@+id/tv_nav_licenses"
-                android:layout_alignLeft="@+id/tv_nav_licenses"
-                android:layout_alignStart="@+id/tv_nav_licenses"
-                android:textColor="@color/primary_dark_material_dark" />
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -150,16 +138,6 @@
                 android:layout_marginLeft="16dp"
                 android:layout_alignRight="@+id/iv_nav_leaderbord"
                 android:layout_alignEnd="@+id/iv_nav_leaderbord" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/iv_nav_aboutus"
-                android:src="@drawable/ic_favorite_grey600_36dp"
-                android:layout_alignBottom="@+id/tv_nav_aboutus"
-                android:layout_alignLeft="@+id/iv_nav_terms"
-                android:layout_alignStart="@+id/iv_nav_terms"
-                android:layout_alignTop="@+id/tv_nav_aboutus" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -199,10 +177,10 @@
                 android:text="Feedback"
                 android:id="@+id/tv_nav_feedback"
                 android:gravity="center_vertical"
-                android:layout_below="@+id/tv_nav_aboutus"
-                android:layout_alignLeft="@+id/tv_nav_aboutus"
-                android:layout_alignStart="@+id/tv_nav_aboutus"
-                android:textColor="@color/primary_dark_material_dark" />
+                android:textColor="@color/primary_dark_material_dark"
+                android:layout_below="@+id/tv_nav_licenses"
+                android:layout_alignLeft="@+id/tv_nav_licenses"
+                android:layout_alignStart="@+id/tv_nav_licenses" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -213,21 +191,21 @@
                 android:src="@drawable/ic_textsms_grey600_36dp"
                 android:layout_alignBottom="@+id/tv_nav_feedback"
                 android:layout_marginLeft="16dp"
-                android:layout_alignRight="@+id/iv_nav_aboutus"
-                android:layout_alignEnd="@+id/iv_nav_aboutus"
-                android:layout_alignTop="@+id/tv_nav_feedback" />
+                android:layout_alignTop="@+id/tv_nav_feedback"
+                android:layout_alignRight="@+id/iv_nav_licenses"
+                android:layout_alignEnd="@+id/iv_nav_licenses" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/iv_nav_licenses"
-                android:layout_above="@+id/tv_nav_aboutus"
-                android:layout_alignLeft="@+id/iv_nav_aboutus"
-                android:layout_alignStart="@+id/iv_nav_aboutus"
                 android:src="@drawable/ic_assignment_grey600_36dp"
-                android:layout_alignRight="@+id/iv_nav_aboutus"
-                android:layout_alignEnd="@+id/iv_nav_aboutus"
-                android:layout_below="@+id/tv_nav_terms" />
+                android:layout_below="@+id/tv_nav_terms"
+                android:layout_alignLeft="@+id/iv_nav_terms"
+                android:layout_alignStart="@+id/iv_nav_terms"
+                android:layout_alignRight="@+id/iv_nav_terms"
+                android:layout_alignEnd="@+id/iv_nav_terms"
+                android:layout_above="@+id/iv_nav_feedback" />
 
             <ImageView
                 android:layout_width="wrap_content"
