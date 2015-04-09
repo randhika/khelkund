@@ -48,6 +48,9 @@ public class TeamOverviewFragment extends Fragment {
     @InjectView(R.id.tv_overview_previouspoints)
     public TextView mPreviousMatchPoints;
 
+    @InjectView(R.id.tv_overview_against)
+    public TextView mPreviousMatchAgainst;
+
     @InjectView(R.id.iv_overview_emblem)
     public ImageView mEmblem;
 
@@ -78,7 +81,8 @@ public class TeamOverviewFragment extends Fragment {
         mTotalPoints.setText(String.valueOf(mTeam.getTotalPoints()));
         if(mTeam.getTeamHistory().size() != 0)
         {
-            mPreviousMatchPoints.setText(String.valueOf(mTeam.getTeamHistory().last().getPoints()) + " against " + mTeam.getTeamHistory().last().getOpposition());
+            mPreviousMatchPoints.setText(String.valueOf(mTeam.getTeamHistory().last().getPoints()));
+            mPreviousMatchAgainst.setText(" in " + mTeam.getTeamHistory().last().getOpposition());
         }
         XAxis xAxis = mChart.getXAxis();
         xAxis.setDrawGridLines(false);

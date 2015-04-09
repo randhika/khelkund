@@ -17,6 +17,7 @@ import com.appacitive.khelkund.model.events.PlayerChosenEvent;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.ButterKnife;
@@ -28,8 +29,8 @@ import io.realm.RealmResults;
  */
 public class PlayerPoolAdapter extends RecyclerView.Adapter<PlayerPoolAdapter.PoolViewHolder>{
 
-    private RealmResults<Player> mPlayers;
-    public PlayerPoolAdapter(RealmResults<Player> players)
+    private List<Player> mPlayers;
+    public PlayerPoolAdapter(List<Player> players)
     {
         this.mPlayers = players;
     }

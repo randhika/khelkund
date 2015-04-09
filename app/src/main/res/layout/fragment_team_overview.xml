@@ -104,6 +104,16 @@
             android:src="@drawable/l14"
             android:layout_alignBottom="@+id/tv_overview_previouspoints"
             android:layout_marginLeft="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="in"
+            android:id="@+id/tv_overview_against"
+            android:layout_alignBottom="@+id/tv_overview_previouspoints"
+            android:layout_toRightOf="@+id/tv_overview_previouspoints"
+            android:layout_toEndOf="@+id/tv_overview_previouspoints"
+            android:layout_marginLeft="4dp" />
     </RelativeLayout>
 
 </ScrollView>

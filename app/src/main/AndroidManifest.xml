@@ -47,6 +47,7 @@
         <activity
             android:name=".activities.HomeActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
             android:label="@string/title_activity_home" />
         <activity
             android:name=".activities.EmailLoginActivity"
@@ -204,6 +205,7 @@
         <activity
             android:name=".navigationdrawer.LicencesActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
             android:label="@string/title_activity_licences"
             android:parentActivityName=".activities.HomeActivity">
             <meta-data

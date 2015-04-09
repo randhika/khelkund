@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,7 +19,7 @@ import android.widget.Toast;
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.CreateTeamActivity;
 import com.appacitive.khelkund.activities.HomeActivity;
-import com.appacitive.khelkund.activities.EmailLoginActivity;
+import com.appacitive.khelkund.activities.LoginActivity;
 import com.appacitive.khelkund.activities.ViewTeamActivity;
 import com.appacitive.khelkund.activities.pick5.Pick5HomeActivity;
 import com.appacitive.khelkund.infra.APCallback;
@@ -28,9 +31,6 @@ import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.Team;
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
-import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import org.json.JSONObject;
 
@@ -93,73 +93,100 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.inject(this, rootView);
+//        this.setHasOptionsMenu(true);
         ConnectionManager.checkNetworkConnectivity(getActivity());
         manager = new StorageManager();
         userId = SharedPreferencesManager.ReadUserId();
 
         if (userId == null)
         {
-            Intent loginIntent = new Intent(getActivity(), EmailLoginActivity.class);
+            Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
             startActivity(loginIntent);
             getActivity().finish();
         }
 
         mUser = manager.GetUser(userId);
 
-        String name = mUser.getFirstName();
-        if (mUser.getLastName() != null && mUser.getLastName().equals("null") == false)
-            name += " " + mUser.getLastName();
-        mName.setText(name);
+        showUserBasicDetails();
 
-        if (HomeFragment.this.mTeam == null) {
-            fetchAndDisplayUserDetails();
+        if (mTeam == null) {
+            fetchAndDisplayTeamDetails();
         }
-
-        mFantasy.setOnClickListener(onFantasyClick);
 
         return rootView;
     }
 
-    private void fetchAndDisplayUserDetails() {
-        userId = SharedPreferencesManager.ReadUserId();
+    private void fetchAndDisplayTeamDetails() {
         manager = new StorageManager();
         mTeam = manager.GetTeam(userId);
         if (mTeam == null) {
             fetchTeam(userId);
         } else {
-            mRank.setText(String.valueOf(mTeam.getRank()));
-            mPoints.setText(String.valueOf(mTeam.getTotalPoints()));
-            if (mTeam.getId() == null) {
-                SnackBarManager.showError("Your team has unsaved changes.", getActivity());
-            }
+            showTeamBasicDetails();
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mTeam == null) {
-            mTeam = new StorageManager().GetTeam(SharedPreferencesManager.ReadUserId());
-        }
+    private void showTeamBasicDetails()
+    {
+        mRank.setText(String.valueOf(mTeam.getRank()));
+        mPoints.setText(String.valueOf(mTeam.getTotalPoints()));
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
+    private void showUserBasicDetails()
+    {
+        String name = mUser.getFirstName();
+        if (mUser.getLastName() != null && mUser.getLastName().equals("null") == false)
+            name += " " + mUser.getLastName();
+        mName.setText(name);
     }
 
-    View.OnClickListener onFantasyClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (isTeamCreatedOnServer() == true) {
-                Intent viewTeamIntent = new Intent(getActivity(), ViewTeamActivity.class);
-                startActivity(viewTeamIntent);
-            } else {
-                Intent createTeamIntent = new Intent(getActivity(), CreateTeamActivity.class);
-                startActivity(createTeamIntent);
-            }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if (mTeam == null) {
+//            mTeam = new StorageManager().GetTeam(SharedPreferencesManager.ReadUserId());
+//        }
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//    }
+
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.menu_home, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//
+//            case R.id.menu_action_refresh:
+//                refreshTeamDetails();
+//                return true;
+//            default:
+//                break;
+//        }
+//        return false;
+//    }
+
+    private void refreshTeamDetails() {
+        fetchTeam(SharedPreferencesManager.ReadUserId());
+    }
+
+    @OnClick(R.id.card_view_fantasy)
+    public void onFantasyClick()
+    {
+        if (isTeamCreatedOnServer() == true) {
+            Intent viewTeamIntent = new Intent(getActivity(), ViewTeamActivity.class);
+            startActivity(viewTeamIntent);
+        } else {
+            Intent createTeamIntent = new Intent(getActivity(), CreateTeamActivity.class);
+            startActivity(createTeamIntent);
         }
-    };
+    }
 
     private boolean isTeamCreatedOnServer() {
         if (mTeam != null && mTeam.getId() != null && TextUtils.isEmpty(mTeam.getId()) == false)
@@ -192,7 +219,7 @@ public class HomeFragment extends Fragment {
             public void success(JSONObject result) {
                 mProgressDialog.dismiss();
                 if (result.optJSONObject("Error") != null) {
-
+                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), getActivity());
                     return;
                 }
                 if (result.optString("Id") != null) {
@@ -201,6 +228,7 @@ public class HomeFragment extends Fragment {
                     mTeam.setUserId(userId);
                     StorageManager storageManager = new StorageManager();
                     storageManager.SaveTeam(mTeam);
+                    showTeamBasicDetails();
                 }
             }
 

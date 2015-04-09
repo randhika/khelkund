@@ -28,21 +28,16 @@ import com.appacitive.khelkund.model.PlayerType;
 import com.appacitive.khelkund.model.TeamHelper;
 import com.appacitive.khelkund.model.events.FilledPlayerCardClickedEvent;
 import com.appacitive.khelkund.model.events.PlayerChosenEvent;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.squareup.otto.Subscribe;
 
 public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.TabListener {
 
     SectionsPagerAdapter mSectionsPagerAdapter;
-
     ViewPager mViewPager;
 
     private PlayerType mPlayerType;
-
-    public List<String> allTeams = new ArrayList<String>(){{
-        add("KXIP");add("RR");add("DD");add("CSK");add("RCB");add("SRH");add("KKR");add("MI");
-    }};
-
-    public List<String> chosenTeams = new ArrayList<String>(allTeams);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,12 +71,12 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_player_pool, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupActionBarTitle()
@@ -90,6 +85,15 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
         String playerType = getIntent().getStringExtra("type");
         mPlayerType = PlayerType.valueOf(playerType.toUpperCase());
         actionBar.setTitle("Choose " + playerType);
+    }
+
+    private void showSearchFilterTutorialOverlay() {
+        new ShowcaseView.Builder(this)
+                .setTarget(new ViewTarget(findViewById(R.id.menu_action_filter)))
+                .setContentTitle("You can filter on teams based on upcoming matches")
+                .hideOnTouchOutside()
+                .singleShot(44)
+                .build().hideButton();
     }
 
     @Override
@@ -142,7 +146,6 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
 
         @Override
         public CharSequence getPageTitle(int position) {
-            Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
                     return "ALL";

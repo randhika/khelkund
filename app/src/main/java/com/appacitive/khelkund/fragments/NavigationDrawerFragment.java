@@ -13,15 +13,20 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.infra.KhelkundApplication;
+import com.appacitive.khelkund.model.KhelkundUser;
+import com.appacitive.khelkund.model.Team;
 import com.appacitive.khelkund.navigationdrawer.FeedbackActivity;
 import com.appacitive.khelkund.navigationdrawer.HowToPlayActivity;
 import com.appacitive.khelkund.navigationdrawer.LeaderboardActivity;
@@ -34,7 +39,9 @@ import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.digits.sdk.android.Digits;
 import com.facebook.login.LoginManager;
+import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.models.User;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -69,6 +76,12 @@ public class NavigationDrawerFragment extends Fragment {
     @InjectView(R.id.tv_nav_terms)
     public TextView mTerms;
 
+    @InjectView(R.id.tv_nav_name)
+    public TextView mName;
+
+    @InjectView(R.id.iv_nav_logo)
+    public ImageView mLogo;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +108,28 @@ public class NavigationDrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         ButterKnife.inject(this, view);
+
+        String userId = SharedPreferencesManager.ReadUserId();
+        StorageManager manager = new StorageManager();
+        KhelkundUser user = manager.GetUser(userId);
+
+        if(user != null)
+        {
+            String name = user.getFirstName();
+            if (user.getLastName() != null && user.getLastName().equals("null") == false)
+                name += " " + user.getLastName();
+            mName.setText(name);
+
+        }
+
+        Team team = manager.GetTeam(userId);
+        if(team != null)
+        {
+            int bitmapId  = KhelkundApplication.getAppContext().getResources().getIdentifier(team.getImageName(), "drawable", KhelkundApplication.getAppContext().getPackageName());
+            if(bitmapId > 0)
+                Picasso.with(getActivity()).load(bitmapId).into(mLogo);
+        }
+
         return view;
     }
 

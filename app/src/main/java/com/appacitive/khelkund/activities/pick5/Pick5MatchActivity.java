@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.widget.RelativeLayout;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.fragments.Pick5FinishedFragment;
@@ -23,11 +24,18 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class Pick5MatchActivity extends ActionBarActivity {
 
     private ProgressDialog mDialog;
     private Pick5MatchDetails mDetails;
+
+    @InjectView(R.id.pick5_next_match)
+    public RelativeLayout mNext;
+
+    @InjectView(R.id.pick5_previous_match)
+    public RelativeLayout mPrevious;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -30,6 +30,7 @@ import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.adapters.PlayerCardAdapter;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.BusProvider;
+import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
@@ -152,6 +153,7 @@ public class EditTeamActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_team);
         ButterKnife.inject(this);
+        ConnectionManager.checkNetworkConnectivity(this);
         mStorageManager = new StorageManager();
         String userId = SharedPreferencesManager.ReadUserId();
         mUser = mStorageManager.GetUser(userId);
@@ -221,6 +223,9 @@ public class EditTeamActivity extends ActionBarActivity {
     }
 
     private void shareTeam() {
+
+        mProgressDialog.setMessage("Ready to share?");
+        mProgressDialog.show();
         Bitmap bitmap = getScreenBitmap();
 
         Intent share = new Intent(Intent.ACTION_SEND);
@@ -242,17 +247,25 @@ public class EditTeamActivity extends ActionBarActivity {
         }
 
         share.putExtra(Intent.EXTRA_STREAM, uri);
+        mProgressDialog.dismiss();
         startActivity(Intent.createChooser(share, "Share team using"));
     }
 
     private Bitmap getScreenBitmap() {
 
-        ScrollView iv = (ScrollView) findViewById(R.id.edit_team_parent_scroll);
-        Bitmap bitmap = Bitmap.createBitmap(iv.getChildAt(0).getWidth(), iv.getChildAt(0).getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(bitmap);
-        c.drawColor(Color.WHITE);
-        iv.getChildAt(0).draw(c);
-        return (bitmap);
+        View view = findViewById(R.id.rl_edit_team_parent).getRootView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache(true);
+        Bitmap cs = Bitmap.createBitmap(view.getDrawingCache());
+        view.setDrawingCacheEnabled(false);
+        return cs;
+
+//        ScrollView iv = (ScrollView) findViewById(R.id.edit_team_parent_scroll);
+//        Bitmap bitmap = Bitmap.createBitmap(iv.getChildAt(0).getWidth(), iv.getChildAt(0).getHeight(), Bitmap.Config.ARGB_8888);
+//        Canvas c = new Canvas(bitmap);
+//        c.drawColor(Color.WHITE);
+//        iv.getChildAt(0).draw(c);
+//        return (bitmap);
     }
 
     private void resetAdapters(Team team, boolean animate) {
@@ -589,7 +602,7 @@ public class EditTeamActivity extends ActionBarActivity {
     private void showSaveTeamTutorialOverlay() {
         new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(findViewById(R.id.action_save)))
-                .setContentTitle("Don't forget to SAVE your team once you have decided your players")
+                .setContentTitle("Don't forget to SAVE your team once you have chosen your players")
                 .hideOnTouchOutside()
                 .singleShot(33)
                 .build().hideButton();

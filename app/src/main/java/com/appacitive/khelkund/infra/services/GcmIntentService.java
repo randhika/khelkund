@@ -1,12 +1,14 @@
 package com.appacitive.khelkund.infra.services;
 
 import android.app.IntentService;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -73,12 +75,10 @@ public class GcmIntentService extends IntentService {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(bundle.getString("alert")))
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(bundle.getString("alert")))
                         .setSmallIcon(R.drawable.launcher)
                         .setContentTitle(bundle.getString("title"))
-//                        .setContentText(bundle.getString("alert"))
-                ;
+                        .setDefaults(Notification.DEFAULT_SOUND);
 
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());

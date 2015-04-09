@@ -9,13 +9,13 @@
     tools:context="com.appacitive.khelkund.activities.RegisterActivity">
 
     <!--<fragment-->
-        <!--android:name="com.appacitive.khelkund.fragments.LoginFragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--tools:layout="@layout/fragment_login"-->
+    <!--android:name="com.appacitive.khelkund.fragments.LoginFragment"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--tools:layout="@layout/fragment_login"-->
 
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:id="@+id/fragment">-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:id="@+id/fragment">-->
 
     <!--</fragment>-->
 
@@ -38,7 +38,8 @@
         android:layout_marginBottom="8dp"
         android:layout_below="@+id/fragment_container"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textSize="16sp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -53,7 +54,8 @@
         android:layout_alignEnd="@+id/et_register_name"
         android:hint="Email address"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -68,7 +70,8 @@
         android:layout_alignEnd="@+id/et_register_email"
         android:hint="Password"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -99,41 +102,33 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="36dp" />
 
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:id="@+id/rl_login"-->
-        <!--android:layout_below="@+id/divider2">-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical|center_horizontal"
 
-        <RelativeLayout
+        android:id="@+id/relativeLayout4">
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:text="Already a member? "
             android:gravity="center_vertical|center_horizontal"
+            android:id="@+id/textView12"
+            android:layout_marginBottom="16dp" />
 
-            android:id="@+id/relativeLayout4">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Already a member? "
-                android:gravity="center_vertical|center_horizontal"
-                android:id="@+id/textView12"
-                android:layout_marginBottom="16dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="LOG IN"
-                android:id="@+id/tv_login"
-                android:gravity="center_vertical|center_horizontal"
-                android:layout_toRightOf="@+id/textView12"
-                android:textColor="@color/primary"
-                android:textStyle="bold" />
-        </RelativeLayout>
-    <!--</RelativeLayout>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOG IN"
+            android:id="@+id/tv_login"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_toRightOf="@+id/textView12"
+            android:textColor="@color/primary"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
 </RelativeLayout>

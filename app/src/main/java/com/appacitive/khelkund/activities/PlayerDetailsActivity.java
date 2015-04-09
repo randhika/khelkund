@@ -86,10 +86,6 @@ public class PlayerDetailsActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Remove title bar
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_player_details);
         ButterKnife.inject(this);
@@ -207,7 +203,7 @@ public class PlayerDetailsActivity extends ActionBarActivity {
 
         mName.setText(mPlayerFromDb.getDisplayName());
         mToolbar.setBackgroundResource(TeamHelper.getTeamColor(mPlayerFromDb.getShortTeamName()));
-        Picasso.with(this).load(mPlayerFromDb.getImageUrl()).fit().centerInside().into(mPlayerPhoto);
+        Picasso.with(this).load(mPlayerFromDb.getImageUrl()).fit().centerInside().placeholder(R.drawable.demo).into(mPlayerPhoto);
         mPrice.setText("$ " + String.valueOf(mPlayerFromDb.getPrice()));
     }
 

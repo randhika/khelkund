@@ -4,12 +4,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.appacitive.core.AppacitiveConnection;
 import com.appacitive.core.AppacitiveDevice;
@@ -17,28 +23,21 @@ import com.appacitive.core.model.Callback;
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.fragments.HomeFragment;
 import com.appacitive.khelkund.fragments.NavigationDrawerFragment;
-import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
-import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
-import com.appacitive.khelkund.infra.Urls;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import org.codechimp.apprater.AppRater;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.lang.ref.SoftReference;
-import java.util.HashMap;
-import java.util.Map;
 
 public class HomeActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    private Toolbar mToolbar;
+    DrawerLayout Drawer;
+    ActionBarDrawerToggle mDrawerToggle;
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     private CharSequence mTitle;
@@ -55,13 +54,29 @@ public class HomeActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ConnectionManager.checkNetworkConnectivity(this);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        mToolbar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+        Drawer = (DrawerLayout) findViewById(R.id.drawer_layout);        // Drawer object Assigned to the view
+        mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+
+
+        }; // Drawer Toggle Object Made
+        Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
+        mDrawerToggle.syncState();
         context = getApplicationContext();
 
         if (checkPlayServices()) {
@@ -73,6 +88,7 @@ public class HomeActivity extends ActionBarActivity
             }
         }
     }
+
     @Override
     public void onBackPressed() {
         finish();
@@ -185,7 +201,7 @@ public class HomeActivity extends ActionBarActivity
         device.setDeviceType("android");
 
         new AppacitiveConnection("user_device").fromExistingUser("user", Long.valueOf(SharedPreferencesManager.ReadUserId()))
-            .toNewDevice("device", device)
+                .toNewDevice("device", device)
                 .createInBackground(new Callback<AppacitiveConnection>() {
                     @Override
                     public void success(AppacitiveConnection result) {
@@ -207,5 +223,17 @@ public class HomeActivity extends ActionBarActivity
         editor.putInt(PROPERTY_APP_VERSION, appVersion);
         editor.commit();
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_home, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        return super.onOptionsItemSelected(item);
+//    }
 
 }
