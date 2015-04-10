@@ -224,6 +224,7 @@ public class EditTeamActivity extends ActionBarActivity {
 
     private void shareTeam() {
 
+        mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Ready to share?");
         mProgressDialog.show();
         Bitmap bitmap = getScreenBitmap();
@@ -282,22 +283,6 @@ public class EditTeamActivity extends ActionBarActivity {
 
         mWicketKeepersAdapter.resetDetails(TeamHelper.getWicketKeepers(team), formation.WicketKeepersCount, R.drawable.wicketkeeper, PlayerType.WICKETKEEPER, team.getCaptainId());
         mWicketKeepersAdapter.notifyDataSetChanged();
-
-//        mBatsmenAdapter = new PlayerCardAdapter(TeamHelper.getBatsmen(team), formation.BatsmenCount, R.drawable.batsman, PlayerType.BATSMAN, team.getCaptainId());
-//        mBatsmanRecyclerView.setAdapter(mBatsmenAdapter);
-//        mBowlersAdapter = new PlayerCardAdapter(TeamHelper.getBowlers(team), formation.BowlersCount, R.drawable.bowler, PlayerType.BOWLER, team.getCaptainId());
-//        mBowlerRecyclerView.setAdapter(mBowlersAdapter);
-//        mAllRoundersAdapter = new PlayerCardAdapter(TeamHelper.getAllRounders(team), formation.AllRoundersCount, R.drawable.allrounder, PlayerType.ALLROUNDER, team.getCaptainId());
-//        mAllRounderRecyclerView.setAdapter(mAllRoundersAdapter);
-//        mWicketKeepersAdapter = new PlayerCardAdapter(TeamHelper.getWicketKeepers(team), formation.WicketKeepersCount, R.drawable.wicketkeeper, PlayerType.WICKETKEEPER, team.getCaptainId());
-//        mWicketKeeperRecyclerView.setAdapter(mWicketKeepersAdapter);
-//        if(animate)
-//        {
-//            mBatsmanRecyclerView.setItemAnimator(new LandingAnimator());
-//            mBowlerRecyclerView.setItemAnimator(new LandingAnimator());
-//            mAllRounderRecyclerView.setItemAnimator(new LandingAnimator());
-//            mWicketKeeperRecyclerView.setItemAnimator(new LandingAnimator());
-//        }
     }
 
     private PlayerCardAdapter getAdapterByType(PlayerType type) {

@@ -117,7 +117,6 @@ public class TeamOverviewFragment extends Fragment {
 
     private void showOverlayTutorial() {
 
-
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -131,8 +130,11 @@ public class TeamOverviewFragment extends Fragment {
             }
         };
         new Handler().postDelayed(runnable, 500);
+    }
 
-
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
     }
 
 

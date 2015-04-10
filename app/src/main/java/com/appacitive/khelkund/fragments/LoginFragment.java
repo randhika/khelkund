@@ -242,5 +242,10 @@ public class LoginFragment extends Fragment {
         twitterLoginButton.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
 
 }

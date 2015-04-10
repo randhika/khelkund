@@ -31,6 +31,11 @@ public class Urls {
         {
             return baseUrl + String.format("PickThemFiveService.svc/GetPickThemTeam/%s/%s", matchId, userId);
         }
+
+        public static String getSaveTeamUrl()
+        {
+            return baseUrl + "PickThemFiveService.svc/SavePickThemTeam";
+        }
     }
 
     public static class TeamUrls

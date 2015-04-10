@@ -38,6 +38,7 @@ public class Pick5MatchDetails {
                 this.Players.add(new Player(playersArray.optJSONObject(i)));
         }
 
+        //  key : userPlayerId, value : appPlayerId
         this.PlayerMappings = new HashMap<String, String>();
         JSONArray mappingsArray = json.optJSONArray("PlayerMapping");
         if(mappingsArray != null)

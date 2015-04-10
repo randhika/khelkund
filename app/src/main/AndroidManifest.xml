@@ -238,6 +238,7 @@
         <activity
             android:name=".navigationdrawer.PrizesActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
             android:label="@string/title_activity_prizes"
             android:parentActivityName=".activities.HomeActivity">
             <meta-data

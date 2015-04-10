@@ -112,4 +112,9 @@ public class TeamSquadFragment extends Fragment {
         };
         new Handler().postDelayed(runnable, 500);
     }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
 }

@@ -183,4 +183,9 @@ public class PlayerPoolFragment extends Fragment {
         super.onPause();
         BusProvider.getInstance().unregister(this);
     }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
 }

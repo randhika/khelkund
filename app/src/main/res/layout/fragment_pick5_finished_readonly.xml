@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.appacitive.khelkund.fragments.Pick5PlayFragment">
+    tools:context="com.appacitive.khelkund.fragments.Pick5FinishedReadonlyFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/my_bowler_name"
                     android:layout_centerHorizontal="true"
-                    android:text="    "
+                    android:text="bowler"
                     android:maxLines="1"
                     android:textColor="@color/primary_dark"
                     android:layout_marginBottom="4dp" />
@@ -56,7 +56,7 @@
                     android:layout_marginTop="16dp"
                     android:id="@+id/my_batsman_name"
                     android:layout_centerHorizontal="true"
-                    android:text="    "
+                    android:text="batsman"
                     android:layout_below="@+id/my_bowler_score"
                     android:maxLines="1"
                     android:textColor="@color/primary_dark"
@@ -89,7 +89,7 @@
                     android:id="@+id/my_allrounder_name"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="16dp"
-                    android:text="    "
+                    android:text="all rounder"
                     android:layout_below="@+id/my_batsman_score"
                     android:maxLines="1"
                     android:textColor="@color/primary_dark"
@@ -122,7 +122,7 @@
                     android:id="@+id/my_wk_name"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="16dp"
-                    android:text="    "
+                    android:text="wicket keeper"
                     android:layout_below="@+id/my_allrounder_score"
                     android:maxLines="1"
                     android:textColor="@color/primary_dark"
@@ -156,7 +156,7 @@
                     android:layout_centerHorizontal="true"
                     android:id="@+id/my_any_name"
                     android:layout_marginTop="16dp"
-                    android:text="    "
+                    android:text="any player"
                     android:layout_below="@+id/my_wk_score"
                     android:maxLines="1"
                     android:textColor="@color/primary_dark"
@@ -198,10 +198,10 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/ai_bowler_name"
                     android:layout_centerHorizontal="true"
+                    android:text="bowler"
                     android:maxLines="1"
                     android:textColor="@color/primary_dark"
-                    android:layout_marginBottom="4dp"
-                    android:text="    " />
+                    android:layout_marginBottom="4dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -230,7 +230,7 @@
                     android:layout_marginTop="16dp"
                     android:id="@+id/ai_batsman_name"
                     android:layout_centerHorizontal="true"
-                    android:text="    "
+                    android:text="batsman"
                     android:layout_below="@+id/ai_bowler_score"
                     android:maxLines="1"
                     android:textColor="@color/primary_dark"
@@ -262,7 +262,7 @@
                     android:id="@+id/ai_allrounder_name"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="16dp"
-                    android:text="    "
+                    android:text="all rounder"
                     android:layout_below="@+id/ai_batsman_score"
                     android:maxLines="1"
                     android:textColor="@color/primary_dark"
@@ -294,7 +294,7 @@
                     android:id="@+id/ai_wk_name"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="16dp"
-                    android:text="    "
+                    android:text="wicket keeper"
                     android:layout_below="@+id/ai_allrounder_score"
                     android:maxLines="1"
                     android:textColor="@color/primary_dark"
@@ -327,7 +327,7 @@
                     android:layout_centerHorizontal="true"
                     android:id="@+id/ai_any_name"
                     android:layout_marginTop="16dp"
-                    android:text="    "
+                    android:text="any player"
                     android:layout_below="@+id/ai_wk_score"
                     android:maxLines="1"
                     android:textColor="@color/primary_dark"
@@ -361,13 +361,22 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Pick 5 Players"
+        android:text="You won this match"
         android:id="@+id/tv_pick5_readonly_result"
         android:textSize="22sp"
         android:gravity="center_horizontal|center_vertical"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textColor="@android:color/darker_gray" />
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Your total score"
+        android:id="@+id/tv_readonly_score_label"
+        android:layout_below="@+id/tv_pick5_readonly_result"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp" />
 
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -375,26 +384,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_readonly_score_label"
         android:layout_marginTop="4dp"
         app:cardBackgroundColor="@color/primary_dark"
-        android:id="@+id/cv_readonly_score_card"
-        android:layout_below="@+id/tv_pick5_readonly_result">
+        android:id="@+id/cv_readonly_score_card">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+12"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:padding="8dp"
+            android:textColor="@android:color/white"
+            android:id="@+id/tv_readonly_score" />
 
     </android.support.v7.widget.CardView>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:text="SUBMIT"
-        android:id="@+id/btn_pick5_play"
+        android:text="SHARE"
+        android:id="@+id/btn_readonly_share"
         android:layout_below="@+id/tv_pick5_readonly_result"
         android:layout_centerHorizontal="true"
         android:textColor="@android:color/white"
         android:background="@color/accent"
         android:textStyle="bold"
         android:elevation="8dp"
-        android:layout_marginTop="138dp"
-        android:enabled="false" />
+        android:layout_marginTop="138dp" />
 
 
 </RelativeLayout>

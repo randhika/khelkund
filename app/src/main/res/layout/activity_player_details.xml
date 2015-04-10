@@ -177,6 +177,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="36dp"
+
         android:text="REMOVE"
         android:id="@+id/btn_details_remove"
         android:layout_alignBottom="@+id/btn_make_captain"
