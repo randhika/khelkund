@@ -181,30 +181,37 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
             return;
         }
 
-        if (mDetails.getTeamPoints() > mDetails.getAppTeamPoints()) {
+        int myWinningCount = 0;
+        if (myTeam.Batsman.getPoints() > aiTeam.Batsman.getPoints())
+            myWinningCount++;
+        if (myTeam.Bowler.getPoints() > aiTeam.Bowler.getPoints())
+            myWinningCount++;
+        if (myTeam.AllRounder.getPoints() > aiTeam.AllRounder.getPoints())
+            myWinningCount++;
+        if (myTeam.WicketKeeper.getPoints() > aiTeam.WicketKeeper.getPoints())
+            myWinningCount++;
+        if (myTeam.Any.getPoints() > aiTeam.Any.getPoints())
+            myWinningCount++;
+
+        if (myWinningCount >= 4) {
             mResult.setText("You won this match");
             mResult.setTextColor(getActivity().getResources().getColor(R.color.accent));
-        }
-        if (mDetails.getTeamPoints() < mDetails.getAppTeamPoints()) {
+        } else {
             mResult.setText("You lost this match");
             mResult.setTextColor(getActivity().getResources().getColor(R.color.primary));
-        }
-        if (mDetails.getTeamPoints() == mDetails.getAppTeamPoints()) {
-            mResult.setText("This match was a tie");
-            mResult.setTextColor(getActivity().getResources().getColor(R.color.primary_dark));
         }
 
         mScore.setText(String.valueOf(mDetails.getTeamPoints()));
     }
 
     private void displayPlayers() {
-        int myBorderColor = 0;
-        int aiBorderColor = 0;
+        int myBorderColor = Color.DKGRAY;
+        int aiBorderColor = Color.DKGRAY;
 
         //  show batsmen details
 
-        if (mDetails.getResult() == 1)
-            myBorderColor = aiBorderColor = 0;
+        if (mDetails.getResult() == 1 || myTeam.Batsman.getPoints() == aiTeam.Batsman.getPoints())
+            myBorderColor = aiBorderColor = Color.DKGRAY;
         else {
             myBorderColor = (myTeam.Batsman.getPoints() > aiTeam.Batsman.getPoints()) ? (Color.GREEN) : Color.RED;
             aiBorderColor = (myTeam.Batsman.getPoints() > aiTeam.Batsman.getPoints()) ? (Color.RED) : Color.GREEN;
@@ -215,6 +222,7 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
                 .into(mMyBatsman);
         mMyBatsmanName.setText(myTeam.Batsman.getDisplayName());
         mMyBatsmanScore.setText(String.valueOf(myTeam.Batsman.getPoints()));
+
         Picasso.with(getActivity()).load(aiTeam.Batsman.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Batsman.getShortTeamName())), aiBorderColor)).into(mAiBatsman);
         mAiBatsmanScore.setText(String.valueOf(aiTeam.Batsman.getPoints()));
@@ -222,16 +230,18 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
 
         //  show bowler details
 
-        if (mDetails.getResult() == 1)
-            myBorderColor = aiBorderColor = 0;
+        if (mDetails.getResult() == 1 || myTeam.Bowler.getPoints() == aiTeam.Bowler.getPoints())
+            myBorderColor = aiBorderColor = Color.DKGRAY;
         else {
             myBorderColor = (myTeam.Bowler.getPoints() > aiTeam.Bowler.getPoints()) ? (Color.GREEN) : Color.RED;
             aiBorderColor = (myTeam.Bowler.getPoints() > aiTeam.Bowler.getPoints()) ? (Color.RED) : Color.GREEN;
         }
+
         Picasso.with(getActivity()).load(myTeam.Bowler.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Bowler.getShortTeamName())), myBorderColor)).into(mMyBowler);
         mMyBowlerName.setText(myTeam.Bowler.getDisplayName());
         mMyBowlerScore.setText(String.valueOf(myTeam.Bowler.getPoints()));
+
         Picasso.with(getActivity()).load(aiTeam.Bowler.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Bowler.getShortTeamName())), aiBorderColor)).into(mAiBowler);
         mAiBowlerScore.setText(String.valueOf(aiTeam.Bowler.getPoints()));
@@ -239,16 +249,18 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
 
         //  show all rounder details
 
-        if (mDetails.getResult() == 1)
-            myBorderColor = aiBorderColor = 0;
+        if (mDetails.getResult() == 1 || myTeam.AllRounder.getPoints() == aiTeam.AllRounder.getPoints())
+            myBorderColor = aiBorderColor = Color.DKGRAY;
         else {
             myBorderColor = (myTeam.AllRounder.getPoints() > aiTeam.AllRounder.getPoints()) ? (Color.GREEN) : Color.RED;
             aiBorderColor = (myTeam.AllRounder.getPoints() > aiTeam.AllRounder.getPoints()) ? (Color.RED) : Color.GREEN;
         }
+
         Picasso.with(getActivity()).load(myTeam.AllRounder.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.AllRounder.getShortTeamName())), myBorderColor)).into(mMyAllRounder);
         mMyAllRounderName.setText(myTeam.AllRounder.getDisplayName());
         mMyAllRounderScore.setText(String.valueOf(myTeam.AllRounder.getPoints()));
+
         Picasso.with(getActivity()).load(aiTeam.AllRounder.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.AllRounder.getShortTeamName())), aiBorderColor)).into(mAiAllRounder);
         mAiAllRounderScore.setText(String.valueOf(aiTeam.AllRounder.getPoints()));
@@ -256,16 +268,18 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
 
         //  show wicket keeper details
 
-        if (mDetails.getResult() == 1)
-            myBorderColor = aiBorderColor = 0;
+        if (mDetails.getResult() == 1 || myTeam.WicketKeeper.getPoints() == aiTeam.WicketKeeper.getPoints())
+            myBorderColor = aiBorderColor = Color.DKGRAY;
         else {
             myBorderColor = (myTeam.WicketKeeper.getPoints() > aiTeam.WicketKeeper.getPoints()) ? (Color.GREEN) : Color.RED;
             aiBorderColor = (myTeam.WicketKeeper.getPoints() > aiTeam.WicketKeeper.getPoints()) ? (Color.RED) : Color.GREEN;
         }
+
         Picasso.with(getActivity()).load(myTeam.WicketKeeper.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.WicketKeeper.getShortTeamName())), myBorderColor)).into(mMyWicketKeeper);
         mMyWicketKeeperName.setText(myTeam.WicketKeeper.getDisplayName());
         mMyWicketKeeperScore.setText(String.valueOf(myTeam.WicketKeeper.getPoints()));
+
         Picasso.with(getActivity()).load(aiTeam.WicketKeeper.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.WicketKeeper.getShortTeamName())), aiBorderColor)).into(mAiWicketKeeper);
         mAiWicketKeeperScore.setText(String.valueOf(aiTeam.WicketKeeper.getPoints()));
@@ -273,16 +287,18 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
 
         //  show any player details
 
-        if (mDetails.getResult() == 1)
-            myBorderColor = aiBorderColor = 0;
+        if (mDetails.getResult() == 1 || myTeam.Any.getPoints() == aiTeam.Any.getPoints())
+            myBorderColor = aiBorderColor = Color.DKGRAY;
         else {
             myBorderColor = (myTeam.Any.getPoints() > aiTeam.Any.getPoints()) ? (Color.GREEN) : Color.RED;
             aiBorderColor = (myTeam.Any.getPoints() > aiTeam.Any.getPoints()) ? (Color.RED) : Color.GREEN;
         }
+
         Picasso.with(getActivity()).load(myTeam.Any.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Any.getShortTeamName())), myBorderColor)).into(mMyAny);
         mMyAnyName.setText(myTeam.Any.getDisplayName());
         mMyAnyScore.setText(String.valueOf(myTeam.Any.getPoints()));
+
         Picasso.with(getActivity()).load(aiTeam.Any.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Any.getShortTeamName())), aiBorderColor)).into(mAiAny);
         mAiAnyScore.setText(String.valueOf(aiTeam.Any.getPoints()));
@@ -324,7 +340,8 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
         }
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
     }

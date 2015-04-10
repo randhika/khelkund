@@ -43,7 +43,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="0"
                     android:id="@+id/my_bowler_score"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/my_bowler"
@@ -76,7 +75,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="0"
                     android:id="@+id/my_batsman_score"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/my_batsman"
@@ -110,7 +108,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:layout_centerHorizontal="true"
-                    android:text="0"
                     android:id="@+id/my_allrounder_score"
                     android:layout_below="@+id/my_allrounder"
                     android:textColor="@color/primary"
@@ -143,7 +140,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:layout_centerHorizontal="true"
-                    android:text="0"
                     android:id="@+id/my_wk_score"
                     android:layout_below="@+id/my_wk"
 
@@ -177,7 +173,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="0"
                     android:id="@+id/my_any_score"
                     android:layout_below="@+id/my_any"
                     android:textColor="@color/primary"
@@ -217,7 +212,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="0"
                     android:id="@+id/ai_bowler_score"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/ai_bowler"
@@ -249,7 +243,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="0"
                     android:id="@+id/ai_batsman_score"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/ai_batsman"
@@ -282,7 +275,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:layout_centerHorizontal="true"
-                    android:text="0"
                     android:id="@+id/ai_allrounder_score"
                     android:layout_below="@+id/ai_allrounder"
                     android:textColor="@color/primary"
@@ -314,7 +306,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:layout_centerHorizontal="true"
-                    android:text="0"
                     android:id="@+id/ai_wk_score"
                     android:layout_below="@+id/ai_wk"
 
@@ -347,7 +338,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="0"
                     android:id="@+id/ai_any_score"
                     android:layout_below="@+id/ai_any"
                     android:textColor="@color/primary"
@@ -394,7 +384,7 @@
         android:textStyle="bold"
         android:elevation="8dp"
         android:layout_marginTop="138dp"
-        android:enabled="false" />
+        />
 
 
 </RelativeLayout>

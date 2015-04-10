@@ -17,7 +17,7 @@ public class Pick5MatchDetails {
     {
         if(json == null)
             return;
-        this.MatchDetails = new Match(json.optJSONObject("MatchDetails"));
+        this.MatchDetails = new Match(json.optJSONObject("MatchDetails"), -1);
         this.Result = json.optInt("Result");
         this.TeamPoints = json.optInt("TeamPoints");
         this.AppTeamPoints = json.optInt("AppTeamPoints");

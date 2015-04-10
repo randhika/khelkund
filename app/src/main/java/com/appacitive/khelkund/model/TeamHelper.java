@@ -25,10 +25,28 @@ public class TeamHelper {
         return batsmen;
     }
 
+    public static List<Player> getBatsmen(List<Player> players) {
+        List<Player> bowlers = new ArrayList<Player>();
+        if (players != null)
+            for (Player p : players)
+                if (p.getType().equals("Batsman"))
+                    bowlers.add(p);
+        return bowlers;
+    }
+
     public static List<Player> getBowlers(Team team) {
         List<Player> bowlers = new ArrayList<Player>();
         if (team.getPlayers() != null)
             for (Player p : team.getPlayers())
+                if (p.getType().equals("Bowler"))
+                    bowlers.add(p);
+        return bowlers;
+    }
+
+    public static List<Player> getBowlers(List<Player> players) {
+        List<Player> bowlers = new ArrayList<Player>();
+        if (players != null)
+            for (Player p : players)
                 if (p.getType().equals("Bowler"))
                     bowlers.add(p);
         return bowlers;
@@ -43,6 +61,15 @@ public class TeamHelper {
         return allRounders;
     }
 
+    public static List<Player> getAllRounders(List<Player> players) {
+        List<Player> bowlers = new ArrayList<Player>();
+        if (players != null)
+            for (Player p : players)
+                if (p.getType().equals("AllRounder"))
+                    bowlers.add(p);
+        return bowlers;
+    }
+
     public static List<Player> getWicketKeepers(Team team) {
         List<Player> wk = new ArrayList<Player>();
         if (team.getPlayers() != null)
@@ -50,6 +77,15 @@ public class TeamHelper {
                 if (p.getType().equals("WicketKeeper"))
                     wk.add(p);
         return wk;
+    }
+
+    public static List<Player> getWicketKeepers(List<Player> players) {
+        List<Player> bowlers = new ArrayList<Player>();
+        if (players != null)
+            for (Player p : players)
+                if (p.getType().equals("WicketKeeper"))
+                    bowlers.add(p);
+        return bowlers;
     }
 
     public static Formation getFormation(Team team) {

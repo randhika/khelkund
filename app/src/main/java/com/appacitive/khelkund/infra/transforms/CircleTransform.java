@@ -32,35 +32,6 @@ public class CircleTransform implements Transformation {
         this.mBackgroundColor = backgroundColor;
     }
 
-//    @Override
-//    public Bitmap transform(Bitmap source) {
-//        int size = Math.min(source.getWidth(), source.getHeight());
-//
-//        Bitmap squaredBitmap = Bitmap.createBitmap(source, 0, 0, size, size);
-//        if (squaredBitmap != source) {
-//            source.recycle();
-//        }
-//
-//        Bitmap bitmap = Bitmap.createBitmap(200, 200, source.getConfig());
-//        float radius = (200)/2f;
-//        Canvas canvas = new Canvas(bitmap);
-//
-//        Paint backgroundPaint = new Paint();
-//        backgroundPaint.setColor(mBackgroundColor);
-//        backgroundPaint.setAntiAlias(true);
-//
-//        canvas.drawCircle(radius, radius, radius, backgroundPaint );
-//
-//        Paint paint = new Paint();
-//        BitmapShader shader = new BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
-//        paint.setShader(shader);
-//        paint.setAntiAlias(true);
-//
-//        canvas.drawCircle(radius, radius, radius, paint);
-//        squaredBitmap.recycle();
-//        return bitmap;
-//    }
-
     @Override
     public Bitmap transform(Bitmap source) {
         int size = Math.min(source.getWidth(), source.getHeight());

@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 
@@ -64,6 +65,7 @@ public class Player extends RealmObject {
     private String DisplayName;
     private String FirstName;
     private String LastName;
+    @Index
     private String Type;
     private String ImageUrl;
     private int Price;

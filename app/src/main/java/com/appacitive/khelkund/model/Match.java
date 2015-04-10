@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 
@@ -20,10 +21,12 @@ public class Match extends RealmObject {
     public Match()
     {}
 
-    public Match(JSONObject jsonObject)
+    public Match(JSONObject jsonObject, int matchNumber)
     {
         if(jsonObject == null)
             return;
+
+        this.MatchNumber = matchNumber;
         this.AwayTeamName = jsonObject.optString("AwayTeamName");
         this.HomeTeamName = jsonObject.optString("HomeTeamName");
         this.AwayTeamShortName = jsonObject.optString("AwayTeamShortName");
@@ -42,6 +45,8 @@ public class Match extends RealmObject {
 
     @PrimaryKey
     private String Id;
+
+    private int MatchNumber;
     private String AwayTeamName;
     private String HomeTeamName;
     private String AwayTeamShortName;
@@ -112,5 +117,13 @@ public class Match extends RealmObject {
 
     public void setVenue(String venue) {
         Venue = venue;
+    }
+
+    public int getMatchNumber() {
+        return MatchNumber;
+    }
+
+    public void setMatchNumber(int matchNumber) {
+        MatchNumber = matchNumber;
     }
 }

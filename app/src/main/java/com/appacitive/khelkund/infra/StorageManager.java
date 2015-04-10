@@ -121,4 +121,32 @@ public class StorageManager {
         query.equalTo("Id", matchId);
         return query.findFirst();
     }
+
+    public String getNextMatchId(String matchId) {
+        Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
+        RealmQuery<Match> query = realm.where(Match.class);
+        query.equalTo("Id", matchId);
+        Match currentMatch = query.findFirst();
+
+        RealmQuery<Match> query1 = realm.where(Match.class);
+        query1.equalTo("MatchNumber", currentMatch.getMatchNumber() + 1);
+        Match nextMatch = query1.findFirst();
+        if(nextMatch == null)
+            return null;
+        return nextMatch.getId();
+    }
+
+    public String getPreviousMatchId(String matchId) {
+        Realm realm = Realm.getInstance(KhelkundApplication.getAppContext());
+        RealmQuery<Match> query = realm.where(Match.class);
+        query.equalTo("Id", matchId);
+        Match currentMatch = query.findFirst();
+
+        RealmQuery<Match> query1 = realm.where(Match.class);
+        query1.equalTo("MatchNumber", currentMatch.getMatchNumber() - 1);
+        Match previousMatch = query1.findFirst();
+        if(previousMatch == null)
+            return null;
+        return previousMatch.getId();
+    }
 }

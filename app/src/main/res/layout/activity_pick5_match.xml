@@ -38,7 +38,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="23rd April"
+                    android:text="Previous"
                     android:id="@+id/textView17"
                     android:layout_alignBottom="@+id/imageView10"
                     android:layout_toRightOf="@+id/imageView10"
@@ -75,7 +75,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="24th April"
+                    android:text="Next"
                     android:id="@+id/textView18"
                     android:layout_alignBottom="@+id/imageView11"
                     android:layout_toLeftOf="@+id/imageView11"

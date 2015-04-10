@@ -37,7 +37,7 @@ public class FetchAllPick5MatchesIntentService extends IntentService {
                 List<Match> matchList = new ArrayList<Match>();
                 for(int i = 0;i<matchesArray.length(); i++)
                 {
-                    matchList.add(new Match(matchesArray.optJSONObject(i)));
+                    matchList.add(new Match(matchesArray.optJSONObject(i), i));
                 }
                 StorageManager manager = new StorageManager();
                 manager.SaveMatches(matchList);
