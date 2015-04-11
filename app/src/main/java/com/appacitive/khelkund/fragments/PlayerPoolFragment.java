@@ -2,6 +2,7 @@ package com.appacitive.khelkund.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -15,9 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.activities.PlayerPoolActivity;
 import com.appacitive.khelkund.adapters.PlayerPoolAdapter;
 import com.appacitive.khelkund.infra.BusProvider;
+import com.appacitive.khelkund.infra.KhelkundApplication;
+import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
+import com.appacitive.khelkund.infra.services.FetchAllPlayersIntentService;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PlayerType;
 import com.appacitive.khelkund.model.events.FilterAppliedEvent;
@@ -69,6 +74,11 @@ public class PlayerPoolFragment extends Fragment {
         switch (sectionNumber) {
             case 1: {
                 fragment.mPlayers = storageManager.GetAllPlayers(playerType.toString());
+                if(fragment.mPlayers == null || fragment.mPlayers.size() == 0)
+                {
+                    Intent mServiceIntent = new Intent(KhelkundApplication.getAppContext(), FetchAllPlayersIntentService.class);
+                    KhelkundApplication.getAppContext().startService(mServiceIntent);
+                }
                 break;
             }
 

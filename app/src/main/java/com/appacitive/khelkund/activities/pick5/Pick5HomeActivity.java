@@ -9,8 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.adapters.Pick5Adapter;
 import com.appacitive.khelkund.infra.BusProvider;
+import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
+import com.appacitive.khelkund.infra.services.FetchAllPick5MatchesIntentService;
 import com.appacitive.khelkund.model.Match;
 import com.appacitive.khelkund.model.events.MatchSelectedEvent;
 import com.squareup.otto.Subscribe;
@@ -36,11 +38,15 @@ public class Pick5HomeActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick5_home);
         ButterKnife.inject(this);
+        ConnectionManager.checkNetworkConnectivity(this);
         StorageManager storageManager = new StorageManager();
         mMatches = storageManager.GetAllMatches();
 
-        if(mMatches.size() == 0)
+        if(mMatches.size() == 0) {
             SnackBarManager.showMessage("Match data could not be made available at the moment. Please try again later", this);
+            Intent mPick5ServiceIntent = new Intent(this, FetchAllPick5MatchesIntentService.class);
+            startService(mPick5ServiceIntent);
+        }
 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);

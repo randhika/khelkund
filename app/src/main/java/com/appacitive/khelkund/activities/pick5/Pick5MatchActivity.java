@@ -393,6 +393,8 @@ public class Pick5MatchActivity extends ActionBarActivity {
     @OnClick(R.id.pick5_next_match)
     public void onNextMatchClick() {
         StorageManager manager = new StorageManager();
+        if(mDetails == null)
+            return;
         String nextMatchId = manager.getNextMatchId(mDetails.getMatchDetails().getId());
         if (nextMatchId == null) {
             SnackBarManager.showMessage("No more matches", this);
@@ -406,6 +408,8 @@ public class Pick5MatchActivity extends ActionBarActivity {
     @OnClick(R.id.pick5_previous_match)
     public void onPreviousMatchClick() {
         StorageManager manager = new StorageManager();
+        if(mDetails == null)
+            return;
         String previousMatchId = manager.getPreviousMatchId(mDetails.getMatchDetails().getId());
         if (previousMatchId == null) {
             SnackBarManager.showMessage("No more matches", this);

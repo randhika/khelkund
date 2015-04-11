@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="+ 20"
-                android:id="@+id/my_bowler_score"
+                android:id="@+id/my_batsman_score"
                 android:layout_below="@+id/my_bowler"
                 android:layout_alignRight="@+id/my_bowler"
                 android:layout_alignEnd="@+id/my_bowler"
@@ -43,9 +43,9 @@
                 android:src="@drawable/batsman"
                 android:scaleX="-1"
                 android:id="@+id/my_batsman"
-                android:layout_below="@+id/my_bowler_score"
-                android:layout_alignLeft="@+id/my_bowler_score"
-                android:layout_alignStart="@+id/my_bowler_score"
+                android:layout_below="@+id/my_batsman_score"
+                android:layout_alignLeft="@+id/my_batsman_score"
+                android:layout_alignStart="@+id/my_batsman_score"
                 android:layout_marginTop="16dp"
                 android:scaleType="center" />
 

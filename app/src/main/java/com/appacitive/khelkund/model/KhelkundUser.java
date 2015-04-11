@@ -58,32 +58,4 @@ public class KhelkundUser extends RealmObject {
     public void setLastName(String lastName) {
         LastName = lastName;
     }
-
-//    @Override
-//    public int describeContents() {
-//        return this.hashCode();
-//    }
-//
-//    @Override
-//    public void writeToParcel(Parcel parcel, int i) {
-//        parcel.writeString(Id);
-//        parcel.writeString(FirstName);
-//        parcel.writeString(LastName);
-//    }
-//    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-//        public KhelkundUser createFromParcel(Parcel in) {
-//            return new KhelkundUser(in);
-//        }
-//        public KhelkundUser[] newArray(int size) {
-//            return new KhelkundUser[size];
-//        }
-//    };
-//
-//    private KhelkundUser(Parcel in)
-//    {
-//        Id = in.readString();
-//        FirstName = in.readString();
-//        LastName = in.readString();
-//    }
-
 }

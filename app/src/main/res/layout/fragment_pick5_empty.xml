@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView16"
+        android:id="@+id/iv_match_over_flag"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/ic_flag_grey600_48dp" />
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Match Over"
-        android:id="@+id/textView21"
-        android:layout_below="@+id/imageView16"
+        android:id="@+id/tv_match_over_label"
+        android:layout_below="@+id/iv_match_over_flag"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

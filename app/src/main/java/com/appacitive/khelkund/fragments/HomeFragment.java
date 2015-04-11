@@ -114,7 +114,7 @@ public class HomeFragment extends Fragment {
 
         showUserBasicDetails();
 
-        if (mTeam == null) {
+        if (mTeam == null || mTeam.getId() == null) {
             fetchAndDisplayTeamDetails();
         }
 
@@ -124,7 +124,7 @@ public class HomeFragment extends Fragment {
     private void fetchAndDisplayTeamDetails() {
         manager = new StorageManager();
         mTeam = manager.GetTeam(userId);
-        if (mTeam == null) {
+        if (mTeam == null || mTeam.getId() == null) {
             fetchTeam(userId);
         } else {
             showTeamBasicDetails();
@@ -218,6 +218,7 @@ public class HomeFragment extends Fragment {
         Http http = new Http();
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("Fetching your team");
+        mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.show();
         http.get(Urls.TeamUrls.getMyTeamUrl(userId), new HashMap<String, String>(), new APCallback() {
             @Override
@@ -240,7 +241,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void failure(Exception e) {
                 mProgressDialog.dismiss();
-                SnackBarManager.showError("Unable to fetch your team.", getActivity());
+                SnackBarManager.showError("Unable to fetch your team at the moment.", getActivity());
             }
         });
     }

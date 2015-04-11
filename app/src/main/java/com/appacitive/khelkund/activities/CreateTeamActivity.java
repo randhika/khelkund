@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,8 @@ import com.appacitive.khelkund.model.Team;
 import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.events.LogoSelectedEvent;
 import com.appacitive.khelkund.model.viewholders.TeamLogoViewHolder;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.squareup.otto.Subscribe;
@@ -36,7 +39,7 @@ import io.realm.RealmList;
 
 public class CreateTeamActivity extends ActionBarActivity {
 
-    private static List<String> mLogos = new ArrayList<String>()
+    private static final List<String> mLogos = new ArrayList<String>()
     {{
             add("l1");
             add("l2");
@@ -85,7 +88,7 @@ public class CreateTeamActivity extends ActionBarActivity {
         mUser = manager.GetUser(mUserId);
         if(mUser.getFirstName() != null && mUser.getFirstName() != "null")
         {
-            mTeamName.setHint(String.format("Your team name eg %s XI", mUser.getFirstName()));
+            mTeamName.setHint(String.format("Your team name eg %s's XI", mUser.getFirstName()));
         }
         mLogoRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(this, 3);
@@ -98,6 +101,7 @@ public class CreateTeamActivity extends ActionBarActivity {
             public void onClick(View view) {
                 if(TextUtils.isEmpty(mTeamName.getText()))
                 {
+                    YoYo.with(Techniques.Shake).duration(700).playOn(mTeamName);
                     SnackbarManager.show(
                             Snackbar.with(getApplicationContext())
                                     .text("Please provide a name for your team"), CreateTeamActivity.this);
@@ -141,7 +145,6 @@ public class CreateTeamActivity extends ActionBarActivity {
         storageManager.SaveTeam(team);
         Intent editTeamIntent = new Intent(CreateTeamActivity.this, EditTeamActivity.class);
         startActivity(editTeamIntent);
-        finish();
     }
 
     @Override

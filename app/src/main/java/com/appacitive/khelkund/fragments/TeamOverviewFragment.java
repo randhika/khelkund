@@ -82,7 +82,8 @@ public class TeamOverviewFragment extends Fragment {
         if(mTeam.getTeamHistory().size() != 0)
         {
             mPreviousMatchPoints.setText(String.valueOf(mTeam.getTeamHistory().last().getPoints()));
-            mPreviousMatchAgainst.setText(" in " + mTeam.getTeamHistory().last().getOpposition());
+            String[] previousMatchTeams = mTeam.getTeamHistory().last().getOpposition().split("-");
+            mPreviousMatchAgainst.setText(String.format(" in %s vs %s", previousMatchTeams[0], previousMatchTeams[1]));
         }
         XAxis xAxis = mChart.getXAxis();
         xAxis.setDrawGridLines(false);

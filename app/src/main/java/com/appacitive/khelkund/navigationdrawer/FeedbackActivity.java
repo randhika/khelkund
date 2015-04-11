@@ -1,8 +1,8 @@
 package com.appacitive.khelkund.navigationdrawer;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -35,20 +35,18 @@ public class FeedbackActivity extends ActionBarActivity {
     }
 
     @OnClick(R.id.btn_feedback)
-    public void onSubmit()
-    {
+    public void onSubmit() {
         //  hide keyboard
-        InputMethodManager inputMethodManager = (InputMethodManager)  getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
         String userId = SharedPreferencesManager.ReadUserId();
         final String to1 = "khelkund@gmail.com";
         final String to2 = "asinha@tavisca.com";
         String message = mFeedbackForm.getText().toString();
-        if(TextUtils.isEmpty(message))
+        if (TextUtils.isEmpty(message))
             return;
         String subject = "Khelkund Feedback : User " + userId;
-
 
         AppacitiveEmail email = new AppacitiveEmail(subject).withBody(new RawEmailBody(message, false));
         email.to.add(to1);
@@ -61,33 +59,8 @@ public class FeedbackActivity extends ActionBarActivity {
 
             @Override
             public void failure(AppacitiveEmail result, Exception e) {
-                SnackBarManager.showError("Unable to send feedback at the moment", FeedbackActivity.this);
+                SnackBarManager.showError("Could not send feedback at the moment", FeedbackActivity.this);
             }
         });
     }
-
-//    @OnClick(R.id.btn_feedback)
-//    public void onSubmit()
-//    {
-//        String userId = SharedPreferencesManager.ReadUserId();
-//        String to1 = "khelkund@gmail.com";
-////        String to2= "sathley@appacitive.com";
-//        String message = mFeedbackForm.getText().toString();
-//        if(TextUtils.isEmpty(message))
-//            return;
-//        String subject = "Khelkund Feedback : User " + userId;
-//
-//        Intent mEmail = new Intent(Intent.ACTION_SEND);
-//        mEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{ to1});
-//        mEmail.putExtra(Intent.EXTRA_SUBJECT, subject);
-//        mEmail.putExtra(Intent.EXTRA_TEXT, message);
-//
-//        // prompts to choose email client
-//        mEmail.setType("message/rfc822");
-//
-//        startActivity(Intent.createChooser(mEmail, "Send email via"));
-//        finish();
-//    }
-
-
 }
