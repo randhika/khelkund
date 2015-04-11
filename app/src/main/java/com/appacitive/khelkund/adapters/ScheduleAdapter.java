@@ -10,10 +10,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.model.Match;
-import com.appacitive.khelkund.model.events.MatchSelectedEvent;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -93,7 +91,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         public ImageView awayLogo;
         @InjectView(R.id.iv_pick5_home_logo)
         public ImageView homeLogo;
-        @InjectView(R.id.tv_pick5_date)
+        @InjectView(R.id.tv_pick5_play_date)
         public TextView date;
         @InjectView(R.id.tv_pick5_venue)
         public TextView venue;

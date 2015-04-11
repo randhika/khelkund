@@ -7,7 +7,8 @@
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:id="@+id/pick5_toolbar"
-        android:layout_height="120dp"
+        android:layout_height="150dp"
+        android:elevation="8dp"
         android:background="@color/primary_dark">
 
         <RelativeLayout
@@ -20,6 +21,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:layout_alignParentStart="true"
                 android:id="@+id/pick5_previous_match"
                 android:layout_marginTop="12dp"
@@ -58,10 +61,12 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:id="@+id/pick5_next_match"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="12dp"
-                android:layout_toEndOf="@+id/textView19"
-                android:layout_toRightOf="@+id/textView19">
+                android:layout_toRightOf="@+id/textView19"
+                android:layout_toEndOf="@+id/textView19">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -94,28 +99,69 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:layout_marginBottom="24dp" />
+                android:textSize="14sp"
+                android:layout_marginBottom="48dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Pick em 5"
+                android:id="@+id/tv_pick5_play_date"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="4dp" />
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:id="@+id/imageView12"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/iv_pick5_play_home"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:src="@drawable/dd"
-                android:layout_marginLeft="24dp" />
+                android:layout_marginLeft="88dp"
+                android:layout_marginBottom="36dp" />
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:id="@+id/imageView13"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/iv_pick5_play_away"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/mi"
-                android:layout_marginRight="24dp" />
+                android:layout_marginRight="88dp"
+                android:layout_marginBottom="36dp" />
+
+            <TextView
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="HOME"
+                android:id="@+id/tv_pick5_play_hometeamname"
+                android:layout_alignTop="@+id/iv_pick5_play_home"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_alignBottom="@+id/iv_pick5_play_home"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="AWAY"
+                android:id="@+id/tv_pick5_play_awayteamname"
+                android:layout_alignTop="@+id/iv_pick5_play_away"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@+id/iv_pick5_play_away"
+                android:gravity="center_vertical|center_horizontal"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
 
         </RelativeLayout>
 

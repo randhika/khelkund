@@ -17,6 +17,8 @@ import com.appacitive.khelkund.infra.transforms.CircleTransform;
 import com.appacitive.khelkund.model.Pick5MatchDetails;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.TeamHelper;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -174,6 +176,8 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
     }
 
     private void displayResults() {
+
+        YoYo.with(Techniques.ZoomIn).duration(2000).playOn(mResult);
 
         if (mDetails.getResult() == 1) {
             mResult.setText("This match is under progress");

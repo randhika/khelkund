@@ -34,6 +34,8 @@ import com.appacitive.khelkund.model.events.pick5.Pick5AnyPlayerChosenEvent;
 import com.appacitive.khelkund.model.events.pick5.Pick5BatsmanChosenEvent;
 import com.appacitive.khelkund.model.events.pick5.Pick5BowlerChosenEvent;
 import com.appacitive.khelkund.model.events.pick5.Pick5WicketKeeperChosenEvent;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
@@ -62,17 +64,11 @@ public class Pick5PlayFragment extends Fragment {
     @InjectView(R.id.my_bowler)
     public ImageView mMyBowler;
 
-    @InjectView(R.id.my_bowler_score)
-    public TextView mMyBowlerScore;
-
     @InjectView(R.id.my_bowler_name)
     public TextView mMyBowlerName;
 
     @InjectView(R.id.my_batsman)
     public ImageView mMyBatsman;
-
-    @InjectView(R.id.my_batsman_score)
-    public TextView mMyBatsmanScore;
 
     @InjectView(R.id.my_batsman_name)
     public TextView mMyBatsmanName;
@@ -80,26 +76,17 @@ public class Pick5PlayFragment extends Fragment {
     @InjectView(R.id.my_allrounder)
     public ImageView mMyAllRounder;
 
-    @InjectView(R.id.my_allrounder_score)
-    public TextView mMyAllRounderScore;
-
     @InjectView(R.id.my_allrounder_name)
     public TextView mMyAllRounderName;
 
     @InjectView(R.id.my_wk)
     public ImageView mMyWicketKeeper;
 
-    @InjectView(R.id.my_wk_score)
-    public TextView mMyWicketKeeperScore;
-
     @InjectView(R.id.my_wk_name)
     public TextView mMyWicketKeeperName;
 
     @InjectView(R.id.my_any)
     public ImageView mMyAny;
-
-    @InjectView(R.id.my_any_score)
-    public TextView mMyAnyScore;
 
     @InjectView(R.id.my_any_name)
     public TextView mMyAnyName;
@@ -109,17 +96,11 @@ public class Pick5PlayFragment extends Fragment {
     @InjectView(R.id.ai_bowler)
     public ImageView mAiBowler;
 
-    @InjectView(R.id.ai_bowler_score)
-    public TextView mAiBowlerScore;
-
     @InjectView(R.id.ai_bowler_name)
     public TextView mAiBowlerName;
 
     @InjectView(R.id.ai_batsman)
     public ImageView mAiBatsman;
-
-    @InjectView(R.id.ai_batsman_score)
-    public TextView mAiBatsmanScore;
 
     @InjectView(R.id.ai_batsman_name)
     public TextView mAiBatsmanName;
@@ -127,26 +108,17 @@ public class Pick5PlayFragment extends Fragment {
     @InjectView(R.id.ai_allrounder)
     public ImageView mAiAllRounder;
 
-    @InjectView(R.id.ai_allrounder_score)
-    public TextView mAiAllRounderScore;
-
     @InjectView(R.id.ai_allrounder_name)
     public TextView mAiAllRounderName;
 
     @InjectView(R.id.ai_wk)
     public ImageView mAiWicketKeeper;
 
-    @InjectView(R.id.ai_wk_score)
-    public TextView mAiWicketKeeperScore;
-
     @InjectView(R.id.ai_wk_name)
     public TextView mAiWicketKeeperName;
 
     @InjectView(R.id.ai_any)
     public ImageView mAiAny;
-
-    @InjectView(R.id.ai_any_score)
-    public TextView mAiAnyScore;
 
     @InjectView(R.id.ai_any_name)
     public TextView mAiAnyName;
@@ -270,11 +242,9 @@ public class Pick5PlayFragment extends Fragment {
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Batsman.getShortTeamName()))))
                 .into(mMyBatsman);
         mMyBatsmanName.setText(myTeam.Batsman.getDisplayName());
-        mMyBatsmanScore.setText(String.valueOf(myTeam.Batsman.getPoints()));
 
         Picasso.with(getActivity()).load(aiTeam.Batsman.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Batsman.getShortTeamName())))).into(mAiBatsman);
-        mAiBatsmanScore.setText(String.valueOf(aiTeam.Batsman.getPoints()));
         mAiBatsmanName.setText(aiTeam.Batsman.getDisplayName());
 
         //  show bowler details
@@ -282,11 +252,9 @@ public class Pick5PlayFragment extends Fragment {
         Picasso.with(getActivity()).load(myTeam.Bowler.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Bowler.getShortTeamName())))).into(mMyBowler);
         mMyBowlerName.setText(myTeam.Bowler.getDisplayName());
-        mMyBowlerScore.setText(String.valueOf(myTeam.Bowler.getPoints()));
 
         Picasso.with(getActivity()).load(aiTeam.Bowler.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Bowler.getShortTeamName())))).into(mAiBowler);
-        mAiBowlerScore.setText(String.valueOf(aiTeam.Bowler.getPoints()));
         mAiBowlerName.setText(aiTeam.Bowler.getDisplayName());
 
         //  show all rounder details
@@ -294,11 +262,9 @@ public class Pick5PlayFragment extends Fragment {
         Picasso.with(getActivity()).load(myTeam.AllRounder.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.AllRounder.getShortTeamName())))).into(mMyAllRounder);
         mMyAllRounderName.setText(myTeam.AllRounder.getDisplayName());
-        mMyAllRounderScore.setText(String.valueOf(myTeam.AllRounder.getPoints()));
 
         Picasso.with(getActivity()).load(aiTeam.AllRounder.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.AllRounder.getShortTeamName())))).into(mAiAllRounder);
-        mAiAllRounderScore.setText(String.valueOf(aiTeam.AllRounder.getPoints()));
         mAiAllRounderName.setText(aiTeam.AllRounder.getDisplayName());
 
         //  show wicket keeper details
@@ -306,11 +272,9 @@ public class Pick5PlayFragment extends Fragment {
         Picasso.with(getActivity()).load(myTeam.WicketKeeper.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.WicketKeeper.getShortTeamName())))).into(mMyWicketKeeper);
         mMyWicketKeeperName.setText(myTeam.WicketKeeper.getDisplayName());
-        mMyWicketKeeperScore.setText(String.valueOf(myTeam.WicketKeeper.getPoints()));
 
         Picasso.with(getActivity()).load(aiTeam.WicketKeeper.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.WicketKeeper.getShortTeamName())))).into(mAiWicketKeeper);
-        mAiWicketKeeperScore.setText(String.valueOf(aiTeam.WicketKeeper.getPoints()));
         mAiWicketKeeperName.setText(aiTeam.WicketKeeper.getDisplayName());
 
         //  show any player details
@@ -318,11 +282,9 @@ public class Pick5PlayFragment extends Fragment {
         Picasso.with(getActivity()).load(myTeam.Any.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Any.getShortTeamName())))).into(mMyAny);
         mMyAnyName.setText(myTeam.Any.getDisplayName());
-        mMyAnyScore.setText(String.valueOf(myTeam.Any.getPoints()));
 
         Picasso.with(getActivity()).load(aiTeam.Any.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Any.getShortTeamName())))).into(mAiAny);
-        mAiAnyScore.setText(String.valueOf(aiTeam.Any.getPoints()));
         mAiAnyName.setText(aiTeam.Any.getDisplayName());
     }
 
@@ -336,17 +298,23 @@ public class Pick5PlayFragment extends Fragment {
     @Subscribe
     public void batsmanChosen(Pick5BatsmanChosenEvent event) {
         mDialog.dismiss();
+
+        YoYo.with(Techniques.Landing).duration(1000).playOn(mMyBatsman);
+
         myTeam.Batsman = event.player;
         Picasso.with(getActivity()).load(myTeam.Batsman.getImageUrl()).resize(200, 300).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Batsman.getShortTeamName()))))
                 .into(mMyBatsman);
         mMyBatsmanName.setText(myTeam.Batsman.getDisplayName());
 
+        YoYo.with(Techniques.SlideInRight).duration(1000).playOn(mAiBatsman);
+
         aiTeam.Batsman = manager.GetPlayer(mDetails.getPlayerMappings().get(myTeam.Batsman.getId()));
         Picasso.with(getActivity()).load(aiTeam.Batsman.getImageUrl()).resize(200, 300).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Batsman.getShortTeamName()))))
                 .into(mAiBatsman);
         mAiBatsmanName.setText(aiTeam.Batsman.getDisplayName());
+
 
         if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null)
             mSubmit.setEnabled(true);
@@ -355,12 +323,15 @@ public class Pick5PlayFragment extends Fragment {
     @Subscribe
     public void bowlerChosen(Pick5BowlerChosenEvent event) {
         mDialog.dismiss();
+
+        YoYo.with(Techniques.Landing).duration(1000).playOn(mMyBowler);
         myTeam.Bowler = event.player;
         Picasso.with(getActivity()).load(myTeam.Bowler.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Bowler.getShortTeamName()))))
                 .into(mMyBowler);
         mMyBowlerName.setText(myTeam.Bowler.getDisplayName());
 
+        YoYo.with(Techniques.SlideInRight).duration(1000).playOn(mAiBowler);
         aiTeam.Bowler = manager.GetPlayer(mDetails.getPlayerMappings().get(myTeam.Bowler.getId()));
         Picasso.with(getActivity()).load(aiTeam.Bowler.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Bowler.getShortTeamName()))))
@@ -374,12 +345,14 @@ public class Pick5PlayFragment extends Fragment {
     @Subscribe
     public void allRounderChosen(Pick5AllRounderChosenEvent event) {
         mDialog.dismiss();
+        YoYo.with(Techniques.Landing).duration(1000).playOn(mMyAllRounder);
         myTeam.AllRounder = event.player;
         Picasso.with(getActivity()).load(myTeam.AllRounder.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.AllRounder.getShortTeamName()))))
                 .into(mMyAllRounder);
         mMyAllRounderName.setText(myTeam.AllRounder.getDisplayName());
 
+        YoYo.with(Techniques.SlideInRight).duration(1000).playOn(mAiAllRounder);
         aiTeam.AllRounder = manager.GetPlayer(mDetails.getPlayerMappings().get(myTeam.AllRounder.getId()));
         Picasso.with(getActivity()).load(aiTeam.AllRounder.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.AllRounder.getShortTeamName()))))
@@ -393,12 +366,14 @@ public class Pick5PlayFragment extends Fragment {
     @Subscribe
     public void wicketKeeperChosen(Pick5WicketKeeperChosenEvent event) {
         mDialog.dismiss();
+        YoYo.with(Techniques.Landing).duration(1000).playOn(mMyWicketKeeper);
         myTeam.WicketKeeper = event.player;
         Picasso.with(getActivity()).load(myTeam.WicketKeeper.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.WicketKeeper.getShortTeamName()))))
                 .into(mMyWicketKeeper);
         mMyWicketKeeperName.setText(myTeam.WicketKeeper.getDisplayName());
 
+        YoYo.with(Techniques.SlideInRight).duration(1000).playOn(mAiWicketKeeper);
         aiTeam.WicketKeeper = manager.GetPlayer(mDetails.getPlayerMappings().get(myTeam.WicketKeeper.getId()));
         Picasso.with(getActivity()).load(aiTeam.WicketKeeper.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.WicketKeeper.getShortTeamName()))))
@@ -412,12 +387,14 @@ public class Pick5PlayFragment extends Fragment {
     @Subscribe
     public void wildCardChosen(Pick5AnyPlayerChosenEvent event) {
         mDialog.dismiss();
+        YoYo.with(Techniques.Landing).duration(1000).playOn(mMyAny);
         myTeam.Any = event.player;
         Picasso.with(getActivity()).load(myTeam.Any.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Any.getShortTeamName()))))
                 .into(mMyAny);
         mMyAnyName.setText(myTeam.Any.getDisplayName());
 
+        YoYo.with(Techniques.SlideInRight).duration(1000).playOn(mAiAny);
         aiTeam.Any = manager.GetPlayer(mDetails.getPlayerMappings().get(myTeam.Any.getId()));
         Picasso.with(getActivity()).load(aiTeam.Any.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Any.getShortTeamName()))))
@@ -476,7 +453,7 @@ public class Pick5PlayFragment extends Fragment {
     public void onAnyPlayerClick() {
         mDialog = new Dialog(getActivity());
         mDialog.setContentView(R.layout.layout_pick5_chooser_dialog);
-        mDialog.setTitle("Pick your wild card player");
+        mDialog.setTitle("Pick your wildcard player");
         CoverFlowCarousel carousel = (CoverFlowCarousel) mDialog.findViewById(R.id.carousel);
         final Pick5PlayerAdapter adapter = new Pick5PlayerAdapter(getActivity(), allAvailablePlayers, new Pick5AnyPlayerChosenEvent());
         carousel.setAdapter(adapter);
