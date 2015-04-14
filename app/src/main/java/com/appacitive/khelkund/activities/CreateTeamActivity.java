@@ -41,22 +41,10 @@ public class CreateTeamActivity extends ActionBarActivity {
 
     private static final List<String> mLogos = new ArrayList<String>()
     {{
-            add("l1");
-            add("l2");
-            add("l3");
-            add("l4");
-            add("l5");
-            add("l6");
-            add("l7");
-            add("l8");
-            add("l9");
-            add("l10");
-            add("l11");
-            add("l12");
-            add("l13");
-            add("l14");
-            add("l15");
-            add("l16");
+            add("l1");            add("l2");            add("l3");            add("l4");
+            add("l5");            add("l6");            add("l7");            add("l8");
+            add("l9");            add("l10");            add("l11");            add("l12");
+            add("l13");            add("l14");            add("l15");            add("l16");
             add("l17");
         }};
 

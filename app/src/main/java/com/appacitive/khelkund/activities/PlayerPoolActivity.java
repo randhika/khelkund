@@ -83,8 +83,17 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
     {
         final ActionBar actionBar = getSupportActionBar();
         String playerType = getIntent().getStringExtra("type");
+        actionBar.setHomeButtonEnabled(false);
+        actionBar.setDefaultDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
         mPlayerType = PlayerType.valueOf(playerType.toUpperCase());
-        actionBar.setTitle("Choose " + playerType);
+
+        if(playerType.equals("AllRounder"))
+            actionBar.setTitle("Choose a All Rounder");
+        else if(playerType.equals("WicketKeeper"))
+            actionBar.setTitle("Choose a Wicket Keeper");
+        else actionBar.setTitle("Choose a " + playerType);
     }
 
     private void showSearchFilterTutorialOverlay() {

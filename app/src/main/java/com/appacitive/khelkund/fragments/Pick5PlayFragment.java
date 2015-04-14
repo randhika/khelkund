@@ -4,7 +4,9 @@ package com.appacitive.khelkund.fragments;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +38,9 @@ import com.appacitive.khelkund.model.events.pick5.Pick5BowlerChosenEvent;
 import com.appacitive.khelkund.model.events.pick5.Pick5WicketKeeperChosenEvent;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.Target;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
@@ -150,7 +155,6 @@ public class Pick5PlayFragment extends Fragment {
         public Player Any;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -170,7 +174,19 @@ public class Pick5PlayFragment extends Fragment {
         }
 
         fetchPlayers();
+
+        showTutorialOverlay();
         return view;
+    }
+
+    private void showTutorialOverlay() {
+        new ShowcaseView.Builder(getActivity())
+                .setTarget(ViewTarget.NONE)
+                .setContentTitle("Welcome to Pick'em 5")
+                .setContentText("Start by creating your team on the left")
+                .hideOnTouchOutside()
+                .singleShot(111)
+                .build().hideButton();
     }
 
     private void fetchPlayers() {
@@ -294,12 +310,11 @@ public class Pick5PlayFragment extends Fragment {
         ButterKnife.reset(this);
     }
 
-
     @Subscribe
     public void batsmanChosen(Pick5BatsmanChosenEvent event) {
         mDialog.dismiss();
 
-        YoYo.with(Techniques.Landing).duration(1000).playOn(mMyBatsman);
+        YoYo.with(Techniques.FadeIn).duration(1000).playOn(mMyBatsman);
 
         myTeam.Batsman = event.player;
         Picasso.with(getActivity()).load(myTeam.Batsman.getImageUrl()).resize(200, 300).centerInside()
@@ -317,14 +332,30 @@ public class Pick5PlayFragment extends Fragment {
 
 
         if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null)
+        {
             mSubmit.setEnabled(true);
+            new ShowcaseView.Builder(getActivity())
+                    .setTarget(new ViewTarget(mSubmit))
+                    .setContentTitle("SAVE your team once you have decided all your players.")
+                    .hideOnTouchOutside()
+                    .singleShot(444)
+                    .build().hideButton();
+        }
+
+
+        new ShowcaseView.Builder(getActivity())
+                .setTarget(new ViewTarget(mAiBatsman))
+                .setContentTitle("The app automatically assigns an opponent for your chosen batsman")
+                .hideOnTouchOutside()
+                .singleShot(222)
+                .build().hideButton();
     }
 
     @Subscribe
     public void bowlerChosen(Pick5BowlerChosenEvent event) {
         mDialog.dismiss();
 
-        YoYo.with(Techniques.Landing).duration(1000).playOn(mMyBowler);
+        YoYo.with(Techniques.FadeIn).duration(1000).playOn(mMyBowler);
         myTeam.Bowler = event.player;
         Picasso.with(getActivity()).load(myTeam.Bowler.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Bowler.getShortTeamName()))))
@@ -339,13 +370,35 @@ public class Pick5PlayFragment extends Fragment {
         mAiBowlerName.setText(aiTeam.Bowler.getDisplayName());
 
         if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null)
+        {
             mSubmit.setEnabled(true);
+            new ShowcaseView.Builder(getActivity())
+                    .setTarget(new ViewTarget(mSubmit))
+                    .setContentTitle("SAVE your team once you have decided all your players.")
+                    .hideOnTouchOutside()
+                    .singleShot(444)
+                    .build().hideButton();
+        }
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                new ShowcaseView.Builder(getActivity())
+                        .setTarget(new ViewTarget(mAiBowler))
+                        .setContentTitle("The app automatically assigns an opponent for your chosen bowler")
+                        .hideOnTouchOutside()
+                        .singleShot(222)
+                        .build().hideButton();
+            }
+        };
+        new Handler().postDelayed(runnable, 1000);
+
     }
 
     @Subscribe
     public void allRounderChosen(Pick5AllRounderChosenEvent event) {
         mDialog.dismiss();
-        YoYo.with(Techniques.Landing).duration(1000).playOn(mMyAllRounder);
+        YoYo.with(Techniques.FadeIn).duration(1000).playOn(mMyAllRounder);
         myTeam.AllRounder = event.player;
         Picasso.with(getActivity()).load(myTeam.AllRounder.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.AllRounder.getShortTeamName()))))
@@ -360,13 +413,34 @@ public class Pick5PlayFragment extends Fragment {
         mAiAllRounderName.setText(aiTeam.AllRounder.getDisplayName());
 
         if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null)
+        {
             mSubmit.setEnabled(true);
+            new ShowcaseView.Builder(getActivity())
+                    .setTarget(new ViewTarget(mSubmit))
+                    .setContentTitle("SAVE your team once you have decided all your players.")
+                    .hideOnTouchOutside()
+                    .singleShot(444)
+                    .build().hideButton();
+        }
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                new ShowcaseView.Builder(getActivity())
+                        .setTarget(new ViewTarget(mAiAllRounder))
+                        .setContentTitle("The app automatically assigns an opponent for your chosen all rounder")
+                        .hideOnTouchOutside()
+                        .singleShot(222)
+                        .build().hideButton();
+            }
+        };
+        new Handler().postDelayed(runnable, 1000);
     }
 
     @Subscribe
     public void wicketKeeperChosen(Pick5WicketKeeperChosenEvent event) {
         mDialog.dismiss();
-        YoYo.with(Techniques.Landing).duration(1000).playOn(mMyWicketKeeper);
+        YoYo.with(Techniques.FadeIn).duration(1000).playOn(mMyWicketKeeper);
         myTeam.WicketKeeper = event.player;
         Picasso.with(getActivity()).load(myTeam.WicketKeeper.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.WicketKeeper.getShortTeamName()))))
@@ -381,13 +455,34 @@ public class Pick5PlayFragment extends Fragment {
         mAiWicketKeeperName.setText(aiTeam.WicketKeeper.getDisplayName());
 
         if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null)
+        {
             mSubmit.setEnabled(true);
+            new ShowcaseView.Builder(getActivity())
+                    .setTarget(new ViewTarget(mSubmit))
+                    .setContentTitle("SAVE your team once you have decided all your players.")
+                    .hideOnTouchOutside()
+                    .singleShot(444)
+                    .build().hideButton();
+        }
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                new ShowcaseView.Builder(getActivity())
+                        .setTarget(new ViewTarget(mAiWicketKeeper))
+                        .setContentTitle("The app automatically assigns an opponent for your chosen wicket keeper")
+                        .hideOnTouchOutside()
+                        .singleShot(222)
+                        .build().hideButton();
+            }
+        };
+        new Handler().postDelayed(runnable, 1000);
     }
 
     @Subscribe
     public void wildCardChosen(Pick5AnyPlayerChosenEvent event) {
         mDialog.dismiss();
-        YoYo.with(Techniques.Landing).duration(1000).playOn(mMyAny);
+        YoYo.with(Techniques.FadeIn).duration(1000).playOn(mMyAny);
         myTeam.Any = event.player;
         Picasso.with(getActivity()).load(myTeam.Any.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Any.getShortTeamName()))))
@@ -402,7 +497,30 @@ public class Pick5PlayFragment extends Fragment {
         mAiAnyName.setText(aiTeam.Any.getDisplayName());
 
         if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null)
+        {
             mSubmit.setEnabled(true);
+            new ShowcaseView.Builder(getActivity())
+                    .setTarget(new ViewTarget(mSubmit))
+                    .setContentTitle("SAVE your team once you have decided all your players.")
+                    .hideOnTouchOutside()
+                    .singleShot(444)
+                    .build().hideButton();
+        }
+
+        new ShowcaseView.Builder(getActivity())
+                .setTarget(new Target() {
+                    @Override
+                    public Point getPoint() {
+                        int[] coordinates = new int[2];
+                        mMyAny.getLocationOnScreen(coordinates);
+                        return new Point(coordinates[0], coordinates[1]);
+                    }
+                })
+                .setContentTitle("Wildcard player")
+                .setContentText("This player can be of any type. But should not already be part of your team.")
+                .hideOnTouchOutside()
+                .singleShot(333)
+                .build().hideButton();
     }
 
     @OnClick(R.id.my_batsman)
@@ -458,6 +576,8 @@ public class Pick5PlayFragment extends Fragment {
         final Pick5PlayerAdapter adapter = new Pick5PlayerAdapter(getActivity(), allAvailablePlayers, new Pick5AnyPlayerChosenEvent());
         carousel.setAdapter(adapter);
         mDialog.show();
+
+
     }
 
     @OnClick(R.id.btn_pick5_play)
@@ -507,6 +627,13 @@ public class Pick5PlayFragment extends Fragment {
                     return;
                 }
                 SnackBarManager.showSuccess("Pick saved successfully", getActivity());
+                new ShowcaseView.Builder(getActivity())
+                        .setTarget(ViewTarget.NONE)
+                        .setContentTitle("Congratulations")
+                        .setContentText("You can check back here after the match to see the result.")
+                        .hideOnTouchOutside()
+                        .singleShot(555)
+                        .build().hideButton();
             }
 
             @Override

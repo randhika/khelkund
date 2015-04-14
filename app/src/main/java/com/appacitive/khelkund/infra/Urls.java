@@ -20,6 +20,19 @@ public class Urls {
         }
     }
 
+    public static class PrivateLeagueUrls
+    {
+        public static String getPrivateLeaguesUrl(String userId)
+        {
+            return baseUrl + "PrivateLeagueService.svc/PrivateLeagues/" + userId;
+        }
+
+        public static String getCreatePrivateLeaguesUrl()
+        {
+            return baseUrl + "PrivateLeagueService.svc/CreatePrivateLeague";
+        }
+    }
+
     public static class Pick5Urls
     {
         public static String getAllMatchesUrl()

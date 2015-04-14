@@ -33,6 +33,7 @@ public class LoginActivity extends ActionBarActivity {
         }
         ShimmerFrameLayout shimmerContainer =
                 (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
+        shimmerContainer.setRepeatDelay(1200);
         shimmerContainer.startShimmerAnimation();
     }
 

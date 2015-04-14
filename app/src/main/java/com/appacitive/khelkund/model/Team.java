@@ -68,9 +68,9 @@ public class Team extends RealmObject {
     private String Name;
     private RealmList<Player> Players;
     private String PreviousMatch;
-    private int Rank;
-    private int TotalPoints;
-    private int TransfersRemaining;
+    private int Rank=0;
+    private int TotalPoints=0;
+    private int TransfersRemaining=0;
     private RealmList<History> TeamHistory;
 
     public RealmList<Player> getPlayers() {

@@ -5,19 +5,18 @@
     android:layout_height="match_parent"
     android:id="@+id/squad_parent"
     android:background="@android:color/background_light"
-    tools:context="com.appacitive.khelkund.fragments.TeamSquadFragment">
+    tools:context="com.appacitive.khelkund.activities.privateleague.PrivateLeagueHomeActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_squad"
-        android:scrollbars="vertical"
+        android:id="@+id/rv_privateleague"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_edit"
+        android:id="@+id/fab_create_private_league"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_icon="@android:drawable/ic_menu_edit"
+        fab:fab_icon="@drawable/plus"
         fab:fab_colorNormal="@color/accent"
         fab:fab_colorPressed="#C2185B"
         android:layout_alignParentBottom="true"

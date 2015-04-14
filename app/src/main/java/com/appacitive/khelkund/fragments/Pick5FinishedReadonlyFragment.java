@@ -168,8 +168,9 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_pick5_finished_readonly, container, false);
         ButterKnife.inject(this, rootView);
         this.mDetails = ((Pick5MatchActivity) getActivity()).getMatchDetails();
-        displayResults();
+
         loadPlayers();
+        displayResults();
         displayPlayers();
 
         return rootView;
@@ -202,10 +203,10 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
             mResult.setTextColor(getActivity().getResources().getColor(R.color.accent));
         } else {
             mResult.setText("You lost this match");
-            mResult.setTextColor(getActivity().getResources().getColor(R.color.primary));
+            mResult.setTextColor(getActivity().getResources().getColor(R.color.primary_dark));
         }
 
-        mScore.setText(String.valueOf(mDetails.getTeamPoints()));
+        mScore.setText(String.valueOf(myTeam.Batsman.getPoints() + myTeam.Bowler.getPoints() + myTeam.AllRounder.getPoints() + myTeam.WicketKeeper.getPoints() + myTeam.Any.getPoints()));
     }
 
     private void displayPlayers() {

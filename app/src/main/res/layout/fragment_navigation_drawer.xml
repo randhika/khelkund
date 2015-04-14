@@ -37,7 +37,7 @@
                 android:layout_height="48dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:background="?android:attr/selectableItemBackground"
-                android:text="IPL T20 Schedule"
+                android:text="Matches Schedule"
                 android:id="@+id/tv_nav_schedule"
                 android:gravity="center_vertical"
                 android:layout_below="@+id/tv_nav_leaderboard"

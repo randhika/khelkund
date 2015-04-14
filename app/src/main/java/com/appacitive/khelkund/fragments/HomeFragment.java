@@ -3,16 +3,15 @@ package com.appacitive.khelkund.fragments;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +21,7 @@ import com.appacitive.khelkund.activities.HomeActivity;
 import com.appacitive.khelkund.activities.LoginActivity;
 import com.appacitive.khelkund.activities.ViewTeamActivity;
 import com.appacitive.khelkund.activities.pick5.Pick5HomeActivity;
+import com.appacitive.khelkund.activities.privateleague.PrivateLeagueHomeActivity;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
@@ -29,8 +29,19 @@ import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
+import com.appacitive.khelkund.infra.transforms.CircleTransform;
+import com.appacitive.khelkund.infra.transforms.CircleTransform2;
 import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.Team;
+import com.facebook.AccessToken;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.squareup.picasso.Picasso;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.models.User;
 
 import org.json.JSONObject;
 
@@ -65,8 +76,18 @@ public class HomeFragment extends Fragment {
     @InjectView(R.id.card_view_pick5)
     public CardView mPick5;
 
+    @InjectView(R.id.iv_home_photo)
+    public ImageView mPhoto;
+
     private ProgressDialog mProgressDialog;
     private StorageManager manager;
+    private TeamStatus mTeamStatus = TeamStatus.DONT_KNOW;
+
+    private enum TeamStatus {
+        CREATED,
+        NOT_CREATED,
+        DONT_KNOW
+    }
 
     public static HomeFragment newInstance(int sectionNumber) {
         HomeFragment fragment = new HomeFragment();
@@ -88,7 +109,8 @@ public class HomeFragment extends Fragment {
 
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
     }
@@ -98,47 +120,64 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.inject(this, rootView);
+        this.mTeamStatus = TeamStatus.DONT_KNOW;
 //        this.setHasOptionsMenu(true);
         ConnectionManager.checkNetworkConnectivity(getActivity());
         manager = new StorageManager();
         userId = SharedPreferencesManager.ReadUserId();
 
-        if (userId == null)
-        {
+        if (userId == null) {
             Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
             startActivity(loginIntent);
             getActivity().finish();
         }
 
         mUser = manager.GetUser(userId);
-
         showUserBasicDetails();
-
-        if (mTeam == null || mTeam.getId() == null) {
-            fetchAndDisplayTeamDetails();
-        }
-
+        fetchTeam(userId);
+        fetchProfileImage();
         return rootView;
     }
 
-    private void fetchAndDisplayTeamDetails() {
-        manager = new StorageManager();
-        mTeam = manager.GetTeam(userId);
-        if (mTeam == null || mTeam.getId() == null) {
-            fetchTeam(userId);
-        } else {
-            showTeamBasicDetails();
+    private void fetchProfileImage() {
+        // facebook
+        AccessToken token = AccessToken.getCurrentAccessToken();
+        if (token != null) {
+            String url = "http://graph.facebook.com/" + token.getUserId() + "/picture?type=large&redirect=false";
+            Http http = new Http();
+            http.get(url, new HashMap<String, String>(), new APCallback() {
+                @Override
+                public void success(JSONObject result) {
+                    Picasso.with(getActivity()).load(result.optJSONObject("data").optString("url")).into(mPhoto);
+                }
+            });
+
         }
+        else if (Twitter.getSessionManager().getActiveSession() != null) {
+            Twitter.getApiClient().getAccountService().verifyCredentials(true, false, new Callback<User>() {
+                @Override
+                public void success(Result<User> result) {
+                    if (result.data.profileImageUrl != null)
+                        Picasso.with(getActivity()).load(result.data.profileImageUrl.replace("_normal", "")).into(mPhoto);
+                }
+
+                @Override
+                public void failure(TwitterException e) {
+
+                }
+
+            });
+        }
+        else Picasso.with(getActivity()).load(R.drawable.user).into(mPhoto);
+
     }
 
-    private void showTeamBasicDetails()
-    {
+    private void showTeamBasicDetails() {
         mRank.setText(String.valueOf(mTeam.getRank()));
         mPoints.setText(String.valueOf(mTeam.getTotalPoints()));
     }
 
-    private void showUserBasicDetails()
-    {
+    private void showUserBasicDetails() {
         String name = mUser.getFirstName();
         if (mUser.getLastName() != null && mUser.getLastName().equals("null") == false)
             name += " " + mUser.getLastName();
@@ -182,15 +221,19 @@ public class HomeFragment extends Fragment {
     }
 
     @OnClick(R.id.card_view_fantasy)
-    public void onFantasyClick()
-    {
-        if (isTeamCreatedOnServer() == true) {
+    public void onFantasyClick() {
+        if (mTeamStatus == TeamStatus.CREATED) {
             Intent viewTeamIntent = new Intent(getActivity(), ViewTeamActivity.class);
             startActivity(viewTeamIntent);
-        } else {
+        } else if (mTeamStatus == TeamStatus.NOT_CREATED) {
             Intent createTeamIntent = new Intent(getActivity(), CreateTeamActivity.class);
             startActivity(createTeamIntent);
+        } else if (mTeamStatus == TeamStatus.DONT_KNOW) {
+
+            Toast.makeText(getActivity(), "Unable to fetch team details at the moment. PLease try again later", Toast.LENGTH_SHORT).show();
+
         }
+
     }
 
     private boolean isTeamCreatedOnServer() {
@@ -202,9 +245,10 @@ public class HomeFragment extends Fragment {
     }
 
     @OnClick(R.id.card_view_privateleague)
-    public void onPrivateLeagueClick()
-    {
-        Toast.makeText(getActivity(),"This game is currently unavailable. Check back soon.", Toast.LENGTH_SHORT).show();
+    public void onPrivateLeagueClick() {
+        Intent intent = new Intent(getActivity(), PrivateLeagueHomeActivity.class);
+        startActivity(intent);
+//        Toast.makeText(getActivity(), "This game is currently unavailable. Check back soon.", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.card_view_pick5)
@@ -225,7 +269,8 @@ public class HomeFragment extends Fragment {
             public void success(JSONObject result) {
                 mProgressDialog.dismiss();
                 if (result.optJSONObject("Error") != null) {
-                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), getActivity());
+                    mTeamStatus = TeamStatus.NOT_CREATED;
+//                    SnackBarManager.showMessage("Start by creating a Fantasy team", getActivity());
                     return;
                 }
                 if (result.optString("Id") != null) {
@@ -234,6 +279,7 @@ public class HomeFragment extends Fragment {
                     mTeam.setUserId(userId);
                     StorageManager storageManager = new StorageManager();
                     storageManager.SaveTeam(mTeam);
+                    mTeamStatus = TeamStatus.CREATED;
                     showTeamBasicDetails();
                 }
             }
@@ -241,7 +287,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void failure(Exception e) {
                 mProgressDialog.dismiss();
-                SnackBarManager.showError("Unable to fetch your team at the moment.", getActivity());
+                StorageManager manager = new StorageManager();
+                mTeam = manager.GetTeam(userId);
+                if (mTeam != null && mTeam.getId() != null) {
+                    mTeamStatus = TeamStatus.CREATED;
+                    showTeamBasicDetails();
+                } else mTeamStatus = TeamStatus.DONT_KNOW;
             }
         });
     }

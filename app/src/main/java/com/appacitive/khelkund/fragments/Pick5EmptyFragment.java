@@ -44,7 +44,7 @@ public class Pick5EmptyFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_pick5_empty, container, false);
         ButterKnife.inject(this, view);
-        YoYo.with(Techniques.ZoomIn).duration(800).playOn(mFlag);
+        YoYo.with(Techniques.ZoomIn).duration(1000).playOn(mFlag);
         return view;
     }
 

@@ -551,7 +551,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:text="SUBMIT"
+        android:text="  SAVE  "
         android:id="@+id/btn_pick5_play"
         android:layout_below="@+id/tv_pick5_readonly_result"
         android:layout_centerHorizontal="true"

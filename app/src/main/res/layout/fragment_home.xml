@@ -19,7 +19,8 @@
 
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:id="@+id/inner_rl">
+        android:id="@+id/inner_rl"
+        android:elevation="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -90,6 +91,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Mathew Perry"
@@ -101,16 +103,26 @@
                 android:textStyle="italic"
                 android:textSize="24sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView"
-                android:src="@drawable/user"
-
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/iv_home_photo"
+                app:border_width="2dp"
+                app:border_color="@color/background_material_light"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="-20dp"
-                android:translationZ="5dp" />
+                 />
+            <!--<ImageView-->
+                <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+                <!--android:id="@+id/iv_home_photo"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginBottom="-20dp"-->
+                <!--/>-->
 
         </RelativeLayout>
     </RelativeLayout>

@@ -40,7 +40,7 @@ public class PlayerPoolAdapter extends RecyclerView.Adapter<PlayerPoolAdapter.Po
         put("MI", "Mumbai Indians");
         put("SRH", "Sunrisers Hyderabad");
         put("DD", "Delhi Daredevils");
-        put("RCB", "Royal Challenger's Bangalore");
+        put("RCB", "Royal Challengers Bangalore");
         put("RR", "Rajasthan Royals");
         put("CSK", "Chennai Super Kings");
         put("KKR", "Kolkata Knight Riders");

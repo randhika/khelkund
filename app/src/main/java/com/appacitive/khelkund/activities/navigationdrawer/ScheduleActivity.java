@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.navigationdrawer;
+package com.appacitive.khelkund.activities.navigationdrawer;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;

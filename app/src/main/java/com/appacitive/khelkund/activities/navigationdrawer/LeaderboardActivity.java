@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.navigationdrawer;
+package com.appacitive.khelkund.activities.navigationdrawer;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -23,6 +23,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.adapters.SlideInBottomAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.adapters.SlideInLeftAnimationAdapter;
 
 public class LeaderboardActivity extends ActionBarActivity {
 
@@ -85,7 +89,7 @@ public class LeaderboardActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(LeaderboardActivity.this);
         ((LinearLayoutManager)mLayoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new LeaderboardAdapter(mScores, mUserId);
+        mAdapter = new SlideInLeftAnimationAdapter(new LeaderboardAdapter(mScores, mUserId));
         mRecyclerView.setAdapter(mAdapter);
     }
 

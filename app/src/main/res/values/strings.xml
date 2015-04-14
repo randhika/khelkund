@@ -46,13 +46,14 @@
     <string name="title_activity_pick5_match">Pick\'em 5</string>
     <string name="title_activity_leaderboard">Leaderboard</string>
     <string name="title_activity_feedback">Submit Feedback</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_how_to_play">"How To Play "</string>
+    <string name="title_activity_how_to_play">"How To Play"</string>
     <string name="title_activity_licences">Licences</string>
     <string name="title_activity_about_us">About Us</string>
-    <string name="title_activity_schedule">IPL T20 Schedule</string>
+    <string name="title_activity_schedule">Schedule</string>
     <string name="title_activity_scoring_chart">Scoring Chart</string>
-    <string name="title_activity_terms_and_policy">TermsAndPolicyActivity</string>
+    <string name="title_activity_terms_and_policy">Terms And Policy</string>
     <string name="title_activity_prizes">Prizes</string>
+    <string name="title_activity_create_private_league">Create a new Private League</string>
+    <string name="title_activity_private_league_home">Your Private Leagues</string>
+    <string name="title_activity_how_to_play_activity2">How To Play</string>
 </resources>

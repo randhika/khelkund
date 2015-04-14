@@ -13,6 +13,8 @@ import android.view.View;
 
 import com.squareup.picasso.Transformation;
 
+import java.util.UUID;
+
 /**
  * Created by sathley on 4/4/2015.
  */
@@ -71,6 +73,6 @@ public class CircleTransform implements Transformation {
 
     @Override
     public String key() {
-        return "circle";
+        return UUID.randomUUID().toString();
     }
 }

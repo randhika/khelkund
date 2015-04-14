@@ -75,7 +75,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_arrow_forward_grey600" />
+                    android:src="@drawable/ic_arrow_forward_white" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -86,9 +86,11 @@
                     android:layout_toLeftOf="@+id/imageView11"
                     android:layout_alignParentTop="true"
                     android:gravity="center_vertical"
-                    android:textColor="#BDBDBD"
+                    android:textColor="@android:color/white"
                     android:layout_marginRight="16dp"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textStyle="bold"
+                    android:textSize="18sp" />
             </RelativeLayout>
 
             <TextView

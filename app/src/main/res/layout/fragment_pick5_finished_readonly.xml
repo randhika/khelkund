@@ -61,7 +61,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentTop="true"
-                        android:gravity="center_vertical" />
+                        android:gravity="bottom|right" />
 
 
                 </RelativeLayout>
@@ -103,11 +103,11 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="0"
                         android:id="@+id/my_batsman_score"
-                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="center_vertical" />
+                        android:layout_alignParentTop="true"
+                        android:gravity="bottom|right" />
 
                 </RelativeLayout>
 
@@ -151,7 +151,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:gravity="center_vertical" />
+                        android:gravity="bottom" />
 
                 </RelativeLayout>
 
@@ -195,7 +195,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:gravity="center_vertical" />
+                        android:gravity="bottom" />
 
                 </RelativeLayout>
 
@@ -241,7 +241,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:gravity="center_vertical" />
+                        android:gravity="bottom" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -295,7 +295,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentBottom="true"
-                        android:gravity="center_vertical" />
+                        android:gravity="bottom" />
 
 
                 </RelativeLayout>
@@ -340,7 +340,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentBottom="true"
-                        android:gravity="center_vertical" />
+                        android:gravity="bottom" />
 
                 </RelativeLayout>
 
@@ -383,7 +383,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentBottom="true"
-                        android:gravity="center_vertical" />
+                        android:gravity="bottom" />
 
                 </RelativeLayout>
 
@@ -426,7 +426,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentBottom="true"
-                        android:gravity="center_vertical" />
+                        android:gravity="bottom" />
 
                 </RelativeLayout>
 
@@ -471,7 +471,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentBottom="true"
-                        android:gravity="center_vertical" />
+                        android:gravity="bottom" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -483,12 +483,13 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="You won this match"
+        android:text="Match Result"
         android:id="@+id/tv_pick5_readonly_result"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:gravity="center_horizontal|center_vertical"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"

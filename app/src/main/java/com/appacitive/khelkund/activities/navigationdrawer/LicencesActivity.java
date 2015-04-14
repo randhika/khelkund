@@ -1,16 +1,12 @@
-package com.appacitive.khelkund.navigationdrawer;
+package com.appacitive.khelkund.activities.navigationdrawer;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
-
-import org.w3c.dom.Text;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

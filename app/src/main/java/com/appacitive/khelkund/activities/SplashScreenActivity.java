@@ -12,6 +12,7 @@ import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.services.FetchAllPick5MatchesIntentService;
 import com.appacitive.khelkund.infra.services.FetchAllPlayersIntentService;
+import com.appacitive.khelkund.infra.services.FetchAllPrivateLeaguesIntentService;
 
 
 public class SplashScreenActivity extends ActionBarActivity {
@@ -38,6 +39,9 @@ public class SplashScreenActivity extends ActionBarActivity {
 
         Intent mPick5ServiceIntent = new Intent(this, FetchAllPick5MatchesIntentService.class);
         startService(mPick5ServiceIntent);
+
+//        Intent mPrivateLeagueIntent = new Intent(this, FetchAllPrivateLeaguesIntentService.class);
+//        startService(mPrivateLeagueIntent);
     }
 
     private Handler splashHandler = new Handler() {

@@ -498,7 +498,6 @@ public class EditTeamActivity extends ActionBarActivity {
         }
 
 
-//        mTransfers.setText(String.valueOf(team.getTransfersRemaining()) + " Transfers");
         mPoints.setText(String.valueOf(team.getTotalPoints()) + " Pt");
         Formation formation = TeamHelper.getFormation(mTeamMutated);
         mFormation.setText(String.format("Your team formation is set to %s BTSM, %s BWLR, %s AR and %s WK.", formation.BatsmenCount, formation.BowlersCount, formation.AllRoundersCount, formation.WicketKeepersCount));
@@ -737,8 +736,4 @@ public class EditTeamActivity extends ActionBarActivity {
                         .duration(Snackbar.SnackbarDuration.LENGTH_LONG) // make it shorter
                 , this);
     }
-
-
-
-
 }

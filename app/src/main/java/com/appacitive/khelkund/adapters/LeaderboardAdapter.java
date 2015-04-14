@@ -2,6 +2,7 @@ package com.appacitive.khelkund.adapters;
 
 import android.graphics.Color;
 import android.provider.CalendarContract;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,14 +46,14 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         LeaderboardScore score = mScores.get(position);
         holder.points.setText(String.valueOf(score.getPoints()));
-        holder.teamName.setText(String.valueOf(score.getTeamName()));
+
         holder.userName.setText(String.valueOf(score.getUserName()));
         holder.rank.setText(String.valueOf(score.getRank()));
 
         if(score.getUserId().equals(mUserId))
-            holder.mLayout.setBackgroundColor(Color.CYAN);
+            holder.teamName.setText(String.valueOf(score.getTeamName()) + " (YOU) ");
         else
-            holder.mLayout.setBackgroundColor(Color.WHITE);
+            holder.teamName.setText(String.valueOf(score.getTeamName()));
 
         int bitmapId = KhelkundApplication.getAppContext().getResources().getIdentifier(score.getUserTeamImage(), "drawable", KhelkundApplication.getAppContext().getPackageName());
         if(bitmapId > 0)
