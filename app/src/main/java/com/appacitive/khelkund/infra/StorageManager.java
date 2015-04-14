@@ -26,11 +26,11 @@ public class StorageManager {
         Realm.deleteRealmFile(KhelkundApplication.getAppContext());
     }
 
-    public List<PrivateLeague> GetPrivateLeague(String id)
+    public List<PrivateLeague> GetAllPrivateLeaguesForUser(String id)
     {
         Realm realm = getInstance();
         RealmQuery<PrivateLeague> query = realm.where(PrivateLeague.class);
-        query.equalTo("Id", id);
+        query.equalTo("UserId", id);
         return query.findAll();
     }
 

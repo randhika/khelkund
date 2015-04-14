@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="New Private League"
+        android:id="@+id/textView21"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:textColor="@color/primary_dark" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_private_league_create_name"
+        android:layout_below="@+id/textView21"
+        android:layout_centerHorizontal="true"
+        android:hint="New Private League Name"
+        android:layout_margin="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="CREATE"
+        android:id="@+id/tv_create_league"
+        android:layout_below="@+id/et_private_league_create_name"
+        android:layout_alignRight="@+id/et_private_league_create_name"
+        android:layout_alignEnd="@+id/et_private_league_create_name"
+        android:textColor="@color/accent"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="CANCEL"
+        android:id="@+id/tv_createleague_cancel"
+        android:layout_alignTop="@+id/tv_create_league"
+        android:layout_toLeftOf="@+id/tv_create_league"
+        android:layout_toStartOf="@+id/tv_create_league"
+        android:layout_marginRight="16dp"
+        android:textColor="@color/accent"
+        android:gravity="center_vertical" />
+</RelativeLayout>

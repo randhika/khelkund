@@ -118,6 +118,42 @@ public class TeamHelper {
         return newTeam;
     }
 
+    public static List<PrivateLeague> clone(List<PrivateLeague> leagues)
+    {
+        List<PrivateLeague> newList = new ArrayList<PrivateLeague>();
+        for(PrivateLeague league : leagues)
+            newList.add(clone(league));
+
+        return newList;
+    }
+
+    public static PrivateLeague clone(PrivateLeague league)
+    {
+        PrivateLeague newLeague = new PrivateLeague();
+        newLeague.setUserId(league.getUserId());
+        newLeague.setCode(league.getCode());
+        newLeague.setName(league.getName());
+        if(league.getTeams() != null)
+        {
+            for(PrivateLeagueTeam team : league.getTeams())
+                newLeague.getTeams().add(clone(team));
+        }
+        return newLeague;
+    }
+
+    public static PrivateLeagueTeam clone(PrivateLeagueTeam team)
+    {
+        PrivateLeagueTeam newTeam = new PrivateLeagueTeam();
+        newTeam.setUserId(team.getUserId());
+        newTeam.setImageName(team.getImageName());
+        newTeam.setRank(team.getRank());
+        newTeam.setTotalPoints(team.getTotalPoints());
+        newTeam.setUsername(team.getUsername());
+        newTeam.setUserTeamId(team.getUserTeamId());
+        newTeam.setUserTeamName(team.getUserTeamName());
+        return newTeam;
+    }
+
     public static History clone(History history)
     {
         History h = new History();

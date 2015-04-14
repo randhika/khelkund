@@ -112,6 +112,7 @@ public class TeamOverviewFragment extends Fragment {
         dataSet.setLineWidth(3);
         LineData lineData = new LineData(oppositions, new ArrayList<LineDataSet>(){{add(dataSet);}});
         mChart.setData(lineData);
+        mChart.setDescription("");
         showOverlayTutorial();
         return rootView;
     }

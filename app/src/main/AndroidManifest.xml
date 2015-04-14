@@ -273,6 +273,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.HomeActivity" />
         </activity>
+        <activity
+            android:name=".activities.privateleague.PrivateLeagueLeaderboardActivity"
+            android:label="@string/title_activity_private_league_leaderboard"
+            android:parentActivityName=".activities.privateleague.PrivateLeagueHomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.appacitive.khelkund.activities.privateleague.PrivateLeagueHomeActivity" />
+        </activity>
     </application>
 
 </manifest>

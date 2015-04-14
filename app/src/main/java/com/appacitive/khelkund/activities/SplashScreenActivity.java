@@ -40,8 +40,8 @@ public class SplashScreenActivity extends ActionBarActivity {
         Intent mPick5ServiceIntent = new Intent(this, FetchAllPick5MatchesIntentService.class);
         startService(mPick5ServiceIntent);
 
-//        Intent mPrivateLeagueIntent = new Intent(this, FetchAllPrivateLeaguesIntentService.class);
-//        startService(mPrivateLeagueIntent);
+        Intent mPrivateLeagueIntent = new Intent(this, FetchAllPrivateLeaguesIntentService.class);
+        startService(mPrivateLeagueIntent);
     }
 
     private Handler splashHandler = new Handler() {

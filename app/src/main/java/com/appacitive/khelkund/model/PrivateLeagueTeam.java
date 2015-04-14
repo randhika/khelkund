@@ -23,20 +23,20 @@ public class PrivateLeagueTeam extends RealmObject {
         if (json == null)
             return;
 
+        this.UserId = json.optString("UserId");
         this.Username = json.optString("UserName");
         this.UserTeamName = json.optString("UserTeamName");
         this.UserTeamId = json.optString("UserTeamId");
         this.ImageName = json.optString("ImageName");
-        this.Name = json.optString("Name");
         this.Rank = json.optInt("Rank");
         this.TotalPoints = json.optInt("Points");
     }
 
+    private String UserId;
     private String Username;
     private String UserTeamId;
     private String UserTeamName;
     private String ImageName;
-    private String Name;
     private int Rank=0;
     private int TotalPoints=0;
 
@@ -64,14 +64,6 @@ public class PrivateLeagueTeam extends RealmObject {
         ImageName = imageName;
     }
 
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
     public int getRank() {
         return Rank;
     }
@@ -94,5 +86,13 @@ public class PrivateLeagueTeam extends RealmObject {
 
     public void setUserTeamName(String userTeamName) {
         UserTeamName = userTeamName;
+    }
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
     }
 }

@@ -112,7 +112,8 @@
                 android:layout_marginLeft="18dp"
                 android:layout_alignRight="@+id/iv_details_photo"
                 android:layout_alignEnd="@+id/iv_details_photo"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:singleLine="true" />
 
         </RelativeLayout>
 

@@ -196,12 +196,13 @@ public class PlayerDetailsActivity extends ActionBarActivity {
             add(dataSet);
         }});
         mChart.setData(lineData);
-
+//        mChart.setNoDataTextDescription("No chart data");
+        mChart.setDescription("");
     }
 
     private void DisplayPlayerBasicDetails() {
 
-        mName.setText(mPlayerFromDb.getDisplayName());
+        mName.setText(mPlayerFromDb.getFirstName() + " " + mPlayerFromDb.getLastName());
         mToolbar.setBackgroundResource(TeamHelper.getTeamColor(mPlayerFromDb.getShortTeamName()));
         Picasso.with(this).load(mPlayerFromDb.getImageUrl()).fit().centerInside().placeholder(R.drawable.demo).into(mPlayerPhoto);
         mPrice.setText("$ " + String.valueOf(mPlayerFromDb.getPrice()));

@@ -27,7 +27,7 @@ public class FetchAllPrivateLeaguesIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Http http = new Http();
-        String mUserId = SharedPreferencesManager.ReadUserId();
+        final String mUserId = SharedPreferencesManager.ReadUserId();
         if(mUserId == null)
             return;
         http.get(Urls.PrivateLeagueUrls.getPrivateLeaguesUrl(mUserId), new HashMap<String, String>(), new APCallback() {
@@ -39,8 +39,12 @@ public class FetchAllPrivateLeaguesIntentService extends IntentService {
                 List<PrivateLeague> privateLeagues = new ArrayList<PrivateLeague>();
                 JSONArray leaguesArray = result.optJSONArray("PrivateLeagues");
                 if (leaguesArray != null) {
-                    for (int i = 0; i < leaguesArray.length(); i++)
-                        privateLeagues.add(new PrivateLeague(leaguesArray.optJSONObject(i)));
+                    for (int i = 0; i < leaguesArray.length(); i++) {
+                        PrivateLeague league = new PrivateLeague(leaguesArray.optJSONObject(i));
+                        league.setUserId(mUserId);
+                        privateLeagues.add(league);
+                    }
+
                 }
                 StorageManager mManager = new StorageManager();
                 mManager.SavePrivateLeagues(privateLeagues);

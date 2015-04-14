@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 
@@ -16,7 +17,7 @@ public class PrivateLeague extends RealmObject {
 
     public PrivateLeague()
     {
-
+        this.Teams = new RealmList<PrivateLeagueTeam>();
     }
 
     public PrivateLeague(JSONObject json)
@@ -24,7 +25,8 @@ public class PrivateLeague extends RealmObject {
         if(json == null)
             return;
         this.Id = json.optString("PrivateLeagueId");
-        this.Id = json.optString("PrivateLeagueName");
+        this.Name = json.optString("PrivateLeagueName");
+        this.Code = json.optString("PrivateLeagueCode");
         this.Teams = new RealmList<PrivateLeagueTeam>();
         JSONArray teamsArray = json.optJSONArray("UserTeams");
         if(teamsArray != null)
@@ -36,10 +38,15 @@ public class PrivateLeague extends RealmObject {
         }
     }
 
+    @Index
+    private String UserId;
+
     @PrimaryKey
     private String Id;
 
     private String Name;
+
+    private String Code;
 
     private RealmList<PrivateLeagueTeam> Teams;
 
@@ -65,5 +72,21 @@ public class PrivateLeague extends RealmObject {
 
     public void setTeams(RealmList<PrivateLeagueTeam> teams) {
         Teams = teams;
+    }
+
+    public String getCode() {
+        return Code;
+    }
+
+    public void setCode(String code) {
+        Code = code;
+    }
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
     }
 }

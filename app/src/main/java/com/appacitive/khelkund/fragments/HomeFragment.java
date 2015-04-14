@@ -110,18 +110,11 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.reset(this);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.inject(this, rootView);
         this.mTeamStatus = TeamStatus.DONT_KNOW;
-//        this.setHasOptionsMenu(true);
         ConnectionManager.checkNetworkConnectivity(getActivity());
         manager = new StorageManager();
         userId = SharedPreferencesManager.ReadUserId();

@@ -15,6 +15,7 @@ import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
+import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.Urls;
 import com.daimajia.androidanimations.library.Techniques;
@@ -64,8 +65,8 @@ public class CreatePrivateLeagueActivity extends ActionBarActivity {
     {
         JSONObject payload = new JSONObject();
         try {
-            payload.put("PrivateLeagueName", mName.getText().toString());
-            payload.put("Password", mPassword.getText().toString());
+            payload.put("Name", mName.getText().toString());
+            payload.put("UserId", SharedPreferencesManager.ReadUserId());
         }
         catch (JSONException e)
         {
@@ -75,6 +76,10 @@ public class CreatePrivateLeagueActivity extends ActionBarActivity {
         http.post(Urls.PrivateLeagueUrls.getCreatePrivateLeaguesUrl(), new HashMap<String, String>(), payload, new APCallback() {
             @Override
             public void success(JSONObject result) {
+                if (result.optJSONObject("Error") != null) {
+                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), CreatePrivateLeagueActivity.this);
+                    return;
+                }
 
                 Intent privateLeagueHomeIntent = new Intent(CreatePrivateLeagueActivity.this, PrivateLeagueHomeActivity.class);
                 startActivity(privateLeagueHomeIntent);

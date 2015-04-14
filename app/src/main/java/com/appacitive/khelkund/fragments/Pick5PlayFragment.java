@@ -627,13 +627,16 @@ public class Pick5PlayFragment extends Fragment {
                     return;
                 }
                 SnackBarManager.showSuccess("Pick saved successfully", getActivity());
-                new ShowcaseView.Builder(getActivity())
+                ShowcaseView sv =
+                        new ShowcaseView.Builder(getActivity())
                         .setTarget(ViewTarget.NONE)
                         .setContentTitle("Congratulations")
                         .setContentText("You can check back here after the match to see the result.")
                         .hideOnTouchOutside()
                         .singleShot(555)
-                        .build().hideButton();
+                        .build();
+                sv.setShouldCentreText(true);
+                sv.hideButton();
             }
 
             @Override

@@ -281,6 +281,7 @@ public class EmailLoginActivity extends ActionBarActivity implements LoaderCallb
         builder.setTitle("Forgot Password?");
         builder.setMessage("We'll email you instructions for resetting your password.");
         final EditText input = new EditText(this);
+        // TODO add margin to input
         input.setHint("Email Address");
         builder.setView(input);
         builder.setPositiveButton("SEND", new DialogInterface.OnClickListener() {

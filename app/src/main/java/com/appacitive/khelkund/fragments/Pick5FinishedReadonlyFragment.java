@@ -1,14 +1,23 @@
 package com.appacitive.khelkund.fragments;
 
 
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
@@ -21,10 +30,12 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.squareup.picasso.Picasso;
 
+import java.io.OutputStream;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -199,10 +210,10 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
             myWinningCount++;
 
         if (myWinningCount >= 4) {
-            mResult.setText("You won this match");
+            mResult.setText("You won this match against Khelkund");
             mResult.setTextColor(getActivity().getResources().getColor(R.color.accent));
         } else {
-            mResult.setText("You lost this match");
+            mResult.setText("You lost this match to Khelkund");
             mResult.setTextColor(getActivity().getResources().getColor(R.color.primary_dark));
         }
 
@@ -349,6 +360,65 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    @OnClick(R.id.btn_readonly_share)
+    public void onShareClick()
+    {
+        Bitmap bitmap = getScreenBitmap(getActivity());
+
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/jpeg");
+
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "Khelkund Pick'em 5");
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        Uri uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                values);
+
+        OutputStream outstream;
+        try {
+            outstream = getActivity().getContentResolver().openOutputStream(uri);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
+            outstream.close();
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+        share.putExtra(Intent.EXTRA_TEXT, getActivity().getResources().getString(R.string.SHORT_APP_URL) );
+
+        share.putExtra(Intent.EXTRA_STREAM, uri);
+        startActivity(Intent.createChooser(share, "Share team using"));
+    }
+
+    private Bitmap getScreenBitmap(Activity activity) {
+
+        View view = activity.getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap bitmap = view.getDrawingCache();
+        Rect rect = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+        int statusBarHeight = rect.top;
+        int width = activity.getWindowManager().getDefaultDisplay().getWidth();
+        int height = activity.getWindowManager().getDefaultDisplay().getHeight();
+        Bitmap bitmap2 = Bitmap.createBitmap(bitmap, 0, statusBarHeight, width,
+                height - statusBarHeight);
+        view.destroyDrawingCache();
+        return bitmap2;
+
+//        Bitmap bitmap;
+//        View v1 = (RelativeLayout) getActivity().findViewById(R.id.rl_pick5_readonly_parent);
+//        v1.setDrawingCacheEnabled(true);
+//        bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+//        v1.setDrawingCacheEnabled(false);
+//        return bitmap;
+
+//        RelativeLayout iv = (RelativeLayout) getActivity().findViewById(R.id.rl_pick5_readonly_parent);
+//        Bitmap bitmap = Bitmap.createBitmap(iv.getWidth(), iv.getHeight(), Bitmap.Config.ARGB_8888);
+//        Canvas c = new Canvas(bitmap);
+//        c.drawColor(Color.WHITE);
+//        iv.draw(c);
+//        return (bitmap);
     }
 
 

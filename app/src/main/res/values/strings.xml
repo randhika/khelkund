@@ -31,6 +31,7 @@
     <string name="facebook_app_id">794318567264645</string>
     <string name="TWITTER_KEY">N1J0SKJLkMAoQe2kERO9LaX6j</string>
     <string name="TWITTER_SECRET">ehmqbKoGROgCV2Ynk8jL9TsC7laL5xPvjMWXti9xZBSdO7zgqP</string>
+    <string name="SHORT_APP_URL">http://goo.gl/cNyTpp</string>
 
     <string name="title_activity_view_team">My Team</string>
 
@@ -40,7 +41,7 @@
     <string name="title_activity_player_details">Player Details</string>
 
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="title_activity_player_pool">Select Player</string>
     <string name="title_activity_pick5_home">Pick\'em 5</string>
     <string name="title_activity_pick5_match">Pick\'em 5</string>
@@ -56,4 +57,5 @@
     <string name="title_activity_create_private_league">Create a new Private League</string>
     <string name="title_activity_private_league_home">Your Private Leagues</string>
     <string name="title_activity_how_to_play_activity2">How To Play</string>
+    <string name="title_activity_private_league_leaderboard">Private League Leaderboard</string>
 </resources>
