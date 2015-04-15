@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.KhelkundApplication;
+import com.appacitive.khelkund.infra.widgets.CircleView;
 import com.appacitive.khelkund.model.Match;
+import com.appacitive.khelkund.model.TeamHelper;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -47,8 +49,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         DateFormat df = new SimpleDateFormat("dd, MMMM yyyy");
         holder.date.setText(df.format(match.getStartDate()));
         holder.venue.setText(match.getVenue());
-        Picasso.with(KhelkundApplication.getAppContext()).load(getTeamLogo(match.getAwayTeamShortName())).into(holder.awayLogo);
-        Picasso.with(KhelkundApplication.getAppContext()).load(getTeamLogo(match.getHomeTeamShortName())).into(holder.homeLogo);
+//        Picasso.with(KhelkundApplication.getAppContext()).load(getTeamLogo(match.getAwayTeamShortName())).into(holder.awayLogo);
+//        Picasso.with(KhelkundApplication.getAppContext()).load(getTeamLogo(match.getHomeTeamShortName())).into(holder.homeLogo);
+
+        holder.homeLogo.setTitleText(match.getHomeTeamShortName());
+        holder.homeLogo.setFillColor(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(match.getHomeTeamShortName())));
+        holder.awayLogo.setTitleText(match.getAwayTeamShortName());
+        holder.awayLogo.setFillColor(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(match.getAwayTeamShortName())));
+
         holder.relativeLayout.setBackgroundResource(R.drawable.background);
         holder.card.setCardElevation(8);
         holder.card.setPreventCornerOverlap(true);
@@ -87,10 +95,17 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         public TextView awayName;
         @InjectView(R.id.tv_pick5_home_team_name)
         public TextView homeName;
+
+//        @InjectView(R.id.iv_pick5_away_logo)
+//        public ImageView awayLogo;
+//        @InjectView(R.id.iv_pick5_home_logo)
+//        public ImageView homeLogo;
+
         @InjectView(R.id.iv_pick5_away_logo)
-        public ImageView awayLogo;
+        public CircleView awayLogo;
         @InjectView(R.id.iv_pick5_home_logo)
-        public ImageView homeLogo;
+        public CircleView homeLogo;
+
         @InjectView(R.id.tv_pick5_play_date)
         public TextView date;
         @InjectView(R.id.tv_pick5_venue)
@@ -103,6 +118,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         public ScheduleViewHolder(View itemView) {
             super(itemView);
             ButterKnife.inject(this, itemView);
+
         }
     }
 }

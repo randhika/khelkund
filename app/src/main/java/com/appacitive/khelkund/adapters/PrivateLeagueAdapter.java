@@ -1,5 +1,6 @@
 package com.appacitive.khelkund.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.activities.privateleague.PrivateLeagueHomeActivity;
+import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
@@ -15,6 +18,7 @@ import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PrivateLeague;
 import com.appacitive.khelkund.model.PrivateLeagueTeam;
 import com.appacitive.khelkund.model.Team;
+import com.appacitive.khelkund.model.events.PrivateLeagueSelectedEvent;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -45,7 +49,7 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
 
     @Override
     public void onBindViewHolder(PrivateLeagueViewHolder holder, int position) {
-        PrivateLeague privateLeague = mPrivateLeagues.get(position);
+        final PrivateLeague privateLeague = mPrivateLeagues.get(position);
         holder.name.setText(privateLeague.getName());
         holder.playerCount.setText(String.valueOf(privateLeague.getTeams().size()) + " users are playing this league");
 
@@ -58,6 +62,13 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
                 break;
             }
         }
+        holder.itemView.setOnClickListener(null);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BusProvider.getInstance().post(new PrivateLeagueSelectedEvent(privateLeague.getId()));
+            }
+        });
     }
 
     @Override

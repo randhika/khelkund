@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.adapters.SlideInBottomAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.adapters.SlideInLeftAnimationAdapter;
 
 public class LeaderboardActivity extends ActionBarActivity {
@@ -92,6 +90,4 @@ public class LeaderboardActivity extends ActionBarActivity {
         mAdapter = new SlideInLeftAnimationAdapter(new LeaderboardAdapter(mScores, mUserId));
         mRecyclerView.setAdapter(mAdapter);
     }
-
-
 }

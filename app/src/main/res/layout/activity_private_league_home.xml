@@ -10,7 +10,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_privateleague"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/et_join_private_league_code" />
 
     <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_create_private_league"
@@ -26,4 +27,19 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
         />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/et_join_private_league_code"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="Enter a Private League code to join"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp" />
 </RelativeLayout>

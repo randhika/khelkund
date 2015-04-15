@@ -48,7 +48,7 @@ public class PlayerPoolFragment extends Fragment {
     public RecyclerView.Adapter mAdapter;
     public RecyclerView.LayoutManager mLayoutManager;
 
-    private RealmResults<Player> mPlayers;
+    private List<Player> mPlayers;
     private static final String ARG_SECTION_NUMBER = "section_number";
     private int sectionNumber = 0;
 

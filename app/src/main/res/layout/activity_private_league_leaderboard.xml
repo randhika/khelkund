@@ -5,24 +5,25 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@drawable/leaderboard"
-    tools:context="com.appacitive.khelkund.activities.navigationdrawer.LeaderboardActivity">
+    tools:context="com.appacitive.khelkund.activities.privateleague.PrivateLeagueLeaderboardActivity">
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="68dp"
         android:background="@android:color/transparent"
-        android:id="@+id/leaderboard_header"
+        android:id="@+id/tv_private_league_leaderboard_header"
         android:text="LEADERBOARD"
         android:textColor="@android:color/white"
         android:gravity="center_vertical|center_horizontal"
         android:textSize="33sp"
-        android:typeface="serif" />
+        android:typeface="serif"
+        android:singleLine="true" />
 
 
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/leaderboard_header"
-        android:id="@+id/rv_leaderboard"
+        android:layout_below="@+id/tv_private_league_leaderboard_header"
+        android:id="@+id/rv_privateleague_leaderboard"
         android:background="@android:color/transparent"
         android:cacheColorHint="@android:color/transparent"
         android:layout_width="wrap_content"

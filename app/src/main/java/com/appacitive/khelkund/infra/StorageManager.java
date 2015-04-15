@@ -34,6 +34,14 @@ public class StorageManager {
         return query.findAll();
     }
 
+    public PrivateLeague GetPrivateLeague(String leagueId)
+    {
+        Realm realm = getInstance();
+        RealmQuery<PrivateLeague> query = realm.where(PrivateLeague.class);
+        query.equalTo("Id", leagueId);
+        return query.findFirst();
+    }
+
     public void SavePrivateLeagues(List<PrivateLeague> privateLeagues)
     {
         Realm realm = getInstance();

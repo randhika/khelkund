@@ -130,6 +130,7 @@ public class TeamHelper {
     public static PrivateLeague clone(PrivateLeague league)
     {
         PrivateLeague newLeague = new PrivateLeague();
+        newLeague.setId(league.getId());
         newLeague.setUserId(league.getUserId());
         newLeague.setCode(league.getCode());
         newLeague.setName(league.getName());

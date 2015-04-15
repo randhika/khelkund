@@ -239,6 +239,7 @@
         <activity
             android:name=".activities.privateleague.CreatePrivateLeagueActivity"
             android:label="@string/title_activity_create_private_league"
+            android:screenOrientation="portrait"
             android:parentActivityName=".activities.privateleague.PrivateLeagueHomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -247,6 +248,7 @@
         <activity
             android:name=".activities.privateleague.PrivateLeagueHomeActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_private_league_home"
             android:parentActivityName=".activities.HomeActivity" >
             <intent-filter>
@@ -268,6 +270,7 @@
         <activity
             android:name=".activities.navigationdrawer.HowToPlayActivity"
             android:label="@string/title_activity_how_to_play_activity2"
+            android:screenOrientation="portrait"
             android:parentActivityName=".activities.HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -276,6 +279,8 @@
         <activity
             android:name=".activities.privateleague.PrivateLeagueLeaderboardActivity"
             android:label="@string/title_activity_private_league_leaderboard"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
             android:parentActivityName=".activities.privateleague.PrivateLeagueHomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

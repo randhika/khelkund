@@ -22,6 +22,11 @@ public class Urls {
 
     public static class PrivateLeagueUrls
     {
+        public static String getJoinPrivateLeaguesUrl()
+        {
+            return baseUrl + "PrivateLeagueService.svc/JoinPrivateLeague";
+        }
+
         public static String getPrivateLeaguesUrl(String userId)
         {
             return baseUrl + "PrivateLeagueService.svc/PrivateLeagues/" + userId;
