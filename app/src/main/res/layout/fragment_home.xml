@@ -22,116 +22,114 @@
         android:id="@+id/inner_rl"
         android:elevation="5dp">
 
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="36dp"
-                android:layout_marginBottom="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="0"
-                    android:id="@+id/tv_rank"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@color/background_floating_material_light"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="RANK"
-                    android:id="@+id/tv_label_rank"
-                    android:layout_below="@+id/tv_rank"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@color/background_floating_material_light" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/relativeLayout2"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginBottom="18dp"
-                android:layout_marginRight="36dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="0"
-                    android:id="@+id/tv_points"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@color/background_floating_material_light"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="POINTS"
-                    android:id="@+id/tv_label_points"
-                    android:layout_below="@+id/tv_points"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@color/background_floating_material_light" />
-            </RelativeLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="36dp"
+            android:layout_marginBottom="18dp">
 
             <TextView
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Mathew Perry"
-                android:id="@+id/tv_name"
-                android:textColor="@color/abc_primary_text_material_dark"
+                android:text="0"
+                android:id="@+id/tv_rank"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="36dp"
-                android:textStyle="italic"
-                android:textSize="24sp" />
+                android:textColor="@color/background_floating_material_light"
+                android:textStyle="bold" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/iv_home_photo"
-                app:border_width="2dp"
-                app:border_color="@color/background_material_light"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentBottom="true"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="RANK"
+                android:id="@+id/tv_label_rank"
+                android:layout_below="@+id/tv_rank"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="-20dp"
-                 />
-            <!--<ImageView-->
-                <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-                <!--android:id="@+id/iv_home_photo"-->
-                <!--android:layout_width="100dp"-->
-                <!--android:layout_height="100dp"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_marginBottom="-20dp"-->
-                <!--/>-->
-
+                android:textColor="@color/background_floating_material_light" />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout2"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="18dp"
+            android:layout_marginRight="36dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="0"
+                android:id="@+id/tv_points"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/background_floating_material_light"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="POINTS"
+                android:id="@+id/tv_label_points"
+                android:layout_below="@+id/tv_points"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/background_floating_material_light" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Mathew Perry"
+            android:id="@+id/tv_name"
+            android:textColor="@color/abc_primary_text_material_dark"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="36dp"
+            android:textStyle="italic"
+            android:textSize="24sp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_home_photo"
+            app:border_width="2dp"
+            app:border_color="@color/background_material_light"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-20dp" />
+        <!--<ImageView-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/iv_home_photo"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="-20dp"-->
+        <!--/>-->
+
+        <!--</RelativeLayout>-->
     </RelativeLayout>
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Games"
+        android:text="Pick a game"
         android:layout_below="@+id/inner_rl"
         android:id="@+id/tv_scoreboard_label"
         android:layout_alignParentLeft="true"
@@ -140,163 +138,281 @@
         android:layout_marginBottom="18dp"
         android:textSize="18sp" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clickable="false"
         android:layout_below="@+id/tv_scoreboard_label">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view_fantasy"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:elevation="5dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_margin="4dp">
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/card_view_fantasy"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_below="@+id/tv_scoreboard_label"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:elevation="5dp"
-                android:layout_gravity="center"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                android:layout_height="match_parent"
+                android:background="#424242">
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Fantasy League"
-                        android:id="@+id/textView9"
-                        android:textColor="@color/primary_dark"
-                        android:textSize="26sp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginLeft="92dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Fantasy Cricket"
+                    android:id="@+id/textView9"
+                    android:textSize="22sp"
+                    android:textIsSelectable="false"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@android:color/white" />
 
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:id="@+id/imageView6"
-                        android:layout_alignParentTop="false"
-                        android:layout_alignParentLeft="false"
-                        android:layout_alignParentStart="true"
-                        android:src="@drawable/fantacy"
-                        android:layout_marginLeft="32dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_alignParentBottom="false"
-                        android:layout_alignParentRight="false"
-                        android:layout_alignWithParentIfMissing="false"
-                        android:layout_centerVertical="true" />
 
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/card_view_pick5"
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view_pick5"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_margin="4dp">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_below="@+id/card_view_fantasy"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="#424242">
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Pick'em 5"
-                        android:id="@+id/textView10"
-                        android:textColor="@color/primary_dark"
-                        android:textSize="26sp"
-                        android:textIsSelectable="false"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="92dp" />
-
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:id="@+id/imageView7"
-                        android:src="@drawable/pickme5"
-                        android:layout_gravity="center_vertical"
-                        android:layout_alignWithParentIfMissing="false"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginLeft="32dp" />
-
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Pick'em 5"
+                    android:id="@+id/textView10"
+                    android:textSize="22sp"
+                    android:textIsSelectable="false"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@android:color/white" />
 
 
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/card_view_privateleague"
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view_privateleague"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_below="@+id/card_view_pick5"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_height="72dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp">
+                android:layout_height="match_parent"
+                android:background="#424242">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Private League"
+                    android:id="@+id/textView11"
+                    android:textSize="22sp"
+                    android:textIsSelectable="false"
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Private League"
-                        android:id="@+id/textView11"
-                        android:textColor="@color/primary_dark"
-                        android:textSize="26sp"
-                        android:textIsSelectable="false"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="92dp" />
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white" />
 
 
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:id="@+id/imageView8"
-                        android:src="@drawable/private_league"
-                        android:layout_gravity="center_vertical"
-                        android:layout_alignWithParentIfMissing="false"
-                        android:layout_alignBottom="@+id/textView11"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginLeft="32dp" />
 
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
+    </LinearLayout>
 
-    </ScrollView>
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:layout_below="@+id/tv_scoreboard_label">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/card_view_fantasy"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="72dp"-->
+    <!--android:background="?android:attr/selectableItemBackground"-->
+    <!--android:layout_below="@+id/tv_scoreboard_label"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:elevation="5dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:foreground="?android:attr/selectableItemBackground"-->
+    <!--android:clickable="true"-->
+    <!--android:layout_marginTop="4dp"-->
+    <!--android:layout_marginBottom="4dp">-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="#424242">-->
+
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+    <!--android:text="Fantasy League"-->
+    <!--android:id="@+id/textView9"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textSize="22sp"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_marginLeft="72dp"-->
+    <!--android:textStyle="bold|italic"-->
+    <!--android:textIsSelectable="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:gravity="center_vertical" />-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="36dp"-->
+    <!--android:layout_height="36dp"-->
+    <!--android:id="@+id/imageView6"-->
+    <!--android:layout_alignParentTop="false"-->
+    <!--android:layout_alignParentLeft="false"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:src="@drawable/fantacy"-->
+    <!--android:layout_marginLeft="32dp"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:layout_alignParentBottom="false"-->
+    <!--android:layout_alignParentRight="false"-->
+    <!--android:layout_alignWithParentIfMissing="false"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:visibility="gone" />-->
+
+    <!--</RelativeLayout>-->
+    <!--</android.support.v7.widget.CardView>-->
+
+    <!--<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/card_view_pick5"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="72dp"-->
+    <!--android:foreground="?android:attr/selectableItemBackground"-->
+    <!--android:clickable="true"-->
+    <!--android:layout_below="@+id/card_view_fantasy"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginTop="4dp"-->
+    <!--android:layout_marginBottom="4dp">-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="#424242">-->
+
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+    <!--android:text="Pick'em 5"-->
+    <!--android:id="@+id/textView10"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textSize="22sp"-->
+    <!--android:textIsSelectable="true"-->
+    <!--android:layout_marginLeft="72dp"-->
+    <!--android:textStyle="bold|italic"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:gravity="center_vertical" />-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="36dp"-->
+    <!--android:layout_height="36dp"-->
+    <!--android:id="@+id/imageView7"-->
+    <!--android:src="@drawable/pickme5"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:layout_alignWithParentIfMissing="false"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_marginLeft="32dp"-->
+    <!--android:visibility="gone" />-->
+
+    <!--</RelativeLayout>-->
+    <!--</android.support.v7.widget.CardView>-->
+
+
+    <!--<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/card_view_privateleague"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:foreground="?android:attr/selectableItemBackground"-->
+    <!--android:clickable="true"-->
+    <!--android:layout_below="@+id/card_view_pick5"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_height="72dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginTop="4dp"-->
+    <!--android:layout_marginBottom="4dp">-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="#424242">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+    <!--android:text="Private League"-->
+    <!--android:id="@+id/textView11"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textSize="22sp"-->
+    <!--android:textIsSelectable="true"-->
+    <!--android:layout_marginLeft="72dp"-->
+    <!--android:textStyle="bold|italic"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:gravity="center_vertical" />-->
+
+
+    <!--<ImageView-->
+    <!--android:layout_width="36dp"-->
+    <!--android:layout_height="36dp"-->
+    <!--android:id="@+id/imageView8"-->
+    <!--android:src="@drawable/private_league"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:layout_alignWithParentIfMissing="false"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_marginLeft="32dp"-->
+    <!--android:visibility="gone" />-->
+
+    <!--</RelativeLayout>-->
+    <!--</android.support.v7.widget.CardView>-->
+    <!--</LinearLayout>-->
+
+    <!--</ScrollView>-->
 
 </RelativeLayout>

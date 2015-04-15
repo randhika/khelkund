@@ -17,7 +17,7 @@
         android:id="@+id/fab_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_icon="@android:drawable/ic_menu_edit"
+        fab:fab_icon="@drawable/edit"
         fab:fab_colorNormal="@color/accent"
         fab:fab_colorPressed="#C2185B"
         android:layout_alignParentBottom="true"

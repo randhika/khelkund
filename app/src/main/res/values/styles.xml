@@ -52,7 +52,7 @@
     </style>
 
     <style name="TextAppearance.ShowcaseView.Title" parent="android:style/TextAppearance.Large">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/accent</item>
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">

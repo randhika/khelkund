@@ -4,19 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
+import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.services.FetchAllPick5MatchesIntentService;
 import com.appacitive.khelkund.infra.services.FetchAllPlayersIntentService;
 import com.appacitive.khelkund.infra.services.FetchAllPrivateLeaguesIntentService;
+import com.appacitive.khelkund.model.KhelkundUser;
 
 
 public class SplashScreenActivity extends ActionBarActivity {
-
 
 
     @Override
@@ -27,10 +27,8 @@ public class SplashScreenActivity extends ActionBarActivity {
         startBackgroundIntentServices();
 
 
-
-
         Message msg = new Message();
-        splashHandler.sendMessageDelayed(msg, 1000);
+        splashHandler.sendMessageDelayed(msg, 3000);
     }
 
     private void startBackgroundIntentServices() {
@@ -49,12 +47,19 @@ public class SplashScreenActivity extends ActionBarActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             String userId = SharedPreferencesManager.ReadUserId();
+
             if (userId == null) {
                 Intent loginIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                 startActivity(loginIntent);
             } else {
-                Intent homeIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);
-                startActivity(homeIntent);
+                KhelkundUser user = new StorageManager().GetUser(userId);
+                if (user == null) {
+                    Intent loginIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+                    startActivity(loginIntent);
+                } else {
+                    Intent homeIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);
+                    startActivity(homeIntent);
+                }
             }
             finish();
         }

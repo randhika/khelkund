@@ -5,10 +5,12 @@ import com.appacitive.khelkund.model.Match;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PrivateLeague;
 import com.appacitive.khelkund.model.Team;
+import com.appacitive.khelkund.model.TeamHelper;
 
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmMigration;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
@@ -31,15 +33,16 @@ public class StorageManager {
         Realm realm = getInstance();
         RealmQuery<PrivateLeague> query = realm.where(PrivateLeague.class);
         query.equalTo("UserId", id);
-        return query.findAll();
+        return TeamHelper.clone(query.findAll());
     }
 
-    public PrivateLeague GetPrivateLeague(String leagueId)
+    public PrivateLeague GetPrivateLeague(String leagueId, String userId)
     {
         Realm realm = getInstance();
         RealmQuery<PrivateLeague> query = realm.where(PrivateLeague.class);
         query.equalTo("Id", leagueId);
-        return query.findFirst();
+        query.equalTo("UserId", userId);
+        return TeamHelper.clone(query.findFirst());
     }
 
     public void SavePrivateLeagues(List<PrivateLeague> privateLeagues)
@@ -191,5 +194,18 @@ public class StorageManager {
         if (previousMatch == null)
             return null;
         return previousMatch.getId();
+    }
+
+    public void RemovePrivateLeague(String leagueId, String userId) {
+        Realm realm = getInstance();
+        realm.beginTransaction();
+        RealmQuery<PrivateLeague> query = realm.where(PrivateLeague.class);
+        query.equalTo("UserId", userId);
+        query.equalTo("Id", leagueId);
+        PrivateLeague league = query.findFirst();
+        league.removeFromRealm();
+        realm.commitTransaction();
+        realm.close();
+
     }
 }

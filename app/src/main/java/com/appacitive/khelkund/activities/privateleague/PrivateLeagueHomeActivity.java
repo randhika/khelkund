@@ -1,16 +1,22 @@
 package com.appacitive.khelkund.activities.privateleague;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -28,9 +34,14 @@ import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.PrivateLeague;
 import com.appacitive.khelkund.model.TeamHelper;
+import com.appacitive.khelkund.model.events.PrivateLeagueDeleteEvent;
 import com.appacitive.khelkund.model.events.PrivateLeagueSelectedEvent;
+import com.appacitive.khelkund.model.events.PrivateLeagueShareEvent;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.squareup.otto.Subscribe;
 
 import org.json.JSONArray;
@@ -45,17 +56,19 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import jp.wasabeef.recyclerview.animators.FlipInBottomXAnimator;
-import jp.wasabeef.recyclerview.animators.adapters.SlideInBottomAnimationAdapter;
 
 public class PrivateLeagueHomeActivity extends ActionBarActivity {
 
     @InjectView(R.id.et_join_private_league_code)
     public EditText mCode;
 
+    @InjectView(R.id.fab_create_private_league)
+    public FloatingActionButton mCreate;
+
     @InjectView(R.id.rv_privateleague)
     public RecyclerView mRecyclerView;
 
-    public RecyclerView.Adapter mAdapter;
+    public PrivateLeagueAdapter mAdapter;
     public RecyclerView.LayoutManager mLayoutManager;
 
     private List<PrivateLeague> mPrivateLeagues;
@@ -69,7 +82,12 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         setContentView(R.layout.activity_private_league_home);
         ButterKnife.inject(this);
 
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
         mUserId = SharedPreferencesManager.ReadUserId();
+        mPrivateLeagues = new ArrayList<PrivateLeague>();
         mManager = new StorageManager();
         mPrivateLeagues = TeamHelper.clone(mManager.GetAllPrivateLeaguesForUser(mUserId));
         ConnectionManager.checkNetworkConnectivity(this);
@@ -77,6 +95,24 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
             fetchAndDisplayPrivateLeague();
         else displayPrivateLeagues();
         mCode.addTextChangedListener(watcher);
+        showTutorialOverlay();
+    }
+
+    private void showTutorialOverlay() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                new ShowcaseView.Builder(PrivateLeagueHomeActivity.this)
+                        .setTarget(new ViewTarget(mCreate))
+                        .setContentText("Or join an existing one")
+                        .setContentTitle("Create a new Private League")
+                        .hideOnTouchOutside()
+                        .singleShot(998)
+                        .build().hideButton();
+            }
+        };
+        new Handler().postDelayed(runnable, 1000);
+
     }
 
     private TextWatcher watcher = new TextWatcher() {
@@ -87,7 +123,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            if (charSequence.length() == 4) {
+            if (charSequence.length() == 5) {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                 joinPrivateLeague(charSequence.toString());
@@ -128,10 +164,13 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
                 JSONArray privateLeaguesArray = result.optJSONArray("PrivateLeagues");
                 if (privateLeaguesArray != null && privateLeaguesArray.length() > 0) {
                     PrivateLeague league = new PrivateLeague(privateLeaguesArray.optJSONObject(0));
+                    if (league == null)
+                        return;
                     league.setUserId(mUserId);
                     StorageManager manager = new StorageManager();
                     manager.SavePrivateLeague(league);
                     mPrivateLeagues.add(league);
+                    mAdapter.ResetLeagues(mPrivateLeagues);
                     mAdapter.notifyDataSetChanged();
                 }
 
@@ -147,10 +186,8 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
     }
 
     private void displayPrivateLeagues() {
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new SlideInBottomAnimationAdapter(new PrivateLeagueAdapter(mPrivateLeagues));
+
+        mAdapter = (new PrivateLeagueAdapter(mPrivateLeagues));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new FlipInBottomXAnimator());
     }
@@ -166,19 +203,20 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
                 mProgress.dismiss();
                 if (result.optJSONObject("Error") != null) {
                     SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), PrivateLeagueHomeActivity.this);
-                    return;
-                }
-                List<PrivateLeague> privateLeagues = new ArrayList<PrivateLeague>();
-                JSONArray leaguesArray = result.optJSONArray("PrivateLeagues");
-                if (leaguesArray != null) {
-                    for (int i = 0; i < leaguesArray.length(); i++) {
-                        PrivateLeague league = new PrivateLeague(leaguesArray.optJSONObject(i));
-                        league.setUserId(mUserId);
-                        privateLeagues.add(league);
+                } else {
+                    List<PrivateLeague> privateLeagues = new ArrayList<PrivateLeague>();
+                    JSONArray leaguesArray = result.optJSONArray("PrivateLeagues");
+                    if (leaguesArray != null) {
+                        for (int i = 0; i < leaguesArray.length(); i++) {
+                            PrivateLeague league = new PrivateLeague(leaguesArray.optJSONObject(i));
+                            league.setUserId(mUserId);
+                            privateLeagues.add(league);
+                        }
                     }
+                    StorageManager mManager = new StorageManager();
+                    mManager.SavePrivateLeagues(privateLeagues);
+                    mPrivateLeagues = privateLeagues;
                 }
-                StorageManager mManager = new StorageManager();
-                mManager.SavePrivateLeagues(privateLeagues);
                 displayPrivateLeagues();
             }
 
@@ -208,6 +246,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
             public void onClick(View view) {
                 String name = mName.getText().toString();
                 if (TextUtils.isEmpty(name)) {
+                    YoYo.with(Techniques.Shake).duration(700).playOn(mName);
                     return;
                 }
                 dialog.dismiss();
@@ -246,6 +285,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
                     StorageManager manager = new StorageManager();
                     manager.SavePrivateLeague(league);
                     mPrivateLeagues.add(league);
+                    mAdapter.ResetLeagues(mPrivateLeagues);
                     mAdapter.notifyDataSetChanged();
                     showShareDialog(league);
                 }
@@ -269,6 +309,75 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    @Subscribe
+    public void onPrivateLeagueShareClicked(PrivateLeagueShareEvent event) {
+        StorageManager manager = new StorageManager();
+        PrivateLeague league = manager.GetPrivateLeague(event.LeagueId, mUserId);
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Join my private fantasy league on Khelkund using the code %s. Get the app here %s", league.getCode(), getResources().getString(R.string.SHORT_APP_URL)));
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, String.format("Invite friends to %s using", league.getName())));
+    }
+
+    @Subscribe
+    public void onPrivateLeagueDeleteClicked(PrivateLeagueDeleteEvent event) {
+        final PrivateLeague league = new StorageManager().GetPrivateLeague(event.LeagueId, mUserId);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle("Are you sure you want to leave Private League " + league.getName())
+                .setMessage("You can always re-enter the Private League code and join again.")
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .setPositiveButton("LEAVE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deletePrivateLeague(league.getId());
+                    }
+                });
+        builder.show();
+
+    }
+
+    private void deletePrivateLeague(final String leagueId) {
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setMessage("Removing Private League");
+        dialog.show();
+        Http http = new Http();
+        JSONObject request = new JSONObject();
+
+        try {
+            request.put("UserId", mUserId);
+            request.put("LeagueId", leagueId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        http.post(Urls.PrivateLeagueUrls.getLeavePrivateLeaguesUrl(), new HashMap<String, String>(), request, new APCallback() {
+            @Override
+            public void success(JSONObject result) {
+                dialog.dismiss();
+                if (result.optJSONObject("Error") != null) {
+                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), PrivateLeagueHomeActivity.this);
+                    return;
+                }
+                SnackBarManager.showSuccess("Private League removed.", PrivateLeagueHomeActivity.this);
+                StorageManager manager = new StorageManager();
+                manager.RemovePrivateLeague(leagueId, mUserId);
+                mPrivateLeagues = manager.GetAllPrivateLeaguesForUser(mUserId);
+                mAdapter.ResetLeagues(mPrivateLeagues);
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void failure(Exception e) {
+                dialog.dismiss();
+            }
+        });
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -279,6 +388,22 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
     protected void onPause() {
         super.onPause();
         BusProvider.getInstance().unregister(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_private_league_home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_refresh) {
+            fetchAndDisplayPrivateLeague();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

@@ -36,6 +36,11 @@ public class Urls {
         {
             return baseUrl + "PrivateLeagueService.svc/CreatePrivateLeague";
         }
+
+        public static String getLeavePrivateLeaguesUrl()
+        {
+            return baseUrl + "PrivateLeagueService.svc/LeavePrivateLeague";
+        }
     }
 
     public static class Pick5Urls

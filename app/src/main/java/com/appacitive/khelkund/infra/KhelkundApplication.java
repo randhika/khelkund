@@ -34,7 +34,7 @@ public class KhelkundApplication extends Application {
         Crashlytics crashlytics = new Crashlytics.Builder().disabled(BuildConfig.DEBUG).build();
         Fabric.with(this, crashlytics, new Twitter(authConfig));
         Fabric.with(this, new TwitterCore(authConfig), new Digits());
-        Fabric.with(this, new Twitter(authConfig));
+        Fabric.with(this, new Twitter(authConfig), new Crashlytics());
         AppacitiveContext.initialize("+HfTOp2nF8TnkyZVBblkTBLm6Cz6zIfKYdXBhV6Aag4=", Environment.live, getAppContext());
         FacebookSdk.sdkInitialize(context);
 

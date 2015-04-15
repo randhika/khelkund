@@ -27,14 +27,14 @@
             android:layout_marginTop="32dp"
             android:textColor="@android:color/white" />
 
-        <ImageButton
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
+            android:id="@+id/iv_privateleague_share"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:src="@android:drawable/ic_menu_more"
+            android:src="@android:drawable/ic_menu_share"
             android:background="@android:color/transparent"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp" />
@@ -72,6 +72,16 @@
             android:layout_alignParentStart="true"
             android:layout_marginLeft="54dp"
             android:textColor="@android:color/white" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_private_league_delete"
+            android:src="@android:drawable/ic_menu_delete"
+            android:layout_alignTop="@+id/iv_privateleague_share"
+            android:layout_toLeftOf="@+id/iv_privateleague_share"
+            android:layout_toStartOf="@+id/iv_privateleague_share"
+            android:layout_marginRight="4dp" />
 
     </RelativeLayout>
 

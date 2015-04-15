@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +19,10 @@ import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PrivateLeague;
 import com.appacitive.khelkund.model.PrivateLeagueTeam;
 import com.appacitive.khelkund.model.Team;
+import com.appacitive.khelkund.model.events.PrivateLeagueDeleteEvent;
 import com.appacitive.khelkund.model.events.PrivateLeagueSelectedEvent;
+import com.appacitive.khelkund.model.events.PrivateLeagueShareEvent;
+import com.squareup.otto.Bus;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -39,6 +43,11 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
         this.mPrivateLeagues = privateLeagues;
         this.mManager = new StorageManager();
         mTeam = mManager.GetTeam(SharedPreferencesManager.ReadUserId());
+    }
+
+    public void ResetLeagues(List<PrivateLeague> privateLeagues)
+    {
+        this.mPrivateLeagues = privateLeagues;
     }
 
     @Override
@@ -69,6 +78,21 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
                 BusProvider.getInstance().post(new PrivateLeagueSelectedEvent(privateLeague.getId()));
             }
         });
+        holder.share.setOnClickListener(null);
+        holder.share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BusProvider.getInstance().post(new PrivateLeagueShareEvent(privateLeague.getId()));
+            }
+        });
+
+        holder.delete.setOnClickListener(null);
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BusProvider.getInstance().post(new PrivateLeagueDeleteEvent(privateLeague.getId()));
+            }
+        });
     }
 
     @Override
@@ -89,6 +113,12 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
 
         @InjectView(R.id.tv_private_league_player_count)
         protected TextView playerCount;
+
+        @InjectView(R.id.iv_privateleague_share)
+        protected ImageView share;
+
+        @InjectView(R.id.iv_private_league_delete)
+        protected ImageView delete;
 
 
         public PrivateLeagueViewHolder(View itemView) {

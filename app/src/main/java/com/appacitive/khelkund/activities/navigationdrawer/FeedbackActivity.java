@@ -1,6 +1,8 @@
 package com.appacitive.khelkund.activities.navigationdrawer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
@@ -36,6 +38,7 @@ public class FeedbackActivity extends ActionBarActivity {
 
     @OnClick(R.id.btn_feedback)
     public void onSubmit() {
+        mFeedbackForm.setText("");
         //  hide keyboard
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
@@ -54,13 +57,20 @@ public class FeedbackActivity extends ActionBarActivity {
         email.sendInBackground(new Callback<AppacitiveEmail>() {
             @Override
             public void success(AppacitiveEmail result) {
-                SnackBarManager.showSuccess("Thank you for your feedback", FeedbackActivity.this);
+                showMessage("Thank you for your feedback.");
             }
 
             @Override
             public void failure(AppacitiveEmail result, Exception e) {
-                SnackBarManager.showError("Could not send feedback at the moment", FeedbackActivity.this);
+                showMessage("Your feedback could not be sent right now. Try again later.");
             }
         });
+    }
+
+    private void showMessage(String message) {
+        Dialog dialog = new Dialog(FeedbackActivity.this);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setTitle(message);
+        dialog.show();
     }
 }

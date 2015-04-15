@@ -55,8 +55,6 @@ public class HomeFragment extends Fragment {
 
     private KhelkundUser mUser;
 
-    private boolean isInitializing = false;
-
     private Team mTeam;
 
     private String userId;
@@ -69,12 +67,6 @@ public class HomeFragment extends Fragment {
 
     @InjectView(R.id.tv_name)
     public TextView mName;
-
-    @InjectView(R.id.card_view_fantasy)
-    public CardView mFantasy;
-
-    @InjectView(R.id.card_view_pick5)
-    public CardView mPick5;
 
     @InjectView(R.id.iv_home_photo)
     public ImageView mPhoto;
@@ -129,6 +121,9 @@ public class HomeFragment extends Fragment {
         showUserBasicDetails();
         fetchTeam(userId);
         fetchProfileImage();
+
+
+
         return rootView;
     }
 
@@ -176,38 +171,6 @@ public class HomeFragment extends Fragment {
             name += " " + mUser.getLastName();
         mName.setText(name);
     }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if (mTeam == null) {
-//            mTeam = new StorageManager().GetTeam(SharedPreferencesManager.ReadUserId());
-//        }
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//    }
-
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.menu_home, menu);
-//        super.onCreateOptionsMenu(menu, inflater);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//
-//            case R.id.menu_action_refresh:
-//                refreshTeamDetails();
-//                return true;
-//            default:
-//                break;
-//        }
-//        return false;
-//    }
 
     private void refreshTeamDetails() {
         fetchTeam(SharedPreferencesManager.ReadUserId());

@@ -317,22 +317,22 @@ public class Pick5PlayFragment extends Fragment {
         YoYo.with(Techniques.FadeIn).duration(1000).playOn(mMyBatsman);
 
         myTeam.Batsman = event.player;
-        Picasso.with(getActivity()).load(myTeam.Batsman.getImageUrl()).resize(200, 300).centerInside()
+        Picasso.with(getActivity()).load(myTeam.Batsman.getImageUrl()).resize(250, 370).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Batsman.getShortTeamName()))))
                 .into(mMyBatsman);
+        mMyBatsman.setScaleX(-1);
         mMyBatsmanName.setText(myTeam.Batsman.getDisplayName());
 
         YoYo.with(Techniques.SlideInRight).duration(1000).playOn(mAiBatsman);
 
         aiTeam.Batsman = manager.GetPlayer(mDetails.getPlayerMappings().get(myTeam.Batsman.getId()));
-        Picasso.with(getActivity()).load(aiTeam.Batsman.getImageUrl()).resize(200, 300).centerInside()
+        Picasso.with(getActivity()).load(aiTeam.Batsman.getImageUrl()).resize(250, 370).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Batsman.getShortTeamName()))))
                 .into(mAiBatsman);
         mAiBatsmanName.setText(aiTeam.Batsman.getDisplayName());
 
 
-        if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null)
-        {
+        if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null) {
             mSubmit.setEnabled(true);
             new ShowcaseView.Builder(getActivity())
                     .setTarget(new ViewTarget(mSubmit))
@@ -341,14 +341,6 @@ public class Pick5PlayFragment extends Fragment {
                     .singleShot(444)
                     .build().hideButton();
         }
-
-
-        new ShowcaseView.Builder(getActivity())
-                .setTarget(new ViewTarget(mAiBatsman))
-                .setContentTitle("The app automatically assigns an opponent for your chosen batsman")
-                .hideOnTouchOutside()
-                .singleShot(222)
-                .build().hideButton();
     }
 
     @Subscribe
@@ -360,6 +352,7 @@ public class Pick5PlayFragment extends Fragment {
         Picasso.with(getActivity()).load(myTeam.Bowler.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Bowler.getShortTeamName()))))
                 .into(mMyBowler);
+        mMyBowler.setScaleX(-1);
         mMyBowlerName.setText(myTeam.Bowler.getDisplayName());
 
         YoYo.with(Techniques.SlideInRight).duration(1000).playOn(mAiBowler);
@@ -369,8 +362,7 @@ public class Pick5PlayFragment extends Fragment {
                 .into(mAiBowler);
         mAiBowlerName.setText(aiTeam.Bowler.getDisplayName());
 
-        if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null)
-        {
+        if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null) {
             mSubmit.setEnabled(true);
             new ShowcaseView.Builder(getActivity())
                     .setTarget(new ViewTarget(mSubmit))
@@ -383,12 +375,14 @@ public class Pick5PlayFragment extends Fragment {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                new ShowcaseView.Builder(getActivity())
+                ShowcaseView sv = new ShowcaseView.Builder(getActivity())
                         .setTarget(new ViewTarget(mAiBowler))
-                        .setContentTitle("The app automatically assigns an opponent for your chosen bowler")
+                        .setContentText("The app automatically assigns an opponent for your chosen bowler")
                         .hideOnTouchOutside()
                         .singleShot(222)
-                        .build().hideButton();
+                        .build();
+                sv.setShouldCentreText(true);
+                sv.hideButton();
             }
         };
         new Handler().postDelayed(runnable, 1000);
@@ -403,6 +397,7 @@ public class Pick5PlayFragment extends Fragment {
         Picasso.with(getActivity()).load(myTeam.AllRounder.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.AllRounder.getShortTeamName()))))
                 .into(mMyAllRounder);
+        mMyAllRounder.setScaleX(-1);
         mMyAllRounderName.setText(myTeam.AllRounder.getDisplayName());
 
         YoYo.with(Techniques.SlideInRight).duration(1000).playOn(mAiAllRounder);
@@ -412,8 +407,7 @@ public class Pick5PlayFragment extends Fragment {
                 .into(mAiAllRounder);
         mAiAllRounderName.setText(aiTeam.AllRounder.getDisplayName());
 
-        if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null)
-        {
+        if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null) {
             mSubmit.setEnabled(true);
             new ShowcaseView.Builder(getActivity())
                     .setTarget(new ViewTarget(mSubmit))
@@ -423,18 +417,7 @@ public class Pick5PlayFragment extends Fragment {
                     .build().hideButton();
         }
 
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                new ShowcaseView.Builder(getActivity())
-                        .setTarget(new ViewTarget(mAiAllRounder))
-                        .setContentTitle("The app automatically assigns an opponent for your chosen all rounder")
-                        .hideOnTouchOutside()
-                        .singleShot(222)
-                        .build().hideButton();
-            }
-        };
-        new Handler().postDelayed(runnable, 1000);
+
     }
 
     @Subscribe
@@ -445,6 +428,7 @@ public class Pick5PlayFragment extends Fragment {
         Picasso.with(getActivity()).load(myTeam.WicketKeeper.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.WicketKeeper.getShortTeamName()))))
                 .into(mMyWicketKeeper);
+        mMyWicketKeeper.setScaleX(-1);
         mMyWicketKeeperName.setText(myTeam.WicketKeeper.getDisplayName());
 
         YoYo.with(Techniques.SlideInRight).duration(1000).playOn(mAiWicketKeeper);
@@ -454,8 +438,7 @@ public class Pick5PlayFragment extends Fragment {
                 .into(mAiWicketKeeper);
         mAiWicketKeeperName.setText(aiTeam.WicketKeeper.getDisplayName());
 
-        if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null)
-        {
+        if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null) {
             mSubmit.setEnabled(true);
             new ShowcaseView.Builder(getActivity())
                     .setTarget(new ViewTarget(mSubmit))
@@ -465,18 +448,7 @@ public class Pick5PlayFragment extends Fragment {
                     .build().hideButton();
         }
 
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                new ShowcaseView.Builder(getActivity())
-                        .setTarget(new ViewTarget(mAiWicketKeeper))
-                        .setContentTitle("The app automatically assigns an opponent for your chosen wicket keeper")
-                        .hideOnTouchOutside()
-                        .singleShot(222)
-                        .build().hideButton();
-            }
-        };
-        new Handler().postDelayed(runnable, 1000);
+
     }
 
     @Subscribe
@@ -487,6 +459,7 @@ public class Pick5PlayFragment extends Fragment {
         Picasso.with(getActivity()).load(myTeam.Any.getImageUrl()).resize(250, 375).centerInside()
                 .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Any.getShortTeamName()))))
                 .into(mMyAny);
+        mMyAny.setScaleX(-1);
         mMyAnyName.setText(myTeam.Any.getDisplayName());
 
         YoYo.with(Techniques.SlideInRight).duration(1000).playOn(mAiAny);
@@ -496,8 +469,7 @@ public class Pick5PlayFragment extends Fragment {
                 .into(mAiAny);
         mAiAnyName.setText(aiTeam.Any.getDisplayName());
 
-        if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null)
-        {
+        if (myTeam.Batsman != null && myTeam.Bowler != null && myTeam.AllRounder != null && myTeam.Any != null && myTeam.WicketKeeper != null) {
             mSubmit.setEnabled(true);
             new ShowcaseView.Builder(getActivity())
                     .setTarget(new ViewTarget(mSubmit))
@@ -629,12 +601,12 @@ public class Pick5PlayFragment extends Fragment {
                 SnackBarManager.showSuccess("Pick saved successfully", getActivity());
                 ShowcaseView sv =
                         new ShowcaseView.Builder(getActivity())
-                        .setTarget(ViewTarget.NONE)
-                        .setContentTitle("Congratulations")
-                        .setContentText("You can check back here after the match to see the result.")
-                        .hideOnTouchOutside()
-                        .singleShot(555)
-                        .build();
+                                .setTarget(ViewTarget.NONE)
+                                .setContentTitle("Congratulations!")
+                                .setContentText("Check back soon for results")
+                                .hideOnTouchOutside()
+                                .singleShot(555)
+                                .build();
                 sv.setShouldCentreText(true);
                 sv.hideButton();
             }
