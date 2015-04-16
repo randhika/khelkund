@@ -195,6 +195,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         mAdapter = (new PrivateLeagueAdapter(mPrivateLeagues));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new FlipInBottomXAnimator());
+        ItemCountChanged();
     }
 
     private void fetchAndDisplayPrivateLeague() {

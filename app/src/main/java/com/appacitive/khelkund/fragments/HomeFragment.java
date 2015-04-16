@@ -1,6 +1,5 @@
 package com.appacitive.khelkund.fragments;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.CreateTeamActivity;
-import com.appacitive.khelkund.activities.HomeActivity;
 import com.appacitive.khelkund.activities.LoginActivity;
 import com.appacitive.khelkund.activities.ViewTeamActivity;
 import com.appacitive.khelkund.activities.pick5.Pick5HomeActivity;
@@ -53,7 +51,7 @@ public class HomeFragment extends Fragment {
 
     private Team mTeam;
 
-    private String userId;
+    private String mUserId;
 
     @InjectView(R.id.tv_rank)
     public TextView mRank;
@@ -77,14 +75,6 @@ public class HomeFragment extends Fragment {
         DONT_KNOW
     }
 
-    public static HomeFragment newInstance(int sectionNumber) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     public HomeFragment() {
@@ -105,26 +95,25 @@ public class HomeFragment extends Fragment {
         this.mTeamStatus = TeamStatus.DONT_KNOW;
         ConnectionManager.checkNetworkConnectivity(getActivity());
         manager = new StorageManager();
-        userId = SharedPreferencesManager.ReadUserId();
+        mUserId = SharedPreferencesManager.ReadUserId();
 
-        if (userId == null) {
+        if (mUserId == null) {
             Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
             startActivity(loginIntent);
             getActivity().finish();
         }
 
-        mUser = manager.GetUser(userId);
+        mUser = manager.GetUser(mUserId);
         showUserBasicDetails();
-        fetchTeam(userId);
+        fetchTeam(mUserId);
         fetchProfileImage();
-
-
         return rootView;
+
     }
 
     private void fetchProfileImage() {
         final StorageManager manager = new StorageManager();
-        Bitmap photo = manager.FetchImage(mUser.getId());
+        Bitmap photo = manager.FetchImage(mUserId);
         if (photo != null) {
             mPhoto.setImageBitmap(photo);
             return;
@@ -142,7 +131,7 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                             if (bitmap != null) {
-                                manager.SaveImage(mUser.getId(), bitmap);
+                                manager.SaveImage(mUserId, bitmap);
                                 mPhoto.setImageBitmap(bitmap);
                             }
                         }
@@ -170,7 +159,7 @@ public class HomeFragment extends Fragment {
                             @Override
                             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                                 if (bitmap != null) {
-                                    manager.SaveImage(mUser.getId(), bitmap);
+                                    manager.SaveImage(mUserId, bitmap);
                                     mPhoto.setImageBitmap(bitmap);
                                 }
                             }
@@ -201,8 +190,10 @@ public class HomeFragment extends Fragment {
     }
 
     private void showTeamBasicDetails() {
-        mRank.setText(String.valueOf(mTeam.getRank()));
-        mPoints.setText(String.valueOf(mTeam.getTotalPoints()));
+        if (mTeam != null) {
+            mRank.setText(String.valueOf(mTeam.getRank()));
+            mPoints.setText(String.valueOf(mTeam.getTotalPoints()));
+        }
     }
 
     private void showUserBasicDetails() {
@@ -210,10 +201,6 @@ public class HomeFragment extends Fragment {
         if (mUser.getLastName() != null && mUser.getLastName().equals("null") == false)
             name += " " + mUser.getLastName();
         mName.setText(name);
-    }
-
-    private void refreshTeamDetails() {
-        fetchTeam(SharedPreferencesManager.ReadUserId());
     }
 
     @OnClick(R.id.card_view_fantasy)
@@ -232,26 +219,16 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private boolean isTeamCreatedOnServer() {
-        if (mTeam != null && mTeam.getId() != null && TextUtils.isEmpty(mTeam.getId()) == false)
-            return true;
-        else {
-            return false;
-        }
-    }
-
     @OnClick(R.id.card_view_privateleague)
     public void onPrivateLeagueClick() {
         Intent intent = new Intent(getActivity(), PrivateLeagueHomeActivity.class);
         startActivity(intent);
-//        Toast.makeText(getActivity(), "This game is currently unavailable. Check back soon.", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.card_view_pick5)
     public void onPick5Click() {
         Intent intent = new Intent(getActivity(), Pick5HomeActivity.class);
         startActivity(intent);
-//        Toast.makeText(getActivity(),"This game is currently unavailable. Check back soon.", Toast.LENGTH_SHORT).show();
     }
 
     private void fetchTeam(final String userId) {
@@ -266,7 +243,6 @@ public class HomeFragment extends Fragment {
                 mProgressDialog.dismiss();
                 if (result.optJSONObject("Error") != null) {
                     mTeamStatus = TeamStatus.NOT_CREATED;
-//                    SnackBarManager.showMessage("Start by creating a Fantasy team", getActivity());
                     return;
                 }
                 if (result.optString("Id") != null) {
@@ -293,10 +269,4 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ((HomeActivity) activity).onSectionAttached(
-                getArguments().getInt(ARG_SECTION_NUMBER));
-    }
 }
