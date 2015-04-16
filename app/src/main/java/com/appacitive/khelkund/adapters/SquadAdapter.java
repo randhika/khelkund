@@ -9,7 +9,10 @@ import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.KhelkundApplication;
+import com.appacitive.khelkund.infra.transforms.CircleTransform;
+import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.Player;
+import com.appacitive.khelkund.model.TeamHelper;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -28,14 +31,14 @@ public class SquadAdapter extends RecyclerView.Adapter<SquadAdapter.SquadViewHol
     }
 
     private static final Map<String, String> mTeamNameMappings = new HashMap<String, String>(){{
-        put("KXIP", "King's Eleven Punjab");
-        put("MI", "Mumbai Indians");
-        put("SRH", "Sunrisers Hyderabad");
-        put("DD", "Delhi Daredevils");
-        put("RCB", "Royal Challengers Bangalore");
-        put("RR", "Rajasthan Royals");
-        put("CSK", "Chennai Super Kings");
-        put("KKR", "Kolkata Knight Riders");
+        put("KXIP", "Punjab");
+        put("MI", "Mumbai");
+        put("SRH", "Hyderabad");
+        put("DD", "Delhi");
+        put("RCB", "Bangalore");
+        put("RR", "Rajasthan");
+        put("CSK", "Chennai");
+        put("KKR", "Kolkata");
     }};
     @Override
     public SquadViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,7 +52,12 @@ public class SquadAdapter extends RecyclerView.Adapter<SquadAdapter.SquadViewHol
         holder.name.setText(player.getFirstName() + " " + player.getLastName());
         holder.points.setText(String.valueOf(player.getPoints()));
         holder.team.setText(mTeamNameMappings.get(player.getShortTeamName()));
-        Picasso.with(KhelkundApplication.getAppContext()).load(player.getImageUrl()).into(holder.logo);
+//        Picasso.with(KhelkundApplication.getAppContext()).load(player.getImageUrl()).into(holder.logo);
+
+        Picasso.with(KhelkundApplication.getAppContext())
+                .load(player.getImageUrl()).resize(250, 370).centerInside()
+                .transform(new CircleTransform(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(player.getShortTeamName()))))
+                .into(holder.logo);
     }
 
     @Override

@@ -42,4 +42,37 @@
         android:textSize="16sp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/rl_private_league_empty"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You are currently not playing in any private leagues"
+            android:id="@+id/tv_private_league_empty"
+            android:textSize="24sp"
+            android:singleLine="false"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/textView30"
+            android:layout_alignStart="@+id/textView30"
+            android:paddingRight="36dp"
+            android:paddingLeft="36dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter a private league code to join an existing league, or press + to create a new one."
+            android:id="@+id/textView30"
+            android:layout_below="@+id/tv_private_league_empty"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="36dp"
+            android:paddingRight="36dp"
+            android:layout_marginTop="16dp" />
+    </RelativeLayout>
 </RelativeLayout>

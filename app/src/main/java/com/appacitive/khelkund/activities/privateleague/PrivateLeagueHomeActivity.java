@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
@@ -61,6 +62,9 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
 
     @InjectView(R.id.et_join_private_league_code)
     public EditText mCode;
+
+    @InjectView(R.id.rl_private_league_empty)
+    public RelativeLayout mEmpty;
 
     @InjectView(R.id.fab_create_private_league)
     public FloatingActionButton mCreate;
@@ -172,6 +176,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
                     mPrivateLeagues.add(league);
                     mAdapter.ResetLeagues(mPrivateLeagues);
                     mAdapter.notifyDataSetChanged();
+                    ItemCountChanged();
                 }
 
             }
@@ -287,6 +292,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
                     mPrivateLeagues.add(league);
                     mAdapter.ResetLeagues(mPrivateLeagues);
                     mAdapter.notifyDataSetChanged();
+                    ItemCountChanged();
                     showShareDialog(league);
                 }
             }
@@ -369,6 +375,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
                 mPrivateLeagues = manager.GetAllPrivateLeaguesForUser(mUserId);
                 mAdapter.ResetLeagues(mPrivateLeagues);
                 mAdapter.notifyDataSetChanged();
+                ItemCountChanged();
             }
 
             @Override
@@ -406,5 +413,19 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void ItemCountChanged()
+    {
+        if(mAdapter.getItemCount() == 0)
+        {
+            mRecyclerView.setVisibility(View.GONE);
+            mEmpty.setVisibility(View.VISIBLE);
+
+        }
+        else
+        {
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mEmpty.setVisibility(View.GONE);
+        }
+    }
 
 }

@@ -24,7 +24,7 @@
 
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_incorrect_password">This password is incorrect. Have you verified your email address?</string>
     <string name="error_field_required">This field is required</string>
     <string name="title_activity_register">Register</string>
     

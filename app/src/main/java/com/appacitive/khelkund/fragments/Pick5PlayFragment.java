@@ -336,7 +336,7 @@ public class Pick5PlayFragment extends Fragment {
             mSubmit.setEnabled(true);
             new ShowcaseView.Builder(getActivity())
                     .setTarget(new ViewTarget(mSubmit))
-                    .setContentTitle("SAVE your team once you have decided all your players.")
+                    .setContentText("SAVE your team once you have decided all your players.")
                     .hideOnTouchOutside()
                     .singleShot(444)
                     .build().hideButton();
@@ -366,7 +366,7 @@ public class Pick5PlayFragment extends Fragment {
             mSubmit.setEnabled(true);
             new ShowcaseView.Builder(getActivity())
                     .setTarget(new ViewTarget(mSubmit))
-                    .setContentTitle("SAVE your team once you have decided all your players.")
+                    .setContentText("SAVE your team once you have decided all your players.")
                     .hideOnTouchOutside()
                     .singleShot(444)
                     .build().hideButton();
@@ -411,7 +411,7 @@ public class Pick5PlayFragment extends Fragment {
             mSubmit.setEnabled(true);
             new ShowcaseView.Builder(getActivity())
                     .setTarget(new ViewTarget(mSubmit))
-                    .setContentTitle("SAVE your team once you have decided all your players.")
+                    .setContentText("SAVE your team once you have decided all your players.")
                     .hideOnTouchOutside()
                     .singleShot(444)
                     .build().hideButton();
@@ -442,7 +442,7 @@ public class Pick5PlayFragment extends Fragment {
             mSubmit.setEnabled(true);
             new ShowcaseView.Builder(getActivity())
                     .setTarget(new ViewTarget(mSubmit))
-                    .setContentTitle("SAVE your team once you have decided all your players.")
+                    .setContentText("SAVE your team once you have decided all your players.")
                     .hideOnTouchOutside()
                     .singleShot(444)
                     .build().hideButton();
@@ -473,7 +473,7 @@ public class Pick5PlayFragment extends Fragment {
             mSubmit.setEnabled(true);
             new ShowcaseView.Builder(getActivity())
                     .setTarget(new ViewTarget(mSubmit))
-                    .setContentTitle("SAVE your team once you have decided all your players.")
+                    .setContentText("SAVE your team once you have decided all your players.")
                     .hideOnTouchOutside()
                     .singleShot(444)
                     .build().hideButton();

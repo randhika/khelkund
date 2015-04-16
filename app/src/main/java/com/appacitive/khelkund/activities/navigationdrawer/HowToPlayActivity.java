@@ -121,13 +121,13 @@ public class HowToPlayActivity extends ActionBarActivity implements ActionBar.Ta
             mWebView.getSettings().setJavaScriptEnabled(true);
             mWebView.setClickable(true);
 
-            String path = "file:///android_asset/how_to_play.html";
+            String path = "file:///android_asset/fantasy_league.html";
             if(sectionNumber == 1)
-                path = "file:///android_asset/how_to_play.html";
+                path = "file:///android_asset/fantasy_league.html";
             if(sectionNumber == 2)
-                path = "file:///android_asset/how_to_play.html";
+                path = "file:///android_asset/pick_5.html";
             if(sectionNumber == 3)
-                path = "file:///android_asset/how_to_play.html";
+                path = "file:///android_asset/private_league.html";
             mWebView.loadUrl(path);
             mWebView.setBackgroundColor(Color.TRANSPARENT);
             return rootView;

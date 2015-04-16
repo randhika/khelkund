@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.EditTeamActivity;
@@ -50,7 +51,6 @@ public class TeamSquadFragment extends Fragment {
     @InjectView(R.id.fab_edit)
     public FloatingActionButton mFab;
 
-
     private KhelkundUser mUser;
     private Team mTeam;
 
@@ -77,7 +77,6 @@ public class TeamSquadFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new SquadAdapter(mTeam.getPlayers());
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.abc_list_divider_mtrl_alpha)));
 
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override

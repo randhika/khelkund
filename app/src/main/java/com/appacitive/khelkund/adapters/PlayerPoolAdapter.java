@@ -36,14 +36,14 @@ public class PlayerPoolAdapter extends RecyclerView.Adapter<PlayerPoolAdapter.Po
     }
 
     private static final Map<String, String> mTeamNameMappings = new HashMap<String, String>(){{
-        put("KXIP", "King's Eleven Punjab");
-        put("MI", "Mumbai Indians");
-        put("SRH", "Sunrisers Hyderabad");
-        put("DD", "Delhi Daredevils");
-        put("RCB", "Royal Challengers Bangalore");
-        put("RR", "Rajasthan Royals");
-        put("CSK", "Chennai Super Kings");
-        put("KKR", "Kolkata Knight Riders");
+        put("KXIP", "Punjab");
+        put("MI", "Mumbai");
+        put("SRH", "Hyderabad");
+        put("DD", "Delhi");
+        put("RCB", "Bangalore");
+        put("RR", "Rajasthan");
+        put("CSK", "Chennai");
+        put("KKR", "Kolkata");
     }};
 
     @Override

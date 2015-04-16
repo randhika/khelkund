@@ -120,7 +120,7 @@ public class TeamOverviewFragment extends Fragment {
         LineData lineData = new LineData(oppositions, new ArrayList<LineDataSet>(){{add(dataSet);}});
         mChart.setData(lineData);
         mChart.setDescription("");
-        mChart.animateXY(2000,2000);
+        mChart.animateY(2000);
     }
 
     private void showOverlayTutorial() {

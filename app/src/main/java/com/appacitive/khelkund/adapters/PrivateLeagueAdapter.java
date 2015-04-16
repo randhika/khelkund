@@ -60,14 +60,14 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
     public void onBindViewHolder(PrivateLeagueViewHolder holder, int position) {
         final PrivateLeague privateLeague = mPrivateLeagues.get(position);
         holder.name.setText(privateLeague.getName());
-        holder.playerCount.setText(String.valueOf(privateLeague.getTeams().size()) + " users are playing this league");
+        holder.playerCount.setText(String.valueOf(privateLeague.getTeams().size()) + " user(s) are playing in this league");
 
         for(PrivateLeagueTeam team : privateLeague.getTeams())
         {
             if(team.getUserTeamId().equals(mTeam.getId()));
             {
                 holder.score.setText("Your score is " + team.getTotalPoints());
-                holder.rank.setText("Your rank " + team.getRank());
+                holder.rank.setText("You are rank " + team.getRank());
                 break;
             }
         }

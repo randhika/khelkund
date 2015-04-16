@@ -20,7 +20,6 @@ import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.Statistics;
 import com.appacitive.khelkund.model.TeamHelper;
-import com.github.mikephil.charting.animation.AnimationEasing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -197,7 +196,7 @@ public class PlayerDetailsActivity extends ActionBarActivity {
             add(dataSet);
         }});
         mChart.setData(lineData);
-        mChart.animateXY(2000, 2000);
+        mChart.animateY(2000);
         mChart.setDescription("");
     }
 

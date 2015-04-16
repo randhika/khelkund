@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ScrollView;
@@ -586,7 +587,7 @@ public class EditTeamActivity extends ActionBarActivity {
     private void showSaveTeamTutorialOverlay() {
         new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(findViewById(R.id.action_save)))
-                .setContentTitle("Don't forget to SAVE your team once you have chosen your players")
+                .setContentText("Don't forget to SAVE your team once you have chosen your players")
                 .hideOnTouchOutside()
                 .singleShot(33)
                 .build().hideButton();
