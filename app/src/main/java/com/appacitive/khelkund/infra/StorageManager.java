@@ -1,12 +1,17 @@
 package com.appacitive.khelkund.infra;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.Match;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PrivateLeague;
 import com.appacitive.khelkund.model.Team;
 import com.appacitive.khelkund.model.TeamHelper;
+import com.appacitive.khelkund.model.UserImage;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import io.realm.Realm;
@@ -207,5 +212,34 @@ public class StorageManager {
         realm.commitTransaction();
         realm.close();
 
+    }
+
+    public Bitmap FetchImage(String mUserId) {
+        Realm realm = getInstance();
+        RealmQuery<UserImage> query = realm.where(UserImage.class);
+        query.equalTo("UserId", mUserId);
+        UserImage userImage = query.findFirst();
+        if(userImage != null)
+        {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(userImage.getImage(), 0, userImage.getImage().length);
+            return bitmap;
+        }
+        return null;
+
+    }
+
+    public void SaveImage(String mUserId, Bitmap bitmap)
+    {
+        UserImage image = new UserImage();
+        image.setUserId(mUserId);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        image.setImage(byteArray);
+        Realm realm = getInstance();
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(image);
+        realm.commitTransaction();
+        realm.close();
     }
 }

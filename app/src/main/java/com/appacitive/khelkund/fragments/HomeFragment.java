@@ -3,10 +3,10 @@ package com.appacitive.khelkund.fragments;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,17 +26,13 @@ import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
-import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
-import com.appacitive.khelkund.infra.transforms.CircleTransform;
-import com.appacitive.khelkund.infra.transforms.CircleTransform2;
 import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.Team;
 import com.facebook.AccessToken;
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -123,11 +119,17 @@ public class HomeFragment extends Fragment {
         fetchProfileImage();
 
 
-
         return rootView;
     }
 
     private void fetchProfileImage() {
+        final StorageManager manager = new StorageManager();
+        Bitmap photo = manager.FetchImage(mUser.getId());
+        if (photo != null) {
+            mPhoto.setImageBitmap(photo);
+            return;
+        }
+
         // facebook
         AccessToken token = AccessToken.getCurrentAccessToken();
         if (token != null) {
@@ -136,17 +138,56 @@ public class HomeFragment extends Fragment {
             http.get(url, new HashMap<String, String>(), new APCallback() {
                 @Override
                 public void success(JSONObject result) {
-                    Picasso.with(getActivity()).load(result.optJSONObject("data").optString("url")).into(mPhoto);
+                    Picasso.with(getActivity()).load(result.optJSONObject("data").optString("url")).into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            if (bitmap != null) {
+                                manager.SaveImage(mUser.getId(), bitmap);
+                                mPhoto.setImageBitmap(bitmap);
+                            }
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
+
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                        }
+                    });
+
                 }
             });
 
-        }
-        else if (Twitter.getSessionManager().getActiveSession() != null) {
+        } else if (Twitter.getSessionManager().getActiveSession() != null) {
             Twitter.getApiClient().getAccountService().verifyCredentials(true, false, new Callback<User>() {
                 @Override
                 public void success(Result<User> result) {
-                    if (result.data.profileImageUrl != null)
-                        Picasso.with(getActivity()).load(result.data.profileImageUrl.replace("_normal", "")).into(mPhoto);
+                    if (result.data.profileImageUrl != null) {
+                        Picasso.with(getActivity()).load(result.data.profileImageUrl.replace("_normal", "")).into(new Target() {
+                            @Override
+                            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                                if (bitmap != null) {
+                                    manager.SaveImage(mUser.getId(), bitmap);
+                                    mPhoto.setImageBitmap(bitmap);
+                                }
+                            }
+
+                            @Override
+                            public void onBitmapFailed(Drawable errorDrawable) {
+
+                            }
+
+                            @Override
+                            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                            }
+                        });
+
+                    }
+
                 }
 
                 @Override
@@ -155,8 +196,7 @@ public class HomeFragment extends Fragment {
                 }
 
             });
-        }
-        else Picasso.with(getActivity()).load(R.drawable.user).into(mPhoto);
+        } else Picasso.with(getActivity()).load(R.drawable.user).into(mPhoto);
 
     }
 
