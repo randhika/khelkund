@@ -85,6 +85,13 @@ public class TeamOverviewFragment extends Fragment {
             String[] previousMatchTeams = mTeam.getTeamHistory().last().getOpposition().split("-");
             mPreviousMatchAgainst.setText(String.format(" in %s vs %s", previousMatchTeams[0], previousMatchTeams[1]));
         }
+        initGraph();
+        showOverlayTutorial();
+        return rootView;
+    }
+
+    private void initGraph()
+    {
         XAxis xAxis = mChart.getXAxis();
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
@@ -113,8 +120,7 @@ public class TeamOverviewFragment extends Fragment {
         LineData lineData = new LineData(oppositions, new ArrayList<LineDataSet>(){{add(dataSet);}});
         mChart.setData(lineData);
         mChart.setDescription("");
-        showOverlayTutorial();
-        return rootView;
+        mChart.animateXY(2000,2000);
     }
 
     private void showOverlayTutorial() {
