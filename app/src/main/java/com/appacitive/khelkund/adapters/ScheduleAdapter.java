@@ -49,8 +49,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         DateFormat df = new SimpleDateFormat("dd, MMMM yyyy");
         holder.date.setText(df.format(match.getStartDate()));
         holder.venue.setText(match.getVenue());
-//        Picasso.with(KhelkundApplication.getAppContext()).load(getTeamLogo(match.getAwayTeamShortName())).into(holder.awayLogo);
-//        Picasso.with(KhelkundApplication.getAppContext()).load(getTeamLogo(match.getHomeTeamShortName())).into(holder.homeLogo);
 
         holder.homeLogo.setTitleText(match.getHomeTeamShortName());
         holder.homeLogo.setFillColor(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(match.getHomeTeamShortName())));
@@ -60,28 +58,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         holder.relativeLayout.setBackgroundResource(R.drawable.background);
         holder.card.setCardElevation(8);
         holder.card.setPreventCornerOverlap(true);
-    }
-
-    private int getTeamLogo(String teamName)
-    {
-        if(teamName.equals("KKR"))
-            return R.drawable.kkr;
-        if(teamName.equals("MI"))
-            return R.drawable.mi;
-        if(teamName.equals("SRH"))
-            return R.drawable.srh;
-        if(teamName.equals("KXIP"))
-            return R.drawable.kxip;
-        if(teamName.equals("DD"))
-            return R.drawable.dd;
-        if(teamName.equals("CSK"))
-            return R.drawable.csk;
-        if(teamName.equals("RR"))
-            return R.drawable.rr;
-        if(teamName.equals("RCB"))
-            return R.drawable.rcb;
-
-        return R.drawable.rcb;
     }
 
     @Override
@@ -95,11 +71,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         public TextView awayName;
         @InjectView(R.id.tv_pick5_home_team_name)
         public TextView homeName;
-
-//        @InjectView(R.id.iv_pick5_away_logo)
-//        public ImageView awayLogo;
-//        @InjectView(R.id.iv_pick5_home_logo)
-//        public ImageView homeLogo;
 
         @InjectView(R.id.iv_pick5_away_logo)
         public CircleView awayLogo;

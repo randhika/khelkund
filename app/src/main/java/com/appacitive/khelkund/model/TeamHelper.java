@@ -251,27 +251,27 @@ public class TeamHelper {
         return R.color.DD;
     }
 
-    public static int getTeamLogo(String teamName)
-    {
-        if(teamName.equals("KKR"))
-            return R.drawable.kkr;
-        if(teamName.equals("MI"))
-            return R.drawable.mi;
-        if(teamName.equals("SRH"))
-            return R.drawable.srh;
-        if(teamName.equals("KXIP"))
-            return R.drawable.kxip;
-        if(teamName.equals("DD"))
-            return R.drawable.dd;
-        if(teamName.equals("CSK"))
-            return R.drawable.csk;
-        if(teamName.equals("RR"))
-            return R.drawable.rr;
-        if(teamName.equals("RCB"))
-            return R.drawable.rcb;
-
-        return R.drawable.rcb;
-    }
+//    public static int getTeamLogo(String teamName)
+//    {
+//        if(teamName.equals("KKR"))
+//            return R.drawable.kkr;
+//        if(teamName.equals("MI"))
+//            return R.drawable.mi;
+//        if(teamName.equals("SRH"))
+//            return R.drawable.srh;
+//        if(teamName.equals("KXIP"))
+//            return R.drawable.kxip;
+//        if(teamName.equals("DD"))
+//            return R.drawable.dd;
+//        if(teamName.equals("CSK"))
+//            return R.drawable.csk;
+//        if(teamName.equals("RR"))
+//            return R.drawable.rr;
+//        if(teamName.equals("RCB"))
+//            return R.drawable.rcb;
+//
+//        return R.drawable.rcb;
+//    }
 
 
 }

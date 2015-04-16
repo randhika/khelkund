@@ -52,7 +52,6 @@ public class PrivateLeagueLeaderboardActivity extends ActionBarActivity {
 
         mHeader.setText(mLeague.getName());
 
-
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         ((LinearLayoutManager)mLayoutManager).setOrientation(LinearLayoutManager.VERTICAL);
@@ -85,7 +84,7 @@ public class PrivateLeagueLeaderboardActivity extends ActionBarActivity {
     {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Join my private fantasy league on Khelkund using the code %s. Get the app here %s", mLeague.getCode(), getResources().getString(R.string.SHORT_APP_URL)));
+        sendIntent.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Join my private fantasy league on Khelkund. Use the code %s. Get the app here %s", mLeague.getCode(), getResources().getString(R.string.SHORT_APP_URL)));
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, String.format("Invite friends to %s using", mLeague.getName())));
     }

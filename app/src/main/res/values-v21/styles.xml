@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+                <!-- Customize your theme here. -->
+                <item name="colorPrimary">@color/primary</item>
+                <item name="colorPrimaryDark">@color/primary_dark</item>
+                <item name="colorAccent">@color/accent</item>
+                <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+
+                <!--<item name="android:windowContentTransitions">true</item>-->
+                <!--&lt;!&ndash; specify enter and exit transitions &ndash;&gt;-->
+                <!--&lt;!&ndash; options are: explode, slide, fade &ndash;&gt;-->
+                <!--<item name="android:windowEnterTransition">@android:transition/fade</item>-->
+                <!--<item name="android:windowExitTransition">@android:transition/fade</item>-->
+
+                <!--&lt;!&ndash; specify shared element transitions &ndash;&gt;-->
+                <!--<item name="android:windowSharedElementEnterTransition">-->
+                        <!--@transition/change_image_transform</item>-->
+                <!--<item name="android:windowSharedElementExitTransition">-->
+                        <!--@transition/change_image_transform</item>-->
+
+        </style>
+</resources>
