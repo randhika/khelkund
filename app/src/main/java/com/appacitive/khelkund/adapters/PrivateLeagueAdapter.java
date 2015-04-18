@@ -61,6 +61,9 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
         final PrivateLeague privateLeague = mPrivateLeagues.get(position);
         holder.name.setText(privateLeague.getName());
         holder.playerCount.setText(String.valueOf(privateLeague.getTeams().size()) + " user(s) are playing in this league");
+        holder.code.setText("Private League Code : " + privateLeague.getCode());
+
+        setViewHolderListeners(holder, privateLeague);
 
         for(PrivateLeagueTeam team : privateLeague.getTeams())
         {
@@ -71,6 +74,10 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
                 break;
             }
         }
+
+    }
+
+    private void setViewHolderListeners(PrivateLeagueViewHolder holder, final PrivateLeague privateLeague) {
         holder.itemView.setOnClickListener(null);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +114,9 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
 
         @InjectView(R.id.tv_private_league_rank)
         protected TextView rank;
+
+        @InjectView(R.id.tv_private_league_code)
+        protected TextView code;
 
         @InjectView(R.id.tv_private_league_score)
         protected TextView score;

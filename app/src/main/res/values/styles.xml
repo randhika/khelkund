@@ -10,13 +10,7 @@
 
     </style>
 
-    <style name="MyDialog" parent="Theme.AppCompat.Dialog">
-        <item name="android:windowAnimationStyle">@style/MyDialogAnimation</item>
-    </style>
-
-    <style name="MyDialogAnimation">
-        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
-        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    <style name="MyDialog" parent="Theme.AppCompat.Light.Dialog">
     </style>
 
     <style name="NoActionBar" parent="AppTheme">

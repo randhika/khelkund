@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -20,10 +21,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.adapters.LeaderboardAdapter;
 import com.appacitive.khelkund.adapters.PrivateLeagueAdapter;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.BusProvider;
@@ -173,10 +176,11 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
                     league.setUserId(mUserId);
                     StorageManager manager = new StorageManager();
                     manager.SavePrivateLeague(league);
-                    mPrivateLeagues.add(league);
+                    mPrivateLeagues.add(0, league);
                     mAdapter.ResetLeagues(mPrivateLeagues);
                     mAdapter.notifyDataSetChanged();
                     ItemCountChanged();
+                    mLayoutManager.scrollToPosition(0);
                 }
 
             }
@@ -246,7 +250,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         final Dialog dialog = new Dialog(this, R.style.MyDialog);
         dialog.setContentView(view);
         dialog.show();
-
+        mName.requestFocus();
         mCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -290,11 +294,11 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
                     league.setUserId(mUserId);
                     StorageManager manager = new StorageManager();
                     manager.SavePrivateLeague(league);
-                    mPrivateLeagues.add(league);
+                    mPrivateLeagues.add(0, league);
                     mAdapter.ResetLeagues(mPrivateLeagues);
                     mAdapter.notifyDataSetChanged();
                     ItemCountChanged();
-                    showShareDialog(league);
+                    showShareTutorial(league);
                 }
             }
 
@@ -305,7 +309,26 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         });
     }
 
-    public void showShareDialog(PrivateLeague league) {
+    public void showShareTutorial(final PrivateLeague league) {
+        mLayoutManager.scrollToPosition(0);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                RecyclerView.ViewHolder cardViewHolder = mRecyclerView.findViewHolderForAdapterPosition(0);
+                if(cardViewHolder != null && cardViewHolder.itemView != null)
+                {
+                    ImageView share = (ImageView) cardViewHolder.itemView.findViewById(R.id.iv_privateleague_share);
+                    new ShowcaseView.Builder(PrivateLeagueHomeActivity.this)
+                            .setTarget(new ViewTarget(share))
+                            .setContentTitle("Invite your friends")
+                            .setContentText(String.format("Share the Private League code %s with your friends and invite them to join %s", league.getCode(), league.getName()))
+                            .hideOnTouchOutside()
+                            .singleShot(997)
+                            .build().hideButton();
+                }
+            }
+        };
+        new Handler().postDelayed(runnable, 500);
 
     }
 
@@ -315,14 +338,13 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         intent.putExtra("league_id", event.leagueId);
         startActivity(intent);
     }
-
     @Subscribe
     public void onPrivateLeagueShareClicked(PrivateLeagueShareEvent event) {
         StorageManager manager = new StorageManager();
         PrivateLeague league = manager.GetPrivateLeague(event.LeagueId, mUserId);
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Join my private fantasy league on Khelkund using the code %s. Get the app here %s", league.getCode(), getResources().getString(R.string.SHORT_APP_URL)));
+        sendIntent.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Join my private IPL fantasy league on Khelkund using the code %s. Get the app here %s", league.getCode(), getResources().getString(R.string.SHORT_APP_URL)));
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, String.format("Invite friends to %s using", league.getName())));
     }
