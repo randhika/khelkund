@@ -40,6 +40,7 @@ import java.io.OutputStream;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
 
 public class TeamSquadFragment extends Fragment {
 
@@ -75,7 +76,7 @@ public class TeamSquadFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new SquadAdapter(mTeam.getPlayers());
+        mAdapter = new AlphaInAnimationAdapter(new SquadAdapter(mTeam.getPlayers()));
         mRecyclerView.setAdapter(mAdapter);
 
         mFab.setOnClickListener(new View.OnClickListener() {

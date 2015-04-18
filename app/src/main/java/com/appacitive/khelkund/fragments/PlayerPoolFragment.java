@@ -36,6 +36,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import io.realm.RealmResults;
+import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
 
 /**
  * Created by sathley on 3/29/2015.
@@ -160,7 +161,7 @@ public class PlayerPoolFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         List<Player> filteredList = filter(mPlayers, chosenTeams);
-        mAdapter = new PlayerPoolAdapter(filteredList);
+        mAdapter = new AlphaInAnimationAdapter(new PlayerPoolAdapter(filteredList));
         mRecyclerView.setAdapter(mAdapter);
 
         return rootView;
@@ -168,7 +169,7 @@ public class PlayerPoolFragment extends Fragment {
 
     @Subscribe
     public void onFilterApplied(FilterAppliedEvent event) {
-        mAdapter = new PlayerPoolAdapter(filter(mPlayers, chosenTeams));
+        mAdapter = new AlphaInAnimationAdapter(new PlayerPoolAdapter(filter(mPlayers, chosenTeams)));
         mRecyclerView.setAdapter(mAdapter);
     }
 
