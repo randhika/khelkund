@@ -51,7 +51,8 @@
             android:layout_marginRight="8dp"
             android:singleLine="true"
             android:textSize="12sp"
-            android:textColor="@color/abc_primary_text_material_dark" />
+            android:textColor="@color/abc_primary_text_material_dark"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

@@ -14,12 +14,12 @@
         <ImageView
             android:layout_width="56dp"
             android:layout_height="56dp"
+            android:scaleX="-1"
             android:id="@+id/iv_player_squad_photo"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/demo"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:maxWidth="56dp" />
 

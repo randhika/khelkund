@@ -12,7 +12,9 @@ import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
+import com.appacitive.khelkund.infra.transforms.CircleTransform;
 import com.appacitive.khelkund.model.Player;
+import com.appacitive.khelkund.model.TeamHelper;
 import com.appacitive.khelkund.model.events.PlayerChosenEvent;
 import com.squareup.picasso.Picasso;
 
@@ -65,7 +67,11 @@ public class PlayerPoolAdapter extends RecyclerView.Adapter<PlayerPoolAdapter.Po
             holder.popularity.setText(String.valueOf((player.getPopularity() * 100)/totalTeams) + " %");
         }
 
-        Picasso.with(KhelkundApplication.getAppContext()).load(player.getImageUrl()).placeholder(R.drawable.demo).into(holder.logo);
+//        Picasso.with(KhelkundApplication.getAppContext()).load(player.getImageUrl()).placeholder(R.drawable.demo).into(holder.logo);
+        Picasso.with(KhelkundApplication.getAppContext())
+                .load(player.getImageUrl()).resize(250, 370).centerInside()
+                .transform(new CircleTransform(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(player.getShortTeamName()))))
+                .into(holder.logo);
 
         holder.relativeLayout.setOnClickListener(null);
         holder.relativeLayout.setClickable(false);
