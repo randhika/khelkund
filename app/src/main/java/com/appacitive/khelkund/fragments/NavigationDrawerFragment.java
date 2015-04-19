@@ -129,56 +129,56 @@ public class NavigationDrawerFragment extends Fragment {
         return view;
     }
 
-    @OnClick(R.id.tv_nav_leaderboard)
+    @OnClick(R.id.rl_leaderboard)
     public void onLeaderBoardClick() {
         Intent intent = new Intent(getActivity(), LeaderboardActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.tv_nav_prizes)
+    @OnClick(R.id.rl_prizes)
     public void onPrizesCLick() {
         Intent intent = new Intent(getActivity(), PrizesActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.tv_nav_howtoplay)
+    @OnClick(R.id.rl_howtoplay)
     public void onHowToPlayClick() {
         Intent intent = new Intent(getActivity(), HowToPlayActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.tv_nav_scoring_chart)
+    @OnClick(R.id.rl_scoring)
     public void onScoringChartClick() {
         Intent intent = new Intent(getActivity(), ScoringChartActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.tv_nav_terms)
+    @OnClick(R.id.rl_terms)
     public void onTermsClick() {
         Uri uri = Uri.parse("http://www.khelkund.com/ipl/terms.aspx");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
 
-    @OnClick(R.id.tv_nav_licenses)
+    @OnClick(R.id.rl_licenses)
     public void onLicensesClick() {
         Intent intent = new Intent(getActivity(), LicencesActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.tv_nav_schedule)
+    @OnClick(R.id.rl_schedule)
     public void onScheduleClick() {
         Intent intent = new Intent(getActivity(), ScheduleActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.tv_nav_feedback)
+    @OnClick(R.id.rl_feedback)
     public void onFeedbackClick() {
         Intent feedBackIntent = new Intent(getActivity(), FeedbackActivity.class);
         startActivity(feedBackIntent);
     }
 
-    @OnClick(R.id.tv_nav_logout)
+    @OnClick(R.id.rl_logout)
     public void onLogoutClick() {
         LoginManager.getInstance().logOut();
         Twitter.logOut();
