@@ -7,6 +7,8 @@
     android:layout_height="105dp"
     app:cardBackgroundColor="@color/cardview_light_background"
     app:cardCornerRadius="2dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
     android:layout_margin="4dp"
     android:elevation="5dp">
 

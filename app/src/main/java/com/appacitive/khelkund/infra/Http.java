@@ -48,7 +48,7 @@ public class Http {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Crashlytics.logException(error);
+//                Crashlytics.logException(error);
                 if (callback != null)
                     callback.failure(error);
             }
@@ -79,7 +79,7 @@ public class Http {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Crashlytics.logException(error);
+//                Crashlytics.logException(error);
                 if (callback != null)
                     callback.failure(error);
             }
@@ -147,7 +147,7 @@ public class Http {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Crashlytics.logException(error);
+//                Crashlytics.logException(error);
                 if (callback != null)
                     callback.failure(error);
             }
@@ -178,7 +178,7 @@ public class Http {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Crashlytics.logException(error);
+//                Crashlytics.logException(error);
                 if (callback != null)
                     callback.failure(error);
             }

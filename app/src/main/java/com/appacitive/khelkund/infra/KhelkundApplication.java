@@ -38,6 +38,11 @@ public class KhelkundApplication extends Application {
         AppacitiveContext.initialize("+HfTOp2nF8TnkyZVBblkTBLm6Cz6zIfKYdXBhV6Aag4=", Environment.live, getAppContext());
         FacebookSdk.sdkInitialize(context);
 
+        String userId = SharedPreferencesManager.ReadUserId();
+        if(userId != null)
+            Crashlytics.setUserIdentifier(userId);
+        else Crashlytics.setUserIdentifier("not logged in yet");
+
     }
 
     public static Context getAppContext() {

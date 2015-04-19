@@ -18,6 +18,8 @@ public class TeamHelper {
 
     public static List<Player> getBatsmen(Team team) {
         List<Player> batsmen = new ArrayList<Player>();
+        if(team == null)
+            return batsmen;
         if (team.getPlayers() != null)
             for (Player p : team.getPlayers())
                 if (p.getType().equals("Batsman"))
@@ -35,7 +37,9 @@ public class TeamHelper {
     }
 
     public static List<Player> getBowlers(Team team) {
+
         List<Player> bowlers = new ArrayList<Player>();
+        if(team == null) return bowlers;
         if (team.getPlayers() != null)
             for (Player p : team.getPlayers())
                 if (p.getType().equals("Bowler"))
@@ -53,7 +57,9 @@ public class TeamHelper {
     }
 
     public static List<Player> getAllRounders(Team team) {
+
         List<Player> allRounders = new ArrayList<Player>();
+        if(team == null) return allRounders;
         if (team.getPlayers() != null)
             for (Player p : team.getPlayers())
                 if (p.getType().equals("AllRounder"))
@@ -72,6 +78,7 @@ public class TeamHelper {
 
     public static List<Player> getWicketKeepers(Team team) {
         List<Player> wk = new ArrayList<Player>();
+        if(team == null) return wk;
         if (team.getPlayers() != null)
             for (Player p : team.getPlayers())
                 if (p.getType().equals("WicketKeeper"))
@@ -129,6 +136,7 @@ public class TeamHelper {
 
     public static PrivateLeague clone(PrivateLeague league)
     {
+        if(league == null) return null;
         PrivateLeague newLeague = new PrivateLeague();
         newLeague.setId(league.getId());
         newLeague.setUserId(league.getUserId());
@@ -144,6 +152,7 @@ public class TeamHelper {
 
     public static PrivateLeagueTeam clone(PrivateLeagueTeam team)
     {
+        if (team == null) return null;
         PrivateLeagueTeam newTeam = new PrivateLeagueTeam();
         newTeam.setUserId(team.getUserId());
         newTeam.setImageName(team.getImageName());

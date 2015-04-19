@@ -30,6 +30,7 @@ public class Team extends RealmObject {
             return;
 
         this.Balance = json.optInt("Balance");
+        this.BalanceLimit = json.optInt("BalanceLimit");
         this.CaptainId = json.optString("CaptainId");
         this.Formation = json.optString("Formation");
         this.Id = json.optString("Id");
@@ -61,6 +62,7 @@ public class Team extends RealmObject {
     private String UserId;
 
     private int Balance=0;
+    private int BalanceLimit=0;
     private String CaptainId;
     private String Formation;
     private String Id;
@@ -175,5 +177,13 @@ public class Team extends RealmObject {
 
     public void setUserId(String userId) {
         UserId = userId;
+    }
+
+    public int getBalanceLimit() {
+        return BalanceLimit;
+    }
+
+    public void setBalanceLimit(int balanceLimit) {
+        BalanceLimit = balanceLimit;
     }
 }

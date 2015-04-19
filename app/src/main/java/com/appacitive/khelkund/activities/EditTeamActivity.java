@@ -6,7 +6,6 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,15 +15,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
@@ -38,11 +34,11 @@ import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.infra.VerticallyWrappedGridLayoutManager;
 import com.appacitive.khelkund.model.Formation;
+import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PlayerType;
 import com.appacitive.khelkund.model.Team;
 import com.appacitive.khelkund.model.TeamHelper;
-import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.events.AlreadyOwnedPlayerClickedEvent;
 import com.appacitive.khelkund.model.events.CardErrorEvent;
 import com.appacitive.khelkund.model.events.EmptyPlayerCardClickedEvent;
@@ -51,13 +47,10 @@ import com.appacitive.khelkund.model.events.NewPlayerAddedEvent;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.enums.SnackbarType;
-import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
 import org.codechimp.apprater.AppRater;
@@ -74,8 +67,6 @@ import java.util.Random;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import io.realm.RealmList;
-import jp.wasabeef.recyclerview.animators.LandingAnimator;
-import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
 
 public class EditTeamActivity extends ActionBarActivity {
 
@@ -215,8 +206,7 @@ public class EditTeamActivity extends ActionBarActivity {
             showSuccess("Your changes have been reset");
             return true;
         }
-        if(item.getItemId() == R.id.action_share)
-        {
+        if (item.getItemId() == R.id.action_share) {
             shareTeam();
             return true;
         }
@@ -389,15 +379,14 @@ public class EditTeamActivity extends ActionBarActivity {
             //  reset fields
             mTeamMutated.setCaptainId(null);
 //            mTeamMutated.setBalance(mTeamOriginal.getBalance());
-            mTeamMutated.setBalance(10000000);
+            mTeamMutated.setBalance(mTeamOriginal.getBalanceLimit());
             mTeamMutated.setPlayers(new RealmList<Player>());
 
             Random random = new Random();
             Formation formation = TeamHelper.getFormation(mTeamMutated);
             // Fetch batsmen
             List<Player> batsmen = mStorageManager.GetBargainPlayersByType("Batsman");
-            if(batsmen.size() == 0)
-            {
+            if (batsmen.size() == 0) {
                 showError("Check your internet connectivity and try again");
                 return;
             }
@@ -485,21 +474,18 @@ public class EditTeamActivity extends ActionBarActivity {
     private void updateStats(Team team) {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.abc_slide_in_top);
         animation.setStartOffset(500);
-        if(mBalance.getText().toString().equals(String.valueOf(team.getBalance())) == false)
-        {
+
+        if (mBalance.getText().toString().equals(String.valueOf(team.getBalance())) == false) {
             mBalance.setText(String.valueOf(team.getBalance()));
             mBalance.startAnimation(animation);
-
         }
-        if(mTransfers.getText().toString().equals(String.valueOf(team.getTransfersRemaining() + " Transfers")) == false)
-        {
+
+        if (mTransfers.getText().toString().equals(String.valueOf(team.getTransfersRemaining() + " Transfers")) == false) {
             mTransfers.setText(String.valueOf(team.getTransfersRemaining() + " Transfers"));
             mTransfers.startAnimation(animation);
-
         }
 
-
-        mPoints.setText(String.valueOf(team.getTotalPoints()) + " Pt");
+        mPoints.setText(String.valueOf(team.getTotalPoints()) + " Pts");
         Formation formation = TeamHelper.getFormation(mTeamMutated);
         mFormation.setText(String.format("Your team formation is set to %s BTSM, %s BWLR, %s AR and %s WK.", formation.BatsmenCount, formation.BowlersCount, formation.AllRoundersCount, formation.WicketKeepersCount));
         mBatsmanCount.setText(String.format("%sX", String.valueOf(formation.BatsmenCount)));
@@ -541,7 +527,7 @@ public class EditTeamActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        
+
         showSaveTeamTutorialOverlay();
         // check if the request code is same as what is passed
         if (resultCode != RESULT_OK)
@@ -596,7 +582,6 @@ public class EditTeamActivity extends ActionBarActivity {
     private void tryAddPlayer(final String playerId) {
         StorageManager storageManager = new StorageManager();
         Player player = storageManager.GetPlayer(playerId);
-
 
 
         // check player already exists in your team
@@ -661,20 +646,17 @@ public class EditTeamActivity extends ActionBarActivity {
         // calculate transfers
         List<String> originalPlayerIds = new ArrayList<String>();
         List<String> mutatedPlayerIds = new ArrayList<String>();
-        for(Player p: mTeamOriginal.getPlayers())
-        {
+        for (Player p : mTeamOriginal.getPlayers()) {
             originalPlayerIds.add(p.getId());
         }
 
-        for(Player p: mTeamMutated.getPlayers())
-        {
+        for (Player p : mTeamMutated.getPlayers()) {
             mutatedPlayerIds.add(p.getId());
         }
 
         originalPlayerIds.retainAll(mutatedPlayerIds);
         int transfersMade = 11 - originalPlayerIds.size();
-        if(transfersMade > mTeamOriginal.getTransfersRemaining())
-        {
+        if (transfersMade > mTeamOriginal.getTransfersRemaining()) {
             showError("You don't have sufficient transfers remaining to make these trades");
             YoYo.with(Techniques.Wobble).duration(700).playOn(mTransfers);
             return;
@@ -720,8 +702,8 @@ public class EditTeamActivity extends ActionBarActivity {
         SnackbarManager.show(
                 Snackbar.with(getApplicationContext()) // context
                         .type(SnackbarType.MULTI_LINE)
-                                .color(Color.parseColor("#F44336"))
-                                        .textColor(Color.WHITE)
+                        .color(Color.parseColor("#F44336"))
+                        .textColor(Color.WHITE)
                         .text(message) // text to be displayed
                         .duration(Snackbar.SnackbarDuration.LENGTH_LONG) // make it shorter
                 , this);

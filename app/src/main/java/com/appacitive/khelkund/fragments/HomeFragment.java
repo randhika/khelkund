@@ -104,6 +104,13 @@ public class HomeFragment extends Fragment {
         }
 
         mUser = manager.GetUser(mUserId);
+        if(mUser == null)
+        {
+            Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(loginIntent);
+            getActivity().finish();
+        }
+
         showUserBasicDetails();
         fetchTeam(mUserId);
         fetchProfileImage();
@@ -197,10 +204,12 @@ public class HomeFragment extends Fragment {
     }
 
     private void showUserBasicDetails() {
-        String name = mUser.getFirstName();
-        if (mUser.getLastName() != null && mUser.getLastName().equals("null") == false)
-            name += " " + mUser.getLastName();
-        mName.setText(name);
+        if(mUser != null && mUser.getFirstName() != null) {
+            String name = mUser.getFirstName();
+            if (mUser.getLastName() != null && mUser.getLastName().equals("null") == false)
+                name += " " + mUser.getLastName();
+            mName.setText(name);
+        }
     }
 
     @OnClick(R.id.card_view_fantasy)
