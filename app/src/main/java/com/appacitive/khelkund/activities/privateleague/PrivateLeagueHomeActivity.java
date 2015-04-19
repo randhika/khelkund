@@ -35,7 +35,7 @@ import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.PrivateLeague;
-import com.appacitive.khelkund.model.TeamHelper;
+import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.model.events.PrivateLeagueDeleteEvent;
 import com.appacitive.khelkund.model.events.PrivateLeagueSelectedEvent;
 import com.appacitive.khelkund.model.events.PrivateLeagueShareEvent;

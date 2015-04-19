@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.fragments;
+package com.appacitive.khelkund.fragments.fantasy;
 
 
 import android.os.Bundle;
@@ -15,10 +15,8 @@ import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
-import com.appacitive.khelkund.model.History;
 import com.appacitive.khelkund.model.Team;
 import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -29,7 +27,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.infra.carousel;
+package com.appacitive.khelkund.infra.widgets.carousel;
 
 /**
  * Created by sathley on 4/10/2015.

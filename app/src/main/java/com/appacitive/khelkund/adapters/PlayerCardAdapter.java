@@ -13,7 +13,7 @@ import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PlayerType;
-import com.appacitive.khelkund.model.TeamHelper;
+import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.model.events.EmptyPlayerCardClickedEvent;
 import com.appacitive.khelkund.model.events.FilledPlayerCardClickedEvent;
 import com.appacitive.khelkund.model.viewholders.EmptyCardViewHolder;

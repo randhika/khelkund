@@ -28,6 +28,4 @@ public class TwitterFeedActivity extends ActionBarActivity {
         final TweetTimelineListAdapter adapter = new TweetTimelineListAdapter(this, searchTimeline);
         mTwitter.setAdapter(adapter);
     }
-
-
 }

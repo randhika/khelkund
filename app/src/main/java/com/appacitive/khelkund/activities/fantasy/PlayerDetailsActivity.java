@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.activities;
+package com.appacitive.khelkund.activities.fantasy;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,13 +13,12 @@ import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.APCallback;
-import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.Statistics;
-import com.appacitive.khelkund.model.TeamHelper;
+import com.appacitive.khelkund.infra.TeamHelper;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -85,14 +84,14 @@ public class PlayerDetailsActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_player_details);
         ButterKnife.inject(this);
-        ConnectionManager.checkNetworkConnectivity(this);
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.abc_ic_clear_mtrl_alpha);
-        mToolbar.setCollapsible(false);
+//        mToolbar.setCollapsible(false);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

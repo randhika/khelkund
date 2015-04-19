@@ -6,10 +6,10 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.appacitive.khelkund.activities.RegisterActivity">
+    tools:context="com.appacitive.khelkund.activities.misc.RegisterActivity">
 
     <!--<fragment-->
-    <!--android:name="com.appacitive.khelkund.fragments.LoginFragment"-->
+    <!--android:name="com.appacitive.khelkund.fragments.misc.LoginFragment"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
     <!--tools:layout="@layout/fragment_login"-->

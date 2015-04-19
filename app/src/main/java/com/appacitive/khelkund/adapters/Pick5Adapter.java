@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,9 +13,8 @@ import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.widgets.CircleView;
 import com.appacitive.khelkund.model.Match;
-import com.appacitive.khelkund.model.TeamHelper;
+import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.model.events.MatchSelectedEvent;
-import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -1,21 +1,18 @@
 package com.appacitive.khelkund.activities.pick5;
 
-import android.app.ActivityOptions;
 import android.app.ProgressDialog;
-import android.gesture.GestureOverlayView;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.fragments.Pick5EmptyFragment;
-import com.appacitive.khelkund.fragments.Pick5FinishedReadonlyFragment;
-import com.appacitive.khelkund.fragments.Pick5PlayFragment;
+import com.appacitive.khelkund.fragments.pick5.Pick5EmptyFragment;
+import com.appacitive.khelkund.fragments.pick5.Pick5FinishedReadonlyFragment;
+import com.appacitive.khelkund.fragments.pick5.Pick5PlayFragment;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
@@ -24,11 +21,9 @@ import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
-import com.appacitive.khelkund.infra.transforms.CircleTransform2;
 import com.appacitive.khelkund.infra.widgets.CircleView;
 import com.appacitive.khelkund.model.Pick5MatchDetails;
-import com.appacitive.khelkund.model.TeamHelper;
-import com.squareup.picasso.Picasso;
+import com.appacitive.khelkund.infra.TeamHelper;
 
 import org.json.JSONObject;
 
@@ -37,8 +32,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

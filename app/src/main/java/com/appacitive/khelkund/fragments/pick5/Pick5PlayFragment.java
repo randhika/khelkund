@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.fragments;
+package com.appacitive.khelkund.fragments.pick5;
 
 
 import android.app.Dialog;
@@ -25,12 +25,12 @@ import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
-import com.appacitive.khelkund.infra.carousel.CoverFlowCarousel;
+import com.appacitive.khelkund.infra.widgets.carousel.CoverFlowCarousel;
 import com.appacitive.khelkund.infra.transforms.CircleTransform;
 import com.appacitive.khelkund.infra.transforms.CircleTransform2;
 import com.appacitive.khelkund.model.Pick5MatchDetails;
 import com.appacitive.khelkund.model.Player;
-import com.appacitive.khelkund.model.TeamHelper;
+import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.model.events.pick5.Pick5AllRounderChosenEvent;
 import com.appacitive.khelkund.model.events.pick5.Pick5AnyPlayerChosenEvent;
 import com.appacitive.khelkund.model.events.pick5.Pick5BatsmanChosenEvent;

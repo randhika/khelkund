@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.activities;
+package com.appacitive.khelkund.activities.misc;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,8 +19,8 @@ import com.appacitive.core.AppacitiveConnection;
 import com.appacitive.core.AppacitiveDevice;
 import com.appacitive.core.model.Callback;
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.fragments.HomeFragment;
-import com.appacitive.khelkund.fragments.NavigationDrawerFragment;
+import com.appacitive.khelkund.fragments.misc.HomeFragment;
+import com.appacitive.khelkund.fragments.misc.NavigationDrawerFragment;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;

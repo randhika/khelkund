@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.infra;
+package com.appacitive.khelkund.infra.widgets;
 
 import android.content.Context;
 import android.content.res.TypedArray;

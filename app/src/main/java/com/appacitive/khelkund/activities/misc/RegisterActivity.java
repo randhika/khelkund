@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.activities;
+package com.appacitive.khelkund.activities.misc;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,11 +14,8 @@ import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
-import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
-import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
-import com.appacitive.khelkund.model.KhelkundUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar_actionbar"
-        tools:context="com.appacitive.khelkund.activities.HomeActivity">
+        tools:context="com.appacitive.khelkund.activities.misc.HomeActivity">
 
         <FrameLayout
             android:id="@+id/container"
@@ -34,7 +34,7 @@
             android:layout_width="@dimen/navigation_drawer_width"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:name="com.appacitive.khelkund.fragments.NavigationDrawerFragment"
+            android:name="com.appacitive.khelkund.fragments.misc.NavigationDrawerFragment"
             tools:layout="@layout/fragment_navigation_drawer" />
 
     </android.support.v4.widget.DrawerLayout>

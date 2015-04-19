@@ -28,7 +28,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activities.SplashScreenActivity"
+            android:name=".activities.misc.SplashScreenActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" >
@@ -39,60 +39,60 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.misc.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
-            android:name=".activities.HomeActivity"
+            android:name=".activities.misc.HomeActivity"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
-            android:name=".activities.EmailLoginActivity"
+            android:name=".activities.misc.EmailLoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName=".activities.LoginActivity"
+            android:parentActivityName=".activities.misc.LoginActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.LoginActivity" />
+                android:value=".activities.misc.LoginActivity" />
         </activity>
         <activity
-            android:name=".activities.RegisterActivity"
+            android:name=".activities.misc.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:parentActivityName=".activities.LoginActivity"
+            android:parentActivityName=".activities.misc.LoginActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.LoginActivity" />
+                android:value=".activities.misc.LoginActivity" />
         </activity>
         <activity
-            android:name=".activities.ViewTeamActivity"
+            android:name=".activities.fantasy.ViewTeamActivity"
             android:label="@string/title_activity_view_team"
-            android:parentActivityName=".activities.HomeActivity"
+            android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+                android:value=".activities.misc.HomeActivity" />
         </activity>
         <activity
-            android:name=".activities.EditTeamActivity"
+            android:name=".activities.fantasy.EditTeamActivity"
             android:label="@string/title_activity_edit_team"
-            android:parentActivityName=".activities.HomeActivity"
+            android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+                android:value=".activities.misc.HomeActivity" />
         </activity>
         <activity
-            android:name=".activities.CreateTeamActivity"
+            android:name=".activities.fantasy.CreateTeamActivity"
             android:label="@string/title_activity_create_team"
-            android:parentActivityName=".activities.HomeActivity"
+            android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+                android:value=".activities.misc.HomeActivity" />
         </activity>
 
         <meta-data
@@ -103,14 +103,14 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".activities.PlayerDetailsActivity"
+            android:name=".activities.fantasy.PlayerDetailsActivity"
             android:label="@string/title_activity_player_details"
-            android:parentActivityName=".activities.EditTeamActivity"
+            android:parentActivityName=".activities.fantasy.EditTeamActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.EditTeamActivity" />
+                android:value=".activities.fantasy.EditTeamActivity" />
         </activity>
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -123,13 +123,13 @@
             android:exported="false" />
 
         <activity
-            android:name=".activities.PlayerPoolActivity"
+            android:name=".activities.fantasy.PlayerPoolActivity"
             android:label="@string/title_activity_player_pool"
-            android:parentActivityName=".activities.EditTeamActivity"
+            android:parentActivityName=".activities.fantasy.EditTeamActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.EditTeamActivity" />
+                android:value=".activities.fantasy.EditTeamActivity" />
         </activity>
 
         <service
@@ -139,11 +139,11 @@
         <activity
             android:name=".activities.pick5.Pick5HomeActivity"
             android:label="@string/title_activity_pick5_home"
-            android:parentActivityName=".activities.HomeActivity"
+            android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+                android:value=".activities.misc.HomeActivity" />
         </activity>
 
         <service
@@ -178,49 +178,49 @@
         <activity
             android:name=".activities.navigationdrawer.LeaderboardActivity"
             android:label="@string/title_activity_leaderboard"
-            android:parentActivityName=".activities.HomeActivity"
+            android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+                android:value=".activities.misc.HomeActivity" />
         </activity>
         <activity
             android:name=".activities.navigationdrawer.FeedbackActivity"
             android:label="@string/title_activity_feedback"
-            android:parentActivityName=".activities.HomeActivity"
+            android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+                android:value=".activities.misc.HomeActivity" />
         </activity>
         <activity
             android:name=".activities.navigationdrawer.LicencesActivity"
             android:label="@string/title_activity_licences"
-            android:parentActivityName=".activities.HomeActivity"
+            android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+                android:value=".activities.misc.HomeActivity" />
         </activity>
         <activity
             android:name=".activities.navigationdrawer.ScheduleActivity"
             android:label="@string/title_activity_schedule"
-            android:parentActivityName=".activities.HomeActivity"
+            android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+                android:value=".activities.misc.HomeActivity" />
         </activity>
         <activity
             android:name=".activities.navigationdrawer.ScoringChartActivity"
             android:label="@string/title_activity_scoring_chart"
-            android:parentActivityName=".activities.HomeActivity"
+            android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+                android:value=".activities.misc.HomeActivity" />
         </activity>
         <activity
             android:name=".activities.navigationdrawer.TermsAndPolicyActivity"
@@ -229,17 +229,17 @@
         <activity
             android:name=".activities.navigationdrawer.PrizesActivity"
             android:label="@string/title_activity_prizes"
-            android:parentActivityName=".activities.HomeActivity"
+            android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+                android:value=".activities.misc.HomeActivity" />
         </activity>
         <activity
             android:name=".activities.privateleague.PrivateLeagueHomeActivity"
             android:exported="true"
             android:label="@string/title_activity_private_league_home"
-            android:parentActivityName=".activities.HomeActivity"
+            android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <data
@@ -260,11 +260,11 @@
         <activity
             android:name=".activities.navigationdrawer.HowToPlayActivity"
             android:label="@string/title_activity_how_to_play_activity2"
-            android:parentActivityName=".activities.HomeActivity"
+            android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+                android:value=".activities.misc.HomeActivity" />
         </activity>
         <activity
             android:name=".activities.privateleague.PrivateLeagueLeaderboardActivity"
@@ -279,10 +279,10 @@
         <activity
             android:name=".activities.navigationdrawer.TwitterFeedActivity"
             android:label="@string/title_activity_twitter_feed"
-            android:parentActivityName=".activities.HomeActivity" >
+            android:parentActivityName=".activities.misc.HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.HomeActivity" />
+                android:value=".activities.misc.HomeActivity" />
         </activity>
     </application>
 

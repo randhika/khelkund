@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/squad_parent"
     android:background="@android:color/background_light"
-    tools:context="com.appacitive.khelkund.fragments.TeamSquadFragment">
+    tools:context="com.appacitive.khelkund.fragments.fantasy.TeamSquadFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_squad"

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rl_pick5_readonly_parent"
-    tools:context="com.appacitive.khelkund.fragments.Pick5FinishedReadonlyFragment">
+    tools:context="com.appacitive.khelkund.fragments.pick5.Pick5FinishedReadonlyFragment">
 
     <ScrollView
         android:layout_width="match_parent"

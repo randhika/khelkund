@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:choiceMode="singleChoice"
     android:background="@android:color/white"
-    tools:context="com.appacitive.khelkund.fragments.NavigationDrawerFragment">
+    tools:context="com.appacitive.khelkund.fragments.misc.NavigationDrawerFragment">
 
     <ScrollView
         android:layout_width="fill_parent"

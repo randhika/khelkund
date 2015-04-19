@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.fragments;
+package com.appacitive.khelkund.fragments.misc;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.activities.LoginActivity;
+import com.appacitive.khelkund.activities.misc.LoginActivity;
 import com.appacitive.khelkund.activities.navigationdrawer.FeedbackActivity;
 import com.appacitive.khelkund.activities.navigationdrawer.HowToPlayActivity;
 import com.appacitive.khelkund.activities.navigationdrawer.LeaderboardActivity;

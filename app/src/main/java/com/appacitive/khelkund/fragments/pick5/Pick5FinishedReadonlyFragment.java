@@ -1,11 +1,10 @@
-package com.appacitive.khelkund.fragments;
+package com.appacitive.khelkund.fragments.pick5;
 
 
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
@@ -25,7 +23,7 @@ import com.appacitive.khelkund.activities.pick5.Pick5MatchActivity;
 import com.appacitive.khelkund.infra.transforms.CircleTransform;
 import com.appacitive.khelkund.model.Pick5MatchDetails;
 import com.appacitive.khelkund.model.Player;
-import com.appacitive.khelkund.model.TeamHelper;
+import com.appacitive.khelkund.infra.TeamHelper;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.squareup.picasso.Picasso;

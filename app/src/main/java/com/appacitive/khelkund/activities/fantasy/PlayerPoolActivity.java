@@ -1,8 +1,4 @@
-package com.appacitive.khelkund.activities;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+package com.appacitive.khelkund.activities.fantasy;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,19 +10,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.fragments.PlayerPoolFragment;
+import com.appacitive.khelkund.fragments.fantasy.PlayerPoolFragment;
 import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.model.PlayerType;
-import com.appacitive.khelkund.model.TeamHelper;
-import com.appacitive.khelkund.model.events.FilledPlayerCardClickedEvent;
 import com.appacitive.khelkund.model.events.PlayerChosenEvent;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;

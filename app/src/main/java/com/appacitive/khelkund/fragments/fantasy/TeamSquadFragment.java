@@ -1,33 +1,20 @@
-package com.appacitive.khelkund.fragments;
+package com.appacitive.khelkund.fragments.fantasy;
 
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.activities.EditTeamActivity;
+import com.appacitive.khelkund.activities.fantasy.EditTeamActivity;
 import com.appacitive.khelkund.adapters.SquadAdapter;
-import com.appacitive.khelkund.infra.DividerItemDecoration;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.model.KhelkundUser;
@@ -35,8 +22,6 @@ import com.appacitive.khelkund.model.Team;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
-
-import java.io.OutputStream;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

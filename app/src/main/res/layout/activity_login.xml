@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backloginscreen"
-    tools:context="com.appacitive.khelkund.activities.LoginActivity">
+    tools:context="com.appacitive.khelkund.activities.misc.LoginActivity">
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"

@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.fragments;
+package com.appacitive.khelkund.fragments.misc;
 
 
 import android.app.ProgressDialog;
@@ -11,10 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.activities.EmailLoginActivity;
-import com.appacitive.khelkund.activities.HomeActivity;
-import com.appacitive.khelkund.activities.LoginActivity;
-import com.appacitive.khelkund.activities.RegisterActivity;
+import com.appacitive.khelkund.activities.misc.EmailLoginActivity;
+import com.appacitive.khelkund.activities.misc.HomeActivity;
+import com.appacitive.khelkund.activities.misc.RegisterActivity;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;

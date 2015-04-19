@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.activities;
+package com.appacitive.khelkund.activities.fantasy;
 
 import java.util.Locale;
 
@@ -10,19 +10,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.fragments.TeamOverviewFragment;
-import com.appacitive.khelkund.fragments.TeamSquadFragment;
-import com.appacitive.khelkund.model.TeamHelper;
+import com.appacitive.khelkund.fragments.fantasy.TeamOverviewFragment;
+import com.appacitive.khelkund.fragments.fantasy.TeamSquadFragment;
 
 public class ViewTeamActivity extends ActionBarActivity implements ActionBar.TabListener {
 

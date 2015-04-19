@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.fragments;
+package com.appacitive.khelkund.fragments.misc;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.activities.CreateTeamActivity;
-import com.appacitive.khelkund.activities.LoginActivity;
-import com.appacitive.khelkund.activities.ViewTeamActivity;
+import com.appacitive.khelkund.activities.fantasy.CreateTeamActivity;
+import com.appacitive.khelkund.activities.misc.LoginActivity;
+import com.appacitive.khelkund.activities.fantasy.ViewTeamActivity;
 import com.appacitive.khelkund.activities.pick5.Pick5HomeActivity;
 import com.appacitive.khelkund.activities.privateleague.PrivateLeagueHomeActivity;
 import com.appacitive.khelkund.infra.APCallback;

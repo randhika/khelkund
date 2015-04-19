@@ -7,14 +7,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.activities.HomeActivity;
-import com.appacitive.khelkund.activities.SplashScreenActivity;
+import com.appacitive.khelkund.activities.misc.HomeActivity;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 

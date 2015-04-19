@@ -14,7 +14,7 @@ import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.transforms.CircleTransform;
 import com.appacitive.khelkund.model.Player;
-import com.appacitive.khelkund.model.TeamHelper;
+import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.model.events.PlayerChosenEvent;
 import com.squareup.picasso.Picasso;
 
@@ -24,7 +24,6 @@ import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import io.realm.RealmResults;
 
 /**
  * Created by sathley on 3/29/2015.

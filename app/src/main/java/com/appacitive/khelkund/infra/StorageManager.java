@@ -8,14 +8,12 @@ import com.appacitive.khelkund.model.Match;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PrivateLeague;
 import com.appacitive.khelkund.model.Team;
-import com.appacitive.khelkund.model.TeamHelper;
 import com.appacitive.khelkund.model.UserImage;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmMigration;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 

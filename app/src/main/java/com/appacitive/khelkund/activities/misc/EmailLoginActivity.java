@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.activities;
+package com.appacitive.khelkund.activities.misc;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -15,13 +15,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -33,11 +31,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.appacitive.core.AppacitiveEmail;
 import com.appacitive.core.AppacitiveUser;
 import com.appacitive.core.model.Callback;
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.fragments.LoginFragment;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;

@@ -1,11 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="false">
+    android:clickable="false"
+    tools:context="com.appacitive.khelkund.activities.fantasy.PlayerDetailsActivity">
 
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:id="@+id/player_toolbar"
+        android:elevation="8dp"
         android:layout_height="180dp">
 
         <RelativeLayout

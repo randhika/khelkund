@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.activities;
+package com.appacitive.khelkund.activities.misc;
 
 import android.content.Intent;
 import android.os.Bundle;

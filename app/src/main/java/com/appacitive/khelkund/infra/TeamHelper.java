@@ -1,8 +1,15 @@
-package com.appacitive.khelkund.model;
+package com.appacitive.khelkund.infra;
 
 import android.text.TextUtils;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.model.Formation;
+import com.appacitive.khelkund.model.History;
+import com.appacitive.khelkund.model.Player;
+import com.appacitive.khelkund.model.PrivateLeague;
+import com.appacitive.khelkund.model.PrivateLeagueTeam;
+import com.appacitive.khelkund.model.Statistics;
+import com.appacitive.khelkund.model.Team;
 
 import org.json.JSONArray;
 import org.json.JSONException;
