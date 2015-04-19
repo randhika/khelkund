@@ -31,6 +31,7 @@ import com.appacitive.khelkund.activities.navigationdrawer.LicencesActivity;
 import com.appacitive.khelkund.activities.navigationdrawer.PrizesActivity;
 import com.appacitive.khelkund.activities.navigationdrawer.ScheduleActivity;
 import com.appacitive.khelkund.activities.navigationdrawer.ScoringChartActivity;
+import com.appacitive.khelkund.activities.navigationdrawer.TwitterFeedActivity;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
@@ -169,6 +170,12 @@ public class NavigationDrawerFragment extends Fragment {
     @OnClick(R.id.rl_schedule)
     public void onScheduleClick() {
         Intent intent = new Intent(getActivity(), ScheduleActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.rl_twitter)
+    public void onTwitterFeedClick() {
+        Intent intent = new Intent(getActivity(), TwitterFeedActivity.class);
         startActivity(intent);
     }
 

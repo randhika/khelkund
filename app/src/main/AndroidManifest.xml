@@ -230,8 +230,7 @@
             android:name=".activities.navigationdrawer.PrizesActivity"
             android:label="@string/title_activity_prizes"
             android:parentActivityName=".activities.HomeActivity"
-            android:screenOrientation="portrait"
-             >
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.HomeActivity" />
@@ -239,9 +238,9 @@
         <activity
             android:name=".activities.privateleague.PrivateLeagueHomeActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_private_league_home"
-            android:parentActivityName=".activities.HomeActivity" >
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <data
                     android:host="com.appacitive.khelkund"
@@ -261,8 +260,8 @@
         <activity
             android:name=".activities.navigationdrawer.HowToPlayActivity"
             android:label="@string/title_activity_how_to_play_activity2"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".activities.HomeActivity" >
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.HomeActivity" />
@@ -270,12 +269,20 @@
         <activity
             android:name=".activities.privateleague.PrivateLeagueLeaderboardActivity"
             android:label="@string/title_activity_private_league_leaderboard"
+            android:parentActivityName=".activities.privateleague.PrivateLeagueHomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar"
-            android:parentActivityName=".activities.privateleague.PrivateLeagueHomeActivity" >
+            android:theme="@style/NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.privateleague.PrivateLeagueHomeActivity" />
+        </activity>
+        <activity
+            android:name=".activities.navigationdrawer.TwitterFeedActivity"
+            android:label="@string/title_activity_twitter_feed"
+            android:parentActivityName=".activities.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.appacitive.khelkund.activities.HomeActivity" />
         </activity>
     </application>
 

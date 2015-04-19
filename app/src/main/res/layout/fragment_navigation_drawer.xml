@@ -201,12 +201,42 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rl_terms"
+                android:id="@+id/rl_twitter"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_below="@+id/rl_prizes"
+                android:layout_alignParentLeft="true">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/iv_nav_twitter"
+                    android:src="@drawable/icon_twitter"
+                    android:layout_marginLeft="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="#IPL"
+                    android:id="@+id/tv_nav_twitter"
+                    android:textColor="@color/primary_dark_material_dark"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="72dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_terms"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/rl_twitter"
                 android:layout_alignParentLeft="true">
 
                 <ImageView
