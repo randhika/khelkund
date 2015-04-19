@@ -1,12 +1,15 @@
 package com.appacitive.khelkund.activities;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,8 +22,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
@@ -222,8 +227,9 @@ public class EditTeamActivity extends ActionBarActivity {
 
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("image/jpeg");
-
+        share.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Checkout my team %s on Khelkund. Get the app here %s", mTeamMutated.getName(), getResources().getString(R.string.SHORT_APP_URL)));
         ContentValues values = new ContentValues();
+//        values.put(Intent.EXTRA_TEXT, String.format("Hey! Checkout my team %s on Khelkund. Get the app here %s", mTeamMutated.getName(), getResources().getString(R.string.SHORT_APP_URL)));
         values.put(MediaStore.Images.Media.TITLE, mTeamOriginal.getName());
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
         Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
@@ -245,19 +251,35 @@ public class EditTeamActivity extends ActionBarActivity {
 
     private Bitmap getScreenBitmap() {
 
-        View view = findViewById(R.id.rl_edit_team_parent).getRootView();
-        view.setDrawingCacheEnabled(true);
-        view.buildDrawingCache(true);
-        Bitmap cs = Bitmap.createBitmap(view.getDrawingCache());
-        view.setDrawingCacheEnabled(false);
+        View view = findViewById(R.id.rl_edit_team_header);
+        Bitmap b = Bitmap.createBitmap(view.getWidth(),
+                view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas1 = new Canvas(b);
+        view.draw(canvas1);
+
+        ScrollView iv = (ScrollView) findViewById(R.id.edit_team_parent_scroll);
+        Bitmap c = Bitmap.createBitmap(iv.getChildAt(0).getWidth(), iv.getChildAt(0).getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas2 = new Canvas(c);
+        iv.getChildAt(0).draw(canvas2);
+
+        int width, height = 0;
+
+        if(b.getWidth() > c.getWidth()) {
+            width = b.getWidth();
+
+        } else {
+            width = c.getWidth();
+        }
+
+        height = b.getHeight() + c.getHeight();
+
+        Bitmap cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas comboImage = new Canvas(cs);
+        comboImage.drawColor(getResources().getColor(R.color.background_material_light));
+        comboImage.drawBitmap(b, 0f, 0f, null);
+        comboImage.drawBitmap(c, 0f, b.getHeight(), null);
         return cs;
 
-//        ScrollView iv = (ScrollView) findViewById(R.id.edit_team_parent_scroll);
-//        Bitmap bitmap = Bitmap.createBitmap(iv.getChildAt(0).getWidth(), iv.getChildAt(0).getHeight(), Bitmap.Config.ARGB_8888);
-//        Canvas c = new Canvas(bitmap);
-//        c.drawColor(Color.WHITE);
-//        iv.getChildAt(0).draw(c);
-//        return (bitmap);
     }
 
     private void resetAdapters(Team team, boolean animate) {
