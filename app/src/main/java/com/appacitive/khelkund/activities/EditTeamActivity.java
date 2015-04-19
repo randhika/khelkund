@@ -229,7 +229,6 @@ public class EditTeamActivity extends ActionBarActivity {
         share.setType("image/jpeg");
         share.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Checkout my team %s on Khelkund. Get the app here %s", mTeamMutated.getName(), getResources().getString(R.string.SHORT_APP_URL)));
         ContentValues values = new ContentValues();
-//        values.put(Intent.EXTRA_TEXT, String.format("Hey! Checkout my team %s on Khelkund. Get the app here %s", mTeamMutated.getName(), getResources().getString(R.string.SHORT_APP_URL)));
         values.put(MediaStore.Images.Media.TITLE, mTeamOriginal.getName());
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
         Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,

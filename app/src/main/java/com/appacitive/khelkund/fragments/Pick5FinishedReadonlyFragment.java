@@ -144,8 +144,8 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
     @InjectView(R.id.tv_pick5_readonly_result)
     public TextView mResult;
 
-    @InjectView(R.id.tv_readonly_score)
-    public TextView mScore;
+//    @InjectView(R.id.tv_readonly_score)
+//    public TextView mScore;
 
     @InjectView(R.id.btn_readonly_share)
     public Button mShare;
@@ -189,11 +189,11 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
 
     private void displayResults() {
 
-        YoYo.with(Techniques.ZoomIn).duration(2000).playOn(mResult);
+        YoYo.with(Techniques.ZoomIn).duration(1000).playOn(mResult);
 
         if (mDetails.getResult() == 1) {
             mResult.setText("This match is under progress");
-            mScore.setText("TBD");
+//            mScore.setText("TBD");
             return;
         }
 
@@ -217,20 +217,22 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
             mResult.setTextColor(getActivity().getResources().getColor(R.color.primary_dark));
         }
 
-        mScore.setText(String.valueOf(myTeam.Batsman.getPoints() + myTeam.Bowler.getPoints() + myTeam.AllRounder.getPoints() + myTeam.WicketKeeper.getPoints() + myTeam.Any.getPoints()));
+//        mScore.setText(String.valueOf(myTeam.Batsman.getPoints() + myTeam.Bowler.getPoints() + myTeam.AllRounder.getPoints() + myTeam.WicketKeeper.getPoints() + myTeam.Any.getPoints()));
     }
 
     private void displayPlayers() {
         int myBorderColor = Color.DKGRAY;
         int aiBorderColor = Color.DKGRAY;
+        int green = Color.parseColor("#64DD17");
+        int red = Color.parseColor("#D50000");
 
         //  show batsmen details
 
         if (mDetails.getResult() == 1 || myTeam.Batsman.getPoints() == aiTeam.Batsman.getPoints())
             myBorderColor = aiBorderColor = Color.DKGRAY;
         else {
-            myBorderColor = (myTeam.Batsman.getPoints() > aiTeam.Batsman.getPoints()) ? (Color.GREEN) : Color.RED;
-            aiBorderColor = (myTeam.Batsman.getPoints() > aiTeam.Batsman.getPoints()) ? (Color.RED) : Color.GREEN;
+            myBorderColor = (myTeam.Batsman.getPoints() > aiTeam.Batsman.getPoints()) ? green : red;
+            aiBorderColor = (myTeam.Batsman.getPoints() > aiTeam.Batsman.getPoints()) ? red : green;
         }
 
         Picasso.with(getActivity()).load(myTeam.Batsman.getImageUrl()).resize(250, 375).centerInside()
@@ -249,8 +251,8 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
         if (mDetails.getResult() == 1 || myTeam.Bowler.getPoints() == aiTeam.Bowler.getPoints())
             myBorderColor = aiBorderColor = Color.DKGRAY;
         else {
-            myBorderColor = (myTeam.Bowler.getPoints() > aiTeam.Bowler.getPoints()) ? (Color.GREEN) : Color.RED;
-            aiBorderColor = (myTeam.Bowler.getPoints() > aiTeam.Bowler.getPoints()) ? (Color.RED) : Color.GREEN;
+            myBorderColor = (myTeam.Bowler.getPoints() > aiTeam.Bowler.getPoints()) ? green : red;
+            aiBorderColor = (myTeam.Bowler.getPoints() > aiTeam.Bowler.getPoints()) ? red : green;
         }
 
         Picasso.with(getActivity()).load(myTeam.Bowler.getImageUrl()).resize(250, 375).centerInside()
@@ -268,8 +270,8 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
         if (mDetails.getResult() == 1 || myTeam.AllRounder.getPoints() == aiTeam.AllRounder.getPoints())
             myBorderColor = aiBorderColor = Color.DKGRAY;
         else {
-            myBorderColor = (myTeam.AllRounder.getPoints() > aiTeam.AllRounder.getPoints()) ? (Color.GREEN) : Color.RED;
-            aiBorderColor = (myTeam.AllRounder.getPoints() > aiTeam.AllRounder.getPoints()) ? (Color.RED) : Color.GREEN;
+            myBorderColor = (myTeam.AllRounder.getPoints() > aiTeam.AllRounder.getPoints()) ? green : red;
+            aiBorderColor = (myTeam.AllRounder.getPoints() > aiTeam.AllRounder.getPoints()) ? red : green;
         }
 
         Picasso.with(getActivity()).load(myTeam.AllRounder.getImageUrl()).resize(250, 375).centerInside()
@@ -287,8 +289,8 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
         if (mDetails.getResult() == 1 || myTeam.WicketKeeper.getPoints() == aiTeam.WicketKeeper.getPoints())
             myBorderColor = aiBorderColor = Color.DKGRAY;
         else {
-            myBorderColor = (myTeam.WicketKeeper.getPoints() > aiTeam.WicketKeeper.getPoints()) ? (Color.GREEN) : Color.RED;
-            aiBorderColor = (myTeam.WicketKeeper.getPoints() > aiTeam.WicketKeeper.getPoints()) ? (Color.RED) : Color.GREEN;
+            myBorderColor = (myTeam.WicketKeeper.getPoints() > aiTeam.WicketKeeper.getPoints()) ? green : red;
+            aiBorderColor = (myTeam.WicketKeeper.getPoints() > aiTeam.WicketKeeper.getPoints()) ? red : green;
         }
 
         Picasso.with(getActivity()).load(myTeam.WicketKeeper.getImageUrl()).resize(250, 375).centerInside()
@@ -306,8 +308,8 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
         if (mDetails.getResult() == 1 || myTeam.Any.getPoints() == aiTeam.Any.getPoints())
             myBorderColor = aiBorderColor = Color.DKGRAY;
         else {
-            myBorderColor = (myTeam.Any.getPoints() > aiTeam.Any.getPoints()) ? (Color.GREEN) : Color.RED;
-            aiBorderColor = (myTeam.Any.getPoints() > aiTeam.Any.getPoints()) ? (Color.RED) : Color.GREEN;
+            myBorderColor = (myTeam.Any.getPoints() > aiTeam.Any.getPoints()) ? green : red;
+            aiBorderColor = (myTeam.Any.getPoints() > aiTeam.Any.getPoints()) ? red : green;
         }
 
         Picasso.with(getActivity()).load(myTeam.Any.getImageUrl()).resize(250, 375).centerInside()
@@ -376,15 +378,15 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
         Uri uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 values);
 
-        OutputStream outstream;
+        OutputStream outputStream;
         try {
-            outstream = getActivity().getContentResolver().openOutputStream(uri);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
-            outstream.close();
+            outputStream = getActivity().getContentResolver().openOutputStream(uri);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            outputStream.close();
         } catch (Exception e) {
             System.err.println(e.toString());
         }
-        share.putExtra(Intent.EXTRA_TEXT, getActivity().getResources().getString(R.string.SHORT_APP_URL) );
+        share.putExtra(Intent.EXTRA_TEXT, String.format("Check out my squad on Khelkund's Pick'em 5. You can play too. Get the app here %s", getActivity().getResources().getString(R.string.SHORT_APP_URL)));
 
         share.putExtra(Intent.EXTRA_STREAM, uri);
         startActivity(Intent.createChooser(share, "Share team using"));
