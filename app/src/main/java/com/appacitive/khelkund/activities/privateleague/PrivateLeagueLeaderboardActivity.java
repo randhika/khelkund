@@ -1,5 +1,6 @@
 package com.appacitive.khelkund.activities.privateleague;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
@@ -82,10 +83,14 @@ public class PrivateLeagueLeaderboardActivity extends ActionBarActivity {
     @OnClick(R.id.fab_share)
     public void onShareClick()
     {
+        ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setMessage("Invite your friends");
+        dialog.show();
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Join my private IPL fantasy league on Khelkund. Use the code %s. Get the app here %s", mLeague.getCode(), getResources().getString(R.string.SHORT_APP_URL)));
         sendIntent.setType("text/plain");
+        dialog.dismiss();
         startActivity(Intent.createChooser(sendIntent, String.format("Invite friends to %s using", mLeague.getName())));
     }
 }

@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -26,7 +25,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.adapters.LeaderboardAdapter;
 import com.appacitive.khelkund.adapters.PrivateLeagueAdapter;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.BusProvider;
@@ -146,7 +144,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
     private void joinPrivateLeague(String code) {
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setMessage("Joining private league " + code);
-        dialog.setCanceledOnTouchOutside(true);
+        dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
         Http http = new Http();
@@ -273,6 +271,10 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
     }
 
     private void createNewPrivateLeague(String name) {
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setMessage("Creating Private League");
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
         Http http = new Http();
         JSONObject request = new JSONObject();
         try {
@@ -284,6 +286,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         http.post(Urls.PrivateLeagueUrls.getCreatePrivateLeaguesUrl(), new HashMap<String, String>(), request, new APCallback() {
             @Override
             public void success(JSONObject result) {
+                dialog.dismiss();
                 if (result.optJSONObject("Error") != null) {
                     SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), PrivateLeagueHomeActivity.this);
                     return;
@@ -304,6 +307,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
 
             @Override
             public void failure(Exception e) {
+                dialog.dismiss();
                 SnackBarManager.showError("Unable to create Private League.", PrivateLeagueHomeActivity.this);
             }
         });
@@ -315,8 +319,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
             @Override
             public void run() {
                 RecyclerView.ViewHolder cardViewHolder = mRecyclerView.findViewHolderForAdapterPosition(0);
-                if(cardViewHolder != null && cardViewHolder.itemView != null)
-                {
+                if (cardViewHolder != null && cardViewHolder.itemView != null) {
                     ImageView share = (ImageView) cardViewHolder.itemView.findViewById(R.id.iv_privateleague_share);
                     new ShowcaseView.Builder(PrivateLeagueHomeActivity.this)
                             .setTarget(new ViewTarget(share))
@@ -338,14 +341,20 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         intent.putExtra("league_id", event.leagueId);
         startActivity(intent);
     }
+
     @Subscribe
     public void onPrivateLeagueShareClicked(PrivateLeagueShareEvent event) {
+        ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setMessage("Invite your friends");
+        dialog.show();
         StorageManager manager = new StorageManager();
         PrivateLeague league = manager.GetPrivateLeague(event.LeagueId, mUserId);
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Join my private IPL fantasy league on Khelkund using the code %s. Get the app here %s", league.getCode(), getResources().getString(R.string.SHORT_APP_URL)));
         sendIntent.setType("text/plain");
+
+        dialog.dismiss();
         startActivity(Intent.createChooser(sendIntent, String.format("Invite friends to %s using", league.getName())));
     }
 
@@ -436,16 +445,12 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void ItemCountChanged()
-    {
-        if(mAdapter.getItemCount() == 0)
-        {
+    public void ItemCountChanged() {
+        if (mAdapter.getItemCount() == 0) {
             mRecyclerView.setVisibility(View.GONE);
             mEmpty.setVisibility(View.VISIBLE);
 
-        }
-        else
-        {
+        } else {
             mRecyclerView.setVisibility(View.VISIBLE);
             mEmpty.setVisibility(View.GONE);
         }

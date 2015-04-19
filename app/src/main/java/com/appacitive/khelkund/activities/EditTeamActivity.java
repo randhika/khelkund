@@ -240,7 +240,7 @@ public class EditTeamActivity extends ActionBarActivity {
 
         share.putExtra(Intent.EXTRA_STREAM, uri);
         mProgressDialog.dismiss();
-        startActivity(Intent.createChooser(share, "Share team using"));
+        startActivity(Intent.createChooser(share, String.format("Share %s using :", mTeamMutated.getName())));
     }
 
     private Bitmap getScreenBitmap() {
