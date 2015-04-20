@@ -90,4 +90,6 @@ public class LeaderboardActivity extends ActionBarActivity {
         mAdapter = new SlideInLeftAnimationAdapter(new LeaderboardAdapter(mScores, mUserId));
         mRecyclerView.setAdapter(mAdapter);
     }
+
+    
 }

@@ -5,21 +5,26 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.pick5.Pick5MatchActivity;
+import com.appacitive.khelkund.infra.SharedPreferencesManager;
+import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.transforms.CircleTransform;
 import com.appacitive.khelkund.model.Pick5MatchDetails;
 import com.appacitive.khelkund.model.Player;
@@ -34,6 +39,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +47,9 @@ import butterknife.OnClick;
 public class Pick5FinishedReadonlyFragment extends Fragment {
 
     private Pick5MatchDetails mDetails;
+
+    private static final int green = Color.parseColor("#64DD17");
+    private static final int red = Color.parseColor("#D50000");
 
     private static final int empty_background_color = Color.parseColor("#ffd3d3d3");
 
@@ -142,8 +151,14 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
     @InjectView(R.id.tv_pick5_readonly_result)
     public TextView mResult;
 
-//    @InjectView(R.id.tv_readonly_score)
-//    public TextView mScore;
+    @InjectView(R.id.tv_pick5_result_desc)
+    public TextView mResultDesc;
+
+    @InjectView(R.id.iv_pick5_you)
+    public CircleImageView mImageYou;
+
+    @InjectView(R.id.iv_pick5_khelkund)
+    public CircleImageView mImageKhelkund;
 
     @InjectView(R.id.btn_readonly_share)
     public Button mShare;
@@ -187,13 +202,21 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
 
     private void displayResults() {
 
-        YoYo.with(Techniques.ZoomIn).duration(1000).playOn(mResult);
+        // show user image
+        StorageManager manager = new StorageManager();
+        Bitmap me = manager.FetchImage(SharedPreferencesManager.ReadUserId());
+        if(me != null)
+        {
+            mImageYou.setImageBitmap(me);
+        }
 
         if (mDetails.getResult() == 1) {
-            mResult.setText("This match is under progress");
-//            mScore.setText("TBD");
+            mResult.setText("TBD");
+            mResultDesc.setText("4 or more of your players need to outperform their opponents");
             return;
         }
+
+
 
         int myWinningCount = 0;
         if (myTeam.Batsman.getPoints() > aiTeam.Batsman.getPoints())
@@ -208,21 +231,23 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
             myWinningCount++;
 
         if (myWinningCount >= 4) {
-            mResult.setText("You won this match against Khelkund");
-            mResult.setTextColor(getActivity().getResources().getColor(R.color.accent));
-        } else {
-            mResult.setText("You lost this match to Khelkund");
-            mResult.setTextColor(getActivity().getResources().getColor(R.color.primary_dark));
-        }
+            mResult.setText("YOU WIN!");
+            mResultDesc.setText("4 or more of your players outperformed their opponents");
+            mImageYou.setBorderColor(green);
+            mImageKhelkund.setBorderColor(red);
 
-//        mScore.setText(String.valueOf(myTeam.Batsman.getPoints() + myTeam.Bowler.getPoints() + myTeam.AllRounder.getPoints() + myTeam.WicketKeeper.getPoints() + myTeam.Any.getPoints()));
+        } else {
+            mResult.setText("YOU LOST!");
+            mResultDesc.setText("4 or more of your players need to outperform their opponents");
+            mImageYou.setBorderColor(red);
+            mImageKhelkund.setBorderColor(green);
+
+        }
     }
 
     private void displayPlayers() {
         int myBorderColor = Color.DKGRAY;
         int aiBorderColor = Color.DKGRAY;
-        int green = Color.parseColor("#64DD17");
-        int red = Color.parseColor("#D50000");
 
         //  show batsmen details
 
@@ -392,33 +417,13 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
 
     private Bitmap getScreenBitmap(Activity activity) {
 
-        View view = activity.getWindow().getDecorView();
-        view.setDrawingCacheEnabled(true);
-        view.buildDrawingCache();
-        Bitmap bitmap = view.getDrawingCache();
-        Rect rect = new Rect();
-        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
-        int statusBarHeight = rect.top;
-        int width = activity.getWindowManager().getDefaultDisplay().getWidth();
-        int height = activity.getWindowManager().getDefaultDisplay().getHeight();
-        Bitmap bitmap2 = Bitmap.createBitmap(bitmap, 0, statusBarHeight, width,
-                height - statusBarHeight);
-        view.destroyDrawingCache();
-        return bitmap2;
+        ScrollView scrollView = (ScrollView) getActivity().findViewById(R.id.pick5_parent_scroll);
+        Bitmap bitmap = Bitmap.createBitmap(scrollView.getChildAt(0).getWidth(), scrollView.getChildAt(0).getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawColor(getResources().getColor(R.color.background_material_light));;
+        scrollView.getChildAt(0).draw(canvas);
+        return bitmap;
 
-//        Bitmap bitmap;
-//        View v1 = (RelativeLayout) getActivity().findViewById(R.id.rl_pick5_readonly_parent);
-//        v1.setDrawingCacheEnabled(true);
-//        bitmap = Bitmap.createBitmap(v1.getDrawingCache());
-//        v1.setDrawingCacheEnabled(false);
-//        return bitmap;
-
-//        RelativeLayout iv = (RelativeLayout) getActivity().findViewById(R.id.rl_pick5_readonly_parent);
-//        Bitmap bitmap = Bitmap.createBitmap(iv.getWidth(), iv.getHeight(), Bitmap.Config.ARGB_8888);
-//        Canvas c = new Canvas(bitmap);
-//        c.drawColor(Color.WHITE);
-//        iv.draw(c);
-//        return (bitmap);
     }
 
 

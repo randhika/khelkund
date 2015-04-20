@@ -3,6 +3,7 @@ package com.appacitive.khelkund.fragments.pick5;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -55,6 +56,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Pick5PlayFragment extends Fragment {
 
@@ -131,6 +133,9 @@ public class Pick5PlayFragment extends Fragment {
     @InjectView(R.id.btn_pick5_play)
     public Button mSubmit;
 
+    @InjectView(R.id.iv_pick5_you)
+    public CircleImageView mImageYou;
+
     public Pick5PlayFragment() {
         // Required empty public constructor
     }
@@ -165,6 +170,8 @@ public class Pick5PlayFragment extends Fragment {
         this.mDetails = ((Pick5MatchActivity) getActivity()).getMatchDetails();
         boolean teamExists = loadPlayers();
 
+        fetchUserImage();
+
         if (teamExists == true) {
             displayPlayers();
             mSubmit.setEnabled(true);
@@ -177,6 +184,13 @@ public class Pick5PlayFragment extends Fragment {
 
         showTutorialOverlay();
         return view;
+    }
+
+    private void fetchUserImage() {
+        StorageManager manager = new StorageManager();
+        Bitmap me = manager.FetchImage(SharedPreferencesManager.ReadUserId());
+        if(me != null)
+            mImageYou.setImageBitmap(me);
     }
 
     private void showTutorialOverlay() {

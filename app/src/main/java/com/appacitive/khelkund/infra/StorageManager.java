@@ -24,7 +24,7 @@ public class StorageManager {
 
     private Realm getInstance()
     {
-        return Realm.getInstance(KhelkundApplication.getAppContext(), "db-v2.realm");
+        return Realm.getInstance(KhelkundApplication.getAppContext(), "db-v3.realm");
     }
 
     public void reset() {

@@ -1,17 +1,89 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rl_pick5_readonly_parent"
+    android:id="@+id/pick5_parent_scroll"
     tools:context="com.appacitive.khelkund.fragments.pick5.Pick5FinishedReadonlyFragment">
 
-    <ScrollView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/rl_pick5_readonly_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:id="@+id/rl_pick5_header"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_pick5_readonly_result"
+                android:text="MATCH RESULTS"
+                android:gravity="center_vertical|center_horizontal"
+                android:textSize="22sp"
+                android:layout_marginBottom="12dp"
+                android:textColor="@color/accent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:border_width="2dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:id="@+id/iv_pick5_you"
+                app:border_color="@android:color/darker_gray"
+                android:src="@drawable/user"
+                android:layout_marginRight="23dp"
+                android:layout_below="@+id/tv_pick5_readonly_result"
+                android:layout_toLeftOf="@+id/tv_vs_label"
+                android:layout_toStartOf="@+id/tv_vs_label"
+                android:layout_marginEnd="23dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:border_width="2dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:id="@+id/iv_pick5_khelkund"
+                app:border_color="@android:color/darker_gray"
+                android:src="@drawable/launcher"
+                android:layout_marginLeft="25dp"
+                android:layout_below="@+id/tv_pick5_readonly_result"
+                android:layout_toRightOf="@+id/tv_vs_label"
+                android:layout_toEndOf="@+id/tv_vs_label"
+                android:layout_marginStart="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Vs."
+                android:id="@+id/tv_vs_label"
+                android:layout_below="@+id/tv_pick5_readonly_result"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4 or more of your players need to outperform their opponents"
+                android:id="@+id/tv_pick5_result_desc"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_below="@+id/iv_pick5_khelkund"
+                android:layout_marginTop="12dp"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl_pick5_header">
 
             <LinearLayout
                 android:layout_width="120dp"
@@ -92,7 +164,7 @@
                         android:id="@+id/my_batsman"
                         android:layout_below="@+id/my_batsman_name"
                         android:scaleType="center"
-                        android:layout_marginTop="2dp"/>
+                        android:layout_marginTop="2dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -134,7 +206,7 @@
                         android:clickable="true"
                         android:layout_below="@+id/my_allrounder_name"
                         android:scaleType="center"
-                        android:layout_marginTop="2dp"/>
+                        android:layout_marginTop="2dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -176,7 +248,7 @@
                         android:clickable="true"
                         android:layout_below="@+id/my_wk_name"
                         android:scaleType="center"
-                        android:layout_marginTop="2dp"/>
+                        android:layout_marginTop="2dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -219,8 +291,7 @@
                         android:id="@+id/my_any"
                         android:layout_below="@+id/my_any_name"
                         android:scaleType="center"
-                        android:layout_marginTop="2dp"
-                        />
+                        android:layout_marginTop="2dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -315,7 +386,7 @@
                         android:id="@+id/ai_batsman"
                         android:layout_below="@+id/ai_batsman_name"
                         android:scaleType="center"
-                        android:layout_marginTop="2dp"/>
+                        android:layout_marginTop="2dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -356,7 +427,7 @@
                         android:clickable="true"
                         android:layout_below="@+id/ai_allrounder_name"
                         android:scaleType="center"
-                        android:layout_marginTop="2dp"/>
+                        android:layout_marginTop="2dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -397,7 +468,7 @@
                         android:clickable="true"
                         android:layout_below="@+id/ai_wk_name"
                         android:scaleType="center"
-                        android:layout_marginTop="2dp"/>
+                        android:layout_marginTop="2dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -439,8 +510,7 @@
                         android:id="@+id/ai_any"
                         android:layout_below="@+id/ai_any_name"
                         android:scaleType="center"
-                        android:layout_marginTop="2dp"
-                        />
+                        android:layout_marginTop="2dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -457,33 +527,19 @@
                 </RelativeLayout>
             </LinearLayout>
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="SHARE"
+                android:id="@+id/btn_readonly_share"
+                android:textColor="@android:color/white"
+                android:background="@color/accent"
+                android:textStyle="bold"
+                android:elevation="8dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
         </RelativeLayout>
-    </ScrollView>
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Match Result"
-        android:id="@+id/tv_pick5_readonly_result"
-        android:textSize="18sp"
-        android:gravity="center_horizontal|center_vertical"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textStyle="italic" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:text="SHARE"
-        android:id="@+id/btn_readonly_share"
-        android:layout_below="@+id/tv_pick5_readonly_result"
-        android:layout_centerHorizontal="true"
-        android:textColor="@android:color/white"
-        android:background="@color/accent"
-        android:textStyle="bold"
-        android:elevation="8dp"
-        android:layout_marginTop="88dp" />
-
-
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
