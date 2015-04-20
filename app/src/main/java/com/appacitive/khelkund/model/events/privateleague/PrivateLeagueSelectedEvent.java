@@ -1,4 +1,4 @@
-package com.appacitive.khelkund.model.events;
+package com.appacitive.khelkund.model.events.privateleague;
 
 import com.appacitive.khelkund.model.PrivateLeague;
 

@@ -9,10 +9,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.model.LeaderboardScore;
 import com.appacitive.khelkund.model.PrivateLeague;
 import com.appacitive.khelkund.model.PrivateLeagueTeam;
+import com.appacitive.khelkund.model.events.LeaderboardItemClickedEvent;
 import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
@@ -38,7 +40,7 @@ public class PrivateLeagueLeaderboardAdapter extends RecyclerView.Adapter<Privat
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        PrivateLeagueTeam team = mLeague.getTeams().get(position);
+        final PrivateLeagueTeam team = mLeague.getTeams().get(position);
         holder.points.setText(String.valueOf(team.getTotalPoints()));
 
         holder.userName.setText(String.valueOf(team.getUsername()));
@@ -52,6 +54,14 @@ public class PrivateLeagueLeaderboardAdapter extends RecyclerView.Adapter<Privat
         int bitmapId = KhelkundApplication.getAppContext().getResources().getIdentifier(team.getImageName(), "drawable", KhelkundApplication.getAppContext().getPackageName());
         if(bitmapId > 0)
             Picasso.with(KhelkundApplication.getAppContext()).load(bitmapId).into(holder.logo);
+
+        holder.mLayout.setOnClickListener(null);
+        holder.mLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BusProvider.getInstance().post(new LeaderboardItemClickedEvent(team.getUserId()));
+            }
+        });
     }
 
     @Override
