@@ -16,6 +16,8 @@ import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.Urls;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,6 +87,7 @@ public class RegisterActivity extends ActionBarActivity {
         {
             mName.setError("Provide a proper name.");
             mName.requestFocus();
+            YoYo.with(Techniques.Shake).duration(700).playOn(mName);
             return;
         }
 
@@ -92,6 +95,7 @@ public class RegisterActivity extends ActionBarActivity {
         {
             mEmail.setError("Provide a proper email address.");
             mEmail.requestFocus();
+            YoYo.with(Techniques.Shake).duration(700).playOn(mEmail);
             return;
         }
 
@@ -99,6 +103,7 @@ public class RegisterActivity extends ActionBarActivity {
         {
             mPassword.setError("Passwords should be at least 4 characters.");
             mPassword.requestFocus();
+            YoYo.with(Techniques.Shake).duration(700).playOn(mPassword);
             return;
         }
         mProgressDialog = new ProgressDialog(this);
@@ -122,10 +127,6 @@ public class RegisterActivity extends ActionBarActivity {
                     SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), RegisterActivity.this);
                     return;
                 }
-//                KhelkundUser user = new KhelkundUser(result.optJSONObject("User"));
-//                SharedPreferencesManager.WriteUserId(user.getId());
-//                StorageManager manager = new StorageManager();
-//                manager.SaveUser(user);
                 SnackBarManager.showSuccess("An email verification link has been sent to " + mEmail.getText().toString() + ". Don't forget to check your spam folder.", RegisterActivity.this);
                 Intent homeIntent = new Intent(RegisterActivity.this, EmailLoginActivity.class);
                 startActivity(homeIntent);

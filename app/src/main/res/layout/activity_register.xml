@@ -8,17 +8,6 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.appacitive.khelkund.activities.misc.RegisterActivity">
 
-    <!--<fragment-->
-    <!--android:name="com.appacitive.khelkund.fragments.misc.LoginFragment"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--tools:layout="@layout/fragment_login"-->
-
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:id="@+id/fragment">-->
-
-    <!--</fragment>-->
-
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/fragment_container"
         android:layout_alignParentTop="true"
@@ -28,34 +17,36 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/et_register_name"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="Name"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="8dp"
-        android:layout_below="@+id/fragment_container"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="16sp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/et_register_email"
-        android:layout_below="@+id/et_register_name"
+        android:layout_below="@+id/fragment_container"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/et_register_name"
         android:layout_alignEnd="@+id/et_register_name"
         android:hint="Email address"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="8dp"
         android:textSize="16sp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/et_register_name"
+        android:layout_below="@+id/et_register_email"
+        android:hint="Name"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="16sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -63,22 +54,19 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/et_register_password"
-        android:layout_below="@+id/et_register_email"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/et_register_email"
-        android:layout_alignEnd="@+id/et_register_email"
         android:hint="Password"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:layout_below="@+id/et_register_name"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SIGN UP"
         android:id="@+id/btn_register"
-
         android:background="@color/accent"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
@@ -88,7 +76,7 @@
         android:layout_alignRight="@+id/et_register_password"
         android:layout_alignEnd="@+id/et_register_password"
         android:textStyle="bold"
-        android:translationZ="5dp" />
+         />
 
     <View
         android:layout_width="match_parent"

@@ -34,8 +34,6 @@ public class KhelkundApplication extends Application {
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Crashlytics crashlytics = new Crashlytics.Builder().disabled(BuildConfig.DEBUG).build();
         Fabric.with(this, crashlytics, new Twitter(authConfig));
-        Fabric.with(this, new TwitterCore(authConfig), new Digits(), new TweetUi());
-        Fabric.with(this, new Twitter(authConfig), new Crashlytics());
         AppacitiveContext.initialize("+HfTOp2nF8TnkyZVBblkTBLm6Cz6zIfKYdXBhV6Aag4=", Environment.live, getAppContext());
         FacebookSdk.sdkInitialize(context);
 
@@ -43,7 +41,6 @@ public class KhelkundApplication extends Application {
         if(userId != null)
             Crashlytics.setUserIdentifier(userId);
         else Crashlytics.setUserIdentifier("not logged in yet");
-
     }
 
     public static Context getAppContext() {
