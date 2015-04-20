@@ -50,7 +50,7 @@ public class LeaderboardActivity extends ActionBarActivity {
 
     private void FetchLeaderBoard() {
         mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setMessage("Fetching Leaderboard");
+        mProgressDialog.setMessage("Fetching Global Leaderboard");
         mProgressDialog.show();
         Http http = new Http();
         mUserId = SharedPreferencesManager.ReadUserId();
