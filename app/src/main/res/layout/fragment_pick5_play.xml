@@ -19,22 +19,22 @@
                 app:border_width="2dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
                 android:id="@+id/iv_pick5_you"
                 app:border_color="@android:color/darker_gray"
                 android:src="@drawable/user"
-                android:layout_marginRight="23dp"
+                android:layout_marginRight="25dp"
                 android:layout_toLeftOf="@+id/tv_vs_label"
                 android:layout_toStartOf="@+id/tv_vs_label"
-                android:layout_marginEnd="23dp" />
+                android:layout_marginEnd="25dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 app:border_width="2dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
                 android:id="@+id/iv_pick5_khelkund"
                 app:border_color="@android:color/darker_gray"
                 android:src="@drawable/launcher"
@@ -82,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_marginTop="4dp"
-                    android:layout_height="100dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -93,8 +93,8 @@
                         android:maxLines="1" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:src="@drawable/bowler"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
@@ -102,7 +102,6 @@
                         android:id="@+id/my_bowler"
                         android:layout_centerHorizontal="true"
                         android:layout_below="@+id/my_bowler_name"
-                        android:scaleType="center"
                         android:layout_marginTop="2dp" />
 
 
@@ -112,7 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_marginTop="4dp"
-                    android:layout_height="100dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -124,8 +123,8 @@
                         android:maxLines="1" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:src="@drawable/batsman"
                         android:scaleX="-1"
                         android:background="?attr/selectableItemBackground"
@@ -133,7 +132,6 @@
                         android:layout_centerHorizontal="true"
                         android:id="@+id/my_batsman"
                         android:layout_below="@+id/my_batsman_name"
-                        android:scaleType="center"
                         android:layout_marginTop="2dp" />
 
                 </RelativeLayout>
@@ -142,7 +140,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_marginTop="4dp"
-                    android:layout_height="100dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -153,8 +151,8 @@
                         android:maxLines="1" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/allrounder"
                         android:scaleX="-1"
@@ -162,7 +160,6 @@
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:layout_below="@+id/my_allrounder_name"
-                        android:scaleType="center"
                         android:layout_marginTop="2dp" />
 
                 </RelativeLayout>
@@ -171,7 +168,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_marginTop="4dp"
-                    android:layout_height="100dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -182,8 +179,8 @@
                         android:maxLines="1" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:src="@drawable/wicketkeeper"
                         android:layout_centerHorizontal="true"
                         android:scaleX="-1"
@@ -191,7 +188,6 @@
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:layout_below="@+id/my_wk_name"
-                        android:scaleType="center"
                         android:layout_marginTop="2dp" />
 
                 </RelativeLayout>
@@ -200,7 +196,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_marginTop="4dp"
-                    android:layout_height="100dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -212,8 +208,8 @@
                         android:maxLines="1" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:src="@drawable/any"
@@ -221,7 +217,6 @@
                         android:scaleX="-1"
                         android:id="@+id/my_any"
                         android:layout_below="@+id/my_any_name"
-                        android:scaleType="center"
                         android:layout_marginTop="2dp" />
 
                 </RelativeLayout>
@@ -240,7 +235,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_marginTop="4dp"
-                    android:layout_height="100dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -251,15 +246,14 @@
                         android:maxLines="1" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:src="@drawable/bowler"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:id="@+id/ai_bowler"
                         android:layout_centerHorizontal="true"
                         android:layout_below="@+id/ai_bowler_name"
-                        android:scaleType="center"
                         android:layout_marginTop="2dp" />
 
 
@@ -269,7 +263,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_marginTop="4dp"
-                    android:layout_height="100dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -281,15 +275,14 @@
                         android:maxLines="1" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:src="@drawable/batsman"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:layout_centerHorizontal="true"
                         android:id="@+id/ai_batsman"
                         android:layout_below="@+id/ai_batsman_name"
-                        android:scaleType="center"
                         android:layout_marginTop="2dp" />
 
                 </RelativeLayout>
@@ -298,7 +291,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_marginTop="4dp"
-                    android:layout_height="100dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -309,15 +302,14 @@
                         android:maxLines="1" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/allrounder"
                         android:id="@+id/ai_allrounder"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:layout_below="@+id/ai_allrounder_name"
-                        android:scaleType="center"
                         android:layout_marginTop="2dp" />
 
                 </RelativeLayout>
@@ -326,7 +318,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_marginTop="4dp"
-                    android:layout_height="100dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -337,15 +329,14 @@
                         android:maxLines="1" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:src="@drawable/wicketkeeper"
                         android:layout_centerHorizontal="true"
                         android:id="@+id/ai_wk"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:layout_below="@+id/ai_wk_name"
-                        android:scaleType="center"
                         android:layout_marginTop="2dp" />
 
                 </RelativeLayout>
@@ -354,7 +345,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_marginTop="4dp"
-                    android:layout_height="100dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -366,15 +357,14 @@
                         android:maxLines="1" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:src="@drawable/any"
                         android:layout_centerHorizontal="true"
                         android:id="@+id/ai_any"
                         android:layout_below="@+id/ai_any_name"
-                        android:scaleType="center"
                         android:layout_marginTop="2dp" />
 
                 </RelativeLayout>
@@ -389,7 +379,7 @@
                 android:background="@color/accent"
                 android:textStyle="bold"
                 android:elevation="8dp"
-                android:layout_centerVertical="true"
+                android:layout_alignBottom="@+id/linearLayout2"
                 android:layout_centerHorizontal="true" />
 
 

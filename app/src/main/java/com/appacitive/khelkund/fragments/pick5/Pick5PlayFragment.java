@@ -227,9 +227,9 @@ public class Pick5PlayFragment extends Fragment {
     }
 
     private boolean loadPlayers() {
-        List<Player> myPlayers = mDetails.getPlayers();
-        if (myPlayers.size() == 0)
+        if(mDetails == null || mDetails.getPlayers() == null || mDetails.getPlayers().size() != 5 || mDetails.getAppPlayers().size() != 5)
             return false;
+        List<Player> myPlayers = mDetails.getPlayers();
         for (Player myPlayer : myPlayers) {
             String aiPlayerId = mDetails.getPlayerMappings().get(myPlayer.getId());
             Player aiPlayer = null;

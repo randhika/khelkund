@@ -25,9 +25,7 @@ public class TeamHelper {
 
     public static List<Player> getBatsmen(Team team) {
         List<Player> batsmen = new ArrayList<Player>();
-        if(team == null)
-            return batsmen;
-        if (team.getPlayers() != null)
+        if (team != null && team.getPlayers() != null)
             for (Player p : team.getPlayers())
                 if (p.getType().equals("Batsman"))
                     batsmen.add(p);
@@ -46,8 +44,7 @@ public class TeamHelper {
     public static List<Player> getBowlers(Team team) {
 
         List<Player> bowlers = new ArrayList<Player>();
-        if(team == null) return bowlers;
-        if (team.getPlayers() != null)
+        if (team != null && team.getPlayers() != null)
             for (Player p : team.getPlayers())
                 if (p.getType().equals("Bowler"))
                     bowlers.add(p);
@@ -66,8 +63,7 @@ public class TeamHelper {
     public static List<Player> getAllRounders(Team team) {
 
         List<Player> allRounders = new ArrayList<Player>();
-        if(team == null) return allRounders;
-        if (team.getPlayers() != null)
+        if (team != null && team.getPlayers() != null)
             for (Player p : team.getPlayers())
                 if (p.getType().equals("AllRounder"))
                     allRounders.add(p);
@@ -85,8 +81,7 @@ public class TeamHelper {
 
     public static List<Player> getWicketKeepers(Team team) {
         List<Player> wk = new ArrayList<Player>();
-        if(team == null) return wk;
-        if (team.getPlayers() != null)
+        if (team != null && team.getPlayers() != null)
             for (Player p : team.getPlayers())
                 if (p.getType().equals("WicketKeeper"))
                     wk.add(p);
