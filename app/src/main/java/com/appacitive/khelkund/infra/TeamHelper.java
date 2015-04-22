@@ -16,7 +16,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sathley on 3/28/2015.
@@ -121,39 +124,35 @@ public class TeamHelper {
         if (team.getPlayers() != null)
             for (Player p : team.getPlayers())
                 newTeam.getPlayers().add(clone(p));
-        if(team.getTeamHistory() != null)
+        if (team.getTeamHistory() != null)
             for (History h : team.getTeamHistory())
                 newTeam.getTeamHistory().add(clone(h));
         return newTeam;
     }
 
-    public static List<PrivateLeague> clone(List<PrivateLeague> leagues)
-    {
+    public static List<PrivateLeague> clone(List<PrivateLeague> leagues) {
         List<PrivateLeague> newList = new ArrayList<PrivateLeague>();
-        for(PrivateLeague league : leagues)
+        for (PrivateLeague league : leagues)
             newList.add(clone(league));
 
         return newList;
     }
 
-    public static PrivateLeague clone(PrivateLeague league)
-    {
-        if(league == null) return null;
+    public static PrivateLeague clone(PrivateLeague league) {
+        if (league == null) return null;
         PrivateLeague newLeague = new PrivateLeague();
         newLeague.setId(league.getId());
         newLeague.setUserId(league.getUserId());
         newLeague.setCode(league.getCode());
         newLeague.setName(league.getName());
-        if(league.getTeams() != null)
-        {
-            for(PrivateLeagueTeam team : league.getTeams())
+        if (league.getTeams() != null) {
+            for (PrivateLeagueTeam team : league.getTeams())
                 newLeague.getTeams().add(clone(team));
         }
         return newLeague;
     }
 
-    public static PrivateLeagueTeam clone(PrivateLeagueTeam team)
-    {
+    public static PrivateLeagueTeam clone(PrivateLeagueTeam team) {
         if (team == null) return null;
         PrivateLeagueTeam newTeam = new PrivateLeagueTeam();
         newTeam.setUserId(team.getUserId());
@@ -166,10 +165,9 @@ public class TeamHelper {
         return newTeam;
     }
 
-    public static History clone(History history)
-    {
+    public static History clone(History history) {
         History h = new History();
-        if(history == null)
+        if (history == null)
             return h;
         h.setOpposition(history.getOpposition());
         h.setPoints(history.getPoints());
@@ -241,25 +239,24 @@ public class TeamHelper {
         return object;
     }
 
-    public static int getTeamColor(String shortTeamName) {
-        if (shortTeamName.equals("DD"))
-            return R.color.DD;
-        if (shortTeamName.equals("SRH"))
-            return R.color.SRH;
-        if (shortTeamName.equals("CSK"))
-            return R.color.CSK;
-        if (shortTeamName.equals("RCB"))
-            return R.color.RCB;
-        if (shortTeamName.equals("MI"))
-            return R.color.MI;
-        if (shortTeamName.equals("KXIP"))
-            return R.color.KXIP;
-        if (shortTeamName.equals("KKR"))
-            return R.color.KKR;
-        if (shortTeamName.equals("RR"))
-            return R.color.RR;
+    public static final Map<String, Integer> teamColorMap = new LinkedHashMap<String, Integer>() {
+        {
+            put("DD", R.color.DD);
+            put("SRH", R.color.SRH);
+            put("CSK", R.color.CSK);
+            put("RCB", R.color.RCB);
+            put("MI", R.color.MI);
+            put("KXIP", R.color.KXIP);
+            put("KKR", R.color.KKR);
+            put("RR", R.color.RR);
+        }
+    };
 
-        return R.color.DD;
+    public static int getTeamColor(String shortTeamName) {
+
+        if (teamColorMap.containsKey(shortTeamName))
+            return teamColorMap.get(shortTeamName);
+        else return R.color.DD;
     }
 
 //    public static int getTeamLogo(String teamName)
