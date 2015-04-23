@@ -5,6 +5,8 @@ import com.appacitive.khelkund.model.Player;
 /**
  * Created by sathley on 4/10/2015.
  */
-public abstract class Pick5PlayerChosenEventBase {
+public class Pick5PlayerChosenEvent {
     public Player player;
+    public int position;
+
 }

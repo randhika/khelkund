@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -76,7 +78,9 @@ public class Pick5MatchActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pick5_match);
         ButterKnife.inject(this);
         ConnectionManager.checkNetworkConnectivity(this);

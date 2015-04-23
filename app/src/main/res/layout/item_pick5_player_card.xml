@@ -6,10 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="105dp"
     app:cardCornerRadius="2dp"
+
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
+    app:cardBackgroundColor="@android:color/transparent"
     android:layout_margin="4dp"
-    android:elevation="5dp">
+    android:elevation="0dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,7 +33,7 @@
             android:id="@+id/tv_card_name"
             android:singleLine="true"
             android:textSize="12sp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/abc_primary_text_material_light"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"

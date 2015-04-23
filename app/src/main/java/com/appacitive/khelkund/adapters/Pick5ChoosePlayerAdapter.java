@@ -14,7 +14,7 @@ import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.infra.TeamHelper;
-import com.appacitive.khelkund.model.events.pick5.Pick5PlayerChosenEventBase;
+import com.appacitive.khelkund.model.events.pick5.Pick5PlayerChosenEvent;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,17 +22,17 @@ import java.util.List;
 /**
  * Created by sathley on 4/10/2015.
  */
-public class Pick5PlayerAdapter extends BaseAdapter {
+public class Pick5ChoosePlayerAdapter extends BaseAdapter {
 
     private final List<Player> mPlayers;
     private final Context mContext;
-    private final Pick5PlayerChosenEventBase mEvent;
+    private int mPlayerType;
 
-    public Pick5PlayerAdapter(Context context, List<Player> players, Pick5PlayerChosenEventBase event)
+    public Pick5ChoosePlayerAdapter(Context context, List<Player> players, int forPosition)
     {
         mPlayers = players;
-        mEvent = event;
         mContext = context;
+        mPlayerType = forPosition;
     }
 
     @Override
@@ -51,14 +51,14 @@ public class Pick5PlayerAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int posision, View view, ViewGroup viewGroup) {
         if(view == null)
         {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.item_pick5_player_card, viewGroup, false);
         }
 
-        final Player player = getItem(i);
+        final Player player = getItem(posision);
 
         ImageView photo =  (ImageView) view.findViewById(R.id.iv_player_photo);
         TextView name = (TextView) view.findViewById(R.id.tv_card_name);
@@ -72,8 +72,10 @@ public class Pick5PlayerAdapter extends BaseAdapter {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mEvent.player = player;
-                BusProvider.getInstance().post(mEvent);
+                Pick5PlayerChosenEvent event = new Pick5PlayerChosenEvent();
+                event.position = mPlayerType;
+                event.player = player;
+                BusProvider.getInstance().post(event);
             }
         });
         return view;

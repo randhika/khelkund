@@ -22,8 +22,7 @@ import io.realm.RealmResults;
  */
 public class StorageManager {
 
-    private Realm getInstance()
-    {
+    private Realm getInstance() {
         return Realm.getInstance(KhelkundApplication.getAppContext(), "db-v3.realm");
     }
 
@@ -31,16 +30,14 @@ public class StorageManager {
         Realm.deleteRealmFile(KhelkundApplication.getAppContext());
     }
 
-    public List<PrivateLeague> GetAllPrivateLeaguesForUser(String id)
-    {
+    public List<PrivateLeague> GetAllPrivateLeaguesForUser(String id) {
         Realm realm = getInstance();
         RealmQuery<PrivateLeague> query = realm.where(PrivateLeague.class);
         query.equalTo("UserId", id);
         return TeamHelper.clone(query.findAll());
     }
 
-    public PrivateLeague GetPrivateLeague(String leagueId, String userId)
-    {
+    public PrivateLeague GetPrivateLeague(String leagueId, String userId) {
         Realm realm = getInstance();
         RealmQuery<PrivateLeague> query = realm.where(PrivateLeague.class);
         query.equalTo("Id", leagueId);
@@ -48,8 +45,7 @@ public class StorageManager {
         return TeamHelper.clone(query.findFirst());
     }
 
-    public void SavePrivateLeagues(List<PrivateLeague> privateLeagues)
-    {
+    public void SavePrivateLeagues(List<PrivateLeague> privateLeagues) {
         Realm realm = getInstance();
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(privateLeagues);
@@ -57,8 +53,7 @@ public class StorageManager {
         realm.close();
     }
 
-    public void SavePrivateLeague(PrivateLeague privateLeague)
-    {
+    public void SavePrivateLeague(PrivateLeague privateLeague) {
         Realm realm = getInstance();
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(privateLeague);
@@ -141,6 +136,17 @@ public class StorageManager {
         return query.findFirst();
     }
 
+//    public List<Player> GetPlayers(List<String> playerIds) {
+//        Realm realm = getInstance();
+//        RealmQuery<Player> query = realm.where(Player.class);
+//        for (String playerId : playerIds)
+//        {
+//            query.beginGroup()
+//        }
+//            query.equalTo("Id", playerId);
+//        return query.findFirst();
+//    }
+
     public void deleteUser(String userId) {
         Realm realm = getInstance();
         realm.beginTransaction();
@@ -217,8 +223,7 @@ public class StorageManager {
         RealmQuery<UserImage> query = realm.where(UserImage.class);
         query.equalTo("UserId", mUserId);
         UserImage userImage = query.findFirst();
-        if(userImage != null)
-        {
+        if (userImage != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(userImage.getImage(), 0, userImage.getImage().length);
             return bitmap;
         }
@@ -226,8 +231,7 @@ public class StorageManager {
 
     }
 
-    public void SaveImage(String mUserId, Bitmap bitmap)
-    {
+    public void SaveImage(String mUserId, Bitmap bitmap) {
         UserImage image = new UserImage();
         image.setUserId(mUserId);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
