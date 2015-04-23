@@ -12,9 +12,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.model.LeaderboardScore;
 import com.appacitive.khelkund.model.Player;
+import com.appacitive.khelkund.model.events.LeaderboardItemClickedEvent;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -44,7 +46,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        LeaderboardScore score = mScores.get(position);
+        final LeaderboardScore score = mScores.get(position);
         holder.points.setText(String.valueOf(score.getPoints()));
 
         holder.userName.setText(String.valueOf(score.getUserName()));
@@ -58,6 +60,15 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         int bitmapId = KhelkundApplication.getAppContext().getResources().getIdentifier(score.getUserTeamImage(), "drawable", KhelkundApplication.getAppContext().getPackageName());
         if(bitmapId > 0)
             Picasso.with(KhelkundApplication.getAppContext()).load(bitmapId).into(holder.logo);
+
+        holder.mLayout.setOnClickListener(null);
+        holder.mLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BusProvider.getInstance().post(new LeaderboardItemClickedEvent(score.getUserId()));
+            }
+        });
+
     }
 
     @Override

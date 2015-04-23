@@ -1,29 +1,22 @@
 package com.appacitive.khelkund.adapters;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.activities.privateleague.PrivateLeagueHomeActivity;
 import com.appacitive.khelkund.infra.BusProvider;
-import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
-import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PrivateLeague;
 import com.appacitive.khelkund.model.PrivateLeagueTeam;
 import com.appacitive.khelkund.model.Team;
-import com.appacitive.khelkund.model.events.PrivateLeagueDeleteEvent;
-import com.appacitive.khelkund.model.events.PrivateLeagueSelectedEvent;
-import com.appacitive.khelkund.model.events.PrivateLeagueShareEvent;
-import com.squareup.otto.Bus;
-import com.squareup.picasso.Picasso;
+import com.appacitive.khelkund.model.events.privateleague.PrivateLeagueDeleteEvent;
+import com.appacitive.khelkund.model.events.privateleague.PrivateLeagueSelectedEvent;
+import com.appacitive.khelkund.model.events.privateleague.PrivateLeagueShareEvent;
 
 import java.util.List;
 

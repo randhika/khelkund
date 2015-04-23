@@ -1,21 +1,33 @@
 package com.appacitive.khelkund.activities.navigationdrawer;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.adapters.LeaderboardAdapter;
+import com.appacitive.khelkund.adapters.LeaderboardTeamAdapter;
+import com.appacitive.khelkund.adapters.Pick5PlayerAdapter;
 import com.appacitive.khelkund.infra.APCallback;
+import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
+import com.appacitive.khelkund.infra.StorageManager;
+import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.infra.Urls;
+import com.appacitive.khelkund.infra.widgets.carousel.CoverFlowCarousel;
 import com.appacitive.khelkund.model.LeaderboardScore;
+import com.appacitive.khelkund.model.Team;
+import com.appacitive.khelkund.model.events.LeaderboardItemClickedEvent;
+import com.appacitive.khelkund.model.events.pick5.Pick5BatsmanChosenEvent;
+import com.squareup.otto.Subscribe;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -91,5 +103,61 @@ public class LeaderboardActivity extends ActionBarActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    
+
+
+    @Subscribe
+    public void onLeaderboardItemClicked(LeaderboardItemClickedEvent event)
+    {
+        fetchTeamAndDisplay(event.UserId);
+    }
+
+    private void fetchTeamAndDisplay(final String userId) {
+        Http http = new Http();
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Fetching team");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.show();
+        http.get(Urls.TeamUrls.getMyTeamUrl(userId), new HashMap<String, String>(), new APCallback() {
+            @Override
+            public void success(JSONObject result) {
+                mProgressDialog.dismiss();
+                if (result.optJSONObject("Error") != null) {
+                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), LeaderboardActivity.this);
+                    return;
+                }
+                if (result.optString("Id") != null) {
+
+                    Team mTeam = new Team(result);
+                    mTeam.setUserId(userId);
+                    Dialog mDialog = new Dialog(LeaderboardActivity.this, R.style.Base_Theme_AppCompat_Dialog);
+                    mDialog.setContentView(R.layout.layout_leaderboard_team_dialog);
+                    TextView mName = (TextView) mDialog.findViewById(R.id.tv_leaderboard_team_name);
+                    mName.setText(mTeam.getName());
+                    CoverFlowCarousel carousel = (CoverFlowCarousel) mDialog.findViewById(R.id.carousel);
+                    final LeaderboardTeamAdapter adapter = new LeaderboardTeamAdapter(LeaderboardActivity.this, mTeam.getPlayers());
+                    carousel.setAdapter(adapter);
+                    mDialog.show();
+                }
+            }
+
+            @Override
+            public void failure(Exception e) {
+                mProgressDialog.dismiss();
+                SnackBarManager.showError("Something went wrong", LeaderboardActivity.this);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
+    }
+
 }
