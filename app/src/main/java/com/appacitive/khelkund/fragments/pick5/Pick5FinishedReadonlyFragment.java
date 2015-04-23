@@ -2,6 +2,7 @@ package com.appacitive.khelkund.fragments.pick5;
 
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,14 +19,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.pick5.Pick5MatchActivity;
+import com.appacitive.khelkund.adapters.Pick5TeamAdapter;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.transforms.CircleTransform;
+import com.appacitive.khelkund.infra.widgets.CircleView;
+import com.appacitive.khelkund.infra.widgets.carousel.Carousel;
 import com.appacitive.khelkund.model.Pick5MatchDetails;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.infra.TeamHelper;
@@ -48,111 +53,9 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
 
     private Pick5MatchDetails mDetails;
 
-    private static final int green = Color.parseColor("#64DD17");
-    private static final int red = Color.parseColor("#D50000");
-
-    private static final int empty_background_color = Color.parseColor("#ffd3d3d3");
-
-    //  My items
-
-    @InjectView(R.id.my_bowler)
-    public ImageView mMyBowler;
-
-    @InjectView(R.id.my_bowler_score)
-    public TextView mMyBowlerScore;
-
-    @InjectView(R.id.my_bowler_name)
-    public TextView mMyBowlerName;
-
-    @InjectView(R.id.my_batsman)
-    public ImageView mMyBatsman;
-
-    @InjectView(R.id.my_batsman_score)
-    public TextView mMyBatsmanScore;
-
-    @InjectView(R.id.my_batsman_name)
-    public TextView mMyBatsmanName;
-
-    @InjectView(R.id.my_allrounder)
-    public ImageView mMyAllRounder;
-
-    @InjectView(R.id.my_allrounder_score)
-    public TextView mMyAllRounderScore;
-
-    @InjectView(R.id.my_allrounder_name)
-    public TextView mMyAllRounderName;
-
-    @InjectView(R.id.my_wk)
-    public ImageView mMyWicketKeeper;
-
-    @InjectView(R.id.my_wk_score)
-    public TextView mMyWicketKeeperScore;
-
-    @InjectView(R.id.my_wk_name)
-    public TextView mMyWicketKeeperName;
-
-    @InjectView(R.id.my_any)
-    public ImageView mMyAny;
-
-    @InjectView(R.id.my_any_score)
-    public TextView mMyAnyScore;
-
-    @InjectView(R.id.my_any_name)
-    public TextView mMyAnyName;
-
-//    AI items
-
-    @InjectView(R.id.ai_bowler)
-    public ImageView mAiBowler;
-
-    @InjectView(R.id.ai_bowler_score)
-    public TextView mAiBowlerScore;
-
-    @InjectView(R.id.ai_bowler_name)
-    public TextView mAiBowlerName;
-
-    @InjectView(R.id.ai_batsman)
-    public ImageView mAiBatsman;
-
-    @InjectView(R.id.ai_batsman_score)
-    public TextView mAiBatsmanScore;
-
-    @InjectView(R.id.ai_batsman_name)
-    public TextView mAiBatsmanName;
-
-    @InjectView(R.id.ai_allrounder)
-    public ImageView mAiAllRounder;
-
-    @InjectView(R.id.ai_allrounder_score)
-    public TextView mAiAllRounderScore;
-
-    @InjectView(R.id.ai_allrounder_name)
-    public TextView mAiAllRounderName;
-
-    @InjectView(R.id.ai_wk)
-    public ImageView mAiWicketKeeper;
-
-    @InjectView(R.id.ai_wk_score)
-    public TextView mAiWicketKeeperScore;
-
-    @InjectView(R.id.ai_wk_name)
-    public TextView mAiWicketKeeperName;
-
-    @InjectView(R.id.ai_any)
-    public ImageView mAiAny;
-
-    @InjectView(R.id.ai_any_score)
-    public TextView mAiAnyScore;
-
-    @InjectView(R.id.ai_any_name)
-    public TextView mAiAnyName;
-
-    //  result
-    @InjectView(R.id.tv_pick5_readonly_result)
-    public TextView mResult;
-
-    @InjectView(R.id.tv_pick5_result_desc)
-    public TextView mResultDesc;
+    private static final int green = Color.parseColor("#43A047");
+    private static final int red = Color.parseColor("#F44336");
+    private static final int grey = Color.parseColor("#757575");
 
     @InjectView(R.id.iv_pick5_you)
     public CircleImageView mImageYou;
@@ -160,8 +63,34 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
     @InjectView(R.id.iv_pick5_khelkund)
     public CircleImageView mImageKhelkund;
 
-    @InjectView(R.id.btn_readonly_share)
-    public Button mShare;
+    @InjectView(R.id.breadcrumb_btsm)
+    public CircleView mBreadcrumbBtsm;
+
+    @InjectView(R.id.breadcrumb_bwlr)
+    public CircleView mBreadcrumbBwlr;
+
+    @InjectView(R.id.breadcrumb_ar)
+    public CircleView mBreadcrumbAr;
+
+    @InjectView(R.id.breadcrumb_wk)
+    public CircleView mBreadcrumbWk;
+
+    @InjectView(R.id.breadcrumb_any)
+    public CircleView mBreadcrumbAny;
+
+    @InjectView(R.id.my_carousel)
+    public Carousel mMyCarousel;
+
+    @InjectView(R.id.ai_carousel)
+    public Carousel mAiCarousel;
+
+    @InjectView(R.id.tv_pick5_result)
+    public TextView mResult;
+
+    private StorageManager manager;
+
+    private Pick5TeamAdapter mMyAdapter;
+    private Pick5TeamAdapter mAiAdapter;
 
 
     public Pick5FinishedReadonlyFragment() {
@@ -173,180 +102,112 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
         return fragment;
     }
 
-    public Pick5FinishedReadonlyFragment.Pick5Team myTeam = new Pick5Team();
-    public Pick5FinishedReadonlyFragment.Pick5Team aiTeam = new Pick5Team();
-
-    public class Pick5Team {
-        public Player Batsman;
-        public Player Bowler;
-        public Player AllRounder;
-        public Player WicketKeeper;
-        public Player Any;
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_pick5_finished_readonly, container, false);
-        ButterKnife.inject(this, rootView);
+        View view = inflater.inflate(R.layout.fragment_pick5_finished_readonly, container, false);
+        ButterKnife.inject(this, view);
+        manager = new StorageManager();
+
+        fetchAndDisplayUserImage();
+
         this.mDetails = ((Pick5MatchActivity) getActivity()).getMatchDetails();
+        initAdapters();
 
         loadPlayers();
-        displayResults();
-        displayPlayers();
 
-        return rootView;
+        displayResults();
+
+        mMyCarousel.setAdapter(mMyAdapter);
+        mMyCarousel.setSelection(2);
+        mMyCarousel.setSlowDownCoefficient(Integer.MAX_VALUE);
+        mMyCarousel.setSpacing(0.6f);
+
+        mAiCarousel.setAdapter(mAiAdapter);
+        mAiCarousel.setSelection(2);
+        mAiCarousel.setSlowDownCoefficient(Integer.MAX_VALUE);
+        mAiCarousel.setSpacing(0.6f);
+
+        return view;
+    }
+
+    private void initAdapters() {
+        mMyAdapter = new Pick5TeamAdapter(getActivity(), true);
+        mAiAdapter = new Pick5TeamAdapter(getActivity(), false);
+    }
+
+    private void fetchAndDisplayUserImage() {
+        StorageManager manager = new StorageManager();
+        Bitmap me = manager.FetchImage(SharedPreferencesManager.ReadUserId());
+        if (me != null)
+            mImageYou.setImageBitmap(me);
     }
 
     private void displayResults() {
 
-        // show user image
-        StorageManager manager = new StorageManager();
-        Bitmap me = manager.FetchImage(SharedPreferencesManager.ReadUserId());
-        if(me != null)
-        {
-            mImageYou.setImageBitmap(me);
-        }
-
         if (mDetails.getResult() == 1) {
-            mResult.setText("TBD");
-            mResultDesc.setText("4 or more of your players need to outperform their opponents");
+            mResult.setText("Match in Progress");
             return;
         }
 
-
-
         int myWinningCount = 0;
-        if (myTeam.Batsman.getPoints() > aiTeam.Batsman.getPoints())
+
+        if (mMyAdapter.mTeam[0].getPoints() > mAiAdapter.mTeam[0].getPoints())
+        {
             myWinningCount++;
-        if (myTeam.Bowler.getPoints() > aiTeam.Bowler.getPoints())
+            mBreadcrumbBtsm.setFillColor(green);
+        }
+        else mBreadcrumbBtsm.setFillColor(red);
+        mBreadcrumbBtsm.setSubtitleText(String.format("%s-%s", String.valueOf(mMyAdapter.mTeam[0].getPoints()), String.valueOf(mAiAdapter.mTeam[0].getPoints())));
+
+        if (mMyAdapter.mTeam[1].getPoints() > mAiAdapter.mTeam[1].getPoints())
+        {
             myWinningCount++;
-        if (myTeam.AllRounder.getPoints() > aiTeam.AllRounder.getPoints())
+            mBreadcrumbBwlr.setFillColor(green);
+        }
+        else mBreadcrumbBwlr.setFillColor(red);
+        mBreadcrumbBwlr.setSubtitleText(String.format("%s-%s", String.valueOf(mMyAdapter.mTeam[1].getPoints()), String.valueOf(mAiAdapter.mTeam[1].getPoints())));
+
+        if (mMyAdapter.mTeam[2].getPoints() > mAiAdapter.mTeam[2].getPoints())
+        {
             myWinningCount++;
-        if (myTeam.WicketKeeper.getPoints() > aiTeam.WicketKeeper.getPoints())
+            mBreadcrumbAr.setFillColor(green);
+        }
+        else mBreadcrumbAr.setFillColor(red);
+        mBreadcrumbAr.setSubtitleText(String.format("%s-%s", String.valueOf(mMyAdapter.mTeam[2].getPoints()), String.valueOf(mAiAdapter.mTeam[2].getPoints())));
+
+        if (mMyAdapter.mTeam[3].getPoints() > mAiAdapter.mTeam[3].getPoints())
+        {
             myWinningCount++;
-        if (myTeam.Any.getPoints() > aiTeam.Any.getPoints())
+            mBreadcrumbWk.setFillColor(green);
+        }
+        else mBreadcrumbWk.setFillColor(red);
+        mBreadcrumbWk.setSubtitleText(String.format("%s-%s", String.valueOf(mMyAdapter.mTeam[3].getPoints()), String.valueOf(mAiAdapter.mTeam[3].getPoints())));
+
+        if (mMyAdapter.mTeam[4].getPoints() > mAiAdapter.mTeam[4].getPoints())
+        {
             myWinningCount++;
+            mBreadcrumbAny.setFillColor(green);
+        }
+        else mBreadcrumbAny.setFillColor(red);
+        mBreadcrumbAny.setSubtitleText(String.format("%s-%s", String.valueOf(mMyAdapter.mTeam[4].getPoints()), String.valueOf(mAiAdapter.mTeam[4].getPoints())));
 
         if (myWinningCount >= 4) {
             mResult.setText("YOU WIN!");
-            mResultDesc.setText("4 or more of your players outperformed their opponents");
             mImageYou.setBorderColor(green);
             mImageKhelkund.setBorderColor(red);
 
         } else {
             mResult.setText("YOU LOST!");
-            mResultDesc.setText("4 or more of your players need to outperform their opponents");
             mImageYou.setBorderColor(red);
             mImageKhelkund.setBorderColor(green);
-
         }
     }
 
-    private void displayPlayers() {
-        int myBorderColor = Color.DKGRAY;
-        int aiBorderColor = Color.DKGRAY;
-
-        //  show batsmen details
-
-        if (mDetails.getResult() == 1 || myTeam.Batsman.getPoints() == aiTeam.Batsman.getPoints())
-            myBorderColor = aiBorderColor = Color.DKGRAY;
-        else {
-            myBorderColor = (myTeam.Batsman.getPoints() > aiTeam.Batsman.getPoints()) ? green : red;
-            aiBorderColor = (myTeam.Batsman.getPoints() > aiTeam.Batsman.getPoints()) ? red : green;
-        }
-
-        Picasso.with(getActivity()).load(myTeam.Batsman.getImageUrl()).resize(250, 375).centerInside()
-                .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Batsman.getShortTeamName())), myBorderColor))
-                .into(mMyBatsman);
-        mMyBatsmanName.setText(myTeam.Batsman.getDisplayName());
-        mMyBatsmanScore.setText(String.valueOf(myTeam.Batsman.getPoints()));
-
-        Picasso.with(getActivity()).load(aiTeam.Batsman.getImageUrl()).resize(250, 375).centerInside()
-                .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Batsman.getShortTeamName())), aiBorderColor)).into(mAiBatsman);
-        mAiBatsmanScore.setText(String.valueOf(aiTeam.Batsman.getPoints()));
-        mAiBatsmanName.setText(aiTeam.Batsman.getDisplayName());
-
-        //  show bowler details
-
-        if (mDetails.getResult() == 1 || myTeam.Bowler.getPoints() == aiTeam.Bowler.getPoints())
-            myBorderColor = aiBorderColor = Color.DKGRAY;
-        else {
-            myBorderColor = (myTeam.Bowler.getPoints() > aiTeam.Bowler.getPoints()) ? green : red;
-            aiBorderColor = (myTeam.Bowler.getPoints() > aiTeam.Bowler.getPoints()) ? red : green;
-        }
-
-        Picasso.with(getActivity()).load(myTeam.Bowler.getImageUrl()).resize(250, 375).centerInside()
-                .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Bowler.getShortTeamName())), myBorderColor)).into(mMyBowler);
-        mMyBowlerName.setText(myTeam.Bowler.getDisplayName());
-        mMyBowlerScore.setText(String.valueOf(myTeam.Bowler.getPoints()));
-
-        Picasso.with(getActivity()).load(aiTeam.Bowler.getImageUrl()).resize(250, 375).centerInside()
-                .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Bowler.getShortTeamName())), aiBorderColor)).into(mAiBowler);
-        mAiBowlerScore.setText(String.valueOf(aiTeam.Bowler.getPoints()));
-        mAiBowlerName.setText(aiTeam.Bowler.getDisplayName());
-
-        //  show all rounder details
-
-        if (mDetails.getResult() == 1 || myTeam.AllRounder.getPoints() == aiTeam.AllRounder.getPoints())
-            myBorderColor = aiBorderColor = Color.DKGRAY;
-        else {
-            myBorderColor = (myTeam.AllRounder.getPoints() > aiTeam.AllRounder.getPoints()) ? green : red;
-            aiBorderColor = (myTeam.AllRounder.getPoints() > aiTeam.AllRounder.getPoints()) ? red : green;
-        }
-
-        Picasso.with(getActivity()).load(myTeam.AllRounder.getImageUrl()).resize(250, 375).centerInside()
-                .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.AllRounder.getShortTeamName())), myBorderColor)).into(mMyAllRounder);
-        mMyAllRounderName.setText(myTeam.AllRounder.getDisplayName());
-        mMyAllRounderScore.setText(String.valueOf(myTeam.AllRounder.getPoints()));
-
-        Picasso.with(getActivity()).load(aiTeam.AllRounder.getImageUrl()).resize(250, 375).centerInside()
-                .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.AllRounder.getShortTeamName())), aiBorderColor)).into(mAiAllRounder);
-        mAiAllRounderScore.setText(String.valueOf(aiTeam.AllRounder.getPoints()));
-        mAiAllRounderName.setText(aiTeam.AllRounder.getDisplayName());
-
-        //  show wicket keeper details
-
-        if (mDetails.getResult() == 1 || myTeam.WicketKeeper.getPoints() == aiTeam.WicketKeeper.getPoints())
-            myBorderColor = aiBorderColor = Color.DKGRAY;
-        else {
-            myBorderColor = (myTeam.WicketKeeper.getPoints() > aiTeam.WicketKeeper.getPoints()) ? green : red;
-            aiBorderColor = (myTeam.WicketKeeper.getPoints() > aiTeam.WicketKeeper.getPoints()) ? red : green;
-        }
-
-        Picasso.with(getActivity()).load(myTeam.WicketKeeper.getImageUrl()).resize(250, 375).centerInside()
-                .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.WicketKeeper.getShortTeamName())), myBorderColor)).into(mMyWicketKeeper);
-        mMyWicketKeeperName.setText(myTeam.WicketKeeper.getDisplayName());
-        mMyWicketKeeperScore.setText(String.valueOf(myTeam.WicketKeeper.getPoints()));
-
-        Picasso.with(getActivity()).load(aiTeam.WicketKeeper.getImageUrl()).resize(250, 375).centerInside()
-                .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.WicketKeeper.getShortTeamName())), aiBorderColor)).into(mAiWicketKeeper);
-        mAiWicketKeeperScore.setText(String.valueOf(aiTeam.WicketKeeper.getPoints()));
-        mAiWicketKeeperName.setText(aiTeam.WicketKeeper.getDisplayName());
-
-        //  show any player details
-
-        if (mDetails.getResult() == 1 || myTeam.Any.getPoints() == aiTeam.Any.getPoints())
-            myBorderColor = aiBorderColor = Color.DKGRAY;
-        else {
-            myBorderColor = (myTeam.Any.getPoints() > aiTeam.Any.getPoints()) ? green : red;
-            aiBorderColor = (myTeam.Any.getPoints() > aiTeam.Any.getPoints()) ? red : green;
-        }
-
-        Picasso.with(getActivity()).load(myTeam.Any.getImageUrl()).resize(250, 375).centerInside()
-                .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(myTeam.Any.getShortTeamName())), myBorderColor)).into(mMyAny);
-        mMyAnyName.setText(myTeam.Any.getDisplayName());
-        mMyAnyScore.setText(String.valueOf(myTeam.Any.getPoints()));
-
-        Picasso.with(getActivity()).load(aiTeam.Any.getImageUrl()).resize(250, 375).centerInside()
-                .transform(new CircleTransform(getResources().getColor(TeamHelper.getTeamColor(aiTeam.Any.getShortTeamName())), aiBorderColor)).into(mAiAny);
-        mAiAnyScore.setText(String.valueOf(aiTeam.Any.getPoints()));
-        mAiAnyName.setText(aiTeam.Any.getDisplayName());
-    }
-
-    private void loadPlayers() {
+    private boolean loadPlayers() {
+        if (mDetails == null || mDetails.getPlayers() == null || mDetails.getPlayers().size() != 5 || mDetails.getAppPlayers().size() != 5)
+            return false;
         List<Player> myPlayers = mDetails.getPlayers();
         for (Player myPlayer : myPlayers) {
             String aiPlayerId = mDetails.getPlayerMappings().get(myPlayer.getId());
@@ -357,28 +218,28 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
                     break;
                 }
             }
-            if (myPlayer.getType().equals("Batsman") && myTeam.Batsman == null) {
-                myTeam.Batsman = myPlayer;
-                aiTeam.Batsman = aiPlayer;
+            if (myPlayer.getType().equals("Batsman") && mMyAdapter.mTeam[0] == null) {
+                mMyAdapter.mTeam[0] = myPlayer;
+                mAiAdapter.mTeam[0] = aiPlayer;
                 continue;
-            } else if (myPlayer.getType().equals("Bowler") && myTeam.Bowler == null) {
-                myTeam.Bowler = myPlayer;
-                aiTeam.Bowler = aiPlayer;
+            } else if (myPlayer.getType().equals("Bowler") && mMyAdapter.mTeam[1] == null) {
+                mMyAdapter.mTeam[1] = myPlayer;
+                mAiAdapter.mTeam[1] = aiPlayer;
                 continue;
-            } else if (myPlayer.getType().equals("AllRounder") && myTeam.AllRounder == null) {
-                myTeam.AllRounder = myPlayer;
-                aiTeam.AllRounder = aiPlayer;
+            } else if (myPlayer.getType().equals("AllRounder") && mMyAdapter.mTeam[2] == null) {
+                mMyAdapter.mTeam[2] = myPlayer;
+                mAiAdapter.mTeam[2] = aiPlayer;
                 continue;
-            } else if (myPlayer.getType().equals("WicketKeeper") && myTeam.WicketKeeper == null) {
-                myTeam.WicketKeeper = myPlayer;
-                aiTeam.WicketKeeper = aiPlayer;
+            } else if (myPlayer.getType().equals("WicketKeeper") && mMyAdapter.mTeam[3] == null) {
+                mMyAdapter.mTeam[3] = myPlayer;
+                mAiAdapter.mTeam[3] = aiPlayer;
                 continue;
             } else {
-                myTeam.Any = myPlayer;
-                aiTeam.Any = aiPlayer;
+                mMyAdapter.mTeam[4] = myPlayer;
+                mAiAdapter.mTeam[4] = aiPlayer;
             }
-
         }
+        return true;
     }
 
     @Override
@@ -387,10 +248,10 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
         ButterKnife.reset(this);
     }
 
-    @OnClick(R.id.btn_readonly_share)
+    @OnClick(R.id.btn_pick5_share)
     public void onShareClick()
     {
-        Bitmap bitmap = getScreenBitmap(getActivity());
+        Bitmap bitmap = getScreenBitmap();
 
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("image/jpeg");
@@ -415,14 +276,14 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
         startActivity(Intent.createChooser(share, "Share team using"));
     }
 
-    private Bitmap getScreenBitmap(Activity activity) {
+    private Bitmap getScreenBitmap() {
 
-        ScrollView scrollView = (ScrollView) getActivity().findViewById(R.id.pick5_parent_scroll);
-        Bitmap bitmap = Bitmap.createBitmap(scrollView.getChildAt(0).getWidth(), scrollView.getChildAt(0).getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        canvas.drawColor(getResources().getColor(R.color.background_material_light));;
-        scrollView.getChildAt(0).draw(canvas);
-        return bitmap;
+        RelativeLayout view = (RelativeLayout) getActivity().findViewById(R.id.pick5_parent_layout);
+        Bitmap b = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas1 = new Canvas(b);
+        canvas1.drawColor(getResources().getColor(R.color.background_material_light));
+        view.draw(canvas1);
+        return b;
 
     }
 

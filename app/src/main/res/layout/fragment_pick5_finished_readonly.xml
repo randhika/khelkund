@@ -1,535 +1,302 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/pick5_parent_scroll"
-    tools:context="com.appacitive.khelkund.fragments.pick5.Pick5FinishedReadonlyFragment">
+    tools:context="com.appacitive.khelkund.fragments.pick5.Pick5PlayFragment">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rl_pick5_readonly_parent">
+        android:id="@+id/pick5_parent_layout"
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rl_pick5_header"
-            android:paddingTop="16dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_pick5_readonly_result"
-                android:text="MATCH RESULTS"
-                android:gravity="center_vertical|center_horizontal"
-                android:textSize="22sp"
-                android:layout_marginBottom="12dp"
-                android:textColor="@color/accent" />
-
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                app:border_width="2dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_width="66dp"
-                android:layout_height="66dp"
-                android:id="@+id/iv_pick5_you"
-                app:border_color="@android:color/darker_gray"
-                android:src="@drawable/user"
-                android:layout_marginRight="25dp"
-                android:layout_below="@+id/tv_pick5_readonly_result"
-                android:layout_toLeftOf="@+id/tv_vs_label"
-                android:layout_toStartOf="@+id/tv_vs_label"
-                android:layout_marginEnd="25dp" />
-
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                app:border_width="2dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_width="66dp"
-                android:layout_height="66dp"
-                android:id="@+id/iv_pick5_khelkund"
-                app:border_color="@android:color/darker_gray"
-                android:src="@drawable/launcher"
-                android:layout_marginLeft="25dp"
-                android:layout_below="@+id/tv_pick5_readonly_result"
-                android:layout_toRightOf="@+id/tv_vs_label"
-                android:layout_toEndOf="@+id/tv_vs_label"
-                android:layout_marginStart="25dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Vs."
-                android:id="@+id/tv_vs_label"
-                android:layout_below="@+id/tv_pick5_readonly_result"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="24dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="4 or more of your players need to outperform their opponents"
-                android:id="@+id/tv_pick5_result_desc"
-                android:gravity="center_vertical|center_horizontal"
-                android:layout_below="@+id/iv_pick5_khelkund"
-                android:layout_marginTop="12dp"
-                android:textSize="12sp" />
-
-        </RelativeLayout>
+            android:text="RESULT"
+            android:textSize="24sp"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:id="@+id/tv_pick5_result"
+            android:textColor="@color/accent" />
 
 
-        <RelativeLayout
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_pick5_result"
+            android:text="4 or more of your players need to outperform their opponents"
+            android:id="@+id/tv_pick5_result_desc"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="8dp"
+            android:id="@+id/ll_pick5_breadcrumb"
+            android:layout_below="@+id/tv_pick5_result_desc">
+
+            <com.appacitive.khelkund.infra.widgets.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="0dp"
+                app:titleSize="11sp"
+                app:subtitleSize="10sp"
+                android:layout_weight="1"
+                android:layout_height="48dp"
+                app:fillColor="@color/accent"
+                app:titleText="BTSM"
+                app:subtitleText=""
+                app:strokeColorValue="@android:color/transparent"
+                app:titleColor="@android:color/white"
+                app:fillRadius="1.0"
+                android:id="@+id/breadcrumb_btsm"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical" />
+
+            <com.appacitive.khelkund.infra.widgets.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_weight="1"
+                app:titleSize="12sp"
+                app:subtitleSize="10sp"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                app:fillColor="@color/accent"
+                app:titleText="BWLR"
+                app:subtitleText=""
+                app:strokeColorValue="@android:color/transparent"
+                app:titleColor="@android:color/white"
+                app:fillRadius="1.0"
+                android:id="@+id/breadcrumb_bwlr"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical" />
+
+            <com.appacitive.khelkund.infra.widgets.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_weight="1"
+                app:titleSize="12sp"
+                app:subtitleSize="10sp"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                app:fillColor="@color/accent"
+                app:titleText="AR"
+                app:subtitleText=""
+                app:strokeColorValue="@android:color/transparent"
+                app:titleColor="@android:color/white"
+                app:fillRadius="1.0"
+                android:id="@+id/breadcrumb_ar"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical" />
+
+            <com.appacitive.khelkund.infra.widgets.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_weight="1"
+                app:titleSize="12sp"
+                app:subtitleSize="10sp"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                app:fillColor="@color/accent"
+                app:titleText="WK"
+                app:subtitleText=""
+                app:strokeColorValue="@android:color/transparent"
+                app:titleColor="@android:color/white"
+                app:fillRadius="1.0"
+                android:id="@+id/breadcrumb_wk"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical" />
+
+            <com.appacitive.khelkund.infra.widgets.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_weight="1"
+                app:titleSize="12sp"
+                app:subtitleSize="10sp"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                app:fillColor="@color/accent"
+                app:titleText="\?"
+                app:subtitleText=""
+                app:strokeColorValue="@android:color/transparent"
+                app:titleColor="@android:color/white"
+                app:fillRadius="1.0"
+                android:id="@+id/breadcrumb_any"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+
+
+        </LinearLayout>
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/rl_pick5_header">
+            android:layout_marginBottom="28dp"
+            android:layout_below="@id/ll_pick5_breadcrumb">
 
-            <LinearLayout
-                android:layout_width="120dp"
-                android:orientation="vertical"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:weightSum="5"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="16dp"
-                android:id="@+id/linearLayout2">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginTop="4dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rl_my_bowler">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/my_bowler_name"
-                        android:layout_centerHorizontal="true"
-                        android:text="    "
-                        android:maxLines="1" />
-
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:src="@drawable/bowler"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:scaleX="-1"
-                        android:id="@+id/my_bowler"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/my_bowler_name"
-                        android:layout_marginTop="2dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="0"
-                        android:id="@+id/my_bowler_score"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentTop="true"
-                        android:gravity="bottom|right" />
-
-
-                </RelativeLayout>
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/ll_pick5_breadcrumb"
+                android:gravity="center_horizontal"
+                android:id="@+id/relativeLayout5">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="4dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rl_my_batsman">
+                    android:layout_height="match_parent"
+                    android:layout_alignBottom="@+id/my_carousel"
+                    android:gravity="center_vertical"
+                    android:id="@+id/relativeLayout6"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_alignParentTop="true">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:border_width="2dp"
 
-                        android:id="@+id/my_batsman_name"
-                        android:layout_centerHorizontal="true"
-                        android:text="    "
-                        android:maxLines="1" />
-
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:src="@drawable/batsman"
-                        android:scaleX="-1"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/my_batsman"
-                        android:layout_below="@+id/my_batsman_name"
-                        android:layout_marginTop="2dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="0"
-                        android:id="@+id/my_batsman_score"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentTop="true"
-                        android:gravity="bottom|right" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginTop="4dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rl_my_allrounder">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/my_allrounder_name"
-                        android:layout_centerHorizontal="true"
-                        android:text="    "
-                        android:maxLines="1" />
-
-                    <ImageView
                         android:layout_width="56dp"
                         android:layout_height="56dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/allrounder"
-                        android:scaleX="-1"
-                        android:id="@+id/my_allrounder"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:layout_below="@+id/my_allrounder_name"
-                        android:layout_marginTop="2dp" />
+                        android:id="@+id/iv_pick5_you"
+                        app:border_color="@android:color/darker_gray"
+                        android:src="@drawable/user"
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="0"
-                        android:id="@+id/my_allrounder_score"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="bottom" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginTop="4dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rl_my_wicketkeeper">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/my_wk_name"
-                        android:layout_centerHorizontal="true"
-                        android:text="    "
-                        android:maxLines="1" />
-
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:src="@drawable/wicketkeeper"
-                        android:layout_centerHorizontal="true"
-                        android:scaleX="-1"
-                        android:id="@+id/my_wk"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:layout_below="@+id/my_wk_name"
-                        android:layout_marginTop="2dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="0"
-                        android:id="@+id/my_wk_score"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="bottom" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginTop="4dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rl_my_any">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/my_any_name"
-
-                        android:text="    "
-                        android:maxLines="1" />
-
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:src="@drawable/any"
-                        android:layout_centerHorizontal="true"
-                        android:scaleX="-1"
-                        android:id="@+id/my_any"
-                        android:layout_below="@+id/my_any_name"
-                        android:layout_marginTop="2dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="0"
-                        android:id="@+id/my_any_score"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="bottom" />
-
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="120dp"
-                android:orientation="vertical"
-                android:layout_height="match_parent"
-                android:weightSum="5"
-                android:layout_alignTop="@+id/linearLayout2"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/linearLayout3">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginTop="4dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rl_ai_bowler">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/ai_bowler_name"
-                        android:layout_centerHorizontal="true"
-                        android:text="    "
-                        android:maxLines="1" />
-
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:src="@drawable/bowler"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:id="@+id/ai_bowler"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/ai_bowler_name"
-                        android:layout_marginTop="2dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="0"
-                        android:id="@+id/ai_bowler_score"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="bottom" />
-
-
+                        android:layout_alignParentStart="true" />
                 </RelativeLayout>
+
+                <com.appacitive.khelkund.infra.widgets.carousel.Carousel
+                    android:id="@+id/my_carousel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="135dp"
+                    android:layout_toEndOf="@+id/relativeLayout6"
+                    android:layout_toRightOf="@+id/relativeLayout6"
+                    android:layout_alignParentTop="true" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/vs_divider"
+                    android:layout_below="@+id/my_carousel"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp">
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="vs"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+
+
+                <com.appacitive.khelkund.infra.widgets.carousel.Carousel
+                    android:id="@+id/ai_carousel"
+                    android:layout_width="100dp"
+                    android:layout_height="135dp"
+                    android:layout_toLeftOf="@+id/relativeLayout7"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/vs_divider" />
+
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginTop="4dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rl_ai_batsman">
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_vertical"
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    android:id="@+id/relativeLayout7"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_below="@+id/vs_divider"
+                    android:layout_alignBottom="@+id/ai_carousel">
 
-                        android:id="@+id/ai_batsman_name"
-                        android:layout_centerHorizontal="true"
-                        android:text="    "
-                        android:maxLines="1" />
 
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:src="@drawable/batsman"
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        app:border_width="2dp"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/ai_batsman"
-                        android:layout_below="@+id/ai_batsman_name"
-                        android:layout_marginTop="2dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="0"
-                        android:id="@+id/ai_batsman_score"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="bottom" />
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:id="@+id/iv_pick5_khelkund"
+                        app:border_color="@android:color/darker_gray"
+                        android:src="@drawable/launcher" />
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginTop="4dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rl_ai_allrounder">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/ai_allrounder_name"
-                        android:layout_centerHorizontal="true"
-                        android:text="    "
-                        android:maxLines="1" />
 
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/allrounder"
-                        android:id="@+id/ai_allrounder"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:layout_below="@+id/ai_allrounder_name"
-                        android:layout_marginTop="2dp" />
+            </RelativeLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="0"
-                        android:id="@+id/ai_allrounder_score"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="bottom" />
 
-                </RelativeLayout>
+        </ScrollView>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginTop="4dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rl_ai_wicketkeeper">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="  SHARE  "
+            android:id="@+id/btn_pick5_share"
+            android:textColor="@android:color/white"
+            android:background="@color/accent"
+            android:textStyle="bold"
+            android:elevation="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/ai_wk_name"
-                        android:layout_centerHorizontal="true"
-                        android:text="    "
-                        android:maxLines="1" />
-
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:src="@drawable/wicketkeeper"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/ai_wk"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:layout_below="@+id/ai_wk_name"
-                        android:layout_marginTop="2dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="0"
-                        android:id="@+id/ai_wk_score"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="bottom" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginTop="4dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rl_ai_any">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/ai_any_name"
-
-                        android:text="    "
-                        android:maxLines="1" />
-
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:src="@drawable/any"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/ai_any"
-                        android:layout_below="@+id/ai_any_name"
-                        android:layout_marginTop="2dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="0"
-                        android:id="@+id/ai_any_score"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="bottom" />
-
-                </RelativeLayout>
-            </LinearLayout>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:text="SHARE"
-                android:id="@+id/btn_readonly_share"
-                android:textColor="@android:color/white"
-                android:background="@color/accent"
-                android:textStyle="bold"
-                android:elevation="8dp"
-                android:layout_alignBottom="@+id/linearLayout3"
-                android:layout_centerHorizontal="true" />
-
-        </RelativeLayout>
 
     </RelativeLayout>
-</ScrollView>
+
+</RelativeLayout>

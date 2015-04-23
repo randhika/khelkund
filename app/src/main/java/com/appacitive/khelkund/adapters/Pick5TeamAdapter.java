@@ -38,8 +38,6 @@ public class Pick5TeamAdapter extends BaseAdapter {
         return mTeam[position];
     }
 
-    ;
-
     @Override
     public long getItemId(int position) {
         return 0;
@@ -84,7 +82,7 @@ public class Pick5TeamAdapter extends BaseAdapter {
                     break;
                 }
                 default: {
-                    nameText = "?";
+                    nameText = "WILDCARD";
                     break;
                 }
             }

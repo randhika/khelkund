@@ -1,6 +1,7 @@
 package com.appacitive.khelkund.adapters;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -53,7 +54,7 @@ public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHol
     }
 
     private static final Integer[] colors = new Integer[]{
-            R.color.DD, R.color.CSK, R.color.RR, R.color.KXIP, R.color.KKR, R.color.RCB, R.color.MI, R.color.SRH
+            Color.parseColor("#9575CD"), Color.parseColor("#EF5350"),Color.parseColor("#BA68C8"),Color.parseColor("#009688"),Color.parseColor("#827717"),Color.parseColor("#A1887F")
     };
 
     private Date toUtc(Date date)
@@ -78,7 +79,7 @@ public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHol
         holder.awayLogo.setFillColor(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(match.getAwayTeamShortName())));
 
 
-        holder.card.setCardBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(colors[position % 8]));
+        holder.card.setCardBackgroundColor((colors[position % colors.length]));
         holder.relativeLayout.setOnClickListener(null);
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override

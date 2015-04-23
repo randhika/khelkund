@@ -54,7 +54,7 @@ public class Pick5PlayFragment extends Fragment {
 
     private Pick5MatchDetails mDetails;
 
-    private static final int green = Color.parseColor("#64DD17");
+    private static final int green = Color.parseColor("#43A047");
     private static final int red = Color.parseColor("#D50000");
 
     private Dialog mChoosePlayerDialog;
@@ -112,6 +112,9 @@ public class Pick5PlayFragment extends Fragment {
         ButterKnife.inject(this, view);
         manager = new StorageManager();
         this.mDetails = ((Pick5MatchActivity) getActivity()).getMatchDetails();
+
+        fetchAndDisplayUserImage();
+
         initAdapters();
 
         boolean teamExists = loadPlayers();
@@ -132,8 +135,6 @@ public class Pick5PlayFragment extends Fragment {
         mAiCarousel.setSlowDownCoefficient(Integer.MAX_VALUE);
         mAiCarousel.setSpacing(0.6f);
 
-        resetAdapters();
-        fetchAndDisplayUserImage();
         fetchPlayers();
         showTutorialOverlay();
         return view;

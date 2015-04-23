@@ -32,7 +32,7 @@
             <com.appacitive.khelkund.infra.widgets.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="44dp"
+                android:layout_height="48dp"
                 app:fillColor="@color/accent"
                 app:titleText="BTSM"
                 app:titleSize="10sp"
@@ -54,7 +54,7 @@
             <com.appacitive.khelkund.infra.widgets.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="44dp"
+                android:layout_height="48dp"
                 app:titleSize="10sp"
                 app:fillColor="@color/accent"
                 app:titleText="BWLR"
@@ -76,7 +76,7 @@
             <com.appacitive.khelkund.infra.widgets.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="44dp"
+                android:layout_height="48dp"
                 app:fillColor="@color/accent"
                 app:titleSize="10sp"
                 app:titleText="AR"
@@ -98,7 +98,7 @@
             <com.appacitive.khelkund.infra.widgets.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="44dp"
+                android:layout_height="48dp"
                 app:fillColor="@color/accent"
                 app:titleSize="10sp"
                 app:titleText="WK"
@@ -120,7 +120,7 @@
             <com.appacitive.khelkund.infra.widgets.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="44dp"
+                android:layout_height="48dp"
                 app:fillColor="@color/accent"
                 app:titleSize="11sp"
                 app:titleText="\?"
@@ -158,8 +158,7 @@
                     android:layout_alignBottom="@+id/my_carousel"
                     android:gravity="center_vertical"
                     android:id="@+id/relativeLayout6"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="6dp"
                     android:layout_alignParentTop="true">
 
                     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -184,8 +183,6 @@
                     android:layout_height="135dp"
                     android:layout_toEndOf="@+id/relativeLayout6"
                     android:layout_toRightOf="@+id/relativeLayout6"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
                     android:layout_alignParentTop="true" />
 
 
@@ -232,8 +229,6 @@
                     android:layout_toLeftOf="@+id/relativeLayout7"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
                     android:layout_below="@+id/vs_divider" />
 
 
@@ -245,8 +240,7 @@
                     android:gravity="center_vertical"
 
                     android:id="@+id/relativeLayout7"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="6dp"
                     android:layout_below="@+id/vs_divider"
                     android:layout_alignBottom="@+id/ai_carousel">
 
