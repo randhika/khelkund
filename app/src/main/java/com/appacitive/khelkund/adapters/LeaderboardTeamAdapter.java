@@ -14,7 +14,6 @@ import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.model.Player;
-import com.appacitive.khelkund.model.events.pick5.Pick5PlayerChosenEventBase;
 import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.core.internal.TwitterApiConstants;
 

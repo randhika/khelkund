@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.adapters.LeaderboardAdapter;
 import com.appacitive.khelkund.adapters.LeaderboardTeamAdapter;
-import com.appacitive.khelkund.adapters.Pick5PlayerAdapter;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.ConnectionManager;
@@ -26,7 +25,6 @@ import com.appacitive.khelkund.infra.widgets.carousel.CoverFlowCarousel;
 import com.appacitive.khelkund.model.LeaderboardScore;
 import com.appacitive.khelkund.model.Team;
 import com.appacitive.khelkund.model.events.LeaderboardItemClickedEvent;
-import com.appacitive.khelkund.model.events.pick5.Pick5BatsmanChosenEvent;
 import com.squareup.otto.Subscribe;
 
 import org.json.JSONArray;
