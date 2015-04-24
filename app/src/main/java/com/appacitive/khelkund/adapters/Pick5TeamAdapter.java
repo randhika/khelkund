@@ -21,12 +21,12 @@ import com.squareup.picasso.Picasso;
 public class Pick5TeamAdapter extends BaseAdapter {
     public Player[] mTeam = new Player[5];
     private Context mContext;
-    private boolean mIsMine;
+    private boolean mAttachListeners;
     private boolean mIsReadonly;
 
-    public Pick5TeamAdapter(Context context, boolean isMine, boolean readonly) {
+    public Pick5TeamAdapter(Context context, boolean attachListener, boolean readonly) {
         this.mContext = context;
-        mIsMine = isMine;
+        mAttachListeners = attachListener;
         mIsReadonly = readonly;
     }
 
@@ -59,7 +59,7 @@ public class Pick5TeamAdapter extends BaseAdapter {
         TextView nameBottom = (TextView) view.findViewById(R.id.tv_card_nameBottom);
         RelativeLayout cardView = (RelativeLayout) view.findViewById(R.id.card_view_filled);
 
-        if(mIsReadonly)
+        if (mIsReadonly)
             cardView.setAlpha(0.6f);
         String nameText = "";
         if (player != null) {
@@ -78,7 +78,7 @@ public class Pick5TeamAdapter extends BaseAdapter {
                     break;
                 }
                 case 2: {
-                    nameText = "AR";
+                    nameText = "ALL ROUNDER";
                     break;
                 }
                 case 3: {
@@ -100,12 +100,13 @@ public class Pick5TeamAdapter extends BaseAdapter {
         if (position > 2)
             photo.setScaleX(-1);
 
-        if (mIsMine == true) {
+        if (mAttachListeners == true) {
             cardView.setOnClickListener(null);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Pick5PlayerClickedEvent event = new Pick5PlayerClickedEvent(position);
+                    event.player = player;
                     BusProvider.getInstance().post(event);
                 }
             });

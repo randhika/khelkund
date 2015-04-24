@@ -1,44 +1,46 @@
 package com.appacitive.khelkund.fragments.pick5;
 
 
-import android.app.Activity;
-import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.pick5.Pick5MatchActivity;
 import com.appacitive.khelkund.adapters.Pick5TeamAdapter;
+import com.appacitive.khelkund.infra.APCallback;
+import com.appacitive.khelkund.infra.BusProvider;
+import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
+import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
-import com.appacitive.khelkund.infra.transforms.CircleTransform;
+import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.infra.widgets.CircleView;
 import com.appacitive.khelkund.infra.widgets.carousel.Carousel;
+import com.appacitive.khelkund.model.MatchStatistic;
 import com.appacitive.khelkund.model.Pick5MatchDetails;
 import com.appacitive.khelkund.model.Player;
-import com.appacitive.khelkund.infra.TeamHelper;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
-import com.squareup.picasso.Picasso;
+import com.appacitive.khelkund.model.PlayerMatchStatistic;
+import com.appacitive.khelkund.model.events.pick5.Pick5PlayerClickedEvent;
+import com.squareup.otto.Subscribe;
+
+import org.json.JSONObject;
 
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -52,6 +54,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Pick5FinishedReadonlyFragment extends Fragment {
 
     private Pick5MatchDetails mDetails;
+    private MatchStatistic mMatchStatistic;
 
     private static final int green = Color.parseColor("#43A047");
     private static final int red = Color.parseColor("#F44336");
@@ -134,7 +137,7 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
 
     private void initAdapters() {
         mMyAdapter = new Pick5TeamAdapter(getActivity(), true, true);
-        mAiAdapter = new Pick5TeamAdapter(getActivity(), false, true);
+        mAiAdapter = new Pick5TeamAdapter(getActivity(), true, true);
     }
 
     private void fetchAndDisplayUserImage() {
@@ -153,44 +156,34 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
 
         int myWinningCount = 0;
 
-        if (mMyAdapter.mTeam[0].getPoints() > mAiAdapter.mTeam[0].getPoints())
-        {
+        if (mMyAdapter.mTeam[0].getPoints() > mAiAdapter.mTeam[0].getPoints()) {
             myWinningCount++;
             mBreadcrumbBtsm.setFillColor(green);
-        }
-        else mBreadcrumbBtsm.setFillColor(red);
+        } else mBreadcrumbBtsm.setFillColor(red);
         mBreadcrumbBtsm.setSubtitleText(String.format("%s-%s", String.valueOf(mMyAdapter.mTeam[0].getPoints()), String.valueOf(mAiAdapter.mTeam[0].getPoints())));
 
-        if (mMyAdapter.mTeam[1].getPoints() > mAiAdapter.mTeam[1].getPoints())
-        {
+        if (mMyAdapter.mTeam[1].getPoints() > mAiAdapter.mTeam[1].getPoints()) {
             myWinningCount++;
             mBreadcrumbBwlr.setFillColor(green);
-        }
-        else mBreadcrumbBwlr.setFillColor(red);
+        } else mBreadcrumbBwlr.setFillColor(red);
         mBreadcrumbBwlr.setSubtitleText(String.format("%s-%s", String.valueOf(mMyAdapter.mTeam[1].getPoints()), String.valueOf(mAiAdapter.mTeam[1].getPoints())));
 
-        if (mMyAdapter.mTeam[2].getPoints() > mAiAdapter.mTeam[2].getPoints())
-        {
+        if (mMyAdapter.mTeam[2].getPoints() > mAiAdapter.mTeam[2].getPoints()) {
             myWinningCount++;
             mBreadcrumbAr.setFillColor(green);
-        }
-        else mBreadcrumbAr.setFillColor(red);
+        } else mBreadcrumbAr.setFillColor(red);
         mBreadcrumbAr.setSubtitleText(String.format("%s-%s", String.valueOf(mMyAdapter.mTeam[2].getPoints()), String.valueOf(mAiAdapter.mTeam[2].getPoints())));
 
-        if (mMyAdapter.mTeam[3].getPoints() > mAiAdapter.mTeam[3].getPoints())
-        {
+        if (mMyAdapter.mTeam[3].getPoints() > mAiAdapter.mTeam[3].getPoints()) {
             myWinningCount++;
             mBreadcrumbWk.setFillColor(green);
-        }
-        else mBreadcrumbWk.setFillColor(red);
+        } else mBreadcrumbWk.setFillColor(red);
         mBreadcrumbWk.setSubtitleText(String.format("%s-%s", String.valueOf(mMyAdapter.mTeam[3].getPoints()), String.valueOf(mAiAdapter.mTeam[3].getPoints())));
 
-        if (mMyAdapter.mTeam[4].getPoints() > mAiAdapter.mTeam[4].getPoints())
-        {
+        if (mMyAdapter.mTeam[4].getPoints() > mAiAdapter.mTeam[4].getPoints()) {
             myWinningCount++;
             mBreadcrumbAny.setFillColor(green);
-        }
-        else mBreadcrumbAny.setFillColor(red);
+        } else mBreadcrumbAny.setFillColor(red);
         mBreadcrumbAny.setSubtitleText(String.format("%s-%s", String.valueOf(mMyAdapter.mTeam[4].getPoints()), String.valueOf(mAiAdapter.mTeam[4].getPoints())));
 
         if (myWinningCount >= 4) {
@@ -249,8 +242,7 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
     }
 
     @OnClick(R.id.btn_pick5_share)
-    public void onShareClick()
-    {
+    public void onShareClick() {
         Bitmap bitmap = getScreenBitmap();
 
         Intent share = new Intent(Intent.ACTION_SEND);
@@ -287,5 +279,83 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
 
     }
 
+    @Subscribe
+    public void onPlayerClicked(Pick5PlayerClickedEvent event) {
+        if (mMatchStatistic != null)
+            showPlayerStat(event.player);
+        else
+            fetchStatistics(event.player);
+    }
+
+    private void fetchStatistics(Player player) {
+        StorageManager manager = new StorageManager();
+        mMatchStatistic = manager.GetMatchStatistic(mDetails.getMatchDetails().getId(), SharedPreferencesManager.ReadUserId());
+        if (mMatchStatistic != null)
+            showPlayerStat(player);
+        else fetchStatisticsFromServer(player);
+    }
+
+    private void fetchStatisticsFromServer(final Player player) {
+        final ProgressDialog dialog = new ProgressDialog(getActivity());
+        dialog.setMessage("Fetching player statistics");
+        final String userId = SharedPreferencesManager.ReadUserId();
+        Http http = new Http();
+        http.get(Urls.MatchUrls.getScoreboardUrl(mDetails.getMatchDetails().getId(), userId), new HashMap<String, String>(), new APCallback() {
+            @Override
+            public void success(JSONObject result) {
+                dialog.dismiss();
+                if (result.optJSONObject("Error") != null) {
+                    SnackBarManager.showError(result.optJSONObject("Error").optString("ErrorMessage"), getActivity());
+                    return;
+                }
+                mMatchStatistic = new MatchStatistic(result);
+                mMatchStatistic.setUserId(userId);
+
+                if(mMatchStatistic.getPlayerStatistics() != null)
+                {
+                    for (PlayerMatchStatistic statistic : mMatchStatistic.getPlayerStatistics())
+                        statistic.setMatchId(mDetails.getMatchDetails().getId());
+
+                }
+                StorageManager manager = new StorageManager();
+                manager.SaveMatchStatistic(mMatchStatistic);
+
+                showPlayerStat(player);
+            }
+
+            @Override
+            public void failure(Exception e) {
+                dialog.dismiss();
+                SnackBarManager.showError("Unable to fetch player statistics at the moment.", getActivity());
+            }
+        });
+    }
+
+    private void showPlayerStat(Player player) {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        PlayerMatchStatistic statistic = null;
+        for (PlayerMatchStatistic playerMatchStatistic : mMatchStatistic.getPlayerStatistics()) {
+            if (playerMatchStatistic.getPlayerId().equals(player.getId())) {
+                statistic = playerMatchStatistic;
+                break;
+            }
+
+        }
+//        Pick5PlayerDialogFragment playerStatDialog = Pick5PlayerDialogFragment.newInstance(player, statistic);
+//        playerStatDialog.show(fm, "player_details");
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
+    }
 
 }

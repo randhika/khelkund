@@ -116,7 +116,7 @@ public class HowToPlayActivity extends ActionBarActivity implements ActionBar.Ta
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_how_to_play_activity2, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_how_to_play_activity, container, false);
             WebView mWebView = (WebView) rootView.findViewById(R.id.web_howtoplay);
             mWebView.getSettings().setJavaScriptEnabled(true);
             mWebView.setClickable(true);

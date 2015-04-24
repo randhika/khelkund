@@ -11,4 +11,5 @@ public class Pick5PlayerClickedEvent {
         this.position = position;
     }
     public int position;
+    public Player player;
 }

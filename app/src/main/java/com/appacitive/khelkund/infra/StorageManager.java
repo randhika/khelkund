@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 
 import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.Match;
+import com.appacitive.khelkund.model.MatchStatistic;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PrivateLeague;
 import com.appacitive.khelkund.model.Team;
@@ -16,6 +17,7 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import io.realm.annotations.RealmClass;
 
 /**
  * Created by sathley on 3/24/2015.
@@ -243,5 +245,22 @@ public class StorageManager {
         realm.copyToRealmOrUpdate(image);
         realm.commitTransaction();
         realm.close();
+    }
+
+    public void SaveMatchStatistic(MatchStatistic mMatchStatistic) {
+        Realm realm = getInstance();
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(mMatchStatistic);
+        realm.commitTransaction();
+        realm.close();
+    }
+
+    public MatchStatistic GetMatchStatistic(String matchId, String userId)
+    {
+        Realm realm = getInstance();
+        RealmQuery<MatchStatistic> query = realm.where(MatchStatistic.class);
+        query.equalTo("MatchId", matchId);
+        query.equalTo("UserId", userId);
+        return query.findFirst();
     }
 }

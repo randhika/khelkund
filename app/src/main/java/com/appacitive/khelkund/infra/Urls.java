@@ -20,6 +20,13 @@ public class Urls {
         }
     }
 
+    public static class MatchUrls
+    {
+        public static String getScoreboardUrl(String matchId, String userId) {
+            return String.format("http://www.khelkund.com/test/service/MatchService.svc/MatchScorecard/%s/%s", matchId, userId);
+        }
+    }
+
     public static class PrivateLeagueUrls
     {
         public static String getJoinPrivateLeaguesUrl()

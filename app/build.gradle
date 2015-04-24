@@ -57,6 +57,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.android.support:cardview-v7:22.0.0'
     compile 'com.android.support:recyclerview-v7:22.0.0'
+    compile 'com.android.support:gridlayout-v7:22.0.0'
     compile 'com.google.android.gms:play-services-gcm:7.0.0'
     compile 'com.nispok:snackbar:2.10.5'
     compile 'io.realm:realm-android:0.80.1'
@@ -72,8 +73,7 @@ dependencies {
     compile 'com.facebook.shimmer:shimmer:0.1.0@aar'
     compile 'com.android.support:support-v4:22.0.0'
     compile 'com.github.amlcurran.showcaseview:library:5.0.0'
-    compile 'com.makeramen:roundedimageview:2.0.1'
-    compile 'com.github.codechimp-org.apprater:library:1.0.+'
+    compile 'com.github.codechimp-org.apprater:library:1.0.28'
     compile 'jp.wasabeef:recyclerview-animators:1.1.3@aar'
     compile 'de.hdodenhof:circleimageview:1.2.2'
 }

@@ -63,7 +63,7 @@ public class Pick5HomeActivity extends ActionBarActivity {
                 break;
             }
         }
-        mRecyclerView.smoothScrollToPosition(position);
+        mRecyclerView.scrollToPosition(position);
     }
 
     @Override

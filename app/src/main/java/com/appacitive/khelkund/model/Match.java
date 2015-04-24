@@ -54,6 +54,7 @@ public class Match extends RealmObject {
     private Date StartDate;
     private int MatchStatus;
     private String Venue;
+    private boolean isOpen;
 
     public String getAwayTeamName() {
         return AwayTeamName;
@@ -125,5 +126,13 @@ public class Match extends RealmObject {
 
     public void setMatchNumber(int matchNumber) {
         MatchNumber = matchNumber;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setIsOpen(boolean isOpen) {
+        this.isOpen = isOpen;
     }
 }
