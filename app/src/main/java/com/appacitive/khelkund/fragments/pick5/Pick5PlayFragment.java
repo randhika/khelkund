@@ -208,8 +208,8 @@ public class Pick5PlayFragment extends Fragment {
     }
 
     private void initAdapters() {
-        mMyAdapter = new Pick5TeamAdapter(getActivity(), true);
-        mAiAdapter = new Pick5TeamAdapter(getActivity(), false);
+        mMyAdapter = new Pick5TeamAdapter(getActivity(), true, false);
+        mAiAdapter = new Pick5TeamAdapter(getActivity(), false, false);
     }
 
     @Override

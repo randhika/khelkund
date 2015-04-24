@@ -133,8 +133,8 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
     }
 
     private void initAdapters() {
-        mMyAdapter = new Pick5TeamAdapter(getActivity(), true);
-        mAiAdapter = new Pick5TeamAdapter(getActivity(), false);
+        mMyAdapter = new Pick5TeamAdapter(getActivity(), true, true);
+        mAiAdapter = new Pick5TeamAdapter(getActivity(), false, true);
     }
 
     private void fetchAndDisplayUserImage() {

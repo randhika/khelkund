@@ -22,10 +22,12 @@ public class Pick5TeamAdapter extends BaseAdapter {
     public Player[] mTeam = new Player[5];
     private Context mContext;
     private boolean mIsMine;
+    private boolean mIsReadonly;
 
-    public Pick5TeamAdapter(Context context, boolean isMine) {
+    public Pick5TeamAdapter(Context context, boolean isMine, boolean readonly) {
         this.mContext = context;
         mIsMine = isMine;
+        mIsReadonly = readonly;
     }
 
     @Override
@@ -57,6 +59,8 @@ public class Pick5TeamAdapter extends BaseAdapter {
         TextView nameBottom = (TextView) view.findViewById(R.id.tv_card_nameBottom);
         RelativeLayout cardView = (RelativeLayout) view.findViewById(R.id.card_view_filled);
 
+        if(mIsReadonly)
+            cardView.setAlpha(0.6f);
         String nameText = "";
         if (player != null) {
             Picasso.with(mContext).load(player.getImageUrl()).fit().centerInside().placeholder(R.drawable.demo).into(photo);

@@ -20,4 +20,12 @@
         android:id="@+id/tv_match_over_label"
         android:layout_below="@+id/iv_match_over_flag"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You did not create a team for this match."
+        android:id="@+id/textView31"
+        android:layout_below="@+id/tv_match_over_label"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
