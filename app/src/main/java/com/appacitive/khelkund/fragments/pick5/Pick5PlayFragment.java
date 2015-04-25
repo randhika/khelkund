@@ -156,7 +156,7 @@ public class Pick5PlayFragment extends Fragment {
         new ShowcaseView.Builder(getActivity())
                 .setTarget(ViewTarget.NONE)
                 .setContentTitle("Welcome to Pick'em 5")
-                .setContentText("Start by creating your team on the left")
+                .setContentText("Start by creating your squad")
                 .hideOnTouchOutside()
                 .singleShot(111)
                 .build().hideButton();
@@ -247,6 +247,17 @@ public class Pick5PlayFragment extends Fragment {
     public void playerChosen(Pick5PlayerChosenEvent event) {
         mChoosePlayerDialog.dismiss();
 
+        for(int i = 0 ; i < 5; i++)
+        {
+            if(i == event.position)
+                continue;
+            if(mMyAdapter.mTeam[i] != null && event.player.getId().equals(mMyAdapter.mTeam[i].getId()))
+            {
+                SnackBarManager.showError("This player is already on your squad", getActivity());
+                return;
+            }
+        }
+
         mMyAdapter.mTeam[event.position] = event.player;
         mAiAdapter.mTeam[event.position] = manager.GetPlayer(mDetails.getPlayerMappings().get(mMyAdapter.mTeam[event.position].getId()));
 
@@ -314,7 +325,7 @@ public class Pick5PlayFragment extends Fragment {
                 break;
             }
             default: {
-                mChoosePlayerDialog.setTitle("Pick your Wild Card Player");
+                mChoosePlayerDialog.setTitle("Pick your Wildcard Player");
                 adapter = new Pick5ChoosePlayerAdapter(getActivity(), allAvailablePlayers, 4);
                 break;
             }
