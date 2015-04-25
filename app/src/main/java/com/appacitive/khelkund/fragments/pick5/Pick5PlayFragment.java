@@ -124,15 +124,17 @@ public class Pick5PlayFragment extends Fragment {
             mBreadcrumbWk.setFillColor(green);
             mBreadcrumbAr.setFillColor(green);
         }
-        mMyCarousel.setAdapter(mMyAdapter);
-        mMyCarousel.setSelection(2);
+
         mMyCarousel.setSlowDownCoefficient(Integer.MAX_VALUE);
         mMyCarousel.setSpacing(0.6f);
+        mMyCarousel.setAdapter(mMyAdapter);
+        mMyCarousel.setSelection(2);
 
-        mAiCarousel.setAdapter(mAiAdapter);
-        mAiCarousel.setSelection(2);
         mAiCarousel.setSlowDownCoefficient(Integer.MAX_VALUE);
         mAiCarousel.setSpacing(0.6f);
+        mAiCarousel.setAdapter(mAiAdapter);
+        mAiCarousel.setSelection(2);
+
 
         fetchPlayers();
         showTutorialOverlay();
@@ -228,7 +230,7 @@ public class Pick5PlayFragment extends Fragment {
     }
 
     @OnClick(R.id.breadcrumb_ar)
-    public void OnAllRouonderBreadcrumbClick() {
+    public void OnAllRounderBreadcrumbClick() {
         BusProvider.getInstance().post(new Pick5PlayerClickedEvent(2));
     }
 
@@ -340,7 +342,7 @@ public class Pick5PlayFragment extends Fragment {
 
         for (int i = 0; i < mMyAdapter.mTeam.length; i++) {
             if (mMyAdapter.mTeam[i] == null) {
-                SnackBarManager.showError("Your team is missing players", getActivity());
+                SnackBarManager.showError("Pick all 5 players to continue", getActivity());
                 return;
             }
         }

@@ -51,14 +51,14 @@ public class Pick5ChoosePlayerAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int posision, View view, ViewGroup viewGroup) {
+    public View getView(final int position, View view, ViewGroup viewGroup) {
         if(view == null)
         {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.item_pick5_player_card, viewGroup, false);
         }
 
-        final Player player = getItem(posision);
+        final Player player = getItem(position);
 
         ImageView photo =  (ImageView) view.findViewById(R.id.iv_player_photo);
         TextView name = (TextView) view.findViewById(R.id.tv_card_name);

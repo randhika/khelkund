@@ -7,7 +7,7 @@
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:id="@+id/pick5_toolbar"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         android:elevation="8dp"
         android:background="@color/primary_dark">
 
@@ -19,7 +19,7 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:background="?attr/selectableItemBackground"
@@ -57,7 +57,7 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -112,24 +112,24 @@
                 android:text="Pick em 5"
                 android:id="@+id/tv_pick5_play_date"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="4dp" />
 
 
             <com.appacitive.khelkund.infra.widgets.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:id="@+id/iv_pick5_play_home"
-                app:titleText="AA"
+                app:titleText="HOME"
                 app:subtitleText=""
-                app:titleSize="20dp"
+                app:titleSize="16dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="88dp"
-                android:layout_marginBottom="36dp"
+                android:layout_marginBottom="24dp"
 
                 app:subtitleSize="9dp"
                 app:titleColor="@android:color/white"
@@ -142,17 +142,17 @@
                 />
 
             <com.appacitive.khelkund.infra.widgets.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:id="@+id/iv_pick5_play_away"
-                app:titleText="AA"
+                app:titleText="AWAY"
                 app:subtitleText=""
-                app:titleSize="20dp"
+                app:titleSize="16dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="88dp"
-                android:layout_marginBottom="36dp"
+                android:layout_marginBottom="24dp"
                 app:subtitleSize="9dp"
                 app:titleColor="@android:color/white"
                 app:subtitleColor="@android:color/white"
