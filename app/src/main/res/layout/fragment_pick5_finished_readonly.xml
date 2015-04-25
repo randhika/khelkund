@@ -171,7 +171,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignBottom="@+id/my_carousel"
-                    android:gravity="center_vertical"
                     android:id="@+id/relativeLayout6"
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="4dp"
@@ -253,7 +252,6 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:gravity="center_vertical"
 
                     android:id="@+id/relativeLayout7"
                     android:layout_marginRight="6dp"

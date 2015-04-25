@@ -10,8 +10,8 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
     app:cardBackgroundColor="@android:color/transparent"
-    android:layout_margin="4dp"
-    android:elevation="0dp">
+    android:elevation="4dp"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:id="@+id/tv_card_name"
             android:singleLine="true"
             android:textSize="12sp"
-            android:textColor="@color/abc_primary_text_material_light"
+            android:textColor="@android:color/white"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"

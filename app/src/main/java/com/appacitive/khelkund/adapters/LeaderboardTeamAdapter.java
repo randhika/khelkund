@@ -63,7 +63,7 @@ public class LeaderboardTeamAdapter extends BaseAdapter {
         TextView name = (TextView) view.findViewById(R.id.tv_card_name);
         CardView cardView = (CardView) view.findViewById(R.id.card_view_filled);
 
-        cardView.setCardBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(player.getShortTeamName())));
+        cardView.setCardBackgroundColor(mContext.getResources().getColor(TeamHelper.getTeamColor(player.getShortTeamName())));
         Picasso.with(mContext).load(player.getImageUrl()).fit().centerInside().placeholder(R.drawable.demo).into(photo);
         name.setText(player.getDisplayName());
 

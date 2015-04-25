@@ -21,6 +21,7 @@ import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.infra.Urls;
+import com.appacitive.khelkund.infra.widgets.carousel.Carousel;
 import com.appacitive.khelkund.infra.widgets.carousel.CoverFlowCarousel;
 import com.appacitive.khelkund.model.LeaderboardScore;
 import com.appacitive.khelkund.model.Team;
@@ -131,7 +132,8 @@ public class LeaderboardActivity extends ActionBarActivity {
                     mDialog.setContentView(R.layout.layout_leaderboard_team_dialog);
                     TextView mName = (TextView) mDialog.findViewById(R.id.tv_leaderboard_team_name);
                     mName.setText(mTeam.getName());
-                    CoverFlowCarousel carousel = (CoverFlowCarousel) mDialog.findViewById(R.id.carousel);
+                    Carousel carousel = (Carousel) mDialog.findViewById(R.id.carousel);
+                    carousel.setSpacing(1.1f);
                     final LeaderboardTeamAdapter adapter = new LeaderboardTeamAdapter(LeaderboardActivity.this, mTeam.getPlayers());
                     carousel.setAdapter(adapter);
                     mDialog.show();

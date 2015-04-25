@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="24sp" />
 
-    <com.appacitive.khelkund.infra.widgets.carousel.CoverFlowCarousel
+    <com.appacitive.khelkund.infra.widgets.carousel.Carousel
         android:id="@+id/carousel"
         android:padding="4dp"
         android:layout_below="@+id/tv_leaderboard_team_name"

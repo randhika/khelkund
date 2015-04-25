@@ -26,7 +26,6 @@ import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.infra.widgets.CircleView;
 import com.appacitive.khelkund.infra.widgets.carousel.Carousel;
-import com.appacitive.khelkund.infra.widgets.carousel.CoverFlowCarousel;
 import com.appacitive.khelkund.model.Pick5MatchDetails;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.events.pick5.Pick5PlayerChosenEvent;
@@ -247,12 +246,10 @@ public class Pick5PlayFragment extends Fragment {
     public void playerChosen(Pick5PlayerChosenEvent event) {
         mChoosePlayerDialog.dismiss();
 
-        for(int i = 0 ; i < 5; i++)
-        {
-            if(i == event.position)
+        for (int i = 0; i < 5; i++) {
+            if (i == event.position)
                 continue;
-            if(mMyAdapter.mTeam[i] != null && event.player.getId().equals(mMyAdapter.mTeam[i].getId()))
-            {
+            if (mMyAdapter.mTeam[i] != null && event.player.getId().equals(mMyAdapter.mTeam[i].getId())) {
                 SnackBarManager.showError("This player is already on your squad", getActivity());
                 return;
             }
@@ -298,7 +295,8 @@ public class Pick5PlayFragment extends Fragment {
     public void onPlayerClick(Pick5PlayerClickedEvent event) {
         mChoosePlayerDialog = new Dialog(getActivity());
         mChoosePlayerDialog.setContentView(R.layout.layout_pick5_chooser_dialog);
-        CoverFlowCarousel carousel = (CoverFlowCarousel) mChoosePlayerDialog.findViewById(R.id.carousel);
+        Carousel carousel = (Carousel) mChoosePlayerDialog.findViewById(R.id.carousel);
+        carousel.setSpacing(1.1f);
         Pick5ChoosePlayerAdapter adapter = null;
         switch (event.position) {
             case 0: {
@@ -340,10 +338,8 @@ public class Pick5PlayFragment extends Fragment {
     @OnClick(R.id.btn_pick5_play)
     public void onSubmitClick() {
 
-        for(int i = 0; i < mMyAdapter.mTeam.length; i++)
-        {
-            if(mMyAdapter.mTeam[i] == null)
-            {
+        for (int i = 0; i < mMyAdapter.mTeam.length; i++) {
+            if (mMyAdapter.mTeam[i] == null) {
                 SnackBarManager.showError("Your team is missing players", getActivity());
                 return;
             }
