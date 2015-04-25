@@ -13,18 +13,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="23 Apr"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:id="@+id/tv_pick5_play_date"
         android:textColor="@color/abc_primary_text_material_light"
 
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/card_view_pick5"
+        android:layout_toStartOf="@+id/card_view_pick5"
+        android:gravity="center_horizontal" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="07:30 AM"
+        android:text="Fri 07:30 AM"
         android:id="@+id/tv_pick5_play_time"
         android:layout_below="@+id/tv_pick5_play_date"
         android:layout_alignParentLeft="true"

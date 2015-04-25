@@ -1,33 +1,27 @@
 package com.appacitive.khelkund.adapters;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
-import com.appacitive.khelkund.activities.pick5.Pick5HomeActivity;
 import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.widgets.CircleView;
 import com.appacitive.khelkund.model.Match;
 import com.appacitive.khelkund.infra.TeamHelper;
-import com.appacitive.khelkund.model.Team;
 import com.appacitive.khelkund.model.events.MatchSelectedEvent;
-import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -45,7 +39,7 @@ public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHol
     }
 
     private static final DateFormat df = new SimpleDateFormat("dd MMM");
-    private static final DateFormat tf  = new SimpleDateFormat("hh:mm a");
+    private static final DateFormat tf  = new SimpleDateFormat("EEE hh:mm a");
 
     @Override
     public Pick5ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

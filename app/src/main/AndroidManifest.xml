@@ -136,16 +136,6 @@
             android:name=".infra.services.FetchMyPLayersIntentService"
             android:exported="false" />
 
-        <activity
-            android:name=".activities.pick5.Pick5HomeActivity"
-            android:label="@string/title_activity_pick5_home"
-            android:parentActivityName=".activities.misc.HomeActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.misc.HomeActivity" />
-        </activity>
-
         <service
             android:name=".infra.services.FetchAllPick5MatchesIntentService"
             android:exported="false" />
@@ -153,12 +143,12 @@
         <activity
             android:name=".activities.pick5.Pick5MatchActivity"
             android:label="@string/title_activity_pick5_match"
-            android:parentActivityName=".activities.pick5.Pick5HomeActivity"
+            android:parentActivityName=".activities.pick5.Pick5ListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appacitive.khelkund.activities.pick5.Pick5HomeActivity" />
+                android:value="com.appacitive.khelkund.activities.pick5.Pick5ListActivity" />
         </activity>
 
         <receiver
@@ -287,6 +277,14 @@
         <activity
             android:name=".activities.misc.TutorialActivity"
             android:label="@string/title_activity_tutorial"
+            android:parentActivityName=".activities.misc.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.appacitive.khelkund.activities.misc.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activities.pick5.Pick5ListActivity"
+            android:label="@string/title_activity_pick5_list"
             android:parentActivityName=".activities.misc.HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
