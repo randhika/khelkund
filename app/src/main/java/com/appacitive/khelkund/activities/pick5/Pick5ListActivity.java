@@ -102,11 +102,14 @@ public class Pick5ListActivity extends ActionBarActivity implements ActionBar.Ta
             }
             int diffInDays = (int) ((match.getStartDate().getTime() - (new Date()).getTime()) / (1000 * 60 * 60 * 24));
 
-            if (diffInDays > 2)
-            {
-                upcomingMatches.add(match);
-            }
-            else openMatches.add(match);
+            if(match.isOpen() == true)
+                openMatches.add(match);
+            else upcomingMatches.add(match);
+//            if (diffInDays > 2)
+//            {
+//                upcomingMatches.add(match);
+//            }
+//            else openMatches.add(match);
         }
     }
 

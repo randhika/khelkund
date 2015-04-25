@@ -33,7 +33,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     private List<Match> mMatches;
 
     private static final DateFormat df = new SimpleDateFormat("dd MMM");
-    private static final DateFormat tf  = new SimpleDateFormat("hh:mm a");
+    private static final DateFormat tf  = new SimpleDateFormat("EEE hh:mm a");
 
     public ScheduleAdapter(List<Match> matches)
     {

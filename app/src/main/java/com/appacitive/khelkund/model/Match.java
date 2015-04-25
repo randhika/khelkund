@@ -34,6 +34,7 @@ public class Match extends RealmObject {
         this.Id = jsonObject.optString("Id");
         this.MatchStatus = jsonObject.optInt("MatchStatus");
         this.Venue = jsonObject.optString("Venue");
+        this.isOpen = jsonObject.optBoolean("IsOpenForPlay");
         DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'");
         try {
             this.StartDate = df1.parse(jsonObject.optString("StartDate"));

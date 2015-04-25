@@ -2,7 +2,9 @@ package com.appacitive.khelkund.activities.navigationdrawer;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.twitter.sdk.android.tweetui.SearchTimeline;
@@ -21,7 +23,10 @@ public class TwitterFeedActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twitter_feed);
         ButterKnife.inject(this);
-
+        TextView empty = new TextView(this);
+        empty.setGravity(Gravity.CENTER_HORIZONTAL);
+        empty.setText("No data available");
+        mTwitter.setEmptyView(empty);
         final SearchTimeline searchTimeline = new SearchTimeline.Builder()
                 .query("#IPL")
                 .build();

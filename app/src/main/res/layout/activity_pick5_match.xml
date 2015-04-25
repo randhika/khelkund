@@ -17,15 +17,6 @@
             android:layout_height="match_parent"
             android:background="@android:color/transparent">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/iv_pick5_masthead"
-                android:src="@drawable/masthead1"
-                android:alpha="0.7"
-                android:scaleType="centerCrop" />
-
-
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

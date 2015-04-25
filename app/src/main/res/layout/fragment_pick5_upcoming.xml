@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.appacitive.khelkund.fragments.pick5.Pick5EmptyFragment">
+    tools:context="com.appacitive.khelkund.fragments.pick5.Pick5UpcomingFragment">
 
 
     <ImageView
@@ -10,13 +10,13 @@
         android:id="@+id/iv_match_over_flag"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_match_over_flag" />
+        android:src="@drawable/timer" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Match Over"
+        android:text="COME BACK LATER"
         android:id="@+id/tv_match_over_label"
         android:layout_below="@+id/iv_match_over_flag"
         android:layout_centerHorizontal="true" />
@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You did not create a team for this match."
+        android:text="This match is not yet open."
         android:id="@+id/textView31"
         android:layout_below="@+id/tv_match_over_label"
         android:layout_centerHorizontal="true" />

@@ -15,6 +15,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.adapters.SlideInLeftAnimationAdapter;
 
 public class ScheduleActivity extends ActionBarActivity {
@@ -38,7 +39,7 @@ public class ScheduleActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         ScheduleAdapter scheduleAdapter = new ScheduleAdapter(mMatches);
-        mAdapter = new SlideInLeftAnimationAdapter(scheduleAdapter);
+        mAdapter = new ScaleInAnimationAdapter(scheduleAdapter);
         mRecyclerView.setAdapter(mAdapter);
         int position = mMatches.size();
 

@@ -8,28 +8,39 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
+        android:layout_height="48dp"
         android:ems="10"
+        android:inputType="textMultiLine"
         android:id="@+id/et_feedback"
-        android:layout_alignParentTop="true"
+        android:hint="Kindly write your feedback here"
+        android:layout_below="@+id/textView28"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="Kindly write your feedback here"
-        android:layout_marginTop="36dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginTop="16dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/btn_feedback"
-        android:layout_below="@+id/et_feedback"
-        android:layout_alignRight="@+id/et_feedback"
-        android:layout_alignEnd="@+id/et_feedback"
         android:textStyle="bold"
         android:background="@color/accent"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/et_feedback"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We&apos;d love to hear from you!"
+        android:id="@+id/textView28"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="18sp" />
 </RelativeLayout>

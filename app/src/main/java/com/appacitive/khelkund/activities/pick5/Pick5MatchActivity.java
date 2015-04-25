@@ -15,6 +15,7 @@ import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.fragments.pick5.Pick5EmptyFragment;
 import com.appacitive.khelkund.fragments.pick5.Pick5FinishedReadonlyFragment;
 import com.appacitive.khelkund.fragments.pick5.Pick5PlayFragment;
+import com.appacitive.khelkund.fragments.pick5.Pick5UpcomingFragment;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
@@ -22,10 +23,10 @@ import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
+import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.infra.widgets.CircleView;
 import com.appacitive.khelkund.model.Pick5MatchDetails;
-import com.appacitive.khelkund.infra.TeamHelper;
 
 import org.json.JSONObject;
 
@@ -119,19 +120,6 @@ public class Pick5MatchActivity extends ActionBarActivity {
         date = cal.getTime();
         mDate.setText(String.format("MATCH %s  %s IST", matchNumber, df.format(date)));
 
-
-//        mHomeName.setText(mDetails.getMatchDetails().getHomeTeamShortName());
-//        mAwayName.setText(mDetails.getMatchDetails().getAwayTeamShortName());
-
-//        Picasso.with(this)
-//                .load(TeamHelper.getTeamLogo(mDetails.getMatchDetails().getHomeTeamShortName()))
-//                .fit().transform(new CircleTransform2(empty_background_color))
-//                .into(mHomeLogo);
-//        Picasso.with(this)
-//                .load(TeamHelper.getTeamLogo(mDetails.getMatchDetails().getAwayTeamShortName()))
-//                .fit().transform(new CircleTransform2(empty_background_color))
-//                .into(mAwayLogo);
-
         mHomeLogo.setTitleText(mDetails.getMatchDetails().getHomeTeamShortName());
         mHomeLogo.setFillColor(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(mDetails.getMatchDetails().getHomeTeamShortName())));
         mAwayLogo.setTitleText(mDetails.getMatchDetails().getAwayTeamShortName());
@@ -154,9 +142,18 @@ public class Pick5MatchActivity extends ActionBarActivity {
 
         //  if match has not yet started
         if (mDetails.getMatchDetails().getMatchStatus() == 0) {
-            Pick5PlayFragment playPick5Fragment = Pick5PlayFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().setCustomAnimations(enterAnimation, exitAnimation)
-                    .replace(R.id.fragment_container, playPick5Fragment).commit();
+
+            if (mDetails.getMatchDetails().isOpen()) {
+
+                Pick5PlayFragment playPick5Fragment = Pick5PlayFragment.newInstance();
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(enterAnimation, exitAnimation)
+                        .replace(R.id.fragment_container, playPick5Fragment).commit();
+            }
+            else {
+                Pick5UpcomingFragment playPick5Fragment = Pick5UpcomingFragment.newInstance();
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(enterAnimation, exitAnimation)
+                        .replace(R.id.fragment_container, playPick5Fragment).commit();
+            }
 
         }
     }
@@ -194,7 +191,7 @@ public class Pick5MatchActivity extends ActionBarActivity {
     @OnClick(R.id.pick5_next_match)
     public void onNextMatchClick() {
         StorageManager manager = new StorageManager();
-        if(mDetails == null)
+        if (mDetails == null)
             return;
         String nextMatchId = manager.getNextMatchId(mDetails.getMatchDetails().getId());
         if (nextMatchId == null) {
@@ -209,7 +206,7 @@ public class Pick5MatchActivity extends ActionBarActivity {
     @OnClick(R.id.pick5_previous_match)
     public void onPreviousMatchClick() {
         StorageManager manager = new StorageManager();
-        if(mDetails == null)
+        if (mDetails == null)
             return;
         String previousMatchId = manager.getPreviousMatchId(mDetails.getMatchDetails().getId());
         if (previousMatchId == null) {
