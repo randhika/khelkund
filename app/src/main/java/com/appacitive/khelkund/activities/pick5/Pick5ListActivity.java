@@ -96,13 +96,13 @@ public class Pick5ListActivity extends ActionBarActivity implements ActionBar.Ta
         }
 
         for (Match match : mMatches) {
-            if (match.getMatchStatus() == 2 || match.getMatchStatus() == 1) {
+            if (match.getMatchStatus() == 2) {
                 completedMatches.add(match);
                 continue;
             }
-            int diffInDays = (int) ((match.getStartDate().getTime() - (new Date()).getTime()) / (1000 * 60 * 60 * 24));
+//            int diffInDays = (int) ((match.getStartDate().getTime() - (new Date()).getTime()) / (1000 * 60 * 60 * 24));
 
-            if(match.isOpen() == true)
+            if(match.isOpen() == true || match.getMatchStatus() == 1)
                 openMatches.add(match);
             else upcomingMatches.add(match);
 //            if (diffInDays > 2)

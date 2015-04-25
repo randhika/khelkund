@@ -35,6 +35,7 @@ public class PlayerMatchStatistic extends RealmObject {
         this.TotalWickets = jsonObject.optInt("TotalWickets");
         this.Economy = jsonObject.optDouble("Economy");
         this.StrikeRate = jsonObject.optDouble("StrikeRate");
+        this.IsManOfTheMatch = jsonObject.optBoolean("IsManOfTheMatch");
 
     }
 
@@ -56,6 +57,7 @@ public class PlayerMatchStatistic extends RealmObject {
     private int RunsGiven;
     private int TotalSixes;
     private int TotalWickets;
+    private boolean IsManOfTheMatch;
 
     public String getPlayerId() {
         return PlayerId;
@@ -175,5 +177,13 @@ public class PlayerMatchStatistic extends RealmObject {
 
     public void setRunsGiven(int runsGiven) {
         RunsGiven = runsGiven;
+    }
+
+    public boolean getIsManOfTheMatch() {
+        return IsManOfTheMatch;
+    }
+
+    public void setIsManOfTheMatch(boolean isManOfTheMatch) {
+        IsManOfTheMatch = isManOfTheMatch;
     }
 }

@@ -16,6 +16,7 @@ import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.tweetui.TweetUi;
 
 import io.fabric.sdk.android.Fabric;
+import io.realm.Realm;
 
 /**
  * Created by sathley on 3/24/2015.
@@ -30,6 +31,8 @@ public class KhelkundApplication extends Application {
     public void onCreate(){
         super.onCreate();
         KhelkundApplication.context = getApplicationContext();
+        Realm.deleteRealmFile(context, "db-v3.realm");
+        Realm.deleteRealmFile(context, "db-v2.realm");
 //        TwitterAuthConfig authConfig = new TwitterAuthConfig(getResources().getString(R.string.TWITTER_KEY), getResources().getString(R.string.TWITTER_SECRET));
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Crashlytics crashlytics = new Crashlytics.Builder().disabled(BuildConfig.DEBUG).build();

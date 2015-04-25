@@ -116,6 +116,8 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
         fetchAndDisplayUserImage();
 
         this.mDetails = ((Pick5MatchActivity) getActivity()).getMatchDetails();
+
+        
         initAdapters();
 
         loadPlayers();
