@@ -241,7 +241,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="All members of the Private League with 15 or more users &amp; the highest average score will each receive 1 Khelkund T-shirt and Amazon voucher worth Rs. 500."
+            android:text="Top 10 members of the Private League with 15 or more users &amp; the highest average score will each receive 1 Khelkund T-shirt and Amazon voucher worth Rs. 500."
             android:id="@+id/textView45"
             android:layout_below="@+id/textView39"
             android:layout_alignParentLeft="true"
