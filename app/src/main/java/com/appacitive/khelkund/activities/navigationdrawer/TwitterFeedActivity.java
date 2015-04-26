@@ -7,6 +7,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.infra.ConnectionManager;
 import com.twitter.sdk.android.tweetui.SearchTimeline;
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
 
@@ -23,10 +24,7 @@ public class TwitterFeedActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twitter_feed);
         ButterKnife.inject(this);
-        TextView empty = new TextView(this);
-        empty.setGravity(Gravity.CENTER_HORIZONTAL);
-        empty.setText("No data available");
-        mTwitter.setEmptyView(empty);
+        ConnectionManager.checkNetworkConnectivity(this);
         final SearchTimeline searchTimeline = new SearchTimeline.Builder()
                 .query("#IPL")
                 .build();
