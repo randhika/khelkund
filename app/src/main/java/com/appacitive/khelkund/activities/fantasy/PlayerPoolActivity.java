@@ -70,7 +70,7 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+                overridePendingTransition(R.anim.slide_not, R.anim.slide_out_right_fast);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -101,7 +101,7 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
     public void onBackPressed() {
         setResult(RESULT_CANCELED, null);
         finish();
-        overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+        overridePendingTransition(R.anim.slide_not, R.anim.slide_out_right_fast);
     }
 
     @Override
@@ -171,6 +171,6 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
         }
         setResult(RESULT_OK, intent);
         finish();
-        overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+        overridePendingTransition(R.anim.slide_not, R.anim.slide_out_right_fast);
     }
 }

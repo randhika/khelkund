@@ -19,6 +19,7 @@ import com.appacitive.khelkund.model.events.MatchSelectedEvent;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +32,7 @@ import butterknife.InjectView;
  */
 public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHolder> {
 
-    private List<Match> mMatches;
+    private List<Match> mMatches = new ArrayList<Match>();
 
     public Pick5Adapter(List<Match> matches)
     {
@@ -90,6 +91,8 @@ public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHol
 
     @Override
     public int getItemCount() {
+        if(mMatches == null)
+            return 0;
         return mMatches.size();
     }
 

@@ -212,7 +212,7 @@ public class EditTeamActivity extends ActionBarActivity {
             shareTeam();
             return true;
         }
-        if (item.getItemId() == R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
             overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
             return true;
@@ -539,7 +539,8 @@ public class EditTeamActivity extends ActionBarActivity {
         Intent choosePlayerIntent = new Intent(EditTeamActivity.this, PlayerPoolActivity.class);
         choosePlayerIntent.putExtra("type", event.playerType.toString());
         startActivityForResult(choosePlayerIntent, CHOOSE_PLAYER_REQUEST);
-        overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
+//        overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
+        overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_not);
     }
 
     @Override

@@ -35,7 +35,6 @@ import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.PrivateLeague;
-import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.model.events.privateleague.PrivateLeagueDeleteEvent;
 import com.appacitive.khelkund.model.events.privateleague.PrivateLeagueSelectedEvent;
 import com.appacitive.khelkund.model.events.privateleague.PrivateLeagueShareEvent;
@@ -438,10 +437,19 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_refresh) {
-            fetchAndDisplayPrivateLeague();
-            return true;
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+                return true;
+            case R.id.action_refresh:
+                fetchAndDisplayPrivateLeague();
+                return true;
+
         }
+
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -454,6 +462,12 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
             mRecyclerView.setVisibility(View.VISIBLE);
             mEmpty.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
     }
 
 }
