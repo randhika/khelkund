@@ -2,13 +2,14 @@
 
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="92dp"
+    android:layout_height="135dp"
     android:id="@+id/card_view_filled"
     android:foreground="?android:attr/selectableItemBackground"
     android:background="@android:color/transparent"
     android:layout_margin="4dp"
-    android:clickable="true">
+    android:clickable="true"
+    android:gravity="center_vertical|center_horizontal">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -26,29 +27,29 @@
         android:singleLine="true"
         android:textSize="12sp"
         android:textColor="@color/abc_primary_text_material_light"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:gravity="center_vertical|center_horizontal"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignRight="@+id/iv_player_photo"
+        android:layout_alignEnd="@+id/iv_player_photo" />
 
     <TextView
         android:layout_below="@+id/tv_card_nameTop"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tv_card_nameBottom"
         android:singleLine="true"
         android:textSize="12sp"
         android:textColor="@color/abc_primary_text_material_light"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:gravity="center_vertical|center_horizontal"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="4dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignLeft="@+id/iv_player_photo"
+        android:layout_alignStart="@+id/iv_player_photo"
+        android:layout_alignRight="@+id/iv_player_photo"
+        android:layout_alignEnd="@+id/iv_player_photo" />
 
 </RelativeLayout>
 

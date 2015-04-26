@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.appacitive.khelkund.adapters.Pick5TeamAdapter;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.Http;
+import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
@@ -124,17 +126,27 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
 
         displayResults();
 
-        mMyCarousel.setAdapter(mMyAdapter);
+        int width = dpToPx(92);
+
+        mMyCarousel.setChildWidth(width);
         mMyCarousel.setSelection(2);
         mMyCarousel.setSlowDownCoefficient(Integer.MAX_VALUE);
         mMyCarousel.setSpacing(0.6f);
+        mMyCarousel.setAdapter(mMyAdapter);
 
-        mAiCarousel.setAdapter(mAiAdapter);
+        mAiCarousel.setChildWidth(width);
         mAiCarousel.setSelection(2);
         mAiCarousel.setSlowDownCoefficient(Integer.MAX_VALUE);
         mAiCarousel.setSpacing(0.6f);
+        mAiCarousel.setAdapter(mAiAdapter);
 
         return view;
+    }
+
+    public int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = KhelkundApplication.getAppContext().getResources().getDisplayMetrics();
+        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return px;
     }
 
     private void initAdapters() {

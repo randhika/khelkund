@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.appacitive.khelkund.adapters.Pick5TeamAdapter;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.Http;
+import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
@@ -103,6 +105,12 @@ public class Pick5PlayFragment extends Fragment {
     private Pick5TeamAdapter mMyAdapter;
     private Pick5TeamAdapter mAiAdapter;
 
+    public int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = KhelkundApplication.getAppContext().getResources().getDisplayMetrics();
+        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return px;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -125,13 +133,17 @@ public class Pick5PlayFragment extends Fragment {
             mBreadcrumbAr.setFillColor(green);
         }
 
+        int width = dpToPx(92);
+
         mMyCarousel.setSlowDownCoefficient(Integer.MAX_VALUE);
         mMyCarousel.setSpacing(0.6f);
+        mMyCarousel.setChildWidth(width);
         mMyCarousel.setAdapter(mMyAdapter);
         mMyCarousel.setSelection(2);
 
         mAiCarousel.setSlowDownCoefficient(Integer.MAX_VALUE);
         mAiCarousel.setSpacing(0.6f);
+        mAiCarousel.setChildWidth(width);
         mAiCarousel.setAdapter(mAiAdapter);
         mAiCarousel.setSelection(2);
 

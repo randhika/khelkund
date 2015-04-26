@@ -179,7 +179,7 @@
 
                 <com.appacitive.khelkund.infra.widgets.carousel.Carousel
                     android:id="@+id/my_carousel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="135dp"
                     android:layout_toEndOf="@+id/relativeLayout6"
                     android:layout_toRightOf="@+id/relativeLayout6"
@@ -225,7 +225,7 @@
 
                 <com.appacitive.khelkund.infra.widgets.carousel.Carousel
                     android:id="@+id/ai_carousel"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="135dp"
                     android:layout_toLeftOf="@+id/relativeLayout7"
                     android:layout_alignParentLeft="true"
