@@ -24,9 +24,23 @@ public class ViewTeamActivity extends ActionBarActivity implements ActionBar.Tab
     ViewPager mViewPager;
 
     @Override
-    public void onBackPressed()
-    {
-        this.finish();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch(id) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
     }
 
     @Override

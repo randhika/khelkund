@@ -216,13 +216,13 @@ public class HomeFragment extends Fragment {
         if (mTeamStatus == TeamStatus.CREATED) {
             Intent viewTeamIntent = new Intent(getActivity(), ViewTeamActivity.class);
             startActivity(viewTeamIntent);
+            getActivity().overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
         } else if (mTeamStatus == TeamStatus.NOT_CREATED) {
             Intent createTeamIntent = new Intent(getActivity(), CreateTeamActivity.class);
             startActivity(createTeamIntent);
+            getActivity().overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
         } else if (mTeamStatus == TeamStatus.DONT_KNOW) {
-
             Toast.makeText(getActivity(), "Unable to fetch team details at the moment. PLease try again later", Toast.LENGTH_SHORT).show();
-
         }
 
     }
@@ -231,13 +231,14 @@ public class HomeFragment extends Fragment {
     public void onPrivateLeagueClick() {
         Intent intent = new Intent(getActivity(), PrivateLeagueHomeActivity.class);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
     }
 
     @OnClick(R.id.card_view_pick5)
     public void onPick5Click() {
-//        Intent intent = new Intent(getActivity(), Pick5HomeActivity.class);
         Intent intent = new Intent(getActivity(), Pick5ListActivity.class);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
     }
 
     private void fetchTeam(final String userId) {

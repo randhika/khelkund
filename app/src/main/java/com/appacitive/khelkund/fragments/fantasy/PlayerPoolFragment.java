@@ -69,8 +69,7 @@ public class PlayerPoolFragment extends Fragment {
         switch (sectionNumber) {
             case 1: {
                 fragment.mPlayers = storageManager.GetAllPlayers(playerType.toString());
-                if(fragment.mPlayers == null || fragment.mPlayers.size() == 0)
-                {
+                if (fragment.mPlayers == null || fragment.mPlayers.size() == 0) {
                     Intent mServiceIntent = new Intent(KhelkundApplication.getAppContext(), FetchAllPlayersIntentService.class);
                     KhelkundApplication.getAppContext().startService(mServiceIntent);
                 }
@@ -105,8 +104,6 @@ public class PlayerPoolFragment extends Fragment {
             case R.id.menu_action_filter:
                 showFilterDialog();
                 return true;
-            default:
-                break;
         }
         return false;
     }
@@ -189,7 +186,8 @@ public class PlayerPoolFragment extends Fragment {
         BusProvider.getInstance().unregister(this);
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
     }

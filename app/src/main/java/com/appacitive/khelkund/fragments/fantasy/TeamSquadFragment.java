@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -69,6 +70,7 @@ public class TeamSquadFragment extends Fragment {
             public void onClick(View view) {
                 Intent editTeamIntent = new Intent(getActivity(), EditTeamActivity.class);
                 startActivity(editTeamIntent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
             }
         });
         return rootView;

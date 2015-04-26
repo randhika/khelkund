@@ -2,14 +2,14 @@ package com.appacitive.khelkund.activities.fantasy;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -67,22 +67,23 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupActionBarTitle()
-    {
+    private void setupActionBarTitle() {
         final ActionBar actionBar = getSupportActionBar();
         String playerType = getIntent().getStringExtra("type");
-        actionBar.setHomeButtonEnabled(false);
-        actionBar.setDefaultDisplayHomeAsUpEnabled(false);
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setDisplayShowHomeEnabled(false);
         mPlayerType = PlayerType.valueOf(playerType.toUpperCase());
 
-        if(playerType.equals("AllRounder"))
+        if (playerType.equals("AllRounder"))
             actionBar.setTitle("Choose a All Rounder");
-        else if(playerType.equals("WicketKeeper"))
+        else if (playerType.equals("WicketKeeper"))
             actionBar.setTitle("Choose a Wicket Keeper");
         else actionBar.setTitle("Choose a " + playerType);
     }
@@ -97,10 +98,10 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         setResult(RESULT_CANCELED, null);
         finish();
+        overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
     }
 
     @Override
@@ -159,8 +160,7 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
     }
 
     @Subscribe
-    public void onPlayerChosen(PlayerChosenEvent event)
-    {
+    public void onPlayerChosen(PlayerChosenEvent event) {
         Intent intent = new Intent();
         intent.putExtra("player_id", event.PlayerId);
         intent.putExtra("Type", mPlayerType.toString());
@@ -171,5 +171,6 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
         }
         setResult(RESULT_OK, intent);
         finish();
+        overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
     }
 }

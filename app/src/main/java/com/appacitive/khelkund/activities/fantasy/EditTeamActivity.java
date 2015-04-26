@@ -33,6 +33,7 @@ import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
+import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.infra.widgets.VerticallyWrappedGridLayoutManager;
 import com.appacitive.khelkund.model.Formation;
@@ -40,7 +41,6 @@ import com.appacitive.khelkund.model.KhelkundUser;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.PlayerType;
 import com.appacitive.khelkund.model.Team;
-import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.model.events.AlreadyOwnedPlayerClickedEvent;
 import com.appacitive.khelkund.model.events.CardErrorEvent;
 import com.appacitive.khelkund.model.events.EmptyPlayerCardClickedEvent;
@@ -212,7 +212,18 @@ public class EditTeamActivity extends ActionBarActivity {
             shareTeam();
             return true;
         }
+        if (item.getItemId() == R.id.home) {
+            finish();
+            overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
     }
 
     private void shareTeam() {
@@ -260,7 +271,7 @@ public class EditTeamActivity extends ActionBarActivity {
 
         int width, height = 0;
 
-        if(b.getWidth() > c.getWidth()) {
+        if (b.getWidth() > c.getWidth()) {
             width = b.getWidth();
 
         } else {
@@ -528,6 +539,7 @@ public class EditTeamActivity extends ActionBarActivity {
         Intent choosePlayerIntent = new Intent(EditTeamActivity.this, PlayerPoolActivity.class);
         choosePlayerIntent.putExtra("type", event.playerType.toString());
         startActivityForResult(choosePlayerIntent, CHOOSE_PLAYER_REQUEST);
+        overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
     }
 
     @Override
