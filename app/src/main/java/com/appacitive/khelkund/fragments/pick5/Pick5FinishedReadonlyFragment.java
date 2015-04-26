@@ -129,17 +129,16 @@ public class Pick5FinishedReadonlyFragment extends Fragment {
         int width = dpToPx(92);
 
         mMyCarousel.setChildWidth(width);
-        mMyCarousel.setSelection(2);
         mMyCarousel.setSlowDownCoefficient(Integer.MAX_VALUE);
         mMyCarousel.setSpacing(0.6f);
         mMyCarousel.setAdapter(mMyAdapter);
+        mMyCarousel.setSelection(2);
 
         mAiCarousel.setChildWidth(width);
-        mAiCarousel.setSelection(2);
         mAiCarousel.setSlowDownCoefficient(Integer.MAX_VALUE);
         mAiCarousel.setSpacing(0.6f);
         mAiCarousel.setAdapter(mAiAdapter);
-
+        mAiCarousel.setSelection(2);
         return view;
     }
 
