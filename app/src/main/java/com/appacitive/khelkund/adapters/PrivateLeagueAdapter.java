@@ -30,12 +30,12 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
 
     private List<PrivateLeague> mPrivateLeagues;
     private StorageManager mManager;
-    private Team mTeam;
-    public PrivateLeagueAdapter(List<PrivateLeague> privateLeagues)
+    private String mUserId;
+    public PrivateLeagueAdapter(List<PrivateLeague> privateLeagues, String userId)
     {
         this.mPrivateLeagues = privateLeagues;
         this.mManager = new StorageManager();
-        mTeam = mManager.GetTeam(SharedPreferencesManager.ReadUserId());
+        this.mUserId = userId;
     }
 
     public void ResetLeagues(List<PrivateLeague> privateLeagues)
@@ -60,7 +60,7 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
 
         for(PrivateLeagueTeam team : privateLeague.getTeams())
         {
-            if(team.getUserTeamId().equals(mTeam.getId()));
+            if(mUserId.equals(team.getUserId()))
             {
                 holder.score.setText("Your score is " + team.getTotalPoints());
                 holder.rank.setText("You are rank " + team.getRank());

@@ -94,7 +94,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         mUserId = SharedPreferencesManager.ReadUserId();
         mPrivateLeagues = new ArrayList<PrivateLeague>();
         mManager = new StorageManager();
-        mPrivateLeagues = TeamHelper.clone(mManager.GetAllPrivateLeaguesForUser(mUserId));
+        mPrivateLeagues = (mManager.GetAllPrivateLeaguesForUser(mUserId));
         ConnectionManager.checkNetworkConnectivity(this);
         if (mPrivateLeagues == null || mPrivateLeagues.size() == 0)
             fetchAndDisplayPrivateLeague();
@@ -194,7 +194,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
 
     private void displayPrivateLeagues() {
 
-        mAdapter = (new PrivateLeagueAdapter(mPrivateLeagues));
+        mAdapter = new PrivateLeagueAdapter(mPrivateLeagues, mUserId);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new FlipInBottomXAnimator());
         ItemCountChanged();

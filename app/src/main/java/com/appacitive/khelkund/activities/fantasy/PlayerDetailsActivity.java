@@ -108,7 +108,7 @@ public class PlayerDetailsActivity extends ActionBarActivity {
         StorageManager manager = new StorageManager();
         mPlayerFromDb = manager.GetPlayer(playerId);
         DisplayPlayerBasicDetails();
-        InitializeChart();
+
         FetchAndDisplayPlayerStatistics();
         mMakeCaptain.setOnClickListener(makeCaptainListener);
         mRemove.setOnClickListener(removePlayerListener);
@@ -143,6 +143,7 @@ public class PlayerDetailsActivity extends ActionBarActivity {
                     return;
                 mPlayerFromServer = new Player(result);
                 DisplayStatistics();
+                InitializeChart();
             }
 
             @Override
@@ -171,19 +172,19 @@ public class PlayerDetailsActivity extends ActionBarActivity {
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         oppositions.add("");
-        entries.add(new Entry(Float.valueOf(mPlayerFromDb.getPointsHistory1()), 0));
+        entries.add(new Entry(Float.valueOf(mPlayerFromServer.getPointsHistory1()), 0));
 
         oppositions.add("");
-        entries.add(new Entry(Float.valueOf(mPlayerFromDb.getPointsHistory2()), 1));
+        entries.add(new Entry(Float.valueOf(mPlayerFromServer.getPointsHistory2()), 1));
 
         oppositions.add("");
-        entries.add(new Entry(Float.valueOf(mPlayerFromDb.getPointsHistory3()), 2));
+        entries.add(new Entry(Float.valueOf(mPlayerFromServer.getPointsHistory3()), 2));
 
         oppositions.add("");
-        entries.add(new Entry(Float.valueOf(mPlayerFromDb.getPointsHistory4()), 3));
+        entries.add(new Entry(Float.valueOf(mPlayerFromServer.getPointsHistory4()), 3));
 
         oppositions.add("");
-        entries.add(new Entry(Float.valueOf(mPlayerFromDb.getPointsHistory5()), 4));
+        entries.add(new Entry(Float.valueOf(mPlayerFromServer.getPointsHistory5()), 4));
 
         final LineDataSet dataSet = new LineDataSet(entries, "points");
         dataSet.setColor(getResources().getColor(R.color.primary));
@@ -195,7 +196,7 @@ public class PlayerDetailsActivity extends ActionBarActivity {
             add(dataSet);
         }});
         mChart.setData(lineData);
-        mChart.animateY(2000);
+        mChart.animateX(2000);
         mChart.setDescription("");
     }
 
@@ -228,7 +229,7 @@ public class PlayerDetailsActivity extends ActionBarActivity {
             statistics.add("Runs");
             statistics.add(String.valueOf(playerStats.getRunsScored()));
             statistics.add("Strike Rate");
-            statistics.add(String.valueOf(playerStats.getStrikeRate()));
+            statistics.add(String.format("%.2f", playerStats.getStrikeRate()));
 
         }
 
@@ -236,7 +237,7 @@ public class PlayerDetailsActivity extends ActionBarActivity {
             statistics.add("Wickets");
             statistics.add(String.valueOf(playerStats.getWickets()));
             statistics.add("Economy");
-            statistics.add(String.valueOf(playerStats.getEconomy()));
+            statistics.add(String.format("%.2f", playerStats.getEconomy()));
 
         }
 

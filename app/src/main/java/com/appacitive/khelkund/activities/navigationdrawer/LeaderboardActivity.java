@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.adapters.SlideInLeftAnimationAdapter;
 
 public class LeaderboardActivity extends ActionBarActivity {
@@ -98,7 +100,7 @@ public class LeaderboardActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(LeaderboardActivity.this);
         ((LinearLayoutManager)mLayoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new SlideInLeftAnimationAdapter(new LeaderboardAdapter(mScores, mUserId));
+        mAdapter = new AlphaInAnimationAdapter(new LeaderboardAdapter(mScores, mUserId));
         mRecyclerView.setAdapter(mAdapter);
     }
 

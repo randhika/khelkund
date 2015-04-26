@@ -23,6 +23,7 @@ import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.Urls;
+import com.appacitive.khelkund.infra.widgets.carousel.Carousel;
 import com.appacitive.khelkund.infra.widgets.carousel.CoverFlowCarousel;
 import com.appacitive.khelkund.model.PrivateLeague;
 import com.appacitive.khelkund.model.Team;
@@ -39,6 +40,8 @@ import java.util.HashMap;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.adapters.SlideInLeftAnimationAdapter;
 
 public class PrivateLeagueLeaderboardActivity extends ActionBarActivity {
@@ -72,7 +75,7 @@ public class PrivateLeagueLeaderboardActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         ((LinearLayoutManager)mLayoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new SlideInLeftAnimationAdapter(new PrivateLeagueLeaderboardAdapter(mLeague, SharedPreferencesManager.ReadUserId()));
+        mAdapter = new AlphaInAnimationAdapter(new PrivateLeagueLeaderboardAdapter(mLeague, SharedPreferencesManager.ReadUserId()));
         mRecyclerView.setAdapter(mAdapter);
 
         showTutorialOverlay();
@@ -137,7 +140,8 @@ public class PrivateLeagueLeaderboardActivity extends ActionBarActivity {
                     mDialog.setContentView(R.layout.layout_leaderboard_team_dialog);
                     TextView mName = (TextView) mDialog.findViewById(R.id.tv_leaderboard_team_name);
                     mName.setText(mTeam.getName());
-                    CoverFlowCarousel carousel = (CoverFlowCarousel) mDialog.findViewById(R.id.carousel);
+                    Carousel carousel = (Carousel) mDialog.findViewById(R.id.carousel);
+                    carousel.setSpacing(1.1f);
                     final LeaderboardTeamAdapter adapter = new LeaderboardTeamAdapter(PrivateLeagueLeaderboardActivity.this, mTeam.getPlayers());
                     carousel.setAdapter(adapter);
                     mDialog.show();

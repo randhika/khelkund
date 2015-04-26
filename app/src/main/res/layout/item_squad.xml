@@ -34,7 +34,8 @@
             android:layout_marginLeft="78dp"
             android:layout_marginTop="20dp"
             android:textSize="16sp"
-            android:textColor="@color/primary_material_dark" />
+            android:textColor="@color/primary_material_dark"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,12 +54,52 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="0"
             android:id="@+id/tv_squad_points"
-            android:layout_alignBottom="@+id/tv_squad_team"
+            android:textColor="@color/primary_dark"
+            android:textSize="18sp"
+            android:visibility="visible"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/textView47"
+            android:layout_toStartOf="@+id/textView47"
+            android:layout_marginRight="4dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_squad_type"
+            android:layout_alignTop="@+id/tv_squad_name"
+            android:layout_toRightOf="@+id/tv_squad_name"
+            android:layout_toEndOf="@+id/tv_squad_name"
+            android:src="@drawable/any"
+            android:layout_marginLeft="8dp"
+            android:layout_alignBottom="@+id/tv_squad_name"
+            android:padding="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="C"
+            android:id="@+id/tv_squad_captain"
+            android:layout_alignTop="@+id/iv_squad_type"
+            android:layout_toRightOf="@+id/iv_squad_type"
+            android:layout_toEndOf="@+id/iv_squad_type"
+            android:layout_alignBottom="@+id/iv_squad_type"
+            android:layout_marginLeft="4dp"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pts"
+            android:id="@+id/textView47"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="16dp"
-            android:textColor="@color/primary_dark"
-            android:textSize="18sp" />
+            android:layout_marginRight="8dp"
+            android:textSize="10sp"
+            android:layout_alignBottom="@+id/tv_squad_points"
+            android:layout_alignTop="@+id/tv_squad_points"
+            android:gravity="bottom" />
 
     </RelativeLayout>
 </RelativeLayout>

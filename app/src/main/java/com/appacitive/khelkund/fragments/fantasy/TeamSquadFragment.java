@@ -61,7 +61,7 @@ public class TeamSquadFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new AlphaInAnimationAdapter(new SquadAdapter(mTeam.getPlayers()));
+        mAdapter = new AlphaInAnimationAdapter(new SquadAdapter(mTeam.getPlayers(), mTeam.getCaptainId()));
         mRecyclerView.setAdapter(mAdapter);
 
         mFab.setOnClickListener(new View.OnClickListener() {
