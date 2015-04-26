@@ -1,6 +1,7 @@
 package com.appacitive.khelkund.fragments.fantasy;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.utils.ValueFormatter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -92,14 +94,32 @@ public class TeamOverviewFragment extends Fragment {
         XAxis xAxis = mChart.getXAxis();
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
+        xAxis.setAvoidFirstLastClipping(true);
+        xAxis.setDrawLabels(true);
+        xAxis.setTypeface(Typeface.DEFAULT_BOLD);
+        xAxis.setAdjustXLabels(true);
 
         YAxis rightAxis = mChart.getAxisRight();
         rightAxis.setDrawGridLines(false);
         rightAxis.setDrawAxisLine(false);
         rightAxis.setEnabled(false);
-        YAxis leftAxis = mChart.getAxisLeft();leftAxis.setLabelCount(4);
+        rightAxis.setStartAtZero(false);
+
+        YAxis leftAxis = mChart.getAxisLeft();leftAxis.setLabelCount(5);
         leftAxis.setDrawGridLines(false);
         leftAxis.setDrawAxisLine(false);
+        leftAxis.setStartAtZero(false);
+        leftAxis.setSpaceBottom(10f);
+        leftAxis.setSpaceTop(10f);
+        leftAxis.setDrawLabels(true);
+        leftAxis.setTypeface(Typeface.DEFAULT_BOLD);
+        leftAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf(Math.round(value));
+            }
+        });
+
         ArrayList<String> oppositions = new ArrayList<String>();
         ArrayList<Entry> entries = new ArrayList<Entry>();
         for(int i = 0 ; i < mTeam.getTeamHistory().size(); i++)
@@ -109,12 +129,21 @@ public class TeamOverviewFragment extends Fragment {
         }
 
         final LineDataSet dataSet = new LineDataSet(entries, "points");
+        dataSet.setValueTextSize(9);
+
+        dataSet.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf(Math.round(value));
+            }
+        });
         dataSet.setColor(getResources().getColor(R.color.accent));
         dataSet.setCircleSize(5);
         dataSet.setCircleColorHole(getResources().getColor(R.color.accent));
         dataSet.setCircleColor(getResources().getColor(R.color.accent));
         dataSet.setLineWidth(3);
         LineData lineData = new LineData(oppositions, new ArrayList<LineDataSet>(){{add(dataSet);}});
+
         mChart.setData(lineData);
         mChart.setDescription("");
         mChart.animateX(2000);

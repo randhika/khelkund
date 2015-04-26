@@ -1,6 +1,7 @@
 package com.appacitive.khelkund.activities.fantasy;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,16 +16,17 @@ import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.Http;
 import com.appacitive.khelkund.infra.StorageManager;
+import com.appacitive.khelkund.infra.TeamHelper;
 import com.appacitive.khelkund.infra.Urls;
 import com.appacitive.khelkund.model.Player;
 import com.appacitive.khelkund.model.Statistics;
-import com.appacitive.khelkund.infra.TeamHelper;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.utils.ValueFormatter;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
@@ -102,7 +104,7 @@ public class PlayerDetailsActivity extends ActionBarActivity {
         Intent intent = getIntent();
         playerId = intent.getStringExtra("player_id");
         boolean isCaptain = intent.getBooleanExtra("is_captain", false);
-        if(isCaptain == true)
+        if (isCaptain == true)
             mMakeCaptain.setEnabled(false);
 
         StorageManager manager = new StorageManager();
@@ -159,15 +161,33 @@ public class PlayerDetailsActivity extends ActionBarActivity {
         XAxis xAxis = mChart.getXAxis();
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
+        xAxis.setAvoidFirstLastClipping(true);
+        xAxis.setDrawLabels(true);
+        xAxis.setTypeface(Typeface.DEFAULT_BOLD);
+        xAxis.setAdjustXLabels(true);
 
         YAxis rightAxis = mChart.getAxisRight();
         rightAxis.setDrawGridLines(false);
         rightAxis.setDrawAxisLine(false);
         rightAxis.setEnabled(false);
+        rightAxis.setStartAtZero(false);
+
         YAxis leftAxis = mChart.getAxisLeft();
-        leftAxis.setLabelCount(4);
+        leftAxis.setLabelCount(5);
         leftAxis.setDrawGridLines(false);
         leftAxis.setDrawAxisLine(false);
+        leftAxis.setStartAtZero(false);
+        leftAxis.setSpaceBottom(10f);
+        leftAxis.setSpaceTop(10f);
+        leftAxis.setDrawLabels(true);
+        leftAxis.setTypeface(Typeface.DEFAULT_BOLD);
+        leftAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf(Math.round(value));
+            }
+        });
+
         ArrayList<String> oppositions = new ArrayList<String>();
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
@@ -187,6 +207,14 @@ public class PlayerDetailsActivity extends ActionBarActivity {
         entries.add(new Entry(Float.valueOf(mPlayerFromServer.getPointsHistory5()), 4));
 
         final LineDataSet dataSet = new LineDataSet(entries, "points");
+        dataSet.setValueTextSize(9);
+        dataSet.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf(Math.round(value));
+            }
+        });
+
         dataSet.setColor(getResources().getColor(R.color.primary));
         dataSet.setCircleSize(5);
         dataSet.setCircleColorHole(getResources().getColor(R.color.primary));
@@ -208,11 +236,10 @@ public class PlayerDetailsActivity extends ActionBarActivity {
         mPrice.setText("$ " + String.valueOf(mPlayerFromDb.getPrice()));
     }
 
-    private void DisplayStatistics()
-    {
+    private void DisplayStatistics() {
         List<String> statistics = new ArrayList<String>();
         Statistics playerStats = mPlayerFromServer.getStatistics();
-        if(playerStats == null)
+        if (playerStats == null)
             return;
         statistics.add("Matches");
         statistics.add(String.valueOf(playerStats.getMatchesPlayed()));
