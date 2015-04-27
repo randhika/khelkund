@@ -81,7 +81,7 @@ public class PlayerPoolActivity extends ActionBarActivity implements ActionBar.T
         String playerType = getIntent().getStringExtra("type");
         int balanceRemaining = getIntent().getIntExtra("balance", -1);
         if(balanceRemaining > -1)
-            actionBar.setSubtitle("Balance : $" + String.valueOf(balanceRemaining));
+            actionBar.setSubtitle("Balance remaining : $" + String.valueOf(balanceRemaining));
         mPlayerType = PlayerType.valueOf(playerType.toUpperCase());
 
         if (playerType.equals("AllRounder"))

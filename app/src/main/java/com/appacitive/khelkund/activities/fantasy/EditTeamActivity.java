@@ -81,6 +81,7 @@ public class EditTeamActivity extends ActionBarActivity {
 
     private static int VIEW_PLAYER_DETAILS_REQUEST = 111;
     private static int CHOOSE_PLAYER_REQUEST = 222;
+    private boolean mChangesMade = false;
 
     @InjectView(R.id.tv_formation)
     public TextView mFormation;
@@ -213,8 +214,28 @@ public class EditTeamActivity extends ActionBarActivity {
             return true;
         }
         if (item.getItemId() == android.R.id.home) {
-            finish();
-            overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+            if (mChangesMade == false) {
+                finish();
+                overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Are you sure you want to leave?");
+                builder.setTitle("You have unsaved changes");
+                builder.setNegativeButton("STAY", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.setPositiveButton("LEAVE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                        overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+                    }
+                });
+                builder.show();
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -222,8 +243,28 @@ public class EditTeamActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+        if (mChangesMade == false) {
+            EditTeamActivity.super.onBackPressed();
+            overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure you want to leave?");
+            builder.setTitle("You have unsaved changes");
+            builder.setNegativeButton("STAY", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            builder.setPositiveButton("LEAVE", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    EditTeamActivity.super.onBackPressed();
+                    overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+                }
+            });
+            builder.show();
+        }
     }
 
     private void shareTeam() {
@@ -496,6 +537,7 @@ public class EditTeamActivity extends ActionBarActivity {
 
             updateStats(mTeamMutated);
             resetAdapters(mTeamMutated, false);
+            mChangesMade = true;
             showSuccess("Auto selected team for you");
         }
     };
@@ -570,6 +612,7 @@ public class EditTeamActivity extends ActionBarActivity {
                 mTeamMutated.setCaptainId(captainId);
                 updateStats(mTeamMutated);
                 resetAdapters(mTeamMutated, false);
+                mChangesMade = true;
                 Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
@@ -591,6 +634,7 @@ public class EditTeamActivity extends ActionBarActivity {
                             mTeamMutated.setCaptainId(null);
                         updateStats(mTeamMutated);
                         resetAdapters(mTeamMutated, false);
+                        mChangesMade = true;
                     }
                 }
             }
@@ -715,6 +759,7 @@ public class EditTeamActivity extends ActionBarActivity {
                 mTeamMutated = TeamHelper.clone(mTeamOriginal);
                 resetAdapters(mTeamMutated, false);
                 updateStats(mTeamMutated);
+                mChangesMade = false;
                 AppRater.setLightTheme();
                 AppRater.app_launched(EditTeamActivity.this, 2, 2, 2, 2);
             }
@@ -750,4 +795,5 @@ public class EditTeamActivity extends ActionBarActivity {
                         .duration(Snackbar.SnackbarDuration.LENGTH_LONG) // make it shorter
                 , this);
     }
+
 }
