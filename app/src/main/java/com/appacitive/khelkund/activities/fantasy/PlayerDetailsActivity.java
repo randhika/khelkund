@@ -241,29 +241,29 @@ public class PlayerDetailsActivity extends ActionBarActivity {
         Statistics playerStats = mPlayerFromServer.getStatistics();
         if (playerStats == null)
             return;
-        statistics.add("Matches");
+        statistics.add("MATCHES");
         statistics.add(String.valueOf(playerStats.getMatchesPlayed()));
 
         if (mPlayerFromServer.getType().equals("AllRounder")) {
-            statistics.add("Runs");
+            statistics.add("RUNS");
             statistics.add(String.valueOf(playerStats.getRunsScored()));
-            statistics.add("Wickets");
+            statistics.add("WICKETS");
             statistics.add(String.valueOf(playerStats.getWickets()));
 
         }
 
         if (mPlayerFromServer.getType().equals("Batsman") || mPlayerFromServer.getType().equals("WicketKeeper")) {
-            statistics.add("Runs");
+            statistics.add("RUNS");
             statistics.add(String.valueOf(playerStats.getRunsScored()));
-            statistics.add("Strike Rate");
+            statistics.add("STRIKE RATE");
             statistics.add(String.format("%.2f", playerStats.getStrikeRate()));
 
         }
 
         if (mPlayerFromServer.getType().equals("Bowler")) {
-            statistics.add("Wickets");
+            statistics.add("WICKETS");
             statistics.add(String.valueOf(playerStats.getWickets()));
-            statistics.add("Economy");
+            statistics.add("ECONOMY");
             statistics.add(String.format("%.2f", playerStats.getEconomy()));
 
         }

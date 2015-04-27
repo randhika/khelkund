@@ -538,8 +538,8 @@ public class EditTeamActivity extends ActionBarActivity {
     public void onEmptyCardClick(EmptyPlayerCardClickedEvent event) {
         Intent choosePlayerIntent = new Intent(EditTeamActivity.this, PlayerPoolActivity.class);
         choosePlayerIntent.putExtra("type", event.playerType.toString());
+        choosePlayerIntent.putExtra("balance", mTeamMutated.getBalance());
         startActivityForResult(choosePlayerIntent, CHOOSE_PLAYER_REQUEST);
-//        overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
         overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_not);
     }
 

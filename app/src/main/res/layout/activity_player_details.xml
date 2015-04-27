@@ -39,7 +39,6 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="NA"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_details_1"
                     android:layout_centerHorizontal="true"
@@ -61,7 +60,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NA"
                     android:id="@+id/tv_details_2"
                     android:layout_below="@+id/tv_label_details_1"
                     android:layout_centerHorizontal="true"
@@ -83,7 +81,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NA"
                     android:id="@+id/tv_details_3"
                     android:layout_below="@+id/tv_label_details_2"
                     android:layout_centerHorizontal="true"
