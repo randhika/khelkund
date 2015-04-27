@@ -32,9 +32,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="72dp"
         android:layout_marginTop="12dp"
-        android:textSize="18dp"
+        android:textSize="20dp"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
         android:singleLine="true" />
 
     <TextView
@@ -42,7 +41,7 @@
         android:layout_height="wrap_content"
         android:text="Player name"
         android:id="@+id/tv_leaderboard_username"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:layout_below="@+id/tv_leaderboard_teamname"
         android:layout_alignLeft="@+id/tv_leaderboard_teamname"
         android:layout_alignStart="@+id/tv_leaderboard_teamname"
@@ -58,7 +57,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="16dp"
         android:textColor="@android:color/white"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:layout_alignParentTop="true"
         android:layout_alignBottom="@+id/iv_leaderboard_photo"
         android:gravity="center_vertical" />
@@ -71,8 +70,7 @@
         android:layout_below="@+id/tv_leaderboard_username"
         android:layout_alignLeft="@+id/tv_leaderboard_username"
         android:layout_alignStart="@+id/tv_leaderboard_username"
-        android:textSize="16dp"
-        android:layout_marginTop="4dp"
+        android:textSize="14dp"
         android:textColor="@android:color/white" />
 
     <TextView
@@ -85,6 +83,6 @@
         android:layout_toEndOf="@+id/textView13"
         android:textColor="@android:color/holo_green_dark"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textSize="16dp" />
+        android:textSize="14dp" />
 
 </RelativeLayout>

@@ -20,7 +20,6 @@
         android:textColor="@android:color/white"
         android:gravity="center_vertical|center_horizontal"
         android:textSize="33sp"
-        android:typeface="serif"
         android:singleLine="true" />
 
 
