@@ -66,7 +66,6 @@ public class PrivateLeagueLeaderboardActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_private_league_leaderboard);
 
         ButterKnife.inject(this);
@@ -144,7 +143,7 @@ public class PrivateLeagueLeaderboardActivity extends ActionBarActivity {
                     Dialog mDialog = new Dialog(PrivateLeagueLeaderboardActivity.this, R.style.Base_Theme_AppCompat_Dialog);
                     mDialog.setContentView(R.layout.layout_leaderboard_team_dialog);
                     TextView mName = (TextView) mDialog.findViewById(R.id.tv_leaderboard_team_name);
-                    mName.setText(mTeam.getName());
+                    mName.setText("Team " + mTeam.getName());
                     Carousel carousel = (Carousel) mDialog.findViewById(R.id.carousel);
                     carousel.setSpacing(1.1f);
                     final LeaderboardTeamAdapter adapter = new LeaderboardTeamAdapter(PrivateLeagueLeaderboardActivity.this, mTeam.getPlayers());

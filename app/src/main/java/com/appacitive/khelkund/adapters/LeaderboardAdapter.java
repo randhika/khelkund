@@ -39,9 +39,30 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (mScores.get(position).getUserId().equals(mUserId)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_leaderboard, parent, false);
-        return new LeaderboardAdapter.ViewHolder(itemView);
+
+        LeaderboardAdapter.ViewHolder holder = new LeaderboardAdapter.ViewHolder(itemView);
+        if(viewType == 0)
+        {
+            int white = KhelkundApplication.getAppContext().getResources().getColor(android.R.color.white);
+            holder.mLayout.setCardBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(R.color.primary_dark));
+            holder.rank.setTextColor(white);
+            holder.points.setTextColor(white);
+            holder.teamName.setTextColor(white);
+            holder.userName.setTextColor(white);
+            holder.mRankLabel.setTextColor(white);
+        }
+        return holder;
     }
 
     @Override
@@ -51,11 +72,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
         holder.userName.setText(String.valueOf(score.getUserName()));
         holder.rank.setText(String.valueOf(score.getRank()));
-
-        if(score.getUserId().equals(mUserId))
-            holder.teamName.setText(String.valueOf(score.getTeamName()) + " (YOU) ");
-        else
-            holder.teamName.setText(String.valueOf(score.getTeamName()));
+        holder.teamName.setText(String.valueOf(score.getTeamName()));
 
         int bitmapId = KhelkundApplication.getAppContext().getResources().getIdentifier(score.getUserTeamImage(), "drawable", KhelkundApplication.getAppContext().getPackageName());
         if(bitmapId > 0)
@@ -94,7 +111,10 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         public TextView rank;
 
         @InjectView(R.id.rl_item_leaderboard)
-        public RelativeLayout mLayout;
+        public CardView mLayout;
+
+        @InjectView(R.id.tv_leaderboard_rank_label)
+        public TextView mRankLabel;
 
         public ViewHolder(View v) {
             super(v);

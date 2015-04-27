@@ -1,22 +1,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@drawable/leaderboard"
+    android:background="@color/primary"
     tools:context="com.appacitive.khelkund.activities.navigationdrawer.LeaderboardActivity">
 
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="68dp"
+        android:layout_height="56dp"
         android:background="@android:color/transparent"
         android:id="@+id/leaderboard_header"
         android:text="LEADERBOARD"
-        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-condensed"
         android:gravity="center_vertical|center_horizontal"
-        android:textSize="33sp" />
+        android:textSize="33sp"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/abc_primary_text_material_dark" />
 
 
     <android.support.v7.widget.RecyclerView

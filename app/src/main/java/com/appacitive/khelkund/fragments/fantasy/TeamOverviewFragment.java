@@ -33,9 +33,6 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TeamOverviewFragment extends Fragment {
 
     @InjectView(R.id.chart)

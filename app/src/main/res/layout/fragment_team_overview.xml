@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:scrollbars="vertical"
-    android:padding="16dp">
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,7 +33,7 @@
             android:id="@+id/tv_overview_total_points"
             android:textColor="@color/primary_dark"
             android:textStyle="bold"
-
+            android:fontFamily="sans-serif-light"
             android:layout_marginLeft="145dp"
             android:layout_below="@+id/textView" />
 
@@ -55,6 +56,7 @@
             android:layout_marginLeft="145dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="0"
+            android:fontFamily="sans-serif-light"
             android:id="@+id/tv_overview_previouspoints"
             android:layout_below="@+id/textView2"
             android:layout_alignParentLeft="true"
@@ -63,7 +65,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.8dp"
             android:background="@android:color/darker_gray"
             android:id="@+id/divider"
 
@@ -82,17 +84,18 @@
             android:textColor="@color/secondary_text_default_material_light"
 
             android:layout_below="@+id/divider"
-
-            android:layout_marginLeft="72dp"
-            android:layout_marginBottom="32dp" />
+            android:layout_centerHorizontal="true" />
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart"
             android:layout_width="wrap_content"
             android:layout_below="@+id/textView3"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            android:minHeight="250dp" />
+            android:minHeight="250dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp" />
 
         <ImageView
             android:layout_width="100dp"
@@ -109,6 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="in"
+            android:fontFamily="sans-serif-light"
             android:id="@+id/tv_overview_against"
             android:layout_alignBottom="@+id/tv_overview_previouspoints"
             android:layout_toRightOf="@+id/tv_overview_previouspoints"

@@ -1,17 +1,16 @@
 package com.appacitive.khelkund.adapters;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.BusProvider;
 import com.appacitive.khelkund.infra.KhelkundApplication;
-import com.appacitive.khelkund.model.LeaderboardScore;
 import com.appacitive.khelkund.model.PrivateLeague;
 import com.appacitive.khelkund.model.PrivateLeagueTeam;
 import com.appacitive.khelkund.model.events.LeaderboardItemClickedEvent;
@@ -33,9 +32,29 @@ public class PrivateLeagueLeaderboardAdapter extends RecyclerView.Adapter<Privat
     }
 
     @Override
+    public int getItemViewType(int position) {
+        PrivateLeagueTeam team = mLeague.getTeams().get(position);
+        if (team.getUserId().equals(mUserId)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_leaderboard, parent, false);
-        return new PrivateLeagueLeaderboardAdapter.ViewHolder(itemView);
+
+        PrivateLeagueLeaderboardAdapter.ViewHolder holder = new PrivateLeagueLeaderboardAdapter.ViewHolder(itemView);
+        if (viewType == 0) {
+            int white = KhelkundApplication.getAppContext().getResources().getColor(android.R.color.white);
+            holder.mLayout.setCardBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(R.color.primary_dark));
+            holder.rank.setTextColor(white);
+            holder.points.setTextColor(white);
+            holder.teamName.setTextColor(white);
+            holder.userName.setTextColor(white);
+            holder.mRankLabel.setTextColor(white);
+        }
+        return holder;
     }
 
     @Override
@@ -46,13 +65,10 @@ public class PrivateLeagueLeaderboardAdapter extends RecyclerView.Adapter<Privat
         holder.userName.setText(String.valueOf(team.getUsername()));
         holder.rank.setText(String.valueOf(team.getRank()));
 
-        if(team.getUserId().equals(mUserId))
-            holder.teamName.setText(String.valueOf(team.getUserTeamName()) + " (YOU) ");
-        else
-            holder.teamName.setText(String.valueOf(team.getUserTeamName()));
+        holder.teamName.setText(String.valueOf(team.getUserTeamName()));
 
         int bitmapId = KhelkundApplication.getAppContext().getResources().getIdentifier(team.getImageName(), "drawable", KhelkundApplication.getAppContext().getPackageName());
-        if(bitmapId > 0)
+        if (bitmapId > 0)
             Picasso.with(KhelkundApplication.getAppContext()).load(bitmapId).into(holder.logo);
 
         holder.mLayout.setOnClickListener(null);
@@ -87,7 +103,10 @@ public class PrivateLeagueLeaderboardAdapter extends RecyclerView.Adapter<Privat
         public TextView rank;
 
         @InjectView(R.id.rl_item_leaderboard)
-        public RelativeLayout mLayout;
+        public CardView mLayout;
+
+        @InjectView(R.id.tv_leaderboard_rank_label)
+        public TextView mRankLabel;
 
         public ViewHolder(View v) {
             super(v);

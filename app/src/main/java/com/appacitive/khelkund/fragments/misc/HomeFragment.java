@@ -17,8 +17,12 @@ import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.fantasy.CreateTeamActivity;
 import com.appacitive.khelkund.activities.misc.LoginActivity;
 import com.appacitive.khelkund.activities.fantasy.ViewTeamActivity;
+import com.appacitive.khelkund.activities.navigationdrawer.HowToPlayActivity;
+import com.appacitive.khelkund.activities.navigationdrawer.LeaderboardActivity;
+import com.appacitive.khelkund.activities.navigationdrawer.ScheduleActivity;
 import com.appacitive.khelkund.activities.pick5.Pick5ListActivity;
 import com.appacitive.khelkund.activities.privateleague.PrivateLeagueHomeActivity;
+import com.appacitive.khelkund.adapters.LeaderboardAdapter;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.ConnectionManager;
 import com.appacitive.khelkund.infra.Http;
@@ -239,6 +243,27 @@ public class HomeFragment extends Fragment {
         Intent intent = new Intent(getActivity(), Pick5ListActivity.class);
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
+    }
+
+    @OnClick(R.id.home_leaderboard)
+    public void onLeaderboardClick()
+    {
+        Intent intent = new Intent(getActivity(), LeaderboardActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.home_scorecard)
+    public void onScorecardClick()
+    {
+        Intent intent = new Intent(getActivity(), ScheduleActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.home_howtoplay)
+    public void onHowToPlayClick()
+    {
+        Intent intent = new Intent(getActivity(), HowToPlayActivity.class);
+        startActivity(intent);
     }
 
     private void fetchTeam(final String userId) {

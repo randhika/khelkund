@@ -66,15 +66,6 @@ public class NavigationDrawerFragment extends Fragment {
     public NavigationDrawerFragment() {
     }
 
-    @InjectView(R.id.tv_nav_logout)
-    public TextView mLogout;
-
-    @InjectView(R.id.tv_nav_leaderboard)
-    public TextView mLeaderboard;
-
-    @InjectView(R.id.tv_nav_terms)
-    public TextView mTerms;
-
     @InjectView(R.id.tv_nav_name)
     public TextView mName;
 
@@ -130,21 +121,9 @@ public class NavigationDrawerFragment extends Fragment {
         return view;
     }
 
-    @OnClick(R.id.rl_leaderboard)
-    public void onLeaderBoardClick() {
-        Intent intent = new Intent(getActivity(), LeaderboardActivity.class);
-        startActivity(intent);
-    }
-
     @OnClick(R.id.rl_prizes)
     public void onPrizesCLick() {
         Intent intent = new Intent(getActivity(), PrizesActivity.class);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.rl_howtoplay)
-    public void onHowToPlayClick() {
-        Intent intent = new Intent(getActivity(), HowToPlayActivity.class);
         startActivity(intent);
     }
 
@@ -164,12 +143,6 @@ public class NavigationDrawerFragment extends Fragment {
     @OnClick(R.id.rl_licenses)
     public void onLicensesClick() {
         Intent intent = new Intent(getActivity(), LicencesActivity.class);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.rl_schedule)
-    public void onScheduleClick() {
-        Intent intent = new Intent(getActivity(), ScheduleActivity.class);
         startActivity(intent);
     }
 
