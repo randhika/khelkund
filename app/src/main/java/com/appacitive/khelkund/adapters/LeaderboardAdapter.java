@@ -74,6 +74,10 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         holder.rank.setText(String.valueOf(score.getRank()));
         holder.teamName.setText(String.valueOf(score.getTeamName()));
 
+        if(score.getRank() == 1)
+            holder.mTrophy.setVisibility(View.VISIBLE);
+        else holder.mTrophy.setVisibility(View.INVISIBLE);
+
         int bitmapId = KhelkundApplication.getAppContext().getResources().getIdentifier(score.getUserTeamImage(), "drawable", KhelkundApplication.getAppContext().getPackageName());
         if(bitmapId > 0)
             Picasso.with(KhelkundApplication.getAppContext()).load(bitmapId).into(holder.logo);
@@ -115,6 +119,9 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
         @InjectView(R.id.tv_leaderboard_rank_label)
         public TextView mRankLabel;
+
+        @InjectView(R.id.iv_rank1)
+        public ImageView mTrophy;
 
         public ViewHolder(View v) {
             super(v);

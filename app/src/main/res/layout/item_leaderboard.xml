@@ -11,10 +11,15 @@
     app:cardCornerRadius="2dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    app:cardPreventCornerOverlap="true"
     android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:layout_height="match_parent">
 
         <ImageView
@@ -87,5 +92,17 @@
             android:layout_toRightOf="@+id/tv_leaderboard_rank_label"
             android:layout_toEndOf="@+id/tv_leaderboard_rank_label"
             android:textSize="14dp" />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:id="@+id/iv_rank1"
+            android:src="@drawable/ic_fantasy"
+            android:visibility="invisible"
+            android:layout_alignTop="@+id/tv_leaderboard_teamname"
+            android:layout_toRightOf="@+id/tv_leaderboard_teamname"
+            android:layout_toEndOf="@+id/tv_leaderboard_teamname"
+            android:layout_alignBottom="@+id/tv_leaderboard_teamname"
+            android:layout_marginLeft="12dp" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

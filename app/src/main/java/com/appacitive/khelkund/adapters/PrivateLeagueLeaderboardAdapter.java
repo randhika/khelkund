@@ -50,10 +50,12 @@ public class PrivateLeagueLeaderboardAdapter extends RecyclerView.Adapter<Privat
             holder.mLayout.setCardBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(R.color.primary_dark));
             holder.rank.setTextColor(white);
             holder.points.setTextColor(white);
+
             holder.teamName.setTextColor(white);
             holder.userName.setTextColor(white);
             holder.mRankLabel.setTextColor(white);
         }
+        else holder.mTrophy.setImageResource(R.drawable.ic_fantasy_black);
         return holder;
     }
 
@@ -64,6 +66,10 @@ public class PrivateLeagueLeaderboardAdapter extends RecyclerView.Adapter<Privat
 
         holder.userName.setText(String.valueOf(team.getUsername()));
         holder.rank.setText(String.valueOf(team.getRank()));
+
+        if(team.getRank() == 1)
+            holder.mTrophy.setVisibility(View.VISIBLE);
+        else holder.mTrophy.setVisibility(View.INVISIBLE);
 
         holder.teamName.setText(String.valueOf(team.getUserTeamName()));
 
@@ -107,6 +113,9 @@ public class PrivateLeagueLeaderboardAdapter extends RecyclerView.Adapter<Privat
 
         @InjectView(R.id.tv_leaderboard_rank_label)
         public TextView mRankLabel;
+
+        @InjectView(R.id.iv_rank1)
+        public ImageView mTrophy;
 
         public ViewHolder(View v) {
             super(v);
