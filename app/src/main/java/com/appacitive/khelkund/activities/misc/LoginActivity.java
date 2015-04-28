@@ -8,7 +8,7 @@ import android.view.WindowManager;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.fragments.misc.LoginFragment;
-import com.facebook.shimmer.ShimmerFrameLayout;
+//import com.facebook.shimmer.ShimmerFrameLayout;
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -25,10 +25,10 @@ public class LoginActivity extends ActionBarActivity {
                     .add(R.id.fragment_container, loginFragment).commit();
             mLoginFragmentId = loginFragment.getId();
         }
-        ShimmerFrameLayout shimmerContainer =
-                (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-        shimmerContainer.setRepeatDelay(1200);
-        shimmerContainer.startShimmerAnimation();
+//        ShimmerFrameLayout shimmerContainer =
+//                (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
+//        shimmerContainer.setRepeatDelay(1200);
+//        shimmerContainer.startShimmerAnimation();
     }
 
     @Override

@@ -29,8 +29,10 @@ import com.appacitive.khelkund.activities.navigationdrawer.HowToPlayActivity;
 import com.appacitive.khelkund.activities.navigationdrawer.LeaderboardActivity;
 import com.appacitive.khelkund.activities.navigationdrawer.LicencesActivity;
 import com.appacitive.khelkund.activities.navigationdrawer.PrizesActivity;
+import com.appacitive.khelkund.activities.navigationdrawer.PromotionsActivity;
 import com.appacitive.khelkund.activities.navigationdrawer.ScheduleActivity;
 import com.appacitive.khelkund.activities.navigationdrawer.ScoringChartActivity;
+import com.appacitive.khelkund.activities.navigationdrawer.ShareReferralCodeActivity;
 import com.appacitive.khelkund.activities.navigationdrawer.TwitterFeedActivity;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
@@ -124,6 +126,18 @@ public class NavigationDrawerFragment extends Fragment {
     @OnClick(R.id.rl_prizes)
     public void onPrizesCLick() {
         Intent intent = new Intent(getActivity(), PrizesActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.rl_promotions)
+    public void onPromotionsClick() {
+        Intent intent = new Intent(getActivity(), PromotionsActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.rl_share)
+    public void onShareCodeClick() {
+        Intent intent = new Intent(getActivity(), ShareReferralCodeActivity.class);
         startActivity(intent);
     }
 

@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.appacitive.khelkund.activities.navigationdrawer.ShareReferralCodeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Invite friends to join Khelkund and receive one additional transfer. They get one too!"
+            android:id="@+id/textView9"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CODE"
+            android:id="@+id/tv_share_code"
+            android:fontFamily="sans-serif-condensed"
+            android:layout_below="@+id/textView9"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="16dp"
+            android:textSize="36sp"
+            android:textColor="@color/accent" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:id="@+id/share_divider"
+            android:layout_below="@+id/tv_share_code"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SHARE YOUR CODE"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_share"
+            android:scrollbars="vertical"
+            android:layout_below="@+id/share_divider"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+</RelativeLayout>

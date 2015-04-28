@@ -16,13 +16,74 @@
             android:layout_marginBottom="16dp">
 
             <RelativeLayout
-                android:id="@+id/rl_scoring"
+                android:id="@+id/rl_promotions"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/tv_nav_name"
+                android:layout_marginTop="16dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/iv_nav_promotions"
+                    android:src="@drawable/ic_local_attraction_grey600_36dp"
+                    android:layout_marginLeft="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Promotions"
+                    android:id="@+id/tv_nav_promotions"
+                    android:textColor="@color/primary_dark_material_dark"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="72dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_share"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/rl_promotions"
+                android:layout_alignParentLeft="true">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/iv_nav_share"
+                    android:src="@drawable/ic_share_grey600_36dp"
+                    android:layout_marginLeft="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Share"
+                    android:id="@+id/tv_nav_share"
+                    android:textColor="@color/primary_dark_material_dark"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="72dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_scoring"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/rl_share"
                 android:layout_marginTop="16dp">
 
                 <ImageView

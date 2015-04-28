@@ -135,7 +135,6 @@
         <service
             android:name=".infra.services.FetchMyPLayersIntentService"
             android:exported="false" />
-
         <service
             android:name=".infra.services.FetchAllPick5MatchesIntentService"
             android:exported="false" />
@@ -269,7 +268,8 @@
         <activity
             android:name=".activities.navigationdrawer.TwitterFeedActivity"
             android:label="@string/title_activity_twitter_feed"
-            android:parentActivityName=".activities.misc.HomeActivity" >
+            android:parentActivityName=".activities.misc.HomeActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.misc.HomeActivity" />
@@ -277,7 +277,9 @@
         <activity
             android:name=".activities.misc.TutorialActivity"
             android:label="@string/title_activity_tutorial"
-            android:parentActivityName=".activities.misc.HomeActivity" >
+            android:parentActivityName=".activities.misc.HomeActivity"
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.misc.HomeActivity" />
@@ -285,10 +287,29 @@
         <activity
             android:name=".activities.pick5.Pick5ListActivity"
             android:label="@string/title_activity_pick5_list"
-            android:parentActivityName=".activities.misc.HomeActivity" >
+            android:parentActivityName=".activities.misc.HomeActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.appacitive.khelkund.activities.misc.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activities.navigationdrawer.PromotionsActivity"
+            android:label="@string/title_activity_promotions"
+            android:parentActivityName=".activities.misc.HomeActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.misc.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activities.navigationdrawer.ShareReferralCodeActivity"
+            android:label="@string/title_activity_share_referral_code"
+            android:parentActivityName=".activities.misc.HomeActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.misc.HomeActivity" />
         </activity>
     </application>
 

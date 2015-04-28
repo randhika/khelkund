@@ -5,10 +5,10 @@
     android:background="@drawable/backloginscreen"
     tools:context="com.appacitive.khelkund.activities.misc.LoginActivity">
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_view_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <!--<com.facebook.shimmer.ShimmerFrameLayout-->
+        <!--android:id="@+id/shimmer_view_container"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
                 android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
-    </com.facebook.shimmer.ShimmerFrameLayout>
+    <!--</com.facebook.shimmer.ShimmerFrameLayout>-->
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/fragment_container"
