@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.activities.misc.LoginActivity;
 import com.appacitive.khelkund.adapters.PrivateLeagueAdapter;
 import com.appacitive.khelkund.infra.APCallback;
 import com.appacitive.khelkund.infra.BusProvider;
@@ -91,6 +92,13 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mUserId = SharedPreferencesManager.ReadUserId();
+
+        if (mUserId == null) {
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivity(loginIntent);
+            PrivateLeagueHomeActivity.this.finish();
+            return;
+        }
         mPrivateLeagues = new ArrayList<PrivateLeague>();
         mManager = new StorageManager();
         mPrivateLeagues = (mManager.GetAllPrivateLeaguesForUser(mUserId));

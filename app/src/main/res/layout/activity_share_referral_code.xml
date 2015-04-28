@@ -16,7 +16,9 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_margin="16dp" />
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="24dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,7 +28,7 @@
             android:fontFamily="sans-serif-condensed"
             android:layout_below="@+id/textView9"
             android:layout_centerHorizontal="true"
-            android:layout_margin="16dp"
+            android:layout_margin="24dp"
             android:textSize="36sp"
             android:textColor="@color/accent" />
 
@@ -38,9 +40,7 @@
             android:id="@+id/share_divider"
             android:layout_below="@+id/tv_share_code"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp">
+            android:layout_alignParentEnd="true">
 
 
             <View
@@ -71,7 +71,6 @@
             android:id="@+id/rv_share"
             android:scrollbars="vertical"
             android:layout_below="@+id/share_divider"
-            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </RelativeLayout>

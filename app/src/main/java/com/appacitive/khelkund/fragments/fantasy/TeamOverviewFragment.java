@@ -1,6 +1,7 @@
 package com.appacitive.khelkund.fragments.fantasy;
 
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.activities.misc.LoginActivity;
 import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
@@ -68,6 +70,11 @@ public class TeamOverviewFragment extends Fragment {
         View rootView =  inflater.inflate(R.layout.fragment_team_overview, container, false);
         ButterKnife.inject(this, rootView);
         String userId = SharedPreferencesManager.ReadUserId();
+        if (userId == null) {
+            Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(loginIntent);
+            getActivity().finish();
+        }
         StorageManager storageManager = new StorageManager();
         mTeam = storageManager.GetTeam(userId);
         ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(mTeam.getName());

@@ -1,7 +1,11 @@
 package com.appacitive.khelkund.activities.navigationdrawer;
 
+import android.app.usage.UsageStats;
+import android.app.usage.UsageStatsManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.LabeledIntent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
@@ -17,6 +21,7 @@ import com.appacitive.khelkund.infra.BusProvider;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -25,6 +30,7 @@ import butterknife.InjectView;
 public class ShareReferralCodeActivity extends ActionBarActivity {
 
     private List<SharePackageDetails> mPackageDetails;
+    private Intent mIntent;
 
     @InjectView(R.id.tv_share_code)
     public TextView mCode;
@@ -51,11 +57,12 @@ public class ShareReferralCodeActivity extends ActionBarActivity {
 
 
     private void getPackageNames() {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "test");
-        sendIntent.setType("text/plain");
-        List<ResolveInfo> resolveInfoList = getPackageManager().queryIntentActivities(sendIntent, 0);
+        mIntent = new Intent();
+        mIntent.setAction(Intent.ACTION_SEND);
+        mIntent.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Come join me play Khelkund and win attractive prizes. Use the code %s. Get the app here %s", mCode.getText(), getResources().getString(R.string.SHORT_APP_URL)));
+        mIntent.setType("text/plain");
+        mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        List<ResolveInfo> resolveInfoList = getPackageManager().queryIntentActivities(mIntent, PackageManager.GET_RESOLVED_FILTER);
 
         PackageManager packageManager = getPackageManager();
         for (ResolveInfo resolveInfo : resolveInfoList) {
@@ -68,7 +75,6 @@ public class ShareReferralCodeActivity extends ActionBarActivity {
                     ApplicationInfo info = packageManager.getApplicationInfo(packageName, 0);
                     details.appName = packageManager.getApplicationLabel(info).toString();
 
-
                     mPackageDetails.add(details);
                 } catch (Exception e) {
                     continue;
@@ -78,14 +84,9 @@ public class ShareReferralCodeActivity extends ActionBarActivity {
     }
 
     @Subscribe
-    public void onShareItemClick(String packageName)
-    {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Come join me play Khelkund and win attractive prizes. Use the code %s. Get the app here %s", mCode.getText(), getResources().getString(R.string.SHORT_APP_URL)));
-        sendIntent.setType("text/plain");
-        sendIntent.setPackage(packageName);
-        startActivity(sendIntent);
+    public void onShareItemClick(String packageName) {
+        mIntent.setPackage(packageName);
+        startActivity(mIntent);
     }
 
     public class SharePackageDetails {

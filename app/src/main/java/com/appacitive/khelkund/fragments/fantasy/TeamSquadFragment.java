@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.activities.fantasy.EditTeamActivity;
+import com.appacitive.khelkund.activities.misc.LoginActivity;
 import com.appacitive.khelkund.adapters.SquadAdapter;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
@@ -56,6 +57,12 @@ public class TeamSquadFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_team_squad, container, false);
         ButterKnife.inject(this, rootView);
         String userId = SharedPreferencesManager.ReadUserId();
+
+        if (userId == null) {
+            Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(loginIntent);
+            getActivity().finish();
+        }
         StorageManager storageManager = new StorageManager();
         mTeam = storageManager.GetTeam(userId);
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(mTeam.getName());

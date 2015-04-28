@@ -23,8 +23,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.appacitive.khelkund.R;
+import com.appacitive.khelkund.activities.misc.LoginActivity;
 import com.appacitive.khelkund.adapters.Pick5Adapter;
 import com.appacitive.khelkund.infra.BusProvider;
+import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.SnackBarManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.infra.services.FetchAllPick5MatchesIntentService;
@@ -75,6 +77,14 @@ public class Pick5ListActivity extends ActionBarActivity implements ActionBar.Ta
                             .setTabListener(this));
         }
 
+        String mUserId = SharedPreferencesManager.ReadUserId();
+
+        if (mUserId == null) {
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivity(loginIntent);
+            finish();
+            return;
+        }
         fetchMatches();
 
     }
