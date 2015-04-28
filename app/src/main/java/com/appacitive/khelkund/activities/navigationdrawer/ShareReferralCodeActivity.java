@@ -112,7 +112,7 @@ public class ShareReferralCodeActivity extends ActionBarActivity {
     private void getPackageNames() {
         mIntent = new Intent();
         mIntent.setAction(Intent.ACTION_SEND);
-        mIntent.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Come join me play Khelkund and win attractive prizes. Use the code %s. Get the app here %s", mCode.getText(), getResources().getString(R.string.SHORT_APP_URL)));
+        mIntent.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Come join me play Khelkund and win attractive prizes. Use my referral code %s. Get the app here %s", mCode.getText(), getResources().getString(R.string.SHORT_APP_URL)));
         mIntent.setType("text/plain");
         mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         List<ResolveInfo> resolveInfoList = getPackageManager().queryIntentActivities(mIntent, PackageManager.GET_RESOLVED_FILTER);
@@ -139,6 +139,7 @@ public class ShareReferralCodeActivity extends ActionBarActivity {
     @Subscribe
     public void onShareItemClick(String packageName) {
         mIntent.setPackage(packageName);
+        mIntent.putExtra(Intent.EXTRA_TEXT, String.format("Hey! Come join me play Khelkund and win attractive prizes. Use the code %s. Get the app here %s", mCode.getText(), getResources().getString(R.string.SHORT_APP_URL)));
         startActivity(mIntent);
     }
 
