@@ -215,7 +215,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.card_view_fantasy)
+    @OnClick({R.id.card_view_fantasy, R.id.rl_home_rank, R.id.rl_home_points})
     public void onFantasyClick() {
         if (mTeamStatus == TeamStatus.CREATED) {
             Intent viewTeamIntent = new Intent(getActivity(), ViewTeamActivity.class);
