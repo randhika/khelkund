@@ -35,12 +35,12 @@
         android:layout_height="wrap_content"
         android:text="Khelkund for Android"
         android:id="@+id/textView23"
+        android:fontFamily="sans-serif-condensed"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:typeface="serif"
         android:textColor="@android:color/white"
-        android:textSize="22sp"
+        android:textSize="26sp"
         android:layout_margin="16dp"
         android:textStyle="bold" />
 
@@ -66,30 +66,6 @@
         android:layout_alignLeft="@+id/textView24"
         android:layout_alignStart="@+id/textView24"
         android:layout_marginTop="16dp"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Concept by Abhinav Sinha (asinha@tavisca.com)"
-        android:id="@+id/textView26"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/textView25"
-        android:layout_alignLeft="@+id/textView25"
-        android:layout_alignStart="@+id/textView25" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Developed by Sushant Athley (sathley@appacitive.com)"
-        android:id="@+id/textView27"
-        android:layout_below="@+id/textView26"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_margin="16dp"
         android:textColor="@android:color/white" />
 
 </RelativeLayout>

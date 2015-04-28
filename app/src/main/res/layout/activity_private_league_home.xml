@@ -58,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="You are currently not playing in any private leagues"
+            android:fontFamily="sans-serif-light"
             android:id="@+id/tv_private_league_empty"
             android:textSize="24sp"
             android:singleLine="false"
