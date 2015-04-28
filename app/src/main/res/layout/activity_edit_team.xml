@@ -177,7 +177,7 @@
             android:layout_alignLeft="@+id/linearLayout"
             android:layout_alignStart="@+id/linearLayout"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="4dp" />
 
     </RelativeLayout>
 

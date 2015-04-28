@@ -114,6 +114,11 @@ public class Urls {
             return baseUrl + "Loginservice.svc/login";
         }
 
+        public static String getReferralCodeUrl()
+        {
+            return baseUrl + "LoginService.svc/EnterReferralCode";
+        }
+
         public static String getFacebookLoginUrl()
         {
             return baseUrl + "Loginservice.svc/registerfacebook";
@@ -127,6 +132,10 @@ public class Urls {
         public static String getSignupUrl()
         {
             return baseUrl + "Loginservice.svc/register";
+        }
+
+        public static String getUserUrl(String userId) {
+            return baseUrl + "LoginService.svc/LoggedIn/" + userId;
         }
     }
 

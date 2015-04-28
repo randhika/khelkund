@@ -27,6 +27,7 @@ public class KhelkundUser extends RealmObject {
         this.Id = json.optString("UserId");
         this.FirstName = json.optString("FirstName");
         this.LastName = json.optString("LastName");
+        this.ReferralCode = json.optString("ReferralCode");
 
     }
 
@@ -34,6 +35,7 @@ public class KhelkundUser extends RealmObject {
     private String Id;
     private String FirstName;
     private String LastName;
+    private String ReferralCode;
 
     public String getId() {
         return Id;
@@ -57,5 +59,13 @@ public class KhelkundUser extends RealmObject {
 
     public void setLastName(String lastName) {
         LastName = lastName;
+    }
+
+    public String getReferralCode() {
+        return ReferralCode;
+    }
+
+    public void setReferralCode(String referralCode) {
+        ReferralCode = referralCode;
     }
 }

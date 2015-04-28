@@ -1,5 +1,7 @@
 package com.appacitive.khelkund.adapters;
 
+import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +11,9 @@ import android.widget.TextView;
 
 import com.appacitive.khelkund.R;
 import com.appacitive.khelkund.infra.BusProvider;
-import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.model.PrivateLeague;
 import com.appacitive.khelkund.model.PrivateLeagueTeam;
-import com.appacitive.khelkund.model.Team;
 import com.appacitive.khelkund.model.events.privateleague.PrivateLeagueDeleteEvent;
 import com.appacitive.khelkund.model.events.privateleague.PrivateLeagueSelectedEvent;
 import com.appacitive.khelkund.model.events.privateleague.PrivateLeagueShareEvent;
@@ -49,15 +49,19 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
         return new PrivateLeagueViewHolder(itemView);
     }
 
+    private static final Integer[] colors = new Integer[]{
+            Color.parseColor("#9575CD"), Color.parseColor("#EF5350"),Color.parseColor("#BA68C8"),Color.parseColor("#009688"),Color.parseColor("#827717"),Color.parseColor("#A1887F")
+    };
+
     @Override
     public void onBindViewHolder(PrivateLeagueViewHolder holder, int position) {
         final PrivateLeague privateLeague = mPrivateLeagues.get(position);
         holder.name.setText(privateLeague.getName());
-        holder.playerCount.setText(String.valueOf(privateLeague.getTeams().size()) + " user(s) are playing in this league");
+        holder.playerCount.setText(String.valueOf(privateLeague.getTotalRecords()) + " user(s) are playing in this league");
         holder.code.setText("Private League Code : " + privateLeague.getCode());
 
         setViewHolderListeners(holder, privateLeague);
-
+        holder.card.setCardBackgroundColor((colors[position % colors.length]));
         for(PrivateLeagueTeam team : privateLeague.getTeams())
         {
             if(mUserId.equals(team.getUserId()))
@@ -122,6 +126,9 @@ public class PrivateLeagueAdapter  extends RecyclerView.Adapter<PrivateLeagueAda
 
         @InjectView(R.id.iv_private_league_delete)
         protected ImageView delete;
+
+        @InjectView(R.id.card_view_privateleague)
+        protected CardView card;
 
 
         public PrivateLeagueViewHolder(View itemView) {

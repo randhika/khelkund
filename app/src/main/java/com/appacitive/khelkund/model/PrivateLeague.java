@@ -27,6 +27,7 @@ public class PrivateLeague extends RealmObject {
         this.Id = json.optString("PrivateLeagueId");
         this.Name = json.optString("PrivateLeagueName");
         this.Code = json.optString("PrivateLeagueCode");
+        this.TotalRecords = json.optInt("TotalRecords");
         this.Teams = new RealmList<PrivateLeagueTeam>();
         JSONArray teamsArray = json.optJSONArray("UserTeams");
         if(teamsArray != null)
@@ -47,6 +48,8 @@ public class PrivateLeague extends RealmObject {
     private String Name;
 
     private String Code;
+
+    private int TotalRecords;
 
     private RealmList<PrivateLeagueTeam> Teams;
 
@@ -88,5 +91,13 @@ public class PrivateLeague extends RealmObject {
 
     public void setUserId(String userId) {
         UserId = userId;
+    }
+
+    public int getTotalRecords() {
+        return TotalRecords;
+    }
+
+    public void setTotalRecords(int totalRecords) {
+        TotalRecords = totalRecords;
     }
 }

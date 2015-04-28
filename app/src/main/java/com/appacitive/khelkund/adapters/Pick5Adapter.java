@@ -48,14 +48,10 @@ public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHol
         return new Pick5ViewHolder(itemView);
     }
 
-    private static final Integer[] colors = new Integer[]{
-            Color.parseColor("#9575CD"), Color.parseColor("#EF5350"),Color.parseColor("#BA68C8"),Color.parseColor("#009688"),Color.parseColor("#827717"),Color.parseColor("#A1887F")
-    };
-
     private Date toUtc(Date date)
     {
-        Calendar cal = Calendar.getInstance(); // creates calendar
-        cal.setTime(date); // sets calendar time/date
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
         cal.add(Calendar.HOUR_OF_DAY, 5);
         cal.add(Calendar.MINUTE, 30);
         return cal.getTime();
@@ -73,8 +69,6 @@ public class Pick5Adapter extends RecyclerView.Adapter<Pick5Adapter.Pick5ViewHol
         holder.awayLogo.setTitleText(match.getAwayTeamShortName());
         holder.awayLogo.setFillColor(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(match.getAwayTeamShortName())));
 
-
-        holder.card.setCardBackgroundColor((colors[position % colors.length]));
         holder.relativeLayout.setOnClickListener(null);
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override

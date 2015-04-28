@@ -39,29 +39,18 @@
 
     <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view_pick5"
-
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="250dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@color/DD"
+        app:cardBackgroundColor="#009688"
         app:cardCornerRadius="4dp"
         android:layout_gravity="center">
 
-        <!--<ImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:id="@+id/iv_pick5_masthead"-->
-            <!--android:src="@drawable/masthead1"-->
-            <!--android:alpha="0.2"-->
-            <!--android:scaleType="centerCrop" />-->
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            >
-
+            android:layout_height="match_parent">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -115,8 +104,6 @@
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-
-
 
 
 </RelativeLayout>

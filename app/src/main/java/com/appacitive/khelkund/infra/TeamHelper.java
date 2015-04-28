@@ -145,6 +145,7 @@ public class TeamHelper {
         newLeague.setUserId(league.getUserId());
         newLeague.setCode(league.getCode());
         newLeague.setName(league.getName());
+        newLeague.setTotalRecords(league.getTotalRecords());
         if (league.getTeams() != null) {
             for (PrivateLeagueTeam team : league.getTeams())
                 newLeague.getTeams().add(clone(team));

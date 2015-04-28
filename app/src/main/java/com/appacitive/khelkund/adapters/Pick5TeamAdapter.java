@@ -66,7 +66,10 @@ public class Pick5TeamAdapter extends BaseAdapter {
             Picasso.with(mContext).load(player.getImageUrl()).fit().centerInside().placeholder(R.drawable.demo).into(photo);
             nameText = (player.getDisplayName());
         } else {
-            photo.setImageResource(R.drawable.demo);
+            if (mAttachListeners == true)
+                photo.setImageResource(R.drawable.demoadd);
+            else
+                photo.setImageResource(R.drawable.demo);
 
             switch (position) {
                 case 0: {

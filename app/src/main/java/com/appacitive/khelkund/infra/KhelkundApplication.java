@@ -2,6 +2,9 @@ package com.appacitive.khelkund.infra;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import com.appacitive.android.AppacitiveContext;
 import com.appacitive.core.model.Environment;
@@ -31,8 +34,24 @@ public class KhelkundApplication extends Application {
     public void onCreate(){
         super.onCreate();
         KhelkundApplication.context = getApplicationContext();
-        Realm.deleteRealmFile(context, "db-v3.realm");
-        Realm.deleteRealmFile(context, "db-v2.realm");
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        String version = pInfo.versionName;
+        SharedPreferences sharedPreferences = KhelkundApplication.getAppContext().getSharedPreferences("khelkund", Context.MODE_PRIVATE);
+        boolean migrationDone = sharedPreferences.getBoolean("migration_done_" + version, false);
+        if(migrationDone == false){
+            Realm.deleteRealmFile(context);
+            Realm.deleteRealmFile(context, "db-v2.realm");
+            Realm.deleteRealmFile(context, "db-v3.realm");
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("migration_done_" + version , true);
+            editor.commit();
+        }
+
 //        TwitterAuthConfig authConfig = new TwitterAuthConfig(getResources().getString(R.string.TWITTER_KEY), getResources().getString(R.string.TWITTER_SECRET));
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Crashlytics crashlytics = new Crashlytics.Builder().disabled(BuildConfig.DEBUG).build();

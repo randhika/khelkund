@@ -18,8 +18,8 @@ android {
         applicationId "com.appacitive.khelkund"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 19
-        versionName "2.8"
+        versionCode 20
+        versionName "2.9"
     }
 
     lintOptions {

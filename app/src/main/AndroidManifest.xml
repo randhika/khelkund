@@ -165,7 +165,7 @@
         <service android:name=".infra.services.GcmIntentService" />
 
         <activity
-            android:name=".activities.navigationdrawer.LeaderboardActivity"
+            android:name=".activities.misc.LeaderboardActivity"
             android:label="@string/title_activity_leaderboard"
             android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait"
@@ -194,7 +194,7 @@
                 android:value=".activities.misc.HomeActivity" />
         </activity>
         <activity
-            android:name=".activities.navigationdrawer.ScheduleActivity"
+            android:name=".activities.misc.ScheduleActivity"
             android:label="@string/title_activity_schedule"
             android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait" >
@@ -247,7 +247,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".activities.navigationdrawer.HowToPlayActivity"
+            android:name=".activities.misc.HowToPlayActivity"
             android:label="@string/title_activity_how_to_play_activity2"
             android:parentActivityName=".activities.misc.HomeActivity"
             android:screenOrientation="portrait" >

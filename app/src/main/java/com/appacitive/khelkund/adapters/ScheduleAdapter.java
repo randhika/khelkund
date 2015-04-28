@@ -59,7 +59,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         holder.awayLogo.setFillColor(KhelkundApplication.getAppContext().getResources().getColor(TeamHelper.getTeamColor(match.getAwayTeamShortName())));
 
 
-        holder.card.setCardBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(colors[position % 8]));
+//        holder.card.setCardBackgroundColor(KhelkundApplication.getAppContext().getResources().getColor(colors[position % 8]));
 //        holder.relativeLayout.setOnClickListener(null);
 //        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -166,6 +166,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="HOME"
+                android:fontFamily="sans-serif-condensed"
                 android:id="@+id/tv_pick5_play_hometeamname"
                 android:layout_alignTop="@+id/iv_pick5_play_home"
                 android:layout_alignParentLeft="true"
@@ -173,13 +174,14 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:layout_alignBottom="@+id/iv_pick5_play_home"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                 />
 
             <TextView
                 android:layout_width="88dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="AWAY"
+                android:fontFamily="sans-serif-condensed"
                 android:id="@+id/tv_pick5_play_awayteamname"
                 android:layout_alignTop="@+id/iv_pick5_play_away"
                 android:layout_alignParentRight="true"
@@ -187,7 +189,7 @@
                 android:layout_alignBottom="@+id/iv_pick5_play_away"
                 android:gravity="center_vertical|center_horizontal"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                 />
 
 
         </RelativeLayout>

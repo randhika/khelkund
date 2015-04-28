@@ -49,9 +49,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class LoginFragment extends Fragment {
 
     DigitsAuthButton digitsLoginButton;
@@ -86,6 +83,7 @@ public class LoginFragment extends Fragment {
         facebookLoginButton.setBackgroundResource(R.drawable.f_bg);
         facebookLoginButton.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         facebookLoginButton.setFragment(this);
+        facebookLoginButton.setReadPermissions("email", "public_profile");
         facebookLoginButton.registerCallback(callbackManager, facebookSessionCallback);
 
         digitsLoginButton = (DigitsAuthButton) view.findViewById(R.id.digits_login_button);

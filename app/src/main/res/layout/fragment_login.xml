@@ -24,6 +24,7 @@
 
     <com.facebook.login.widget.LoginButton
         xmlns:fb="http://schemas.android.com/apk/res-auto"
+        fb:logout_text="Log in with Facebook"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:scaleType="centerInside"

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.appacitive.khelkund.infra.KhelkundApplication;
 import com.appacitive.khelkund.infra.SharedPreferencesManager;
 import com.appacitive.khelkund.infra.StorageManager;
 import com.appacitive.khelkund.model.Team;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.github.mikephil.charting.charts.LineChart;
@@ -40,14 +43,29 @@ public class TeamOverviewFragment extends Fragment {
     @InjectView(R.id.chart)
     public LineChart mChart;
 
-    @InjectView(R.id.tv_overview_total_points)
+    @InjectView(R.id.cv_overview_emblem)
+    public CardView mCardEmblem;
+
+    @InjectView(R.id.cv_overview_points)
+    public CardView mCardPoints;
+
+    @InjectView(R.id.cv_overview_rank)
+    public CardView mCardRank;
+
+    @InjectView(R.id.cv_overview_previous_points)
+    public CardView mCardPreviousPoints;
+
+    @InjectView(R.id.tv_overview_points)
     public TextView mTotalPoints;
 
-    @InjectView(R.id.tv_overview_previouspoints)
+    @InjectView(R.id.tv_overview_previous_points)
     public TextView mPreviousMatchPoints;
 
-    @InjectView(R.id.tv_overview_against)
-    public TextView mPreviousMatchAgainst;
+    @InjectView(R.id.tv_overview_stat_previous_points_label)
+    public TextView mPreviousMatch;
+
+    @InjectView(R.id.tv_overview_rank)
+    public TextView mRank;
 
     @InjectView(R.id.iv_overview_emblem)
     public ImageView mEmblem;
@@ -86,8 +104,15 @@ public class TeamOverviewFragment extends Fragment {
         {
             mPreviousMatchPoints.setText(String.valueOf(mTeam.getTeamHistory().last().getPoints()));
             String[] previousMatchTeams = mTeam.getTeamHistory().last().getOpposition().split("-");
-            mPreviousMatchAgainst.setText(String.format(" in %s vs %s", previousMatchTeams[0], previousMatchTeams[1]));
+            mPreviousMatch.setText(String.format("%s vs %s", previousMatchTeams[0], previousMatchTeams[1]));
         }
+        mRank.setText(String.valueOf(mTeam.getRank()));
+
+        YoYo.with(Techniques.FadeInLeft).duration(700).playOn(mCardEmblem);
+        YoYo.with(Techniques.FadeInLeft).duration(700).playOn(mCardRank);
+        YoYo.with(Techniques.FadeInLeft).duration(700).playOn(mCardPoints);
+        YoYo.with(Techniques.FadeInLeft).duration(700).playOn(mCardPreviousPoints);
+
         initGraph();
         showOverlayTutorial();
         return rootView;
