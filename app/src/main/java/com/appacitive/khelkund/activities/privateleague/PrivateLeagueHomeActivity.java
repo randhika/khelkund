@@ -347,6 +347,7 @@ public class PrivateLeagueHomeActivity extends ActionBarActivity {
         Intent intent = new Intent(this, PrivateLeagueLeaderboardActivity.class);
         intent.putExtra("league_id", event.leagueId);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
     }
 
     @Subscribe

@@ -85,6 +85,12 @@ public class PrivateLeagueLeaderboardActivity extends ActionBarActivity {
         showTutorialOverlay();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+    }
+
     private void showTutorialOverlay() {
         Runnable runnable = new Runnable() {
             @Override

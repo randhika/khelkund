@@ -128,6 +128,7 @@ public class LoginFragment extends Fragment {
                 Intent homeIntent = new Intent(getActivity(), HomeActivity.class);
                 startActivity(homeIntent);
                 getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
             }
 
             @Override
@@ -231,6 +232,7 @@ public class LoginFragment extends Fragment {
     {
         Intent intent = new Intent(getActivity(), EmailLoginActivity.class);
         startActivity(intent);
+
     }
 
 

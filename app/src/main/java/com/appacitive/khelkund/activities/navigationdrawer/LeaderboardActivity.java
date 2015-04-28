@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -167,4 +168,20 @@ public class LeaderboardActivity extends ActionBarActivity {
         BusProvider.getInstance().unregister(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -250,6 +250,7 @@ public class HomeFragment extends Fragment {
     {
         Intent intent = new Intent(getActivity(), LeaderboardActivity.class);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
     }
 
     @OnClick(R.id.home_scorecard)
@@ -257,6 +258,7 @@ public class HomeFragment extends Fragment {
     {
         Intent intent = new Intent(getActivity(), ScheduleActivity.class);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
     }
 
     @OnClick(R.id.home_howtoplay)
@@ -264,6 +266,7 @@ public class HomeFragment extends Fragment {
     {
         Intent intent = new Intent(getActivity(), HowToPlayActivity.class);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
     }
 
     private void fetchTeam(final String userId) {

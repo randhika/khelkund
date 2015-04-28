@@ -51,14 +51,17 @@ public class SplashScreenActivity extends ActionBarActivity {
             if (userId == null) {
                 Intent loginIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                 startActivity(loginIntent);
+                overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
             } else {
                 KhelkundUser user = new StorageManager().GetUser(userId);
                 if (user == null) {
                     Intent loginIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                     startActivity(loginIntent);
+                    overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
                 } else {
                     Intent homeIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);
                     startActivity(homeIntent);
+                    overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
                 }
             }
             finish();

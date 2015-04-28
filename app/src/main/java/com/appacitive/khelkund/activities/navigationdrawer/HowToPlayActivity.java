@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -132,6 +133,23 @@ public class HowToPlayActivity extends ActionBarActivity implements ActionBar.Ta
             mWebView.setBackgroundColor(Color.TRANSPARENT);
             return rootView;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.slide_in_left_fast, R.anim.slide_out_right_fast);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
