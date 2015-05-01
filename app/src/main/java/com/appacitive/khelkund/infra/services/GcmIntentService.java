@@ -20,8 +20,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 
 public class GcmIntentService extends IntentService {
-    public static int NOTIFICATION_ID = 1;
-    private NotificationManager mNotificationManager;
+    public int NOTIFICATION_ID = 1;
     NotificationCompat.Builder builder;
 
     public GcmIntentService() {
@@ -46,7 +45,7 @@ public class GcmIntentService extends IntentService {
     }
 
     private void sendNotification(final Bundle bundle) {
-        mNotificationManager = (NotificationManager)
+        NotificationManager mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
         PendingIntent contentIntent = null;
         String game = bundle.getString("game");
@@ -78,8 +77,7 @@ public class GcmIntentService extends IntentService {
         bigTextStyle.bigText(bundle.getString("alert"));
         mBuilder.setStyle(bigTextStyle);
 
-
         mBuilder.setContentIntent(contentIntent);
-        mNotificationManager.notify(++NOTIFICATION_ID, mBuilder.build());
+        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 }
