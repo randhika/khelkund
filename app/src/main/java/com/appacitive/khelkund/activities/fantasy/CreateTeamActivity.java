@@ -134,6 +134,7 @@ public class CreateTeamActivity extends ActionBarActivity {
         Intent editTeamIntent = new Intent(CreateTeamActivity.this, EditTeamActivity.class);
         startActivity(editTeamIntent);
         overridePendingTransition(R.anim.slide_in_right_fast, R.anim.slide_out_left_fast);
+        finish();
     }
 
     @Override
