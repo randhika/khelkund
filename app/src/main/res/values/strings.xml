@@ -54,7 +54,7 @@
     <string name="title_activity_private_league_home">Your Private Leagues</string>
     <string name="title_activity_how_to_play_activity2">How To Play</string>
     <string name="title_activity_private_league_leaderboard">Private League Leaderboard</string>
-    <string name="title_activity_twitter_feed">#IPL</string>
+    <string name="title_activity_twitter_feed">Twitter Feed</string>
     <string name="title_activity_tutorial">Khelkund</string>
 
     <string name="title_activity_pick5_list">Pick\'em 5 Challenges</string>
